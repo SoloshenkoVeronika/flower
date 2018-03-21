@@ -23,7 +23,7 @@ public class UserController {
 
     @RequestMapping(value = "users", method = RequestMethod.GET)
     public String listBooks(Model model){
-        model.addAttribute("http://localhost:8080/clier", new User());
+        model.addAttribute("user", new User());
         model.addAttribute("listBooks", this.userService.listUsers());
 
         return "users";
@@ -43,7 +43,7 @@ public class UserController {
     @RequestMapping(value = "/autorization/add", method = RequestMethod.POST)
     public String listBooksa(@ModelAttribute("use") User book){
         if(this.userService.getUser(book)) {
-            return "redirect:ent";
+            return "redirect:http://localhost:8080/client";
         }
         else {
             return "redirect:/users";
