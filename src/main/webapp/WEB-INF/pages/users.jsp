@@ -144,7 +144,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Мой профиль<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li class="divider"></li>
-                        <li><a href="1autor.html">Вход</a></li>
+                        <li><a href="<c:url value="/autorization"/>" target="_blank">Вход</a></li>
                         <li class="divider"></li>
                         <li><a href="<c:url value="/users"/>" target="_blank">Регистрация</a></li>
                     </ul>

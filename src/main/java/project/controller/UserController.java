@@ -23,10 +23,31 @@ public class UserController {
 
     @RequestMapping(value = "users", method = RequestMethod.GET)
     public String listBooks(Model model){
-        model.addAttribute("user", new User());
+        model.addAttribute("http://localhost:8080/clier", new User());
         model.addAttribute("listBooks", this.userService.listUsers());
 
         return "users";
+    }
+
+    @RequestMapping(value = "autorization", method = RequestMethod.GET)
+    public String lishhhhhhhtBook(Model model){
+        model.addAttribute("use", new User());
+        return "autorization";
+    }
+
+    @RequestMapping(value = "client", method = RequestMethod.GET)
+    public String lish(Model model){
+        return "client";
+    }
+
+    @RequestMapping(value = "/autorization/add", method = RequestMethod.POST)
+    public String listBooksa(@ModelAttribute("use") User book){
+        if(this.userService.getUser(book)) {
+            return "redirect:ent";
+        }
+        else {
+            return "redirect:/users";
+        }
     }
 
     @RequestMapping(value = "/users/add", method = RequestMethod.POST)

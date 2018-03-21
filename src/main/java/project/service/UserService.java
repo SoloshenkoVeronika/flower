@@ -14,5 +14,7 @@ public interface UserService {
 
     public User getUserById(int id);
 
+    public boolean getUser(User user);
+
     public List<User> listUsers();
 }

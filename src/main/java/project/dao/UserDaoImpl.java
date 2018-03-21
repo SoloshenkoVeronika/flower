@@ -1,5 +1,6 @@
 package project.dao;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -50,6 +51,22 @@ public class UserDaoImpl implements UserDao {
         logger.info("Book successfully loaded. Book details: " + book);
 
         return book;
+    }
+
+    @Override
+    public boolean getUser(User userr) {
+        System.out.println("rrrrr");
+        Session session =this.sessionFactory.getCurrentSession();
+        if(session.createQuery("from User where login = '"+userr.getLogin()+"' and password = '"+userr.getPassword()+"'").iterate().hasNext()){
+            System.out.println("e122221111e");
+            logger.info("Book successfully loaded. Book details: " + userr);
+            return true;
+        }
+        else{
+            System.out.println("neeet");
+            logger.info("Book successfully loaded. Book details: " + userr);
+            return false;
+        }
     }
 
     @Override
