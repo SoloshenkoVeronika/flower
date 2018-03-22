@@ -46,8 +46,9 @@ public class UserController {
             return "redirect:http://localhost:8080/client";
         }
         else {
-            return "redirect:/users";
+             return "redirect:/users";
         }
+
     }
 
     @RequestMapping(value = "/users/add", method = RequestMethod.POST)
@@ -63,6 +64,7 @@ public class UserController {
 
     @RequestMapping("/remove/{id}")
     public String removeBook(@PathVariable("id") int id){
+
         this.userService.removeUser(id);
 
         return "redirect:/users";
@@ -74,6 +76,7 @@ public class UserController {
         model.addAttribute("listBooks", this.userService.listUsers());
 
         return "books";
+
     }
 
     @RequestMapping("bookdata/{id}")
