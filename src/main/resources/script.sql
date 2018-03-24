@@ -1,6 +1,32 @@
 
 
 USE flowers
+
+
+CREATE TABLE flower(
+  id int(3) NOT NULL AUTO_INCREMENT,
+  species varchar(60) NOT NULL,
+  sort varchar(100) NOT NULL,
+  color varchar(30) NOT NULL,
+  length int(3) NOT NULL,
+  amount  int(3) NOT NULL,
+  price  float(2) NOT NULL,
+  picture varchar(256) NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+INSERT INTO flower (species, sort, color, length, amount, price, picture)
+VALUES ('Роза', 'Blanche Moreau', 'Белый', 90, 50, 3.9, null);
+INSERT INTO flower (species, sort, color, length, amount, price, picture)
+VALUES ('Роза', 'Leonardo da Vinci', 'Розовый', 60, 30, 4, null);
+
+INSERT INTO flower (species, sort, color, length, amount, price, picture)
+VALUES ('Роза', 'Мисс Пигги (Miss Piggy)', 'Розовый', 45, 50, 4.2, null);
+
+INSERT INTO flower (species, sort, color, length, amount, price, picture)
+VALUES ('Тюльпан', 'Christmas Dream', 'Розовый', 35, 60, 1.8, null);
+
+
 CREATE TABLE `user` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
   `login` varchar(50) NOT NULL,
@@ -57,8 +83,6 @@ volume int(3) NOT NULL,
  PRIMARY KEY (id_sz)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-CREATE TABLE flower(
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE bouquet(
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

@@ -6,37 +6,37 @@ import javax.persistence.*;
 @Table(name = "flower")
 public class Flower{
     @Id
-    @Column(name = "id_fl", nullable = false)
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idFl;
 
     @Basic
-    @Column(name = "view_fl", nullable = false, length = 256)
+    @Column(name = "species ", nullable = false, length = 256)
     private String viewFl;
 
     @Basic
-    @Column(name = "sort_fl", nullable = false, length = 256)
+    @Column(name = "sort", nullable = false, length = 256)
     private String sortFl;
 
     @Basic
-    @Column(name = "color_fl", nullable = false, length = 256)
+    @Column(name = "color", nullable = false, length = 256)
     private String colorFl;
 
     @Basic
-    @Column(name = "height", nullable = false)
+    @Column(name = "length", nullable = false)
     private int height;
 
     @Basic
-    @Column(name = "count_fl", nullable = false)
+    @Column(name = "amount", nullable = false)
     private int countFl;
 
     @Basic
-    @Column(name = "price_fl", nullable = false)
+    @Column(name = "price", nullable = false)
     private int priceFl;
 
 
     @Basic
-    @Column(name = "picture_fl", nullable = true, length = 256)
+    @Column(name = "picture", nullable = true, length = 256)
     private String pictureFl;
 
 
