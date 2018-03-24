@@ -31,6 +31,7 @@
         <property name="annotatedClasses">
             <list>
                 <value>project.model.User</value>
+                <value>project.model.Flower</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -48,6 +49,14 @@
 
     <bean id="userService" class="project.service.UserServiceImpl">
         <property name="userDao" ref="userDao"/>
+    </bean>
+
+    <bean id="flowerDao" class="project.dao.FlowerDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="flowerService" class="project.service.FlowerServiceImpl">
+        <property name="flowerDao" ref="flowerDao"/>
     </bean>
 
     <context:component-scan base-package="project"/>

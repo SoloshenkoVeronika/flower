@@ -1,53 +1,53 @@
 package project.service;
 
-import project.dao.UserDao;
+import project.dao.Dao;
 import project.model.User;
 import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
 
-public class UserServiceImpl implements UserService {
-    private UserDao userDao;
+public class UserServiceImpl implements Service<User> {
+    private Dao<User> userDao;
 
-    public void setUserDao(UserDao userDao) {
+    public void setUserDao(Dao userDao) {
         this.userDao = userDao;
     }
 
     @Override
     @Transactional
-    public void addUser(User user) {
-        this.userDao.addUser(user);
+    public void add(User user) {
+        this.userDao.add(user);
     }
 
     @Override
     @Transactional
-    public void updateUser(User user) {
-        this.userDao.updateUser(user);
+    public void update(User user) {
+        this.userDao.update(user);
     }
 
     @Override
     @Transactional
-    public boolean getUser(User user) {
-        return  this.userDao.getUser(user);
+    public boolean getEn(User user) {
+        return  this.userDao.getEn(user);
     }
 
 
     @Override
     @Transactional
-    public void removeUser(int id) {
-        this.userDao.removeUser(id);
+    public void remove(int id) {
+        this.userDao.remove(id);
     }
 
     @Override
     @Transactional
-    public User getUserById(int id) {
-        return this.userDao.getUserById(id);
+    public User getById(int id) {
+        return this.userDao.getById(id);
     }
 
     @Override
     @Transactional
-    public List<User> listUsers() {
-        return this.userDao.listUsers();
+    public List<User> list() {
+        return this.userDao.list();
     }
 }

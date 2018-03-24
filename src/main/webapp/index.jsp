@@ -60,44 +60,44 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="#">Цветы <span class="sr-only">(current)</span></a>
+                <li class="dropdown">
+                <a href="<c:url value="/flowers"/>" target="_blank">Цветы<span class="caret"></span></a>
+                    <%--<ul class="dropdown-menu" role="menu">--%>
+                        <%--<li><a href="<c:url value="/flowers"/>" target="_blank">Просмотреть</a></li>--%>
+                        <%--<li><a href="#">Добавить</a></li>--%>
+                        <%--<li><a href="#">Удалить</a></li>--%>
+                        <%--<li><a href="#">Редактировать</a></li>--%>
+                    <%--</ul>--%>
+                </li>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Букеты<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Подпункт 1.1</a></li>
-                        <li><a href="#">Подпункт 1.2</a></li>
-                        <li><a href="#">Подпункт 1.3</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Подпункт 1.4</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Подпункт 1.5</a></li>
+                        <li><a href="#">Просмотреть</a></li>
+                        <li><a href="#">Добавить</a></li>
+                        <li><a href="#">Удалить</a></li>
+                        <li><a href="#">Редактировать</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Композиции<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Подпункт 1.1</a></li>
-                        <li><a href="#">Подпункт 1.2</a></li>
-                        <li><a href="#">Подпункт 1.3</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Подпункт 1.4</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Подпункт 1.5</a></li>
+                        <li><a href="#">Просмотреть</a></li>
+                        <li><a href="#">Добавить</a></li>
+                        <li><a href="#">Удалить</a></li>
+                        <li><a href="#">Редактировать</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Подарки<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Розы</a></li>
-                        <li><a href="#">Хризантемы</a></li>
-                        <li><a href="#">Подпункт 1.3</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Подпункт 1.4</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Подпункт 1.5</a></li>
+                        <li><a href="#">Просмотреть</a></li>
+                        <li><a href="#">Добавить</a></li>
+                        <li><a href="#">Удалить</a></li>
+                        <li><a href="#">Редактировать</a></li>
                     </ul>
                 </li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">

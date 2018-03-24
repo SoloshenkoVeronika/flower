@@ -1,6 +1,5 @@
 package project.dao;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -10,7 +9,7 @@ import project.model.User;
 
 import java.util.List;
 
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl implements Dao<User> {
     private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 
     private SessionFactory sessionFactory;
@@ -20,66 +19,66 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void addUser(User user) {
+    public void add(User user) {
         Session session = this.sessionFactory.getCurrentSession();
         session.persist(user);
-        logger.info("Book successfully saved. Book details: " + user);
+        logger.info("User successfully saved. User details: " + user);
     }
 
     @Override
-    public void updateUser(User book) {
+    public void update(User user) {
         Session session = this.sessionFactory.getCurrentSession();
-        session.update(book);
-        logger.info("Book successfully update. Book details: " + book);
+        session.update(user);
+        logger.info("User successfully update. User details: " + user);
     }
 
     @Override
-    public void removeUser(int id) {
+    public void remove(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        User book = (User) session.load(User.class, new Integer(id));
+        User user = (User) session.load(User.class, new Integer(id));
 
-        if(book!=null){
-            session.delete(book);
+        if(user!=null){
+            session.delete(user);
         }
-        logger.info("Book successfully removed. Book details: " + book);
+        logger.info("User successfully removed. User details: " + user);
     }
 
     @Override
-    public User getUserById(int id) {
+    public User getById(int id) {
         Session session =this.sessionFactory.getCurrentSession();
-        User book = (User) session.load(User.class, new Integer(id));
-        logger.info("Book successfully loaded. Book details: " + book);
+        User user = (User) session.load(User.class, new Integer(id));
+        logger.info("User successfully loaded. User details: " + user);
 
-        return book;
+        return user;
     }
 
     @Override
-    public boolean getUser(User userr) {
-        System.out.println("rrrrr");
+    public boolean getEn(User userr) {
+//        System.out.println("rrrrr");
         Session session =this.sessionFactory.getCurrentSession();
         if(session.createQuery("from User where login = '"+userr.getLogin()+"' and password = '"+userr.getPassword()+"'").iterate().hasNext()){
-            System.out.println("e122221111e");
-            logger.info("Book successfully loaded. Book details: " + userr);
+//            System.out.println("e122221111e");
+            logger.info("User successfully loaded. User details: " + userr);
             return true;
         }
         else{
             System.out.println("neeet");
-            logger.info("Book successfully loaded. Book details: " + userr);
+            logger.info("User successfully loaded. User details: " + userr);
             return false;
         }
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<User> listUsers() {
+    public List<User> list() {
         Session session = this.sessionFactory.getCurrentSession();
-        List<User> bookList = session.createQuery("from User").list();
+        List<User> userList = session.createQuery("from User").list();
 
-        for(User book: bookList){
-            logger.info("Book list: " + book);
+        for(User user: userList){
+            logger.info("User list: " + user);
         }
 
-        return bookList;
+        return userList;
     }
 }
 

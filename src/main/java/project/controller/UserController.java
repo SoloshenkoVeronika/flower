@@ -1,7 +1,7 @@
 package project.controller;
 
 import project.model.User;
-import project.service.UserService;
+import project.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -13,24 +13,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class UserController {
-    private UserService userService;
+    private Service userService;
 
     @Autowired(required = true)
     @Qualifier(value = "userService")
-    public void setBookService(UserService bookService) {
-        this.userService = bookService;
+    public void setUserService(Service userService) {
+        this.userService = userService;
     }
 
     @RequestMapping(value = "users", method = RequestMethod.GET)
-    public String listBooks(Model model){
+    public String listUsers(Model model){
         model.addAttribute("user", new User());
-        model.addAttribute("listBooks", this.userService.listUsers());
+        model.addAttribute("listUsers", this.userService.list());
 
         return "users";
     }
 
     @RequestMapping(value = "autorization", method = RequestMethod.GET)
-    public String lishhhhhhhtBook(Model model){
+    public String listFlower(Model model){
         model.addAttribute("use", new User());
         return "autorization";
     }
@@ -41,8 +41,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/autorization/add", method = RequestMethod.POST)
-    public String listBooksa(@ModelAttribute("use") User book){
-        if(this.userService.getUser(book)) {
+    public String listUsersa(@ModelAttribute("use") User user){
+        if(this.userService.getEn(user)) {
             return "redirect:http://localhost:8080/client";
         }
         else {
@@ -52,37 +52,32 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/add", method = RequestMethod.POST)
-    public String addBook(@ModelAttribute("user") User book){
-        if(book.getId() == 0){
-            this.userService.addUser(book);
+    public String addUser(@ModelAttribute("user") User user){
+        if(user.getId() == 0){
+            this.userService.add(user);
         }else {
-            this.userService.updateUser(book);
+            this.userService.update(user);
         }
 
         return "redirect:/users";
     }
 
     @RequestMapping("/remove/{id}")
-    public String removeBook(@PathVariable("id") int id){
+    public String removeUser(@PathVariable("id") int id){
 
-        this.userService.removeUser(id);
+        this.userService.remove(id);
 
         return "redirect:/users";
     }
 
     @RequestMapping("edit/{id}")
-    public String editBook(@PathVariable("id") int id, Model model){
-        model.addAttribute("user", this.userService.getUserById(id));
-        model.addAttribute("listBooks", this.userService.listUsers());
+    public String editUser(@PathVariable("id") int id, Model model){
+        model.addAttribute("user", this.userService.getById(id));
+        model.addAttribute("listUsers", this.userService.list());
 
-        return "books";
+        return "users";
 
     }
 
-    @RequestMapping("bookdata/{id}")
-    public String bookData(@PathVariable("id") int id, Model model){
-        model.addAttribute("user", this.userService.getUserById(id));
 
-        return "bookdata";
-    }
 }
