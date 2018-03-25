@@ -33,6 +33,7 @@
                 <value>project.model.User</value>
                 <value>project.model.Flower</value>
                 <value>project.model.Bouquet</value>
+                <value>project.model.Decoration</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -40,6 +41,8 @@
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
                 </prop>
                 <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/flowers</prop>
+                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
             </props>
         </property>
     </bean>
@@ -66,6 +69,14 @@
 
     <bean id="bouquetService" class="project.service.BouquetServiceImpl">
         <property name="bouquetDao" ref="bouquetDao"/>
+    </bean>
+
+    <bean id="decorationDao" class="project.dao.DecorationDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="decorationService" class="project.service.DecorationServiceImpl">
+        <property name="decorationDao" ref="decorationDao"/>
     </bean>
 
 

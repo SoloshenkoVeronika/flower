@@ -119,7 +119,7 @@
                     <a href="<c:url value="/bouquets"/>" target="_blank">Подарки</a>
                 </li>
                 <li class="">
-                    <a href="<c:url value="/bouquets"/>" target="_blank">Украшения</a>
+                    <a href="<c:url value="/decorations"/>" target="_blank">Украшения</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

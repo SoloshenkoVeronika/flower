@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Admin
   Date: 25.03.2018
-  Time: 12:00
+  Time: 20:07
   To change this template use File | Settings | File Templates.
 --%>
 
@@ -149,38 +149,30 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="h2 page-header"
-                        style="color:#8d1645;   font-family: 'Lobster', cursive; text-align: center;">Букеты</h1>
+                        style="color:#8d1645;   font-family: 'Lobster', cursive; text-align: center;">Украшение</h1>
                     <section class="main">
 
 
-                        <c:if test="${!empty listBouquets}">
+                        <c:if test="${!empty listDecorations}">
                             <table class="tg">
                                 <tr>
                                     <th width="40">ID</th>
                                     <th width="120">Название</th>
-                                    <th width="170">Состав</th>
-                                    <th width="40">Длина</th>
-                                    <th width="40">Диаметр</th>
-                                    <th width="40">Вес</th>
                                     <th width="80">Количество</th>
                                     <th width="40">Цена</th>
                                     <th width="120">Изображение</th>
                                     <th width="60">Редактирование</th>
                                     <th width="60">Удаление</th>
                                 </tr>
-                                <c:forEach items="${listBouquets}" var="bouquet">
+                                <c:forEach items="${listDecorations}" var="decoration">
                                     <tr>
-                                        <td>${bouquet.id}</td>
-                                        <td>${bouquet.name}</td>
-                                        <td>${bouquet.composition}</td>
-                                        <td>${bouquet.height}</td>
-                                        <td>${bouquet.diameter}</td>
-                                        <td>${bouquet.weight}</td>
-                                        <td>${bouquet.amount}</td>
-                                        <td>${bouquet.price}</td>
-                                        <td>${bouquet.picture}</td>
-                                        <td><a href="<c:url value='/editbq/${bouquet.id}'/>">Редактирование</a></td>
-                                        <td><a href="<c:url value='/removebq/${bouquet.id}'/>">Удаление</a></td>
+                                        <td>${decoration.id}</td>
+                                        <td>${decoration.name}</td>
+                                        <td>${decoration.amount}</td>
+                                        <td>${decoration.price}</td>
+                                        <td>${decoration.picture}</td>
+                                        <td><a href="<c:url value='/editdec/${decoration.id}'/>">Редактирование</a></td>
+                                        <td><a href="<c:url value='/removedec/${decoration.id}'/>">Удаление</a></td>
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -189,11 +181,11 @@
 
                         <h1>Форма для данных</h1>
 
-                        <c:url var="addAction" value="/bouquets/add"/>
+                        <c:url var="addAction" value="/decorations/add"/>
 
-                        <form:form action="${addAction}" commandName="bouquet">
+                        <form:form action="${addAction}" commandName="decoration">
                             <table>
-                                <c:if test="${!empty bouquet.name}">
+                                <c:if test="${!empty decoration.name}">
                                     <tr>
                                         <td>
                                             <form:label path="id">
@@ -218,46 +210,6 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <form:label path="composition">
-                                            <spring:message text="Состав"/>
-                                        </form:label>
-                                    </td>
-                                    <td>
-                                        <form:input path="composition"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <form:label path="height">
-                                            <spring:message text="Высота"/>
-                                        </form:label>
-                                    </td>
-                                    <td>
-                                        <form:input path="height"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <form:label path="diameter">
-                                            <spring:message text="Диаметр"/>
-                                        </form:label>
-                                    </td>
-                                    <td>
-                                        <form:input path="diameter"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <form:label path="weight">
-                                            <spring:message text="Вес"/>
-                                        </form:label>
-                                    </td>
-                                    <td>
-                                        <form:input path="weight"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
                                         <form:label path="amount">
                                             <spring:message text="Количество"/>
                                         </form:label>
@@ -278,13 +230,13 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <c:if test="${!empty bouquet.name}">
+                                        <c:if test="${!empty decoration.name}">
                                             <input type="submit"
-                                                   value="<spring:message text="Редактировать букет"/>"/>
+                                                   value="<spring:message text="Редактировать украшение"/>"/>
                                         </c:if>
-                                        <c:if test="${empty bouquet.name}">
+                                        <c:if test="${empty decoration.name}">
                                             <input type="submit"
-                                                   value="<spring:message text="Добавить букет"/>"/>
+                                                   value="<spring:message text="Добавить украшение"/>"/>
                                         </c:if>
                                     </td>
                                 </tr>
@@ -314,3 +266,4 @@
 
 </body>
 </html>
+
