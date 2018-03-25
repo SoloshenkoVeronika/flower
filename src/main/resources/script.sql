@@ -1,7 +1,5 @@
 
 
-USE flowers
-
 
 CREATE TABLE flower(
   id int(3) NOT NULL AUTO_INCREMENT,
@@ -84,7 +82,18 @@ volume int(3) NOT NULL,
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
+
 CREATE TABLE bouquet(
+  id INT(3) NOT NULL AUTO_INCREMENT,
+  name VARCHAR(60) NOT NULL,
+  composition VARCHAR(256) NOT NULL,
+  height INT(3) NOT NULL,
+  diameter INT(3) NOT NULL,
+  weight FLOAT(2) NOT NULL,
+  amount  INT(3) NOT NULL,
+  price  FLOAT(2) NOT NULL,
+  picture VARCHAR(256) NULL,
+  PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE composition(

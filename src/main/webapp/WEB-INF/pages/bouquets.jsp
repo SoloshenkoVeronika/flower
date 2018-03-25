@@ -1,10 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: Admin
-  Date: 24.03.2018
-  Time: 12:26
+  Date: 25.03.2018
+  Time: 12:00
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -12,7 +13,7 @@
 <%@ page session="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
-    <title>Цветы</title>
+    <title>Букеты</title>
     <link rel="stylesheet" type="text/css" href="css/autor_style.css"/>
     <script src="js/modernizr.custom.63321.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
@@ -94,14 +95,17 @@
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="sr-only"></span>
             </button>
 
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
-                <li>
-                    <a href="<c:url value="/flowers"/>" target="_blank">Цветы</a>
+                <li class="">
+                    <a href="<c:url value="/flowers"/>" target="_blank">Цветы<span class="caret"></span></a>
                     <%--<ul class="dropdown-menu" role="menu">--%>
                     <%--<li><a href="<c:url value="/flowers"/>" target="_blank">Просмотреть</a></li>--%>
                     <%--<li><a href="#">Добавить</a></li>--%>
@@ -145,36 +149,38 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="h2 page-header"
-                        style="color:#8d1645;   font-family: 'Lobster', cursive; text-align: center;"> Цветы</h1>
+                        style="color:#8d1645;   font-family: 'Lobster', cursive; text-align: center;">Букеты</h1>
                     <section class="main">
 
 
-                        <c:if test="${!empty listFlowers}">
+                        <c:if test="${!empty listBouquets}">
                             <table class="tg">
                                 <tr>
                                     <th width="40">ID</th>
-                                    <th width="120">Вид</th>
-                                    <th width="120">Сорт</th>
-                                    <th width="90">Цвет</th>
+                                    <th width="120">Название</th>
+                                    <th width="170">Состав</th>
                                     <th width="40">Длина</th>
+                                    <th width="40">Диаметр</th>
+                                    <th width="40">Вес</th>
                                     <th width="80">Количество</th>
                                     <th width="40">Цена</th>
                                     <th width="120">Изображение</th>
                                     <th width="60">Редактирование</th>
                                     <th width="60">Удаление</th>
                                 </tr>
-                                <c:forEach items="${listFlowers}" var="flower">
+                                <c:forEach items="${listBouquets}" var="bouquet">
                                     <tr>
-                                        <td>${flower.idFl}</td>
-                                        <td>${flower.viewFl}</td>
-                                        <td>${flower.sortFl}</td>
-                                        <td>${flower.colorFl}</td>
-                                        <td>${flower.height}</td>
-                                        <td>${flower.countFl}</td>
-                                        <td>${flower.priceFl}</td>
-                                        <td>${flower.pictureFl}</td>
-                                        <td><a href="<c:url value='/editfl/${flower.idFl}'/>">Редактирование</a></td>
-                                        <td><a href="<c:url value='/removefl/${flower.idFl}'/>">Удаление</a></td>
+                                        <td>${bouquet.id}</td>
+                                        <td>${bouquet.name}</td>
+                                        <td>${bouquet.composition}</td>
+                                        <td>${bouquet.height}</td>
+                                        <td>${bouquet.diameter}</td>
+                                        <td>${bouquet.weight}</td>
+                                        <td>${bouquet.amount}</td>
+                                        <td>${bouquet.price}</td>
+                                        <td>${bouquet.picture}</td>
+                                        <td><a href="<c:url value='/editbq/${bouquet.id}'/>">Редактирование</a></td>
+                                        <td><a href="<c:url value='/removebq/${bouquet.id}'/>">Удаление</a></td>
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -183,51 +189,41 @@
 
                         <h1>Форма для данных</h1>
 
-                        <c:url var="addAction" value="/flowers/add"/>
+                        <c:url var="addAction" value="/bouquets/add"/>
 
-                        <form:form action="${addAction}" commandName="flower">
+                        <form:form action="${addAction}" commandName="bouquet">
                             <table>
-                                <c:if test="${!empty flower.viewFl}">
+                                <c:if test="${!empty bouquet.name}">
                                     <tr>
                                         <td>
-                                            <form:label path="idFl">
+                                            <form:label path="id">
                                                 <spring:message text="ID"/>
                                             </form:label>
                                         </td>
                                         <td>
-                                            <form:input path="idFl" readonly="true" size="8" disabled="true"/>
-                                            <form:hidden path="idFl"/>
+                                            <form:input path="id" readonly="true" size="8" disabled="true"/>
+                                            <form:hidden path="id"/>
                                         </td>
                                     </tr>
                                 </c:if>
                                 <tr>
                                     <td>
-                                        <form:label path="viewFl">
-                                            <spring:message text="Вид"/>
+                                        <form:label path="name">
+                                            <spring:message text="Название"/>
                                         </form:label>
                                     </td>
                                     <td>
-                                        <form:input path="viewFl"/>
+                                        <form:input path="name"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <form:label path="sortFl">
-                                            <spring:message text="Сорт"/>
+                                        <form:label path="composition">
+                                            <spring:message text="Состав"/>
                                         </form:label>
                                     </td>
                                     <td>
-                                        <form:input path="sortFl"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <form:label path="colorFl">
-                                            <spring:message text="Цвет"/>
-                                        </form:label>
-                                    </td>
-                                    <td>
-                                        <form:input path="colorFl"/>
+                                        <form:input path="composition"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -242,33 +238,53 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <form:label path="countFl">
+                                        <form:label path="diameter">
+                                            <spring:message text="Диаметр"/>
+                                        </form:label>
+                                    </td>
+                                    <td>
+                                        <form:input path="diameter"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <form:label path="weight">
+                                            <spring:message text="Вес"/>
+                                        </form:label>
+                                    </td>
+                                    <td>
+                                        <form:input path="weight"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <form:label path="amount">
                                             <spring:message text="Количество"/>
                                         </form:label>
                                     </td>
                                     <td>
-                                        <form:input path="countFl"/>
+                                        <form:input path="amount"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <form:label path="priceFl">
+                                        <form:label path="price">
                                             <spring:message text="Цена"/>
                                         </form:label>
                                     </td>
                                     <td>
-                                        <form:input path="priceFl"/>
+                                        <form:input path="price"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <c:if test="${!empty flower.viewFl}">
+                                        <c:if test="${!empty bouquet.name}">
                                             <input type="submit"
-                                                   value="<spring:message text="Редактировать цветы"/>"/>
+                                                   value="<spring:message text="Редактировать букет"/>"/>
                                         </c:if>
-                                        <c:if test="${empty flower.viewFl}">
+                                        <c:if test="${empty bouquet.name}">
                                             <input type="submit"
-                                                   value="<spring:message text="Добавить цветы"/>"/>
+                                                   value="<spring:message text="Добавить букет"/>"/>
                                         </c:if>
                                     </td>
                                 </tr>

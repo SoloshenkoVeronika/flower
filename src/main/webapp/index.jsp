@@ -2,13 +2,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Главная страница</title>
-    <link rel="stylesheet" type="text/css" href="css/autor_style.css" />
+    <meta charset="UTF-8"/>
+    <title>Главная страница</title>
+    <link rel="stylesheet" type="text/css" href="css/autor_style.css"/>
     <script src="js/modernizr.custom.63321.js"></script>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/menu_style.css" />
+    <link rel="stylesheet" href="css/menu_style.css"/>
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </head>
@@ -59,49 +59,32 @@
 
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active">
-                <li class="dropdown">
-                <a href="<c:url value="/flowers"/>" target="_blank">Цветы<span class="caret"></span></a>
+                <li class="">
+                    <a href="<c:url value="/flowers"/>" target="_blank">Цветы</a>
                     <%--<ul class="dropdown-menu" role="menu">--%>
-                        <%--<li><a href="<c:url value="/flowers"/>" target="_blank">Просмотреть</a></li>--%>
-                        <%--<li><a href="#">Добавить</a></li>--%>
-                        <%--<li><a href="#">Удалить</a></li>--%>
-                        <%--<li><a href="#">Редактировать</a></li>--%>
+                    <%--<li><a href="<c:url value="/flowers"/>" target="_blank">Просмотреть</a></li>--%>
+                    <%--<li><a href="#">Добавить</a></li>--%>
+                    <%--<li><a href="#">Удалить</a></li>--%>
+                    <%--<li><a href="#">Редактировать</a></li>--%>
                     <%--</ul>--%>
                 </li>
+                <li class="">
+                    <a href="<c:url value="/bouquets"/>" target="_blank">Букеты</a>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Букеты<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Просмотреть</a></li>
-                        <li><a href="#">Добавить</a></li>
-                        <li><a href="#">Удалить</a></li>
-                        <li><a href="#">Редактировать</a></li>
-                    </ul>
+                <li class="">
+                    <a href="<c:url value="/bouquets"/>" target="_blank">Копмозиции</a>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Композиции<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Просмотреть</a></li>
-                        <li><a href="#">Добавить</a></li>
-                        <li><a href="#">Удалить</a></li>
-                        <li><a href="#">Редактировать</a></li>
-                    </ul>
+                <li class="">
+                    <a href="<c:url value="/bouquets"/>" target="_blank">Подарки</a>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Подарки<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Просмотреть</a></li>
-                        <li><a href="#">Добавить</a></li>
-                        <li><a href="#">Удалить</a></li>
-                        <li><a href="#">Редактировать</a></li>
-                    </ul>
+                <li class="">
+                    <a href="<c:url value="/bouquets"/>" target="_blank">Украшения</a>
                 </li>
-
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Мой профиль<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Мой
+                        профиль<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li class="divider"></li>
                         <li><a href="<c:url value="/autorization"/>" target="_blank">Вход</a></li>
@@ -128,27 +111,34 @@
                 <div class="col-md-4">
                     <h4 class="page-header">Cupiditate non</h4>
                     <ul class="list-group">
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
+                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae
+                            vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
+                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae
+                            vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
+                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae
+                            vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
 
                     </ul>
                     <h4 class="page-header">Cupiditate non</h4>
                     <ul class="list-group">
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
+                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae
+                            vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
+                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae
+                            vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
+                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae
+                            vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
 
                     </ul>
                     <h4 class="page-header">Cupiditate non</h4>
                     <ul class="list-group">
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
+                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae
+                            vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
+                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae
+                            vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
+                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae
+                            vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
 
                     </ul>
-
-
 
 
                 </div>
@@ -163,11 +153,11 @@
     </footer>
 </div>
 <script type="text/javascript">
-    $(function(){
-        $(".showpassword").each(function(index,input) {
+    $(function () {
+        $(".showpassword").each(function (index, input) {
             var $input = $(input);
             $("<p class='opt'/>").append(
-                $("<input type='checkbox' class='showpasswordcheckbox' id='showPassword' />").click(function() {
+                $("<input type='checkbox' class='showpasswordcheckbox' id='showPassword' />").click(function () {
                     var change = $(this).is(":checked") ? "text" : "password";
                     var rep = $("<input placeholder='Пароль' type='" + change + "' />")
                         .attr("id", $input.attr("id"))
@@ -181,8 +171,8 @@
             ).append($("<label for='showPassword'/>").text("Показать пароль")).insertAfter($input.parent());
         });
 
-        $('#showPassword').click(function(){
-            if($("#showPassword").is(":checked")) {
+        $('#showPassword').click(function () {
+            if ($("#showPassword").is(":checked")) {
                 $('.icon-lock').addClass('icon-unlock');
                 $('.icon-unlock').removeClass('icon-lock');
             } else {
