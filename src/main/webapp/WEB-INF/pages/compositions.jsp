@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Admin
-  Date: 25.03.2018
-  Time: 20:07
+  Date: 26.03.2018
+  Time: 9:42
   To change this template use File | Settings | File Templates.
 --%>
 
@@ -13,7 +13,7 @@
 <%@ page session="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
-    <title>Украшение</title>
+    <title>Композиции</title>
     <link rel="stylesheet" type="text/css" href="css/autor_style.css"/>
     <script src="js/modernizr.custom.63321.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
@@ -149,30 +149,34 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="h2 page-header"
-                        style="color:#8d1645;   font-family: 'Lobster', cursive; text-align: center;">Украшение</h1>
+                        style="color:#8d1645;   font-family: 'Lobster', cursive; text-align: center;">Композиции</h1>
                     <section class="main">
 
 
-                        <c:if test="${!empty listDecorations}">
+                        <c:if test="${!empty listCompositions}">
                             <table class="tg">
                                 <tr>
                                     <th width="40">ID</th>
                                     <th width="120">Название</th>
+                                    <th width="170">Состав</th>
+                                    <th width="40">Упаковка</th>
                                     <th width="80">Количество</th>
                                     <th width="40">Цена</th>
                                     <th width="120">Изображение</th>
                                     <th width="60">Редактирование</th>
                                     <th width="60">Удаление</th>
                                 </tr>
-                                <c:forEach items="${listDecorations}" var="decoration">
+                                <c:forEach items="${listCompositions}" var="composition">
                                     <tr>
-                                        <td>${decoration.id}</td>
-                                        <td>${decoration.name}</td>
-                                        <td>${decoration.amount}</td>
-                                        <td>${decoration.price}</td>
-                                        <td>${decoration.picture}</td>
-                                        <td><a href="<c:url value='/editdec/${decoration.id}'/>">Редактирование</a></td>
-                                        <td><a href="<c:url value='/removedec/${decoration.id}'/>">Удаление</a></td>
+                                        <td>${composition.id}</td>
+                                        <td>${composition.name}</td>
+                                        <td>${composition.composition}</td>
+                                        <td>${composition.packag}</td>
+                                        <td>${composition.amount}</td>
+                                        <td>${composition.price}</td>
+                                        <td>${composition.picture}</td>
+                                        <td><a href="<c:url value='/editcom/${composition.id}'/>">Редактирование</a></td>
+                                        <td><a href="<c:url value='/removecom/${composition.id}'/>">Удаление</a></td>
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -181,11 +185,11 @@
 
                         <h1>Форма для данных</h1>
 
-                        <c:url var="addAction" value="/decorations/add"/>
+                        <c:url var="addAction" value="/compositions/add"/>
 
-                        <form:form action="${addAction}" commandName="decoration">
+                        <form:form action="${addAction}" commandName="composition">
                             <table>
-                                <c:if test="${!empty decoration.name}">
+                                <c:if test="${!empty composition.name}">
                                     <tr>
                                         <td>
                                             <form:label path="id">
@@ -210,6 +214,26 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        <form:label path="composition">
+                                            <spring:message text="Состав"/>
+                                        </form:label>
+                                    </td>
+                                    <td>
+                                        <form:input path="composition"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <form:label path="packag">
+                                            <spring:message text="Упаковка"/>
+                                        </form:label>
+                                    </td>
+                                    <td>
+                                        <form:input path="packag"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         <form:label path="amount">
                                             <spring:message text="Количество"/>
                                         </form:label>
@@ -230,13 +254,13 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <c:if test="${!empty decoration.name}">
+                                        <c:if test="${!empty composition.name}">
                                             <input type="submit"
-                                                   value="<spring:message text="Редактировать украшение"/>"/>
+                                                   value="<spring:message text="Редактировать композицию"/>"/>
                                         </c:if>
-                                        <c:if test="${empty decoration.name}">
+                                        <c:if test="${empty composition.name}">
                                             <input type="submit"
-                                                   value="<spring:message text="Добавить украшение"/>"/>
+                                                   value="<spring:message text="Добавить композицию"/>"/>
                                         </c:if>
                                     </td>
                                 </tr>

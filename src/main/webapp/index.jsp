@@ -72,10 +72,10 @@
                     <a href="<c:url value="/bouquets"/>" target="_blank">Букеты</a>
                 </li>
                 <li class="">
-                    <a href="<c:url value="/bouquets"/>" target="_blank">Копмозиции</a>
+                    <a href="<c:url value="/compositions"/>" target="_blank">Копмозиции</a>
                 </li>
                 <li class="">
-                    <a href="<c:url value="/bouquets"/>" target="_blank">Подарки</a>
+                    <a href="<c:url value="/bouquets"/>" target="_blank">Упаковки</a>
                 </li>
                 <li class="">
                     <a href="<c:url value="/decorations"/>" target="_blank">Украшения</a>

@@ -34,6 +34,7 @@
                 <value>project.model.Flower</value>
                 <value>project.model.Bouquet</value>
                 <value>project.model.Decoration</value>
+                <value>project.model.Composition</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -78,6 +79,15 @@
     <bean id="decorationService" class="project.service.DecorationServiceImpl">
         <property name="decorationDao" ref="decorationDao"/>
     </bean>
+
+    <bean id="compositionDao" class="project.dao.CompositionDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="compositionService" class="project.service.CompositionServiceImpl">
+        <property name="compositionDao" ref="compositionDao"/>
+    </bean>
+
 
 
     <context:component-scan base-package="project"/>
