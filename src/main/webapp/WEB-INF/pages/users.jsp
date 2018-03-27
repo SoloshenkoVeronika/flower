@@ -7,51 +7,14 @@
 <html>
 <head>
     <title>Регистрация</title>
-    <link rel="stylesheet" type="text/css" href="css/autor_style.css" />
-    <script src="js/modernizr.custom.63321.js"></script>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/menu_style.css" />
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <style type="text/css">
-        .tg {
-            border-collapse: collapse;
-            border-spacing: 0;
-            border-color: #ccc;
-        }
-
-        .tg td {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #fff;
-        }
-
-        .tg th {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            font-weight: normal;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #f0f0f0;
-        }
-
-        .tg .tg-4eph {
-            background-color: #f9f9f9
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/autor_style.css" />"/>
+    <script  src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />" />
 </head>
 <body>
 <div class="container">
@@ -304,10 +267,9 @@
     });
 
 </script>
-<script src="js/jquery.backstretch.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery.backstretch.min.js"></script>
 <script>
-    $.backstretch("images/fon1.jpg");
+    $.backstretch("resources/images/fon1.jpg");
 </script>
-
 </body>
 </html>

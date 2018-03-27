@@ -16,13 +16,14 @@
     <meta charset="UTF-8" />
     <title>Авторизация пользователя</title>
 
-    <link rel="stylesheet" type="text/css" href="css/autor_style.css" />
-    <script src="js/modernizr.custom.63321.js"></script>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/menu_style.css" />
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/autor_style.css" />"/>
+    <script  src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />" />
 
 
 </head>
@@ -256,9 +257,9 @@
     });
 
 </script>
-<script src="js/jquery.backstretch.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery.backstretch.min.js"></script>
 <script>
-    $.backstretch("images/fon1.jpg");
+    $.backstretch("resources/images/fon1.jpg");
 </script>
 
 </body>
