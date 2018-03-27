@@ -153,7 +153,7 @@
                     <section class="main">
 
 
-                        <c:if test="${!empty listDecorations}">
+                        <c:if test="${!empty listPacks}">
                             <table class="tg">
                                 <tr>
                                     <th width="40">ID</th>
@@ -164,15 +164,15 @@
                                     <th width="60">Редактирование</th>
                                     <th width="60">Удаление</th>
                                 </tr>
-                                <c:forEach items="${listDecorations}" var="decoration">
+                                <c:forEach items="${listPacks}" var="pack">
                                     <tr>
-                                        <td>${decoration.id}</td>
-                                        <td>${decoration.name}</td>
-                                        <td>${decoration.amount}</td>
-                                        <td>${decoration.price}</td>
-                                        <td>${decoration.picture}</td>
-                                        <td><a href="<c:url value='/editdec/${decoration.id}'/>">Редактирование</a></td>
-                                        <td><a href="<c:url value='/removedec/${decoration.id}'/>">Удаление</a></td>
+                                        <td>${pack.id}</td>
+                                        <td>${pack.name}</td>
+                                        <td>${pack.amount}</td>
+                                        <td>${pack.price}</td>
+                                        <td>${pack.picture}</td>
+                                        <td><a href="<c:url value='/editpack/${pack.id}'/>">Редактирование</a></td>
+                                        <td><a href="<c:url value='/removepack/${pack.id}'/>">Удаление</a></td>
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -181,11 +181,11 @@
 
                         <h1>Форма для данных</h1>
 
-                        <c:url var="addAction" value="/decorations/add"/>
+                        <c:url var="addAction" value="/packs/add"/>
 
-                        <form:form action="${addAction}" commandName="decoration">
+                        <form:form action="${addAction}" commandName="pack">
                             <table>
-                                <c:if test="${!empty decoration.name}">
+                                <c:if test="${!empty pack.name}">
                                     <tr>
                                         <td>
                                             <form:label path="id">
@@ -230,11 +230,11 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <c:if test="${!empty decoration.name}">
+                                        <c:if test="${!empty pack.name}">
                                             <input type="submit"
                                                    value="<spring:message text="Редактировать украшение"/>"/>
                                         </c:if>
-                                        <c:if test="${empty decoration.name}">
+                                        <c:if test="${empty pack.name}">
                                             <input type="submit"
                                                    value="<spring:message text="Добавить украшение"/>"/>
                                         </c:if>

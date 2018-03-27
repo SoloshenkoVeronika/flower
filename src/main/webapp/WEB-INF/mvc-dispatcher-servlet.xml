@@ -35,6 +35,7 @@
                 <value>project.model.Bouquet</value>
                 <value>project.model.Decoration</value>
                 <value>project.model.Composition</value>
+                <value>project.model.Pack</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -86,6 +87,14 @@
 
     <bean id="compositionService" class="project.service.CompositionServiceImpl">
         <property name="compositionDao" ref="compositionDao"/>
+    </bean>
+
+    <bean id="packDao" class="project.dao.PackDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="packService" class="project.service.PackServiceImpl">
+        <property name="packDao" ref="packDao"/>
     </bean>
 
 

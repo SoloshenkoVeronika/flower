@@ -75,7 +75,7 @@
                     <a href="<c:url value="/compositions"/>" target="_blank">Копмозиции</a>
                 </li>
                 <li class="">
-                    <a href="<c:url value="/bouquets"/>" target="_blank">Упаковки</a>
+                    <a href="<c:url value="/packs"/>" target="_blank">Упаковки</a>
                 </li>
                 <li class="">
                     <a href="<c:url value="/decorations"/>" target="_blank">Украшения</a>
