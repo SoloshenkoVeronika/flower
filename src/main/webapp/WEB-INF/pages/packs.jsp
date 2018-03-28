@@ -13,7 +13,7 @@
 <%@ page session="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
-    <title>Украшение</title>
+    <title>Упаковки</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/autor_style.css" />"/>
     <script  src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
@@ -68,25 +68,19 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="">
-                    <a href="<c:url value="/flowers"/>" target="_blank">Цветы<span class="caret"></span></a>
-                    <%--<ul class="dropdown-menu" role="menu">--%>
-                    <%--<li><a href="<c:url value="/flowers"/>" target="_blank">Просмотреть</a></li>--%>
-                    <%--<li><a href="#">Добавить</a></li>--%>
-                    <%--<li><a href="#">Удалить</a></li>--%>
-                    <%--<li><a href="#">Редактировать</a></li>--%>
-                    <%--</ul>--%>
+                    <a href="<c:url value="/flowers"/>" target="_self">Цветы<span class="caret"></span></a>
                 </li>
                 <li class="">
-                    <a href="<c:url value="/bouquets"/>" target="_blank">Букеты</a>
+                    <a href="<c:url value="/bouquets"/>" target="_self">Букеты</a>
                 </li>
                 <li class="">
-                    <a href="<c:url value="/compositions"/>" target="_blank">Копмозиции</a>
+                    <a href="<c:url value="/compositions"/>" target="_self">Копмозиции</a>
                 </li>
                 <li class="">
-                    <a href="<c:url value="/packs"/>" target="_blank">Упаковки</a>
+                    <a href="<c:url value="/packs"/>" target="_self">Упаковки</a>
                 </li>
                 <li class="">
-                    <a href="<c:url value="/decorations"/>" target="_blank">Украшения</a>
+                    <a href="<c:url value="/decorations"/>" target="_self">Украшения</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -95,9 +89,9 @@
                         профиль<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li class="divider"></li>
-                        <li><a href="<c:url value="/autorization"/>" target="_blank">Вход</a></li>
+                        <li><a href="<c:url value="/autorization"/>" target="_self">Вход</a></li>
                         <li class="divider"></li>
-                        <li><a href="<c:url value="/users"/>" target="_blank">Регистрация</a></li>
+                        <li><a href="<c:url value="/users"/>" target="_self">Регистрация</a></li>
                     </ul>
                 </li>
             </ul>
@@ -112,7 +106,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="h2 page-header"
-                        style="color:#8d1645;   font-family: 'Lobster', cursive; text-align: center;">Украшение</h1>
+                        style="color:#8d1645;   font-family: 'Lobster', cursive; text-align: center;">Упаковки</h1>
                     <section class="main">
 
 
@@ -195,11 +189,11 @@
                                     <td colspan="2">
                                         <c:if test="${!empty pack.name}">
                                             <input type="submit"
-                                                   value="<spring:message text="Редактировать украшение"/>"/>
+                                                   value="<spring:message text="Редактировать упаковку"/>"/>
                                         </c:if>
                                         <c:if test="${empty pack.name}">
                                             <input type="submit"
-                                                   value="<spring:message text="Добавить украшение"/>"/>
+                                                   value="<spring:message text="Добавить упаковку"/>"/>
                                         </c:if>
                                     </td>
                                 </tr>

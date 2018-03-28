@@ -55,32 +55,29 @@
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="sr-only"></span>
             </button>
 
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
-                <li>
-                    <a href="<c:url value="/flowers"/>" target="_blank">Цветы</a>
-                    <%--<ul class="dropdown-menu" role="menu">--%>
-                    <%--<li><a href="<c:url value="/flowers"/>" target="_blank">Просмотреть</a></li>--%>
-                    <%--<li><a href="#">Добавить</a></li>--%>
-                    <%--<li><a href="#">Удалить</a></li>--%>
-                    <%--<li><a href="#">Редактировать</a></li>--%>
-                    <%--</ul>--%>
+                <li class="">
+                    <a href="<c:url value="/flowers"/>" target="_self">Цветы<span class="caret"></span></a>
                 </li>
                 <li class="">
-                    <a href="<c:url value="/bouquets"/>" target="_blank">Букеты</a>
+                    <a href="<c:url value="/bouquets"/>" target="_self">Букеты</a>
                 </li>
                 <li class="">
-                    <a href="<c:url value="/compositions"/>" target="_blank">Копмозиции</a>
+                    <a href="<c:url value="/compositions"/>" target="_self">Копмозиции</a>
                 </li>
                 <li class="">
-                    <a href="<c:url value="/packs"/>" target="_blank">Упаковки</a>
+                    <a href="<c:url value="/packs"/>" target="_self">Упаковки</a>
                 </li>
                 <li class="">
-                    <a href="<c:url value="/decorations"/>" target="_blank">Украшения</a>
+                    <a href="<c:url value="/decorations"/>" target="_self">Украшения</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -89,9 +86,9 @@
                         профиль<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li class="divider"></li>
-                        <li><a href="<c:url value="/autorization"/>" target="_blank">Вход</a></li>
+                        <li><a href="<c:url value="/autorization"/>" target="_self">Вход</a></li>
                         <li class="divider"></li>
-                        <li><a href="<c:url value="/users"/>" target="_blank">Регистрация</a></li>
+                        <li><a href="<c:url value="/users"/>" target="_self">Регистрация</a></li>
                     </ul>
                 </li>
             </ul>
