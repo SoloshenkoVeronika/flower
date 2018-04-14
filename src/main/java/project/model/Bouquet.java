@@ -20,15 +20,15 @@ public class Bouquet {
 
     @Basic
     @Column(name = "height", nullable = false)
-    private int height;
+    private float height;
 
     @Basic
     @Column(name = "diameter", nullable = false)
-    private int diameter;
+    private float diameter;
 
     @Basic
     @Column(name = "weight", nullable = false, precision = 0)
-    private double weight;
+    private float weight;
 
     @Basic
     @Column(name = "amount", nullable = false)
@@ -36,7 +36,7 @@ public class Bouquet {
 
     @Basic
     @Column(name = "price", nullable = false, precision = 0)
-    private double price;
+    private float price;
 
     @Basic
     @Column(name = "picture", nullable = true, length = 256)
@@ -70,29 +70,29 @@ public class Bouquet {
     }
 
 
-    public int getHeight() {
+    public float getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(float height) {
         this.height = height;
     }
 
 
-    public int getDiameter() {
+    public float getDiameter() {
         return diameter;
     }
 
-    public void setDiameter(int diameter) {
+    public void setDiameter(float diameter) {
         this.diameter = diameter;
     }
 
 
-    public double getWeight() {
+    public float getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(float weight) {
         this.weight = weight;
     }
 
@@ -106,11 +106,11 @@ public class Bouquet {
     }
 
 
-    public double getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -128,41 +128,4 @@ public class Bouquet {
         return "Bouquet{" + "id=" + id + ", name='" + name + '\'' + ", composition='" + composition + '\'' + ", height=" + height + ", diameter=" + diameter + ", weight=" + weight + ", amount=" + amount + ", price=" + price + ", picture='" + picture + '\'' + '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Bouquet bouquet = (Bouquet) o;
-
-        if (id != bouquet.id) return false;
-        if (height != bouquet.height) return false;
-        if (diameter != bouquet.diameter) return false;
-        if (Double.compare(bouquet.weight, weight) != 0) return false;
-        if (amount != bouquet.amount) return false;
-        if (Double.compare(bouquet.price, price) != 0) return false;
-        if (name != null ? !name.equals(bouquet.name) : bouquet.name != null) return false;
-        if (composition != null ? !composition.equals(bouquet.composition) : bouquet.composition != null) return false;
-        if (picture != null ? !picture.equals(bouquet.picture) : bouquet.picture != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result;
-        long temp;
-        result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (composition != null ? composition.hashCode() : 0);
-        result = 31 * result + height;
-        result = 31 * result + diameter;
-        temp = Double.doubleToLongBits(weight);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + amount;
-        temp = Double.doubleToLongBits(price);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (picture != null ? picture.hashCode() : 0);
-        return result;
-    }
 }

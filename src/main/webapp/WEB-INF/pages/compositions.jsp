@@ -15,13 +15,14 @@
 <head>
     <title>Композиции</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/autor_style.css" />"/>
-    <script  src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />" />
+    <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />"/>
 </head>
 <body>
 
@@ -67,7 +68,7 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="">
-                    <a href="<c:url value="/flowers"/>" target="_self">Цветы<span class="caret"></span></a>
+                    <a href="<c:url value="/flowers"/>" target="_self">Цветы</a>
                 </li>
                 <li class="">
                     <a href="<c:url value="/bouquets"/>" target="_self">Букеты</a>
@@ -96,7 +97,8 @@
             </ul>
         </div>
     </div>
-</nav>>
+</nav>
+>
 
 <br><br><br><br><br>
 <div class="mybody">
@@ -131,96 +133,87 @@
                                         <td>${composition.amount}</td>
                                         <td>${composition.price}</td>
                                         <td>${composition.picture}</td>
-                                        <td><a href="<c:url value='/editcom/${composition.id}'/>">Редактирование</a></td>
+                                        <td><a href="<c:url value='/editcom/${composition.id}'/>">Редактирование</a>
+                                        </td>
                                         <td><a href="<c:url value='/removecom/${composition.id}'/>">Удаление</a></td>
                                     </tr>
                                 </c:forEach>
                             </table>
                         </c:if>
 
-
-                        <h1>Форма для данных</h1>
-
+                        <div class="headname">
+                            <h1>Форма для данных</h1>
+                        </div>
                         <c:url var="addAction" value="/compositions/add"/>
 
-                        <form:form action="${addAction}" commandName="composition">
-                            <table>
-                                <c:if test="${!empty composition.name}">
-                                    <tr>
-                                        <td>
-                                            <form:label path="id">
-                                                <spring:message text="ID"/>
-                                            </form:label>
-                                        </td>
-                                        <td>
-                                            <form:input path="id" readonly="true" size="8" disabled="true"/>
-                                            <form:hidden path="id"/>
-                                        </td>
-                                    </tr>
-                                </c:if>
-                                <tr>
-                                    <td>
-                                        <form:label path="name">
-                                            <spring:message text="Название"/>
-                                        </form:label>
-                                    </td>
-                                    <td>
-                                        <form:input path="name"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <form:label path="composition">
-                                            <spring:message text="Состав"/>
-                                        </form:label>
-                                    </td>
-                                    <td>
-                                        <form:input path="composition"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <form:label path="packag">
-                                            <spring:message text="Упаковка"/>
-                                        </form:label>
-                                    </td>
-                                    <td>
-                                        <form:input path="packag"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <form:label path="amount">
-                                            <spring:message text="Количество"/>
-                                        </form:label>
-                                    </td>
-                                    <td>
-                                        <form:input path="amount"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <form:label path="price">
-                                            <spring:message text="Цена"/>
-                                        </form:label>
-                                    </td>
-                                    <td>
-                                        <form:input path="price"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <c:if test="${!empty composition.name}">
-                                            <input type="submit"
-                                                   value="<spring:message text="Редактировать композицию"/>"/>
-                                        </c:if>
-                                        <c:if test="${empty composition.name}">
-                                            <input type="submit"
-                                                   value="<spring:message text="Добавить композицию"/>"/>
-                                        </c:if>
-                                    </td>
-                                </tr>
-                            </table>
+                        <form:form action="${addAction}" commandName="composition" class="form-horizontal">
+
+                            <c:if test="${!empty composition.name}">
+                                <div class="form-group">
+                                    <form:label path="id" class="col-sm-2 control-label">
+                                        <spring:message text="ID"/>
+                                    </form:label>
+                                    <div class="col-sm-2">
+                                        <form:input path="id" readonly="true" size="8" disabled="true"/>
+                                        <form:hidden path="id" class="form-control"/>
+                                    </div>
+                                </div>
+                            </c:if>
+
+                            <div class="form-group">
+                                <form:label path="name" class="col-sm-2 control-label">
+                                    <spring:message text="Название"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="name" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <form:label path="composition" class="col-sm-2 control-label">
+                                    <spring:message text="Состав"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="composition" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <form:label path="packag" class="col-sm-2 control-label">
+                                    <spring:message text="Упаковка"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="packag" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <form:label path="amount" class="col-sm-2 control-label">
+                                    <spring:message text="Количество"/>
+                                </form:label>
+                                <div class="col-sm-2">
+                                    <form:input path="amount" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <form:label path="price" class="col-sm-2 control-label">
+                                    <spring:message text="Цена"/>
+                                </form:label>
+                                <div class="col-sm-2">
+
+                                    <form:input path="price" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <c:if test="${!empty composition.name}">
+                                        <input type="submit" class="btn btn-success"
+                                               value="<spring:message text="Редактировать композицию"/>"/>
+                                    </c:if>
+                                    <c:if test="${empty composition.name}">
+                                        <input type="submit" class="btn btn-success"
+                                               value="<spring:message text="Добавить композицию"/>"/>
+                                    </c:if>
+                                </div>
+                            </div>
+
                         </form:form>
 
 
@@ -235,7 +228,7 @@
 
     <footer>
         <div class="container">
-            Consequatur, vel illum, qui in culpa, qui dolorem.
+            <div style="padding: 10px 0pt 0pt 30px; clear: both; color: #8d1645; font-size: 15px;">Все права защищены &copy; <?=date ('Y')?></div>
         </div>
     </footer>
 </div>

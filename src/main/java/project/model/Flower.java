@@ -11,7 +11,7 @@ public class Flower{
     private int idFl;
 
     @Basic
-    @Column(name = "species ", nullable = false, length = 256)
+    @Column(name = "species", nullable = false, length = 256)
     private String viewFl;
 
     @Basic
@@ -24,7 +24,7 @@ public class Flower{
 
     @Basic
     @Column(name = "length", nullable = false)
-    private int height;
+    private float height;
 
     @Basic
     @Column(name = "amount", nullable = false)
@@ -32,7 +32,7 @@ public class Flower{
 
     @Basic
     @Column(name = "price", nullable = false)
-    private int priceFl;
+    private float priceFl;
 
 
     @Basic
@@ -75,11 +75,11 @@ public class Flower{
     }
 
 
-    public int getHeight() {
+    public float getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(float height) {
         this.height = height;
     }
 
@@ -93,11 +93,11 @@ public class Flower{
     }
 
 
-    public int getPriceFl() {
+    public float getPriceFl() {
         return priceFl;
     }
 
-    public void setPriceFl(int priceFl) {
+    public void setPriceFl(float priceFl) {
         this.priceFl = priceFl;
     }
 

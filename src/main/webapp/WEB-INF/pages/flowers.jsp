@@ -5,6 +5,8 @@
   Time: 12:26
   To change this template use File | Settings | File Templates.
 --%>
+
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -14,12 +16,15 @@
 <head>
     <title>Цветы</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/autor_style.css" />"/>
-    <script  src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />" />
+    <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />"/>
+
 </head>
 <body>
 
@@ -65,7 +70,7 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="">
-                    <a href="<c:url value="/flowers"/>" target="_self">Цветы<span class="caret"></span></a>
+                    <a href="<c:url value="/flowers"/>" target="_self">Цветы</a>
                 </li>
                 <li class="">
                     <a href="<c:url value="/bouquets"/>" target="_self">Букеты</a>
@@ -138,114 +143,98 @@
                             </table>
                         </c:if>
 
+                        <div class="headname">
+                            <h1>Форма для данных</h1>
+                        </div>
 
-                        <h1>Форма для данных</h1>
+
 
                         <c:url var="addAction" value="/flowers/add"/>
 
-                        <form:form action="${addAction}" commandName="flower">
-                            <table>
-                                <c:if test="${!empty flower.viewFl}">
-                                    <tr>
-                                        <td>
-                                            <form:label path="idFl">
-                                                <spring:message text="ID"/>
-                                            </form:label>
-                                        </td>
-                                        <td>
-                                            <form:input path="idFl" readonly="true" size="8" disabled="true"/>
-                                            <form:hidden path="idFl"/>
-                                        </td>
-                                    </tr>
-                                </c:if>
-                                <tr>
-                                    <td>
-                                        <form:label path="viewFl">
-                                            <spring:message text="Вид"/>
-                                        </form:label>
-                                    </td>
-                                    <td>
-                                        <form:input path="viewFl"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <form:label path="sortFl">
-                                            <spring:message text="Сорт"/>
-                                        </form:label>
-                                    </td>
-                                    <td>
-                                        <form:input path="sortFl"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <form:label path="colorFl">
-                                            <spring:message text="Цвет"/>
-                                        </form:label>
-                                    </td>
-                                    <td>
-                                        <form:input path="colorFl"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <form:label path="height">
-                                            <spring:message text="Высота"/>
-                                        </form:label>
-                                    </td>
-                                    <td>
-                                        <form:input path="height"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <form:label path="countFl">
-                                            <spring:message text="Количество"/>
-                                        </form:label>
-                                    </td>
-                                    <td>
-                                        <form:input path="countFl"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <form:label path="priceFl">
-                                            <spring:message text="Цена"/>
-                                        </form:label>
-                                    </td>
-                                    <td>
-                                        <form:input path="priceFl"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <c:if test="${!empty flower.viewFl}">
-                                            <input type="submit"
-                                                   value="<spring:message text="Редактировать цветы"/>"/>
-                                        </c:if>
-                                        <c:if test="${empty flower.viewFl}">
-                                            <input type="submit"
-                                                   value="<spring:message text="Добавить цветы"/>"/>
-                                        </c:if>
-                                    </td>
-                                </tr>
-                            </table>
+                        <form:form action="${addAction}" commandName="flower" class="form-horizontal">
+                            <c:if test="${!empty flower.viewFl}">
+                                <div class="form-group">
+                                    <form:label path="idFl" class="col-sm-2 control-label">
+                                        <spring:message text="ID"/>
+                                    </form:label>
+                                    <div class="col-sm-2">
+                                        <form:input path="idFl" readonly="true" size="8" disabled="true"
+                                                    class="form-control"/>
+                                        <form:hidden path="idFl"/>
+                                    </div>
+                                </div>
+                            </c:if>
+                            <div class="form-group">
+                                <form:label path="viewFl" class="col-sm-2 control-label">
+                                    <spring:message text="Вид"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="viewFl" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <form:label path="sortFl" class="col-sm-2 control-label">
+                                    <spring:message text="Сорт"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="sortFl" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <form:label path="colorFl" class="col-sm-2 control-label">
+                                    <spring:message text="Цвет"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="colorFl" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <form:label path="height" class="col-sm-2 control-label">
+                                    <spring:message text="Высота"/>
+                                </form:label>
+                                <div class="col-sm-2">
+                                    <form:input path="height" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <form:label path="countFl" class="col-sm-2 control-label">
+                                    <spring:message text="Количество"/>
+                                </form:label>
+                                <div class="col-sm-2">
+                                    <form:input path="countFl" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <form:label path="priceFl" class="col-sm-2 control-label">
+                                    <spring:message text="Цена"/>
+                                </form:label>
+                                <div class="col-sm-2">
+                                    <form:input path="priceFl" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <c:if test="${!empty flower.viewFl}">
+                                        <input type="submit" class="btn btn-success"
+                                               value="<spring:message text="Редактировать цветы"/>"/>
+                                    </c:if>
+                                    <c:if test="${empty flower.viewFl}">
+                                        <input type="submit" class="btn btn-success"
+                                               value="<spring:message text="Добавить цветы"/>"/>
+                                    </c:if>
+                                </div>
+                            </div>
                         </form:form>
-
-
                     </section>
-
-
                 </div>
-
             </div>
         </div>
     </div>
 
     <footer>
         <div class="container">
-            Consequatur, vel illum, qui in culpa, qui dolorem.
+            <div style="padding: 10px 0pt 0pt 30px; clear: both; color: #8d1645; font-size: 15px;">Все права защищены
+                &copy; <?=date ('Y')?></div>
         </div>
     </footer>
 </div>
@@ -256,3 +245,4 @@
 
 </body>
 </html>
+

@@ -221,7 +221,7 @@
 
     <footer>
         <div class="container">
-            Consequatur, vel illum, qui in culpa,
+            <div style="padding: 10px 0pt 0pt 30px; clear: both; color: #8d1645; font-size: 15px;">Все права защищены &copy; <?=date ('Y')?></div>
         </div>
 
     </footer>
