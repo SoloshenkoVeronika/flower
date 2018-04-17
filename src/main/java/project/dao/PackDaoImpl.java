@@ -28,7 +28,7 @@ public class PackDaoImpl  implements Dao<Pack> {
     public void update(Pack pack) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(pack);
-        logger.info("Pack successfully update. Pack details: " + pack);
+        logger.info("Pack successfully updated. Pack details: " + pack);
     }
 
     @Override

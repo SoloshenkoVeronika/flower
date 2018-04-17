@@ -22,14 +22,6 @@ public class FlowerController {
         this.flowerService = flowerService;
     }
 
-    @RequestMapping(value = "flowers", method = RequestMethod.GET)
-    public String listFlowers(Model model){
-        model.addAttribute("flower", new Flower());
-        model.addAttribute("listFlowers", this.flowerService.list());
-
-        return "flowers";
-    }
-
 
     @RequestMapping(value = "/flowers/add", method = RequestMethod.POST)
     public String addFlower(@ModelAttribute("flower") Flower flower){
@@ -42,21 +34,26 @@ public class FlowerController {
         return "redirect:/flowers";
     }
 
-    @RequestMapping("/removefl/{idFl}")
-    public String removeFlower(@PathVariable("idFl") int id){
-
-        this.flowerService.remove(id);
-
-        return "redirect:/flowers";
-    }
-
     @RequestMapping("editfl/{idFl}")
     public String editFlower(@PathVariable("idFl") int id, Model model){
         model.addAttribute("flower", this.flowerService.getById(id));
         model.addAttribute("listFlowers", this.flowerService.list());
 
         return "flowers";
-
     }
 
+    @RequestMapping("/removefl/{idFl}")
+    public String removeFlower(@PathVariable("idFl") int id){
+        this.flowerService.remove(id);
+
+        return "redirect:/flowers";
+    }
+
+    @RequestMapping(value = "flowers", method = RequestMethod.GET)
+    public String listFlowers(Model model){
+        model.addAttribute("flower", new Flower());
+        model.addAttribute("listFlowers", this.flowerService.list());
+
+        return "flowers";
+    }
 }

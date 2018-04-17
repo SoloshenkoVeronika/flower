@@ -29,7 +29,7 @@ public class UserDaoImpl implements Dao<User> {
     public void update(User user) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(user);
-        logger.info("User successfully update. User details: " + user);
+        logger.info("User successfully updated. User details: " + user);
     }
 
     @Override

@@ -1,12 +1,8 @@
 package project.dao;
 
-
-
-import project.model.User;
-
 import java.util.List;
 
-public interface Dao<T>  {
+public interface Dao<T> {
     public void add(T t);
 
     public void update(T t);

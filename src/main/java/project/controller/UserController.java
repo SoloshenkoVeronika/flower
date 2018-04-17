@@ -21,35 +21,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "users", method = RequestMethod.GET)
-    public String listUsers(Model model){
-        model.addAttribute("user", new User());
-        model.addAttribute("listUsers", this.userService.list());
-
-        return "users";
-    }
-
-    @RequestMapping(value = "autorization", method = RequestMethod.GET)
-    public String listFlower(Model model){
-        model.addAttribute("use", new User());
-        return "autorization";
-    }
-
-    @RequestMapping(value = "client", method = RequestMethod.GET)
-    public String lish(Model model){
-        return "client";
-    }
-
-    @RequestMapping(value = "/autorization/add", method = RequestMethod.POST)
-    public String listUsersa(@ModelAttribute("use") User user){
-        if(this.userService.getEn(user)) {
-            return "redirect:http://localhost:8080/client";
-        }
-        else {
-             return "redirect:/users";
-        }
-
-    }
 
     @RequestMapping(value = "/users/add", method = RequestMethod.POST)
     public String addUser(@ModelAttribute("user") User user){
@@ -62,22 +33,47 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @RequestMapping("/remove/{id}")
-    public String removeUser(@PathVariable("id") int id){
-
-        this.userService.remove(id);
-
-        return "redirect:/users";
-    }
-
     @RequestMapping("edit/{id}")
     public String editUser(@PathVariable("id") int id, Model model){
         model.addAttribute("user", this.userService.getById(id));
         model.addAttribute("listUsers", this.userService.list());
 
         return "users";
-
     }
 
+    @RequestMapping("/remove/{id}")
+    public String removeUser(@PathVariable("id") int id){
+        this.userService.remove(id);
 
+        return "redirect:/users";
+    }
+
+    @RequestMapping(value = "users", method = RequestMethod.GET)
+    public String listUsers(Model model){
+        model.addAttribute("user", new User());
+        model.addAttribute("listUsers", this.userService.list());
+
+        return "users";
+    }
+
+    @RequestMapping(value = "/autorization/add", method = RequestMethod.POST)
+    public String listUsersa(@ModelAttribute("use") User user){
+        if(this.userService.getEn(user)) {
+            return "redirect:http://localhost:8080/client";
+        }
+        else {
+            return "redirect:/users";
+        }
+    }
+
+    @RequestMapping(value = "autorization", method = RequestMethod.GET)
+    public String listFlower(Model model){
+        model.addAttribute("use", new User());
+        return "autorization";
+    }
+
+    @RequestMapping(value = "client", method = RequestMethod.GET)
+    public String lish(Model model){
+        return "client";
+    }
 }

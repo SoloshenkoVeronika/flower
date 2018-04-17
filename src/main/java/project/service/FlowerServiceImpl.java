@@ -27,13 +27,6 @@ public class FlowerServiceImpl implements Service<Flower> {
 
     @Override
     @Transactional
-    public boolean getEn(Flower user) {
-        return  this.flowerDao.getEn(user);
-    }
-
-
-    @Override
-    @Transactional
     public void remove(int id) {
         this.flowerDao.remove(id);
     }
@@ -48,5 +41,11 @@ public class FlowerServiceImpl implements Service<Flower> {
     @Transactional
     public List<Flower> list() {
         return this.flowerDao.list();
+    }
+
+    @Override
+    @Transactional
+    public boolean getEn(Flower user) {
+        return this.flowerDao.getEn(user);
     }
 }

@@ -1,8 +1,5 @@
 package project.service;
 
-
-import project.model.User;
-
 import java.util.List;
 
 public interface Service<T> {
@@ -14,7 +11,7 @@ public interface Service<T> {
 
     public T getById(int id);
 
-    public boolean getEn(T t);
-
     public List<T> list();
+
+    public boolean getEn(T t);
 }
