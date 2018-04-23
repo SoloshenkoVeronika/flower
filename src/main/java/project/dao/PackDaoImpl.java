@@ -50,6 +50,7 @@ public class PackDaoImpl  implements Dao<Pack> {
 
         return pack;
     }
+
     @Override
     public boolean getEn(Pack userr) {
 

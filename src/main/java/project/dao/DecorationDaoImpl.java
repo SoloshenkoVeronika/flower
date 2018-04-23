@@ -50,6 +50,7 @@ public class DecorationDaoImpl implements Dao<Decoration> {
 
         return decoration;
     }
+
     @Override
     public boolean getEn(Decoration userr) {
 

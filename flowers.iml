@@ -22,14 +22,6 @@
         </sourceRoots>
       </configuration>
     </facet>
-    <facet type="hibernate" name="Hibernate">
-      <configuration>
-        <datasource-map>
-          <unit-entry name="hibernate4AnnotatedSessionFactory" value="40219148-9064-4d51-bc71-5552b35afede" />
-        </datasource-map>
-        <naming-strategy-map />
-      </configuration>
-    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6">
     <output url="file://$MODULE_DIR$/target/classes" />

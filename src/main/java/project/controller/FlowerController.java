@@ -25,7 +25,7 @@ public class FlowerController {
 
     @RequestMapping(value = "/flowers/add", method = RequestMethod.POST)
     public String addFlower(@ModelAttribute("flower") Flower flower){
-        if(flower.getIdFl() == 0){
+        if(flower.getId() == 0){
             this.flowerService.add(flower);
         }else {
             this.flowerService.update(flower);

@@ -1,8 +1,8 @@
 package project.service;
 
 import project.dao.Dao;
-import project.model.User;
 import org.springframework.transaction.annotation.Transactional;
+import project.model.User;
 
 
 import java.util.List;
