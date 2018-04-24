@@ -33,7 +33,7 @@ public class DecorationController {
         return "redirect:/decorations";
     }
 
-    @RequestMapping("editdec/{id}")
+    @RequestMapping("editDecoration/{id}")
     public String editDecoration(@PathVariable("id") int id, Model model){
         model.addAttribute("decoration", this.decorationService.getById(id));
         model.addAttribute("listDecorations", this.decorationService.list());
@@ -41,7 +41,7 @@ public class DecorationController {
         return "decorations";
     }
 
-    @RequestMapping("/removedec/{id}")
+    @RequestMapping("/removeDecoration/{id}")
     public String removeDecoration(@PathVariable("id") int id){
         this.decorationService.remove(id);
 

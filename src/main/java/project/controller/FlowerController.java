@@ -25,7 +25,7 @@ public class FlowerController {
 
     @RequestMapping(value = "/flowers/add", method = RequestMethod.POST)
     public String addFlower(@ModelAttribute("flower") Flower flower){
-        if(flower.getIdFl() == 0){
+        if(flower.getId() == 0){
             this.flowerService.add(flower);
         }else {
             this.flowerService.update(flower);
@@ -34,16 +34,16 @@ public class FlowerController {
         return "redirect:/flowers";
     }
 
-    @RequestMapping("editfl/{idFl}")
-    public String editFlower(@PathVariable("idFl") int id, Model model){
+    @RequestMapping("editFlower/{id}")
+    public String editFlower(@PathVariable("id") int id, Model model){
         model.addAttribute("flower", this.flowerService.getById(id));
         model.addAttribute("listFlowers", this.flowerService.list());
 
         return "flowers";
     }
 
-    @RequestMapping("/removefl/{idFl}")
-    public String removeFlower(@PathVariable("idFl") int id){
+    @RequestMapping("/removeFlower/{id}")
+    public String removeFlower(@PathVariable("id") int id){
         this.flowerService.remove(id);
 
         return "redirect:/flowers";

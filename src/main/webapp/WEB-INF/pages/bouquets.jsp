@@ -136,8 +136,8 @@
                                         <td>${bouquet.amount}</td>
                                         <td>${bouquet.price}</td>
                                         <td>${bouquet.picture}</td>
-                                        <td><a href="<c:url value='/editbq/${bouquet.id}'/>">Редактирование</a></td>
-                                        <td><a href="<c:url value='/removebq/${bouquet.id}'/>">Удаление</a></td>
+                                        <td><a href="<c:url value='/editBouquet/${bouquet.id}'/>">Редактирование</a></td>
+                                        <td><a href="<c:url value='/removeBouquet/${bouquet.id}'/>">Удаление</a></td>
                                     </tr>
                                 </c:forEach>
                             </table>

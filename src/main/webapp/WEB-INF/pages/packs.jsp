@@ -129,8 +129,8 @@
                                         <td>${pack.amount}</td>
                                         <td>${pack.price}</td>
                                         <td>${pack.picture}</td>
-                                        <td><a href="<c:url value='/editpack/${pack.id}'/>">Редактирование</a></td>
-                                        <td><a href="<c:url value='/removepack/${pack.id}'/>">Удаление</a></td>
+                                        <td><a href="<c:url value='/editPack/${pack.id}'/>">Редактирование</a></td>
+                                        <td><a href="<c:url value='/removePack/${pack.id}'/>">Удаление</a></td>
                                     </tr>
                                 </c:forEach>
                             </table>

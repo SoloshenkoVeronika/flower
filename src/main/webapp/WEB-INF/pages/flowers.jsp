@@ -128,16 +128,16 @@
                                 </tr>
                                 <c:forEach items="${listFlowers}" var="flower">
                                     <tr>
-                                        <td>${flower.idFl}</td>
-                                        <td>${flower.viewFl}</td>
-                                        <td>${flower.sortFl}</td>
-                                        <td>${flower.colorFl}</td>
-                                        <td>${flower.height}</td>
-                                        <td>${flower.countFl}</td>
-                                        <td>${flower.priceFl}</td>
-                                        <td>${flower.pictureFl}</td>
-                                        <td><a href="<c:url value='/editfl/${flower.idFl}'/>">Редактирование</a></td>
-                                        <td><a href="<c:url value='/removefl/${flower.idFl}'/>">Удаление</a></td>
+                                        <td>${flower.id}</td>
+                                        <td>${flower.species}</td>
+                                        <td>${flower.sort}</td>
+                                        <td>${flower.color}</td>
+                                        <td>${flower.length}</td>
+                                        <td>${flower.amount}</td>
+                                        <td>${flower.price}</td>
+                                        <td>${flower.picture}</td>
+                                        <td><a href="<c:url value='/editFlower/${flower.id}'/>">Редактирование</a></td>
+                                        <td><a href="<c:url value='/removeFlower/${flower.id}'/>">Удаление</a></td>
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -152,73 +152,73 @@
                         <c:url var="addAction" value="/flowers/add"/>
 
                         <form:form action="${addAction}" commandName="flower" class="form-horizontal">
-                            <c:if test="${!empty flower.viewFl}">
+                            <c:if test="${!empty flower.species}">
                                 <div class="form-group">
-                                    <form:label path="idFl" class="col-sm-2 control-label">
+                                    <form:label path="id" class="col-sm-2 control-label">
                                         <spring:message text="ID"/>
                                     </form:label>
                                     <div class="col-sm-2">
-                                        <form:input path="idFl" readonly="true" size="8" disabled="true"
+                                        <form:input path="id" readonly="true" size="8" disabled="true"
                                                     class="form-control"/>
-                                        <form:hidden path="idFl"/>
+                                        <form:hidden path="id"/>
                                     </div>
                                 </div>
                             </c:if>
                             <div class="form-group">
-                                <form:label path="viewFl" class="col-sm-2 control-label">
+                                <form:label path="species" class="col-sm-2 control-label">
                                     <spring:message text="Вид"/>
                                 </form:label>
                                 <div class="col-sm-4">
-                                    <form:input path="viewFl" class="form-control"/>
+                                    <form:input path="species" class="form-control"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <form:label path="sortFl" class="col-sm-2 control-label">
+                                <form:label path="sort" class="col-sm-2 control-label">
                                     <spring:message text="Сорт"/>
                                 </form:label>
                                 <div class="col-sm-4">
-                                    <form:input path="sortFl" class="form-control"/>
+                                    <form:input path="sort" class="form-control"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <form:label path="colorFl" class="col-sm-2 control-label">
+                                <form:label path="color" class="col-sm-2 control-label">
                                     <spring:message text="Цвет"/>
                                 </form:label>
                                 <div class="col-sm-4">
-                                    <form:input path="colorFl" class="form-control"/>
+                                    <form:input path="color" class="form-control"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <form:label path="height" class="col-sm-2 control-label">
+                                <form:label path="length" class="col-sm-2 control-label">
                                     <spring:message text="Высота"/>
                                 </form:label>
                                 <div class="col-sm-2">
-                                    <form:input path="height" class="form-control"/>
+                                    <form:input path="length" class="form-control"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <form:label path="countFl" class="col-sm-2 control-label">
+                                <form:label path="amount" class="col-sm-2 control-label">
                                     <spring:message text="Количество"/>
                                 </form:label>
                                 <div class="col-sm-2">
-                                    <form:input path="countFl" class="form-control"/>
+                                    <form:input path="amount" class="form-control"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <form:label path="priceFl" class="col-sm-2 control-label">
+                                <form:label path="price" class="col-sm-2 control-label">
                                     <spring:message text="Цена"/>
                                 </form:label>
                                 <div class="col-sm-2">
-                                    <form:input path="priceFl" class="form-control"/>
+                                    <form:input path="price" class="form-control"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <c:if test="${!empty flower.viewFl}">
+                                    <c:if test="${!empty flower.species}">
                                         <input type="submit" class="btn btn-success"
                                                value="<spring:message text="Редактировать цветы"/>"/>
                                     </c:if>
-                                    <c:if test="${empty flower.viewFl}">
+                                    <c:if test="${empty flower.species}">
                                         <input type="submit" class="btn btn-success"
                                                value="<spring:message text="Добавить цветы"/>"/>
                                     </c:if>

@@ -98,7 +98,6 @@
         </div>
     </div>
 </nav>
->
 
 <br><br><br><br><br>
 <div class="mybody">
@@ -129,13 +128,13 @@
                                         <td>${composition.id}</td>
                                         <td>${composition.name}</td>
                                         <td>${composition.composition}</td>
-                                        <td>${composition.packag}</td>
+                                        <td>${composition.pack}</td>
                                         <td>${composition.amount}</td>
                                         <td>${composition.price}</td>
                                         <td>${composition.picture}</td>
-                                        <td><a href="<c:url value='/editcom/${composition.id}'/>">Редактирование</a>
+                                        <td><a href="<c:url value='/editComposition/${composition.id}'/>">Редактирование</a>
                                         </td>
-                                        <td><a href="<c:url value='/removecom/${composition.id}'/>">Удаление</a></td>
+                                        <td><a href="<c:url value='/removeComposition/${composition.id}'/>">Удаление</a></td>
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -177,11 +176,11 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <form:label path="packag" class="col-sm-2 control-label">
+                                <form:label path="pack" class="col-sm-2 control-label">
                                     <spring:message text="Упаковка"/>
                                 </form:label>
                                 <div class="col-sm-4">
-                                    <form:input path="packag" class="form-control"/>
+                                    <form:input path="pack" class="form-control"/>
                                 </div>
                             </div>
                             <div class="form-group">

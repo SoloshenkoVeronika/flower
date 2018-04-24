@@ -6,17 +6,17 @@ import javax.persistence.*;
 @Table(name = "user")
 public class User {
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "login")
+    @Column(name = "login", nullable = false, length = 50)
     private String login;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false, length = 50)
     private String password;
 
-    @Column(name = "status")
+    @Column(name = "status", nullable = true)
     private String status;
 
     public int getId() {
@@ -54,5 +54,27 @@ public class User {
     @Override
     public String toString() {
         return "User{" + "id=" + id + ", login='" + login + '\'' + ", password='" + password + '\'' + ", status=" + status + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (id != user.id) return false;
+        if (login != null ? !login.equals(user.login) : user.login != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        return status != null ? status.equals(user.status) : user.status == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (login != null ? login.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
     }
 }

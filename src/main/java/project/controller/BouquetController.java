@@ -33,7 +33,7 @@ public class BouquetController {
         return "redirect:/bouquets";
     }
 
-    @RequestMapping("editbq/{id}")
+    @RequestMapping("editBouquet/{id}")
     public String editBouquet(@PathVariable("id") int id, Model model) {
         model.addAttribute("bouquet", this.bouquetService.getById(id));
         model.addAttribute("listBouquets", this.bouquetService.list());
@@ -41,7 +41,7 @@ public class BouquetController {
         return "bouquets";
     }
 
-    @RequestMapping("/removebq/{id}")
+    @RequestMapping("/removeBouquet/{id}")
     public String removeBouquet(@PathVariable("id") int id) {
         this.bouquetService.remove(id);
 

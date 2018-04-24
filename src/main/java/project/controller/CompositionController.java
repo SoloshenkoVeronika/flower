@@ -33,7 +33,7 @@ public class CompositionController {
         return "redirect:/compositions";
     }
 
-    @RequestMapping("editcom/{id}")
+    @RequestMapping("editComposition/{id}")
     public String editComposition(@PathVariable("id") int id, Model model) {
         model.addAttribute("composition", this.compositionService.getById(id));
         model.addAttribute("listCompositions", this.compositionService.list());
@@ -41,7 +41,7 @@ public class CompositionController {
         return "compositions";
     }
 
-    @RequestMapping("/removecom/{id}")
+    @RequestMapping("/removeComposition/{id}")
     public String removeComposition(@PathVariable("id") int id) {
         this.compositionService.remove(id);
 

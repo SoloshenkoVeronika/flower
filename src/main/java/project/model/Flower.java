@@ -8,110 +8,144 @@ public class Flower{
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idFl;
+    private int id;
 
     @Basic
-    @Column(name = "species", nullable = false, length = 256)
-    private String viewFl;
+    @Column(name = "species", nullable = false, length = 60)
+    private String species;
 
     @Basic
-    @Column(name = "sort", nullable = false, length = 256)
-    private String sortFl;
+    @Column(name = "sort", nullable = false, length = 100)
+    private String sort;
 
     @Basic
-    @Column(name = "color", nullable = false, length = 256)
-    private String colorFl;
+    @Column(name = "color", nullable = false, length = 30)
+    private String color;
 
     @Basic
     @Column(name = "length", nullable = false)
-    private float height;
+    private double length;
 
     @Basic
     @Column(name = "amount", nullable = false)
-    private int countFl;
+    private int amount;
 
     @Basic
     @Column(name = "price", nullable = false)
-    private float priceFl;
+    private double price;
 
 
     @Basic
     @Column(name = "picture", nullable = true, length = 256)
-    private String pictureFl;
+    private String picture;
 
 
-    public int getIdFl() {
-        return idFl;
+    public int getId() {
+        return id;
     }
-    public void setIdFl(int idFl) {
-        this.idFl = idFl;
-    }
-
-
-    public String getViewFl() {
-        return viewFl;
-    }
-
-    public void setViewFl(String viewFl) {
-        this.viewFl = viewFl;
+    public void setId(int id) {
+        this.id = id;
     }
 
 
-    public String getSortFl() {
-        return sortFl;
+    public String getSpecies() {
+        return species;
     }
 
-    public void setSortFl(String sortFl) {
-        this.sortFl = sortFl;
-    }
-
-
-    public String getColorFl() {
-        return colorFl;
-    }
-
-    public void setColorFl(String colorFl) {
-        this.colorFl = colorFl;
+    public void setSpecies(String species) {
+        this.species = species;
     }
 
 
-    public float getHeight() {
-        return height;
+    public String getSort() {
+        return sort;
     }
 
-    public void setHeight(float height) {
-        this.height = height;
-    }
-
-
-    public int getCountFl() {
-        return countFl;
-    }
-
-    public void setCountFl(int countFl) {
-        this.countFl = countFl;
+    public void setSort(String sort) {
+        this.sort = sort;
     }
 
 
-    public float getPriceFl() {
-        return priceFl;
+    public String getColor() {
+        return color;
     }
 
-    public void setPriceFl(float priceFl) {
-        this.priceFl = priceFl;
+    public void setColor(String color) {
+        this.color = color;
     }
 
-    public String getPictureFl() {
-        return pictureFl;
+
+    public double getLength() {
+        return length;
     }
 
-    public void setPictureFl(String pictureFl) {
-        this.pictureFl = pictureFl;
+    public void setLength(double length) {
+        this.length = length;
+    }
+
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     @Override
     public String toString() {
-        return "Flowers{" + "idFl=" + idFl + ", viewFl='" + viewFl + '\'' + ", sortFl='" + sortFl + '\'' + ", colorFl='" + colorFl + '\'' + ", height=" + height + ", countFl=" + countFl + ", priceFl=" + priceFl + ", pictureFl='" + pictureFl + '\'' + '}';
+        return "Flowers{" + "id=" + id + ", species='" + species + '\'' + ", sort='" + sort + '\'' + ", color='" + color + '\'' + ", length=" + length + ", amount=" + amount + ", price=" + price + ", picture='" + picture + '\'' + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Flower flower = (Flower) o;
+
+        if (id != flower.id) return false;
+        if (Double.compare(flower.length, length) != 0) return false;
+        if (amount != flower.amount) return false;
+        if (Double.compare(flower.price, price) != 0) return false;
+        if (species != null ? !species.equals(flower.species) : flower.species != null) return false;
+        if (sort != null ? !sort.equals(flower.sort) : flower.sort != null) return false;
+        if (color != null ? !color.equals(flower.color) : flower.color != null) return false;
+        return picture != null ? picture.equals(flower.picture) : flower.picture == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = id;
+        result = 31 * result + (species != null ? species.hashCode() : 0);
+        result = 31 * result + (sort != null ? sort.hashCode() : 0);
+        result = 31 * result + (color != null ? color.hashCode() : 0);
+        temp = Double.doubleToLongBits(length);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + amount;
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (picture != null ? picture.hashCode() : 0);
+        return result;
     }
 }
 

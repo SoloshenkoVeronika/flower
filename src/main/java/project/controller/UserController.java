@@ -33,7 +33,7 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @RequestMapping("edit/{id}")
+    @RequestMapping("editUser/{id}")
     public String editUser(@PathVariable("id") int id, Model model){
         model.addAttribute("user", this.userService.getById(id));
         model.addAttribute("listUsers", this.userService.list());
@@ -41,7 +41,7 @@ public class UserController {
         return "users";
     }
 
-    @RequestMapping("/remove/{id}")
+    @RequestMapping("/removeUser/{id}")
     public String removeUser(@PathVariable("id") int id){
         this.userService.remove(id);
 

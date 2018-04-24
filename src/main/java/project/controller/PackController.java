@@ -33,7 +33,7 @@ public class PackController {
         return "redirect:/packs";
     }
 
-    @RequestMapping("editpack/{id}")
+    @RequestMapping("editPack/{id}")
     public String editPack(@PathVariable("id") int id, Model model){
         model.addAttribute("pack", this.packService.getById(id));
         model.addAttribute("listPacks", this.packService.list());
@@ -41,7 +41,7 @@ public class PackController {
         return "packs";
     }
 
-    @RequestMapping("/removepack/{id}")
+    @RequestMapping("/removePack/{id}")
     public String removePack(@PathVariable("id") int id){
         this.packService.remove(id);
 

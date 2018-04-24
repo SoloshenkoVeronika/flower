@@ -98,7 +98,6 @@
         </div>
     </div>
 </nav>
->
 
 <br><br><br><br><br>
 <div class="mybody">
@@ -129,8 +128,8 @@
                                         <td>${decoration.amount}</td>
                                         <td>${decoration.price}</td>
                                         <td>${decoration.picture}</td>
-                                        <td><a href="<c:url value='/editdec/${decoration.id}'/>">Редактирование</a></td>
-                                        <td><a href="<c:url value='/removedec/${decoration.id}'/>">Удаление</a></td>
+                                        <td><a href="<c:url value='/editDecoration/${decoration.id}'/>">Редактирование</a></td>
+                                        <td><a href="<c:url value='/removeDecoration/${decoration.id}'/>">Удаление</a></td>
                                     </tr>
                                 </c:forEach>
                             </table>

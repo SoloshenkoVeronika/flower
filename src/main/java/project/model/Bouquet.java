@@ -4,7 +4,6 @@ import javax.persistence.*;
 
 @Entity
 public class Bouquet {
-
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,15 +19,15 @@ public class Bouquet {
 
     @Basic
     @Column(name = "height", nullable = false)
-    private float height;
+    private double height;
 
     @Basic
     @Column(name = "diameter", nullable = false)
-    private float diameter;
+    private double diameter;
 
     @Basic
     @Column(name = "weight", nullable = false, precision = 0)
-    private float weight;
+    private double weight;
 
     @Basic
     @Column(name = "amount", nullable = false)
@@ -36,7 +35,7 @@ public class Bouquet {
 
     @Basic
     @Column(name = "price", nullable = false, precision = 0)
-    private float price;
+    private double price;
 
     @Basic
     @Column(name = "picture", nullable = true, length = 256)
@@ -70,29 +69,29 @@ public class Bouquet {
     }
 
 
-    public float getHeight() {
+    public double getHeight() {
         return height;
     }
 
-    public void setHeight(float height) {
+    public void setHeight(double height) {
         this.height = height;
     }
 
 
-    public float getDiameter() {
+    public double getDiameter() {
         return diameter;
     }
 
-    public void setDiameter(float diameter) {
+    public void setDiameter(double diameter) {
         this.diameter = diameter;
     }
 
 
-    public float getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(float weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
@@ -106,11 +105,11 @@ public class Bouquet {
     }
 
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -128,4 +127,41 @@ public class Bouquet {
         return "Bouquet{" + "id=" + id + ", name='" + name + '\'' + ", composition='" + composition + '\'' + ", height=" + height + ", diameter=" + diameter + ", weight=" + weight + ", amount=" + amount + ", price=" + price + ", picture='" + picture + '\'' + '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Bouquet bouquet = (Bouquet) o;
+
+        if (id != bouquet.id) return false;
+        if (Double.compare(bouquet.height, height) != 0) return false;
+        if (Double.compare(bouquet.diameter, diameter) != 0) return false;
+        if (Double.compare(bouquet.weight, weight) != 0) return false;
+        if (amount != bouquet.amount) return false;
+        if (Double.compare(bouquet.price, price) != 0) return false;
+        if (name != null ? !name.equals(bouquet.name) : bouquet.name != null) return false;
+        if (composition != null ? !composition.equals(bouquet.composition) : bouquet.composition != null) return false;
+        return picture != null ? picture.equals(bouquet.picture) : bouquet.picture == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (composition != null ? composition.hashCode() : 0);
+        temp = Double.doubleToLongBits(height);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(diameter);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(weight);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + amount;
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (picture != null ? picture.hashCode() : 0);
+        return result;
+    }
 }

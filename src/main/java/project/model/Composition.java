@@ -18,8 +18,8 @@ public class Composition {
     private String composition;
 
     @Basic
-    @Column(name = "packag", nullable = false, length = 256)
-    private String packag;
+    @Column(name = "pack", nullable = false, length = 40)
+    private String pack;
 
     @Basic
     @Column(name = "amount", nullable = false)
@@ -61,12 +61,12 @@ public class Composition {
     }
 
 
-    public String getPackag() {
-        return packag;
+    public String getPack() {
+        return pack;
     }
 
-    public void setPackag(String packag) {
-        this.packag = packag;
+    public void setPack(String pack) {
+        this.pack = pack;
     }
 
 
@@ -98,7 +98,7 @@ public class Composition {
 
     @Override
     public String toString() {
-        return "Composition{" + "id=" + id + ", name='" + name + '\'' + ", composition='" + composition + '\'' + ", packag='" + packag + '\'' + ", amount=" + amount + ", price=" + price + ", picture='" + picture + '\'' + '}';
+        return "Composition{" + "id=" + id + ", name='" + name + '\'' + ", composition='" + composition + '\'' + ", pack='" + pack + '\'' + ", amount=" + amount + ", price=" + price + ", picture='" + picture + '\'' + '}';
     }
 
     @Override
@@ -113,7 +113,7 @@ public class Composition {
         if (Double.compare(that.price, price) != 0) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (composition != null ? !composition.equals(that.composition) : that.composition != null) return false;
-        if (packag != null ? !packag.equals(that.packag) : that.packag != null) return false;
+        if (pack != null ? !pack.equals(that.pack) : that.pack != null) return false;
         if (picture != null ? !picture.equals(that.picture) : that.picture != null) return false;
 
         return true;
@@ -126,7 +126,7 @@ public class Composition {
         result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (composition != null ? composition.hashCode() : 0);
-        result = 31 * result + (packag != null ? packag.hashCode() : 0);
+        result = 31 * result + (pack != null ? pack.hashCode() : 0);
         result = 31 * result + amount;
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));

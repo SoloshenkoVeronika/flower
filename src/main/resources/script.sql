@@ -1,20 +1,252 @@
+SET NAMES utf8;
+CREATE DATABASE IF NOT EXISTS flowers DEFAULT CHARACTER SET utf8;
+USE flowers;
+
+DROP TABLE IF EXISTS composition_order;
+DROP TABLE IF EXISTS bouquet_order;
+DROP TABLE IF EXISTS flower_order;
+DROP TABLE IF EXISTS decoration_customer_bouquet;
+DROP TABLE IF EXISTS flower_customer_bouquet;
+DROP TABLE IF EXISTS customer_bouquet_order;
+DROP TABLE IF EXISTS customer_bouquet;
+
+DROP TABLE IF EXISTS `order`;
+DROP TABLE IF EXISTS composition;
+DROP TABLE IF EXISTS bouquet;
+DROP TABLE IF EXISTS pack;
+DROP TABLE IF EXISTS decoration;
+DROP TABLE IF EXISTS flower;
+DROP TABLE IF EXISTS payment;
+DROP TABLE IF EXISTS address;
+DROP TABLE IF EXISTS recipient;
+DROP TABLE IF EXISTS sender;
+DROP TABLE IF EXISTS user;
+
+DROP TABLE IF EXISTS size;
+DROP TABLE IF EXISTS product;
+
+CREATE TABLE IF NOT EXISTS user (
+	id INT(3) NOT NULL AUTO_INCREMENT,
+	login VARCHAR(50) NOT NULL,
+	password VARCHAR(50) NOT NULL,
+	status INT(2) NULL,
+  
+	PRIMARY KEY (id),
+	UNIQUE KEY login (login)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
+CREATE TABLE IF NOT EXISTS sender (
+	id INT(3) NOT NULL AUTO_INCREMENT,
+	first_name VARCHAR(50) NOT NULL,
+	second_name VARCHAR(50) NOT NULL,
+	phone VARCHAR(20) NOT NULL,
+	email VARCHAR(50) NULL,
+  
+	PRIMARY KEY (id),
+	UNIQUE KEY phone (phone)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-CREATE TABLE flower(
-  id int(3) NOT NULL AUTO_INCREMENT,
-  species varchar(60) NOT NULL,
-  sort varchar(100) NOT NULL,
-  color varchar(30) NOT NULL,
-  length float(2) NOT NULL,
-  amount  int(3) NOT NULL,
-  price  float(2) NOT NULL,
-  picture varchar(256) NULL,
+CREATE TABLE IF NOT EXISTS recipient (
+	id INT(3) NOT NULL AUTO_INCREMENT,
+	first_name VARCHAR(50) NOT NULL,
+	second_name VARCHAR(50) NOT NULL,
+	phone VARCHAR(20) NOT NULL,
+  
+	PRIMARY KEY (id),
+	UNIQUE KEY phone (phone)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS address (
+	id INT(3) NOT NULL AUTO_INCREMENT,
+	city VARCHAR(50) NOT NULL,
+	street VARCHAR(50) NOT NULL,
+	house INT(3) NOT NULL,
+	block INT(3) NOT NULL,
+	flat INT(3) NOT NULL,
+  
+	PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+/*CREATE TABLE IF NOT EXISTS payment(
+	id INT(3) NOT NULL AUTO_INCREMENT,
+	name VARCHAR(50) NOT NULL,
+  
+	PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;*/
+
+
+CREATE TABLE IF NOT EXISTS flower (
+	id INT(3) NOT NULL AUTO_INCREMENT,
+	species VARCHAR(60) NOT NULL,
+	sort VARCHAR(100) NOT NULL,
+	color VARCHAR(30) NOT NULL,
+	length DOUBLE(10,2) NOT NULL,
+	amount INT(3) NOT NULL,
+	price DOUBLE(10,2) NOT NULL,
+	picture VARCHAR(256) NULL,
+	
   PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS decoration (
+	id INT(3) NOT NULL AUTO_INCREMENT,
+	name VARCHAR(50) NOT NULL,
+	amount INT(3) NOT NULL,
+	price DOUBLE(10,2) NOT NULL,
+	picture VARCHAR(256) NULL,
+  
+	PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS pack (
+	id INT(3) NOT NULL AUTO_INCREMENT,
+	name VARCHAR(60) NOT NULL,
+	amount INT(3) NOT NULL,
+	price DOUBLE(10,2) NOT NULL,
+	picture VARCHAR(256) NULL,
+  
+	PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS bouquet (
+	id INT(3) NOT NULL AUTO_INCREMENT,
+	name VARCHAR(60) NOT NULL,
+	composition VARCHAR(256) NOT NULL,
+	height DOUBLE(10,2) NOT NULL,
+	diameter DOUBLE(10,2) NOT NULL,
+	weight DOUBLE(10,2) NOT NULL,
+	amount INT(3) NOT NULL,
+	price DOUBLE(10,2) NOT NULL,
+	picture VARCHAR(256) NULL,
+  
+	PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS composition (
+	id INT(3) NOT NULL AUTO_INCREMENT,
+	name VARCHAR(60) NOT NULL,
+	composition VARCHAR(256) NOT NULL,
+	pack VARCHAR(40) NOT NULL,
+	amount INT(3) NOT NULL,
+	price DOUBLE(10,2) NOT NULL,
+	picture VARCHAR(256) NULL,
+  
+	PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS customer_bouquet (
+	id INT(3) NOT NULL AUTO_INCREMENT,
+    pack_id INT(3) NULL,
+    
+	PRIMARY KEY (id),
+	FOREIGN KEY (pack_id) REFERENCES pack (id)
+		ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS flower_customer_bouquet (
+    flower_id INT NULL,
+    customer_bouquet_id INT NULL,
+    
+    FOREIGN KEY (flower_id) REFERENCES flower (id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (customer_bouquet_id) REFERENCES customer_bouquet (id)
+		ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS decoration_customer_bouquet (
+    decoration_id INT NULL,
+    customer_bouquet_id INT NULL,
+    
+    FOREIGN KEY (decoration_id) REFERENCES decoration (id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (customer_bouquet_id) REFERENCES customer_bouquet (id)
+		ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+CREATE TABLE IF NOT EXISTS `order` (
+	id INT(3) NOT NULL AUTO_INCREMENT,
+    user_id INT(3) NULL,
+	sender_id INT(3) NULL,
+	recipient_id INT(3) NULL,
+	address_id INT(3) NULL,
+	
+	payment INT(3) NOT NULL,
+	date VARCHAR(50) NOT NULL,
+	postcard VARCHAR(80) NULL,
+	additional_inf VARCHAR(180) NULL,
+	/*anonymity BOOLEAN NULL,*/
+	cost DOUBLE(10,2) NOT NULL,
+	
+	PRIMARY KEY (id),
+	FOREIGN KEY (user_id) REFERENCES user (id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
+        
+	FOREIGN KEY (sender_id) REFERENCES sender (id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
+        
+    FOREIGN KEY (recipient_id) REFERENCES recipient (id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
+
+	FOREIGN KEY (address_id) REFERENCES address(id)
+		ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS flower_order (
+    flower_id INT NULL,
+    order_id INT NULL,
+    
+    FOREIGN KEY (flower_id) REFERENCES flower (id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (order_id) REFERENCES `order` (id)
+		ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS bouquet_order (
+    bouquet_id INT NULL,
+    order_id INT NULL,
+    
+    FOREIGN KEY (bouquet_id) REFERENCES bouquet (id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (order_id) REFERENCES `order` (id)
+		ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS composition_order (
+    composition_id INT NULL,
+    order_id INT NULL,
+    
+    FOREIGN KEY (composition_id) REFERENCES composition (id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (order_id) REFERENCES `order` (id)
+		ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS customer_bouquet_order (
+    customer_bouquet_id INT NULL,
+    order_id INT NULL,
+    
+    FOREIGN KEY (customer_bouquet_id) REFERENCES customer_bouquet (id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (order_id) REFERENCES `order` (id)
+		ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
 INSERT INTO flower (species, sort, color, length, amount, price, picture)
 VALUES ('Роза', 'Blanche Moreau', 'Белый', 90, 50, 3.9, null);
+
+INSERT INTO flower (species, sort, color, length, amount, price, picture)
+VALUES ('Роза', 'Freedom', 'Красный', 90, 50, 3.9, null);
+
 INSERT INTO flower (species, sort, color, length, amount, price, picture)
 VALUES ('Роза', 'Leonardo da Vinci', 'Розовый', 60, 30, 4, null);
 
@@ -24,128 +256,20 @@ VALUES ('Роза', 'Мисс Пигги (Miss Piggy)', 'Розовый', 45, 50
 INSERT INTO flower (species, sort, color, length, amount, price, picture)
 VALUES ('Тюльпан', 'Christmas Dream', 'Розовый', 35, 60, 1.8, null);
 
+/*
+CREATE TABLE IF NOT EXISTS size(
+	id_sz INT(3) NOT NULL AUTO_INCREMENT,
+	height INT(3) NOT NULL,
+	width INT(3) NOT NULL,
+	diagonal INT(3) NOT NULL,
+	volume INT(3) NOT NULL,
+  
+	PRIMARY KEY (id_sz)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;*/
 
-CREATE TABLE `user` (
-  `id` int(2) NOT NULL AUTO_INCREMENT,
-  `login` varchar(50) NOT NULL,
-  `password` varchar(256) NOT NULL,
-  `status` int(2)  NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `login` (`login`)
+/*
+CREATE TABLE IF NOT EXISTS product(
+id_pr INT(3) NOT NULL,
+id_o INT(3) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE sender(
- id_s int(3) NOT NULL AUTO_INCREMENT,
- name   varchar(50) NOT NULL,
- surname varchar(256) NOT NULL,
- phone varchar(256)  NOT NULL,
- e_mail varchar(256)  NULL,
-  PRIMARY KEY (id_s),
-    UNIQUE KEY phone (phone)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-CREATE TABLE recipient(
- id_r int(3) NOT NULL AUTO_INCREMENT,
- name   varchar(50) NOT NULL,
- surname varchar(256) NOT NULL,
- phone varchar(256)  NOT NULL,
- PRIMARY KEY (id_r),
- UNIQUE KEY phone (phone)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-CREATE TABLE address(
- id_a int(3) NOT NULL AUTO_INCREMENT,
- city   varchar(50) NOT NULL,
- street varchar(256) NOT NULL,
- house int(3)  NOT NULL,
- corps int(3) NOT NULL,
- flat int(3) NOT NULL,
-  PRIMARY KEY (id_a)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-CREATE TABLE payment (
- id_p int(3) NOT NULL AUTO_INCREMENT,
- namr_payment   varchar(50) NOT NULL,
-  PRIMARY KEY (id_p)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-
-CREATE TABLE size(
-id_sz  int(3) NOT NULL AUTO_INCREMENT,
-height int(3) NOT NULL,
-width int(3) NOT NULL,
-diagonal int(3) NOT NULL,
-volume int(3) NOT NULL,
- PRIMARY KEY (id_sz)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-
-
-CREATE TABLE bouquet(
-  id INT(3) NOT NULL AUTO_INCREMENT,
-  name VARCHAR(60) NOT NULL,
-  composition VARCHAR(256) NOT NULL,
-  height FLOAT(2) NOT NULL,
-  diameter FLOAT(2) NOT NULL,
-  weight FLOAT(2) NOT NULL,
-  amount  INT(3) NOT NULL,
-  price  FLOAT(2) NOT NULL,
-  picture VARCHAR(256) NULL,
-  PRIMARY KEY (id)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-CREATE TABLE decoration(
-  id int(3) NOT NULL AUTO_INCREMENT,
-  name varchar(50) NOT NULL,
-  amount  INT(3) NOT NULL,
-  price  FLOAT(2) NOT NULL,
-  picture VARCHAR(256) NULL,
-  PRIMARY KEY (id)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-CREATE TABLE composition(
-  id INT(3) NOT NULL AUTO_INCREMENT,
-  name VARCHAR(60) NOT NULL,
-  composition VARCHAR(256) NOT NULL,
-  packag VARCHAR(256) NOT NULL,
-  amount  INT(3) NOT NULL,
-  price  FLOAT(2) NOT NULL,
-  picture VARCHAR(256) NULL,
-  PRIMARY KEY (id)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-CREATE TABLE pack(
-  id INT(3) NOT NULL AUTO_INCREMENT,
-  name VARCHAR(60) NOT NULL,
-  amount  INT(3) NOT NULL,
-  price  FLOAT(2) NOT NULL,
-  picture VARCHAR(256) NULL,
-  PRIMARY KEY (id)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-
-CREATE TABLE order (
-  id_o int(3) NOT NULL AUTO_INCREMENT,
-  id_s int(3) NOT NULL,
-  id_r int(3) NOT NULL,
-  id_pr int(3) NOT NULL,
-  id_a int(3) NOT NULL,
-  id_p int(3) NOT NULL,
-  data varchar(50) NOT NULL,
-  postcard varchar(50)  NULL,
-  addinforn varchar(50)  NULL,
-  anonymity boolean NULL,
-  cost float NOT NULL,
-  PRIMARY KEY (id_o),
-  CONSTRAINT user FOREIGN KEY (id_s) REFERENCES sender (id_s),
-  CONSTRAINT user FOREIGN KEY (id_r) REFERENCES  recipient (id_r),
-  CONSTRAINT user FOREIGN KEY (id_a) REFERENCES  address(id_a),
-  CONSTRAINT user FOREIGN KEY (id_p) REFERENCES payment (id_p)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-CREATE TABLE product(
-id_pr int(3) NOT NULL,
-id_o int(3) NOT NULL,
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+*/

@@ -75,5 +75,30 @@ public class Pack {
         return "Pack{" + "id=" + id + ", name='" + name + '\'' + ", amount=" + amount + ", price=" + price + ", picture='" + picture + '\'' + '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        Pack pack = (Pack) o;
+
+        if (id != pack.id) return false;
+        if (amount != pack.amount) return false;
+        if (Double.compare(pack.price, price) != 0) return false;
+        if (name != null ? !name.equals(pack.name) : pack.name != null) return false;
+        return picture != null ? picture.equals(pack.picture) : pack.picture == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + amount;
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (picture != null ? picture.hashCode() : 0);
+        return result;
+    }
 }
