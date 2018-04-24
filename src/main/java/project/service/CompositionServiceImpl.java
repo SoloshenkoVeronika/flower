@@ -27,6 +27,13 @@ public class CompositionServiceImpl implements Service<Composition> {
 
     @Override
     @Transactional
+    public boolean getEn(Composition composition) {
+        return  this.compositionDao.getEn(composition);
+    }
+
+
+    @Override
+    @Transactional
     public void remove(int id) {
         this.compositionDao.remove(id);
     }
@@ -41,12 +48,6 @@ public class CompositionServiceImpl implements Service<Composition> {
     @Transactional
     public List<Composition> list() {
         return this.compositionDao.list();
-    }
-
-    @Override
-    @Transactional
-    public boolean getEn(Composition composition) {
-        return this.compositionDao.getEn(composition);
     }
 }
 

@@ -28,7 +28,7 @@ public class FlowerDaoImpl  implements Dao<Flower> {
     public void update(Flower flower) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(flower);
-        logger.info("Flower successfully updated. Flower details: " + flower);
+        logger.info("Flower successfully update. Flower details: " + flower);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class FlowerDaoImpl  implements Dao<Flower> {
     }
 
     @Override
-    public boolean getEn(Flower userr) {
+    public boolean getEn(Flower flower) {
 
         return false;
     }

@@ -27,6 +27,13 @@ public class PackServiceImpl implements Service<Pack> {
 
     @Override
     @Transactional
+    public boolean getEn(Pack pack) {
+        return  this.packDao.getEn(pack);
+    }
+
+
+    @Override
+    @Transactional
     public void remove(int id) {
         this.packDao.remove(id);
     }
@@ -41,12 +48,6 @@ public class PackServiceImpl implements Service<Pack> {
     @Transactional
     public List<Pack> list() {
         return this.packDao.list();
-    }
-
-    @Override
-    @Transactional
-    public boolean getEn(Pack pack) {
-        return this.packDao.getEn(pack);
     }
 }
 

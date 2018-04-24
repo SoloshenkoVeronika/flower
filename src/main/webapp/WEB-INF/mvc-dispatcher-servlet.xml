@@ -18,7 +18,8 @@
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/flowers"/>
+        <property name="url"
+                  value="jdbc:mysql://localhost:3306/flowers"/>
         <property name="username" value="root"/>
         <property name="password" value="root"/>
     </bean>
@@ -44,7 +45,8 @@
         </property>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
+                </prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/flowers</prop>
                 <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
@@ -52,7 +54,6 @@
         </property>
     </bean>
 
-    <!-- DAO and Service beans-->
     <bean id="userDao" class="project.dao.UserDaoImpl">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </bean>
@@ -60,7 +61,6 @@
     <bean id="userService" class="project.service.UserServiceImpl">
         <property name="userDao" ref="userDao"/>
     </bean>
-
 
     <bean id="flowerDao" class="project.dao.FlowerDaoImpl">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
@@ -70,7 +70,6 @@
         <property name="flowerDao" ref="flowerDao"/>
     </bean>
 
-
     <bean id="bouquetDao" class="project.dao.BouquetDaoImpl">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </bean>
@@ -78,7 +77,6 @@
     <bean id="bouquetService" class="project.service.BouquetServiceImpl">
         <property name="bouquetDao" ref="bouquetDao"/>
     </bean>
-
 
     <bean id="decorationDao" class="project.dao.DecorationDaoImpl">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
@@ -88,7 +86,6 @@
         <property name="decorationDao" ref="decorationDao"/>
     </bean>
 
-
     <bean id="compositionDao" class="project.dao.CompositionDaoImpl">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </bean>
@@ -96,7 +93,6 @@
     <bean id="compositionService" class="project.service.CompositionServiceImpl">
         <property name="compositionDao" ref="compositionDao"/>
     </bean>
-
 
     <bean id="packDao" class="project.dao.PackDaoImpl">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>

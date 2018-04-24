@@ -28,7 +28,7 @@ public class DecorationDaoImpl implements Dao<Decoration> {
     public void update(Decoration decoration) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(decoration);
-        logger.info("Decoration successfully updated. Decoration details: " + decoration);
+        logger.info("Decoration successfully update. Decoration details: " + decoration);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class DecorationDaoImpl implements Dao<Decoration> {
     }
 
     @Override
-    public boolean getEn(Decoration userr) {
+    public boolean getEn(Decoration decoration) {
 
         return false;
     }

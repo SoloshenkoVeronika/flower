@@ -18,12 +18,18 @@ public class DecorationServiceImpl implements Service<Decoration> {
     public void add(Decoration decoration) {
         this.decorationDao.add(decoration);
     }
-
     @Override
     @Transactional
     public void update(Decoration decoration) {
         this.decorationDao.update(decoration);
     }
+
+    @Override
+    @Transactional
+    public boolean getEn(Decoration decoration) {
+        return  this.decorationDao.getEn(decoration);
+    }
+
 
     @Override
     @Transactional
@@ -41,11 +47,5 @@ public class DecorationServiceImpl implements Service<Decoration> {
     @Transactional
     public List<Decoration> list() {
         return this.decorationDao.list();
-    }
-
-    @Override
-    @Transactional
-    public boolean getEn(Decoration decoration) {
-        return this.decorationDao.getEn(decoration);
     }
 }

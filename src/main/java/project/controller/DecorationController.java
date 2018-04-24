@@ -21,6 +21,23 @@ public class DecorationController {
         this.decorationService = decorationService;
     }
 
+    @RequestMapping(value = "decorations", method = RequestMethod.GET)
+    public String listDecorations(Model model){
+        model.addAttribute("decoration", new Decoration());
+        model.addAttribute("listDecorations", this.decorationService.list());
+
+        return "decorations";
+
+    }
+
+    @RequestMapping(value = "decorations", method = RequestMethod.GET)
+    public String listDecorations(Model model){
+        model.addAttribute("decoration", new Decoration());
+        model.addAttribute("listDecorations", this.decorationService.list());
+
+        return "decorations";
+    }
+
 
     @RequestMapping(value = "/decorations/add", method = RequestMethod.POST)
     public String addFlower(@ModelAttribute("decoration") Decoration decoration){
@@ -33,27 +50,23 @@ public class DecorationController {
         return "redirect:/decorations";
     }
 
+
+    @RequestMapping("/removedec/{id}")
+    public String removeDecoration(@PathVariable("id") int id){
+
+        this.decorationService.remove(id);
+
+        return "redirect:/decorations";
+    }
+
     @RequestMapping("editdec/{id}")
     public String editDecoration(@PathVariable("id") int id, Model model){
         model.addAttribute("decoration", this.decorationService.getById(id));
         model.addAttribute("listDecorations", this.decorationService.list());
 
         return "decorations";
+
     }
 
-    @RequestMapping("/removedec/{id}")
-    public String removeDecoration(@PathVariable("id") int id){
-        this.decorationService.remove(id);
-
-        return "redirect:/decorations";
-    }
-
-    @RequestMapping(value = "decorations", method = RequestMethod.GET)
-    public String listDecorations(Model model){
-        model.addAttribute("decoration", new Decoration());
-        model.addAttribute("listDecorations", this.decorationService.list());
-
-        return "decorations";
-    }
 }
 
