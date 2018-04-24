@@ -28,7 +28,7 @@ public class UserDaoImpl implements Dao<User> {
     public void update(User user) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(user);
-        logger.info("User successfully update. User details: " + user);
+        logger.info("User successfully updated. User details: " + user);
     }
 
     @Override
@@ -52,17 +52,17 @@ public class UserDaoImpl implements Dao<User> {
     }
 
     @Override
-    public boolean getEn(User user) {
+    public boolean getEn(User userr) {
 //        System.out.println("rrrrr");
         Session session =this.sessionFactory.getCurrentSession();
-        if(session.createQuery("from User where login = '"+user.getLogin()+"' and password = '"+user.getPassword()+"'").iterate().hasNext()){
+        if(session.createQuery("from User where login = '"+userr.getLogin()+"' and password = '"+userr.getPassword()+"'").iterate().hasNext()){
 //            System.out.println("e122221111e");
-            logger.info("User successfully loaded. User details: " + user);
+            logger.info("User successfully loaded. User details: " + userr);
             return true;
         }
         else{
             System.out.println("neeet");
-            logger.info("User successfully loaded. User details: " + user);
+            logger.info("User successfully loaded. User details: " + userr);
             return false;
         }
     }

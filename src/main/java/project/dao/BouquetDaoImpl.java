@@ -8,7 +8,7 @@ import project.model.Bouquet;
 
 import java.util.List;
 
-public class BouquetDaoImpl implements Dao<Bouquet>{
+public class BouquetDaoImpl implements Dao<Bouquet> {
     private static final Logger logger = LoggerFactory.getLogger(BouquetDaoImpl.class);
 
     private SessionFactory sessionFactory;
@@ -28,7 +28,7 @@ public class BouquetDaoImpl implements Dao<Bouquet>{
     public void update(Bouquet bouquet) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(bouquet);
-        logger.info("Bouquet successfully update. Bouquet details: " + bouquet);
+        logger.info("Bouquet successfully updated. Bouquet details: " + bouquet);
     }
 
     @Override
@@ -38,8 +38,12 @@ public class BouquetDaoImpl implements Dao<Bouquet>{
 
         if(bouquet!=null){
             session.delete(bouquet);
+            logger.info("Bouquet successfully removed. Bouquet details: " + bouquet);
         }
-        logger.info("Bouquet successfully removed. Bouquet details: " + bouquet);
+        else {
+            logger.info("Cannot remove. Bouquet with ID = " + id + " not found");
+        }
+
     }
 
     @Override
@@ -62,9 +66,11 @@ public class BouquetDaoImpl implements Dao<Bouquet>{
         Session session = this.sessionFactory.getCurrentSession();
         List<Bouquet> bouquetList = session.createQuery("from Bouquet").list();
 
+        logger.info("Bouquet list:{");
         for(Bouquet bouquet: bouquetList){
-            logger.info("Bouquet list: " + bouquet);
+            logger.info("\t" + bouquet.toString());
         }
+        logger.info("}");
 
         return bouquetList;
     }

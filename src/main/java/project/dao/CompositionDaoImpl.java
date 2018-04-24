@@ -28,7 +28,7 @@ public class CompositionDaoImpl implements Dao<Composition> {
     public void update(Composition composition) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(composition);
-        logger.info("Composition successfully update. Composition details: " + composition);
+        logger.info("Composition successfully updated. Composition details: " + composition);
     }
 
     @Override
@@ -50,9 +50,8 @@ public class CompositionDaoImpl implements Dao<Composition> {
 
         return composition;
     }
-
     @Override
-    public boolean getEn(Composition composition) {
+    public boolean getEn(Composition userr) {
 
         return false;
     }

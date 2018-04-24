@@ -1,9 +1,8 @@
 package project.service;
 
-import project.dao.Dao;
 import org.springframework.transaction.annotation.Transactional;
+import project.dao.Dao;
 import project.model.User;
-
 
 import java.util.List;
 
@@ -28,13 +27,6 @@ public class UserServiceImpl implements Service<User> {
 
     @Override
     @Transactional
-    public boolean getEn(User user) {
-        return  this.userDao.getEn(user);
-    }
-
-
-    @Override
-    @Transactional
     public void remove(int id) {
         this.userDao.remove(id);
     }
@@ -49,5 +41,11 @@ public class UserServiceImpl implements Service<User> {
     @Transactional
     public List<User> list() {
         return this.userDao.list();
+    }
+
+    @Override
+    @Transactional
+    public boolean getEn(User user) {
+        return this.userDao.getEn(user);
     }
 }

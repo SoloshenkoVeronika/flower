@@ -27,13 +27,6 @@ public class BouquetServiceImpl implements Service<Bouquet> {
 
     @Override
     @Transactional
-    public boolean getEn(Bouquet bouquet) {
-        return  this.bouquetDao.getEn(bouquet);
-    }
-
-
-    @Override
-    @Transactional
     public void remove(int id) {
         this.bouquetDao.remove(id);
     }
@@ -48,6 +41,12 @@ public class BouquetServiceImpl implements Service<Bouquet> {
     @Transactional
     public List<Bouquet> list() {
         return this.bouquetDao.list();
+    }
+
+    @Override
+    @Transactional
+    public boolean getEn(Bouquet bouquet) {
+        return this.bouquetDao.getEn(bouquet);
     }
 }
 

@@ -28,7 +28,7 @@ public class PackDaoImpl  implements Dao<Pack> {
     public void update(Pack pack) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(pack);
-        logger.info("Pack successfully update. Pack details: " + pack);
+        logger.info("Pack successfully updated. Pack details: " + pack);
     }
 
     @Override
@@ -50,9 +50,8 @@ public class PackDaoImpl  implements Dao<Pack> {
 
         return pack;
     }
-
     @Override
-    public boolean getEn(Pack pack) {
+    public boolean getEn(Pack userr) {
 
         return false;
     }
