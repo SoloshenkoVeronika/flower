@@ -28,21 +28,12 @@ public class FlowerController {
         model.addAttribute("listFlowers", this.flowerService.list());
 
         return "flowers";
-
-    }
-
-    @RequestMapping(value = "flowers", method = RequestMethod.GET)
-    public String listFlowers(Model model){
-        model.addAttribute("flower", new Flower());
-        model.addAttribute("listFlowers", this.flowerService.list());
-
-        return "flowers";
     }
 
 
     @RequestMapping(value = "/flowers/add", method = RequestMethod.POST)
     public String addFlower(@ModelAttribute("flower") Flower flower){
-        if(flower.getId() == 0){
+        if(flower.getIdFl() == 0){
             this.flowerService.add(flower);
         }else {
             this.flowerService.update(flower);

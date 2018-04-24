@@ -27,6 +27,7 @@ public class UserController {
         model.addAttribute("listUsers", this.userService.list());
 
         return "users";
+    }
 
     @RequestMapping(value = "autorization", method = RequestMethod.GET)
     public String listFlower(Model model){
@@ -78,34 +79,5 @@ public class UserController {
 
     }
 
-    @RequestMapping(value = "users", method = RequestMethod.GET)
-    public String listUsers(Model model){
-        model.addAttribute("user", new User());
-        model.addAttribute("listUsers", this.userService.list());
-
-        return "users";
-    }
-
-    @RequestMapping(value = "autorization", method = RequestMethod.GET)
-    public String listFlower(Model model){
-        model.addAttribute("use", new User());
-        return "autorization";
-    }
-
-    @RequestMapping(value = "client", method = RequestMethod.GET)
-    public String lish(Model model){
-        return "client";
-    }
-
-    @RequestMapping(value = "/autorization/add", method = RequestMethod.POST)
-    public String listUsersa(@ModelAttribute("use") User user){
-        if(this.userService.getEn(user)) {
-            return "redirect:http://localhost:8080/client";
-        }
-        else {
-             return "redirect:/users";
-        }
-
-    }
 
 }

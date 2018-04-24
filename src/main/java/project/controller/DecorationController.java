@@ -27,15 +27,6 @@ public class DecorationController {
         model.addAttribute("listDecorations", this.decorationService.list());
 
         return "decorations";
-
-    }
-
-    @RequestMapping(value = "decorations", method = RequestMethod.GET)
-    public String listDecorations(Model model){
-        model.addAttribute("decoration", new Decoration());
-        model.addAttribute("listDecorations", this.decorationService.list());
-
-        return "decorations";
     }
 
 

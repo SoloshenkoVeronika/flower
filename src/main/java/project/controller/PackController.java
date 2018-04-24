@@ -27,15 +27,6 @@ public class PackController {
         model.addAttribute("listPacks", this.packService.list());
 
         return "packs";
-
-    }
-
-    @RequestMapping(value = "packs", method = RequestMethod.GET)
-    public String listPacks(Model model){
-        model.addAttribute("pack", new Pack());
-        model.addAttribute("listPacks", this.packService.list());
-
-        return "packs";
     }
 
 
