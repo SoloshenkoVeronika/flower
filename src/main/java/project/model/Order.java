@@ -1,26 +1,80 @@
 package project.model;
 
 import javax.persistence.*;
+import java.time.OffsetDateTime;
+import java.util.Collection;
 
 @Entity
 public class Order {
-    private Integer id;
-    private Integer userId;
-    private Integer senderId;
-    private Integer recipientId;
-    private Integer addressId;
-    private Integer payment;
-    private String date;
-    private String postcard;
-    private String additionalInf;
-    private Double cost;
-    private User userByUserId;
-    private Sender senderBySenderId;
-    private Recipient recipientByRecipientId;
-    private Address addressByAddressId;
-
     @Id
     @Column(name = "id", nullable = false)
+    private Integer id;
+
+    @Basic
+    @Column(name = "user_id", nullable = true)
+    private Integer userId;
+
+    @Basic
+    @Column(name = "sender_id", nullable = true)
+    private Integer senderId;
+
+    @Basic
+    @Column(name = "recipient_id", nullable = true)
+    private Integer recipientId;
+
+    @Basic
+    @Column(name = "address_id", nullable = true)
+    private Integer addressId;
+
+    @Basic
+    @Column(name = "date", nullable = false)
+    private OffsetDateTime date;
+
+    @Basic
+    @Column(name = "postcard", nullable = true, length = 80)
+    private String postcard;
+
+    @Basic
+    @Column(name = "additional_inf", nullable = true, length = 180)
+    private String additionalInf;
+
+    @Basic
+    @Column(name = "payment", nullable = false)
+    private Integer payment;
+
+    @Basic
+    @Column(name = "cost", nullable = false, precision = 0)
+    private Double cost;
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private User userByUserId;
+
+    @ManyToOne
+    @JoinColumn(name = "sender_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Sender senderBySenderId;
+
+    @ManyToOne
+    @JoinColumn(name = "recipient_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Recipient recipientByRecipientId;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Address addressByAddressId;
+
+    @OneToMany(mappedBy = "orderByOrderId")
+    private Collection<BouquetOrder> bouquetOrdersById;
+
+    @OneToMany(mappedBy = "orderByOrderId")
+    private Collection<CompositionOrder> compositionOrdersById;
+
+    @OneToMany(mappedBy = "orderByOrderId")
+    private Collection<CustomerBouquetOrder> customerBouquetOrdersById;
+
+    @OneToMany(mappedBy = "orderByOrderId")
+    private Collection<FlowerOrder> flowerOrdersById;
+
     public Integer getId() {
         return id;
     }
@@ -29,8 +83,6 @@ public class Order {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "user_id", nullable = true)
     public Integer getUserId() {
         return userId;
     }
@@ -39,8 +91,6 @@ public class Order {
         this.userId = userId;
     }
 
-    @Basic
-    @Column(name = "sender_id", nullable = true)
     public Integer getSenderId() {
         return senderId;
     }
@@ -49,8 +99,6 @@ public class Order {
         this.senderId = senderId;
     }
 
-    @Basic
-    @Column(name = "recipient_id", nullable = true)
     public Integer getRecipientId() {
         return recipientId;
     }
@@ -59,8 +107,6 @@ public class Order {
         this.recipientId = recipientId;
     }
 
-    @Basic
-    @Column(name = "address_id", nullable = true)
     public Integer getAddressId() {
         return addressId;
     }
@@ -69,28 +115,14 @@ public class Order {
         this.addressId = addressId;
     }
 
-    @Basic
-    @Column(name = "payment", nullable = false)
-    public Integer getPayment() {
-        return payment;
-    }
-
-    public void setPayment(Integer payment) {
-        this.payment = payment;
-    }
-
-    @Basic
-    @Column(name = "date", nullable = false, length = 50)
-    public String getDate() {
+    public OffsetDateTime getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(OffsetDateTime date) {
         this.date = date;
     }
 
-    @Basic
-    @Column(name = "postcard", nullable = true, length = 80)
     public String getPostcard() {
         return postcard;
     }
@@ -99,8 +131,6 @@ public class Order {
         this.postcard = postcard;
     }
 
-    @Basic
-    @Column(name = "additional_inf", nullable = true, length = 180)
     public String getAdditionalInf() {
         return additionalInf;
     }
@@ -109,8 +139,14 @@ public class Order {
         this.additionalInf = additionalInf;
     }
 
-    @Basic
-    @Column(name = "cost", nullable = false, precision = 0)
+    public Integer getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Integer payment) {
+        this.payment = payment;
+    }
+
     public Double getCost() {
         return cost;
     }
@@ -156,8 +192,6 @@ public class Order {
         return result;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
     public User getUserByUserId() {
         return userByUserId;
     }
@@ -166,8 +200,6 @@ public class Order {
         this.userByUserId = userByUserId;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "sender_id", referencedColumnName = "id")
     public Sender getSenderBySenderId() {
         return senderBySenderId;
     }
@@ -176,8 +208,6 @@ public class Order {
         this.senderBySenderId = senderBySenderId;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "recipient_id", referencedColumnName = "id")
     public Recipient getRecipientByRecipientId() {
         return recipientByRecipientId;
     }
@@ -186,13 +216,43 @@ public class Order {
         this.recipientByRecipientId = recipientByRecipientId;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
     public Address getAddressByAddressId() {
         return addressByAddressId;
     }
 
     public void setAddressByAddressId(Address addressByAddressId) {
         this.addressByAddressId = addressByAddressId;
+    }
+
+    public Collection<BouquetOrder> getBouquetOrdersById() {
+        return bouquetOrdersById;
+    }
+
+    public void setBouquetOrdersById(Collection<BouquetOrder> bouquetOrdersById) {
+        this.bouquetOrdersById = bouquetOrdersById;
+    }
+
+    public Collection<CompositionOrder> getCompositionOrdersById() {
+        return compositionOrdersById;
+    }
+
+    public void setCompositionOrdersById(Collection<CompositionOrder> compositionOrdersById) {
+        this.compositionOrdersById = compositionOrdersById;
+    }
+
+    public Collection<CustomerBouquetOrder> getCustomerBouquetOrdersById() {
+        return customerBouquetOrdersById;
+    }
+
+    public void setCustomerBouquetOrdersById(Collection<CustomerBouquetOrder> customerBouquetOrdersById) {
+        this.customerBouquetOrdersById = customerBouquetOrdersById;
+    }
+
+    public Collection<FlowerOrder> getFlowerOrdersById() {
+        return flowerOrdersById;
+    }
+
+    public void setFlowerOrdersById(Collection<FlowerOrder> flowerOrdersById) {
+        this.flowerOrdersById = flowerOrdersById;
     }
 }

@@ -1,6 +1,7 @@
 package project.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "flower")
@@ -34,15 +35,21 @@ public class Flower{
     @Column(name = "price", nullable = false)
     private double price;
 
-
     @Basic
     @Column(name = "picture", nullable = true, length = 256)
     private String picture;
 
 
+    @OneToMany(mappedBy = "flowerByFlowerId")
+    private Collection<FlowerCustomerBouquet> flowerCustomerBouquetsById;
+
+    @OneToMany(mappedBy = "flowerByFlowerId")
+    private Collection<FlowerOrder> flowerOrdersById;
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -147,5 +154,20 @@ public class Flower{
         result = 31 * result + (picture != null ? picture.hashCode() : 0);
         return result;
     }
-}
 
+    public Collection<FlowerCustomerBouquet> getFlowerCustomerBouquetsById() {
+        return flowerCustomerBouquetsById;
+    }
+
+    public void setFlowerCustomerBouquetsById(Collection<FlowerCustomerBouquet> flowerCustomerBouquetsById) {
+        this.flowerCustomerBouquetsById = flowerCustomerBouquetsById;
+    }
+
+    public Collection<FlowerOrder> getFlowerOrdersById() {
+        return flowerOrdersById;
+    }
+
+    public void setFlowerOrdersById(Collection<FlowerOrder> flowerOrdersById) {
+        this.flowerOrdersById = flowerOrdersById;
+    }
+}

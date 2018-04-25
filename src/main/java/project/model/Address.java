@@ -5,16 +5,34 @@ import java.util.Collection;
 
 @Entity
 public class Address {
-    private Integer id;
-    private String city;
-    private String street;
-    private Integer house;
-    private Integer block;
-    private Integer flat;
-    private Collection<Order> ordersById;
-
     @Id
     @Column(name = "id", nullable = false)
+    private Integer id;
+
+    @Basic
+    @Column(name = "city", nullable = false, length = 50)
+    private String city;
+
+    @Basic
+    @Column(name = "street", nullable = false, length = 50)
+    private String street;
+
+    @Basic
+    @Column(name = "house", nullable = false)
+    private Integer house;
+
+    @Basic
+    @Column(name = "block", nullable = false)
+    private Integer block;
+
+    @Basic
+    @Column(name = "flat", nullable = false)
+    private Integer flat;
+
+    
+    @OneToMany(mappedBy = "addressByAddressId")
+    private Collection<Order> ordersById;
+
     public Integer getId() {
         return id;
     }
@@ -23,8 +41,6 @@ public class Address {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "city", nullable = false, length = 50)
     public String getCity() {
         return city;
     }
@@ -33,8 +49,6 @@ public class Address {
         this.city = city;
     }
 
-    @Basic
-    @Column(name = "street", nullable = false, length = 50)
     public String getStreet() {
         return street;
     }
@@ -43,8 +57,6 @@ public class Address {
         this.street = street;
     }
 
-    @Basic
-    @Column(name = "house", nullable = false)
     public Integer getHouse() {
         return house;
     }
@@ -53,8 +65,6 @@ public class Address {
         this.house = house;
     }
 
-    @Basic
-    @Column(name = "block", nullable = false)
     public Integer getBlock() {
         return block;
     }
@@ -63,8 +73,6 @@ public class Address {
         this.block = block;
     }
 
-    @Basic
-    @Column(name = "flat", nullable = false)
     public Integer getFlat() {
         return flat;
     }
@@ -101,7 +109,7 @@ public class Address {
         return result;
     }
 
-    @OneToMany(mappedBy = "addressByAddressId")
+
     public Collection<Order> getOrdersById() {
         return ordersById;
     }

@@ -1,6 +1,7 @@
 package project.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Composition {
@@ -18,7 +19,7 @@ public class Composition {
     private String composition;
 
     @Basic
-    @Column(name = "pack", nullable = false, length = 40)
+    @Column(name = "pack", nullable = false, length = 100)
     private String pack;
 
     @Basic
@@ -33,6 +34,9 @@ public class Composition {
     @Column(name = "picture", nullable = true, length = 256)
     private String picture;
 
+
+    @OneToMany(mappedBy = "compositionByCompositionId")
+    private Collection<CompositionOrder> compositionOrdersById;
 
     public int getId() {
         return id;
@@ -132,5 +136,13 @@ public class Composition {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (picture != null ? picture.hashCode() : 0);
         return result;
+    }
+
+    public Collection<CompositionOrder> getCompositionOrdersById() {
+        return compositionOrdersById;
+    }
+
+    public void setCompositionOrdersById(Collection<CompositionOrder> compositionOrdersById) {
+        this.compositionOrdersById = compositionOrdersById;
     }
 }

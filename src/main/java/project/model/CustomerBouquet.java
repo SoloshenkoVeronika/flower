@@ -1,16 +1,34 @@
 package project.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "customer_bouquet")
 public class CustomerBouquet {
-    private Integer id;
-    private Integer packId;
-    private Pack packByPackId;
-
     @Id
     @Column(name = "id", nullable = false)
+    private Integer id;
+
+    @Basic
+    @Column(name = "pack_id", nullable = true, insertable = false, updatable = false)
+    private Integer packId;
+
+
+    @ManyToOne
+    @JoinColumn(name = "pack_id", referencedColumnName = "id")
+    private Pack packByPackId;
+
+    @OneToMany(mappedBy = "customerBouquetByCustomerBouquetId")
+    private Collection<CustomerBouquetOrder> customerBouquetOrdersById;
+
+    @OneToMany(mappedBy = "customerBouquetByCustomerBouquetId")
+    private Collection<DecorationCustomerBouquet> decorationCustomerBouquetsById;
+
+    @OneToMany(mappedBy = "customerBouquetByCustomerBouquetId")
+    private Collection<FlowerCustomerBouquet> flowerCustomerBouquetsById;
+
+
     public Integer getId() {
         return id;
     }
@@ -19,8 +37,6 @@ public class CustomerBouquet {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "pack_id", nullable = true)
     public Integer getPackId() {
         return packId;
     }
@@ -49,13 +65,35 @@ public class CustomerBouquet {
         return result;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "pack_id", referencedColumnName = "id")
     public Pack getPackByPackId() {
         return packByPackId;
     }
 
     public void setPackByPackId(Pack packByPackId) {
         this.packByPackId = packByPackId;
+    }
+
+    public Collection<CustomerBouquetOrder> getCustomerBouquetOrdersById() {
+        return customerBouquetOrdersById;
+    }
+
+    public void setCustomerBouquetOrdersById(Collection<CustomerBouquetOrder> customerBouquetOrdersById) {
+        this.customerBouquetOrdersById = customerBouquetOrdersById;
+    }
+
+    public Collection<DecorationCustomerBouquet> getDecorationCustomerBouquetsById() {
+        return decorationCustomerBouquetsById;
+    }
+
+    public void setDecorationCustomerBouquetsById(Collection<DecorationCustomerBouquet> decorationCustomerBouquetsById) {
+        this.decorationCustomerBouquetsById = decorationCustomerBouquetsById;
+    }
+
+    public Collection<FlowerCustomerBouquet> getFlowerCustomerBouquetsById() {
+        return flowerCustomerBouquetsById;
+    }
+
+    public void setFlowerCustomerBouquetsById(Collection<FlowerCustomerBouquet> flowerCustomerBouquetsById) {
+        this.flowerCustomerBouquetsById = flowerCustomerBouquetsById;
     }
 }

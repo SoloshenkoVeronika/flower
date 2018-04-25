@@ -125,10 +125,10 @@
                                 <tbody>
                                 <tr>
                                      <td>${flower.picture}</td>
-                                    <td><b>${flower.species} ${flower.sort}</b>
-                                        <br>Цвет ${flower.color}
-                                        <br>Высота ${flower.length}
-                                        <br>Цена ${flower.price}</td>
+                                    <td><b>${flower.species}: ${flower.sort}</b>
+                                        <br>Цвет: ${flower.color}
+                                        <br>Высота: ${flower.length}
+                                        <br>Цена: ${flower.price}</td>
                                     <td><input type="submit" class="btn btn-success"
                                            value="<spring:message text="В корзину"/>"/></td>
                                 </tbody>

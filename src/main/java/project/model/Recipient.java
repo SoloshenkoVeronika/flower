@@ -5,14 +5,26 @@ import java.util.Collection;
 
 @Entity
 public class Recipient {
-    private Integer id;
-    private String firstName;
-    private String secondName;
-    private String phone;
-    private Collection<Order> ordersById;
-
     @Id
     @Column(name = "id", nullable = false)
+    private Integer id;
+
+    @Basic
+    @Column(name = "first_name", nullable = false, length = 50)
+    private String firstName;
+
+    @Basic
+    @Column(name = "second_name", nullable = false, length = 50)
+    private String secondName;
+
+    @Basic
+    @Column(name = "phone", nullable = false, length = 20)
+    private String phone;
+
+
+    @OneToMany(mappedBy = "recipientByRecipientId")
+    private Collection<Order> ordersById;
+
     public Integer getId() {
         return id;
     }
@@ -21,8 +33,6 @@ public class Recipient {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "first_name", nullable = false, length = 50)
     public String getFirstName() {
         return firstName;
     }
@@ -31,8 +41,6 @@ public class Recipient {
         this.firstName = firstName;
     }
 
-    @Basic
-    @Column(name = "second_name", nullable = false, length = 50)
     public String getSecondName() {
         return secondName;
     }
@@ -41,8 +49,6 @@ public class Recipient {
         this.secondName = secondName;
     }
 
-    @Basic
-    @Column(name = "phone", nullable = false, length = 20)
     public String getPhone() {
         return phone;
     }
@@ -75,7 +81,6 @@ public class Recipient {
         return result;
     }
 
-    @OneToMany(mappedBy = "recipientByRecipientId")
     public Collection<Order> getOrdersById() {
         return ordersById;
     }

@@ -1,6 +1,7 @@
 package project.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "user")
@@ -18,6 +19,10 @@ public class User {
 
     @Column(name = "status", nullable = true)
     private String status;
+
+
+    @OneToMany(mappedBy = "userByUserId")
+    private Collection<Order> ordersById;
 
     public int getId() {
         return id;
@@ -76,5 +81,13 @@ public class User {
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
+    }
+
+    public Collection<Order> getOrdersById() {
+        return ordersById;
+    }
+
+    public void setOrdersById(Collection<Order> ordersById) {
+        this.ordersById = ordersById;
     }
 }

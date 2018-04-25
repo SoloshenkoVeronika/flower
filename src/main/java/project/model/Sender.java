@@ -5,15 +5,30 @@ import java.util.Collection;
 
 @Entity
 public class Sender {
-    private Integer id;
-    private String firstName;
-    private String secondName;
-    private String phone;
-    private String email;
-    private Collection<Order> ordersById;
-
     @Id
     @Column(name = "id", nullable = false)
+    private Integer id;
+
+    @Basic
+    @Column(name = "first_name", nullable = false, length = 50)
+    private String firstName;
+
+    @Basic
+    @Column(name = "second_name", nullable = false, length = 50)
+    private String secondName;
+
+    @Basic
+    @Column(name = "phone", nullable = false, length = 20)
+    private String phone;
+
+    @Basic
+    @Column(name = "email", nullable = true, length = 50)
+    private String email;
+
+
+    @OneToMany(mappedBy = "senderBySenderId")
+    private Collection<Order> ordersById;
+
     public Integer getId() {
         return id;
     }
@@ -22,8 +37,6 @@ public class Sender {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "first_name", nullable = false, length = 50)
     public String getFirstName() {
         return firstName;
     }
@@ -32,8 +45,6 @@ public class Sender {
         this.firstName = firstName;
     }
 
-    @Basic
-    @Column(name = "second_name", nullable = false, length = 50)
     public String getSecondName() {
         return secondName;
     }
@@ -42,8 +53,6 @@ public class Sender {
         this.secondName = secondName;
     }
 
-    @Basic
-    @Column(name = "phone", nullable = false, length = 20)
     public String getPhone() {
         return phone;
     }
@@ -52,8 +61,6 @@ public class Sender {
         this.phone = phone;
     }
 
-    @Basic
-    @Column(name = "email", nullable = true, length = 50)
     public String getEmail() {
         return email;
     }
@@ -88,7 +95,6 @@ public class Sender {
         return result;
     }
 
-    @OneToMany(mappedBy = "senderBySenderId")
     public Collection<Order> getOrdersById() {
         return ordersById;
     }

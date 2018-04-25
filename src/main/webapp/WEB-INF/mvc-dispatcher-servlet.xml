@@ -29,19 +29,46 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="annotatedClasses">
             <list>
+                <!--
                 <value>project.model.User</value>
                 <value>project.model.Flower</value>
                 <value>project.model.Bouquet</value>
                 <value>project.model.Decoration</value>
                 <value>project.model.Composition</value>
                 <value>project.model.Pack</value>
+                -->
+
+                <value>project.model.User</value>
+                <value>project.model.Sender</value>
+                <value>project.model.Recipient</value>
+                <value>project.model.Address</value>
+                <value>project.model.Flower</value>
+                <value>project.model.Decoration</value>
+                <value>project.model.Pack</value>
+                <value>project.model.Bouquet</value>
+                <value>project.model.Composition</value>
+                <value>project.model.Order</value>
+
+                <value>project.model.CustomerBouquet</value>
+                <value>project.model.CustomerBouquetOrder</value>
+                <value>project.model.FlowerCustomerBouquet</value>
+                <value>project.model.DecorationCustomerBouquet</value>
+                <value>project.model.FlowerOrder</value>
+                <value>project.model.BouquetOrder</value>
+                <value>project.model.CompositionOrder</value>
                 <!--
                 <value>project.model.Address</value>
                 <value>project.model.Bouquet</value>
+                <value>project.model.BouquetOrder</value>
                 <value>project.model.Composition</value>
+                <value>project.model.CompositionOrder</value>
                 <value>project.model.CustomerBouquet</value>
+                <value>project.model.CustomerBouquetOrder</value>
                 <value>project.model.Decoration</value>
+                <value>project.model.DecorationCustomerBouquet</value>
                 <value>project.model.Flower</value>
+                <value>project.model.FlowerCustomerBouquet</value>
+                <value>project.model.FlowerOrder</value>
                 <value>project.model.Order</value>
                 <value>project.model.Pack</value>
                 <value>project.model.Recipient</value>

@@ -1,6 +1,7 @@
 package project.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Decoration {
@@ -25,6 +26,9 @@ public class Decoration {
     @Column(name = "picture", nullable = true, length = 256)
     private String picture;
 
+
+    @OneToMany(mappedBy = "decorationByDecorationId")
+    private Collection<DecorationCustomerBouquet> decorationCustomerBouquetsById;
 
     public int getId() {
         return id;
@@ -102,5 +106,13 @@ public class Decoration {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (picture != null ? picture.hashCode() : 0);
         return result;
+    }
+
+    public Collection<DecorationCustomerBouquet> getDecorationCustomerBouquetsById() {
+        return decorationCustomerBouquetsById;
+    }
+
+    public void setDecorationCustomerBouquetsById(Collection<DecorationCustomerBouquet> decorationCustomerBouquetsById) {
+        this.decorationCustomerBouquetsById = decorationCustomerBouquetsById;
     }
 }
