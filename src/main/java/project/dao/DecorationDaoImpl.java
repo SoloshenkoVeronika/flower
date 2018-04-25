@@ -50,8 +50,9 @@ public class DecorationDaoImpl implements Dao<Decoration> {
 
         return decoration;
     }
+
     @Override
-    public boolean getEn(Decoration userr) {
+    public boolean getEn(Decoration decoration) {
 
         return false;
     }

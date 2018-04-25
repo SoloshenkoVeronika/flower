@@ -54,6 +54,7 @@ public class BouquetDaoImpl implements Dao<Bouquet> {
 
         return bouquet;
     }
+
     @Override
     public boolean getEn(Bouquet bouquet) {
 
