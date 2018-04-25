@@ -35,6 +35,19 @@
                 <value>project.model.Decoration</value>
                 <value>project.model.Composition</value>
                 <value>project.model.Pack</value>
+                <!--
+                <value>project.model.Address</value>
+                <value>project.model.Bouquet</value>
+                <value>project.model.Composition</value>
+                <value>project.model.CustomerBouquet</value>
+                <value>project.model.Decoration</value>
+                <value>project.model.Flower</value>
+                <value>project.model.Order</value>
+                <value>project.model.Pack</value>
+                <value>project.model.Recipient</value>
+                <value>project.model.Sender</value>
+                <value>project.model.User</value>
+                -->
             </list>
         </property>
         <property name="hibernateProperties">

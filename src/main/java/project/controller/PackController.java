@@ -30,7 +30,7 @@ public class PackController {
             this.packService.update(pack);
         }
 
-        return "redirect:/packs";
+        return "redirect:/packs_admin";
     }
 
     @RequestMapping("editPack/{id}")
@@ -38,22 +38,22 @@ public class PackController {
         model.addAttribute("pack", this.packService.getById(id));
         model.addAttribute("listPacks", this.packService.list());
 
-        return "packs";
+        return "packs_admin";
     }
 
     @RequestMapping("/removePack/{id}")
     public String removePack(@PathVariable("id") int id){
         this.packService.remove(id);
 
-        return "redirect:/packs";
+        return "redirect:/packs_admin";
     }
 
-    @RequestMapping(value = "packs", method = RequestMethod.GET)
+    @RequestMapping(value = "packs_admin", method = RequestMethod.GET)
     public String listPacks(Model model){
         model.addAttribute("pack", new Pack());
         model.addAttribute("listPacks", this.packService.list());
 
-        return "packs";
+        return "packs_admin";
     }
 }
 

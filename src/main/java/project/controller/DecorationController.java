@@ -30,7 +30,7 @@ public class DecorationController {
             this.decorationService.update(decoration);
         }
 
-        return "redirect:/decorations";
+        return "redirect:/decorations_admin";
     }
 
     @RequestMapping("editDecoration/{id}")
@@ -38,22 +38,22 @@ public class DecorationController {
         model.addAttribute("decoration", this.decorationService.getById(id));
         model.addAttribute("listDecorations", this.decorationService.list());
 
-        return "decorations";
+        return "decorations_admin";
     }
 
     @RequestMapping("/removeDecoration/{id}")
     public String removeDecoration(@PathVariable("id") int id){
         this.decorationService.remove(id);
 
-        return "redirect:/decorations";
+        return "redirect:/decorations_admin";
     }
 
-    @RequestMapping(value = "decorations", method = RequestMethod.GET)
+    @RequestMapping(value = "decorations_admin", method = RequestMethod.GET)
     public String listDecorations(Model model){
         model.addAttribute("decoration", new Decoration());
         model.addAttribute("listDecorations", this.decorationService.list());
 
-        return "decorations";
+        return "decorations_admin";
     }
 }
 

@@ -30,7 +30,7 @@ public class CompositionController {
             this.compositionService.update(composition);
         }
 
-        return "redirect:/compositions";
+        return "redirect:/compositions_admin";
     }
 
     @RequestMapping("editComposition/{id}")
@@ -38,21 +38,21 @@ public class CompositionController {
         model.addAttribute("composition", this.compositionService.getById(id));
         model.addAttribute("listCompositions", this.compositionService.list());
 
-        return "compositions";
+        return "compositions_admin";
     }
 
     @RequestMapping("/removeComposition/{id}")
     public String removeComposition(@PathVariable("id") int id) {
         this.compositionService.remove(id);
 
-        return "redirect:/compositions";
+        return "redirect:/compositions_admin";
     }
 
-    @RequestMapping(value = "compositions", method = RequestMethod.GET)
+    @RequestMapping(value = "compositions_admin", method = RequestMethod.GET)
     public String listCompositions(Model model) {
         model.addAttribute("composition", new Composition());
         model.addAttribute("listCompositions", this.compositionService.list());
 
-        return "compositions";
+        return "compositions_admin";
     }
 }

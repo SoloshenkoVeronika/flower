@@ -1,11 +1,10 @@
 <%--
   Created by IntelliJ IDEA.
   User: Admin
-  Date: 24.03.2018
-  Time: 12:26
+  Date: 25.03.2018
+  Time: 20:07
   To change this template use File | Settings | File Templates.
 --%>
-
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
@@ -14,7 +13,7 @@
 <%@ page session="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
-    <title>Цветы</title>
+    <title>Упаковки</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/autor_style.css" />"/>
     <script src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
@@ -70,19 +69,19 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="">
-                    <a href="<c:url value="/flowers"/>" target="_self">Цветы</a>
+                    <a href="<c:url value="/flowers_admin"/>" target="_self">Цветы</a>
                 </li>
                 <li class="">
-                    <a href="<c:url value="/bouquets"/>" target="_self">Букеты</a>
+                    <a href="<c:url value="/bouquets_admin"/>" target="_self">Букеты</a>
                 </li>
                 <li class="">
-                    <a href="<c:url value="/compositions"/>" target="_self">Копмозиции</a>
+                    <a href="<c:url value="/compositions_admin"/>" target="_self">Копмозиции</a>
                 </li>
                 <li class="">
-                    <a href="<c:url value="/packs"/>" target="_self">Упаковки</a>
+                    <a href="<c:url value="/packs_admin"/>" target="_self">Упаковки</a>
                 </li>
                 <li class="">
-                    <a href="<c:url value="/decorations"/>" target="_self">Украшения</a>
+                    <a href="<c:url value="/decorations_admin"/>" target="_self">Украшения</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -108,51 +107,43 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="h2 page-header"
-                        style="color:#8d1645;   font-family: 'Lobster', cursive; text-align: center;"> Цветы</h1>
+                        style="color:#8d1645;   font-family: 'Lobster', cursive; text-align: center;">Упаковки</h1>
                     <section class="main">
 
 
-                        <c:if test="${!empty listFlowers}">
+                        <c:if test="${!empty listPacks}">
                             <table class="tg">
                                 <tr>
                                     <th width="40">ID</th>
-                                    <th width="120">Вид</th>
-                                    <th width="120">Сорт</th>
-                                    <th width="90">Цвет</th>
-                                    <th width="40">Длина</th>
+                                    <th width="120">Название</th>
                                     <th width="80">Количество</th>
                                     <th width="40">Цена</th>
                                     <th width="120">Изображение</th>
                                     <th width="60">Редактирование</th>
                                     <th width="60">Удаление</th>
                                 </tr>
-                                <c:forEach items="${listFlowers}" var="flower">
+                                <c:forEach items="${listPacks}" var="pack">
                                     <tr>
-                                        <td>${flower.id}</td>
-                                        <td>${flower.species}</td>
-                                        <td>${flower.sort}</td>
-                                        <td>${flower.color}</td>
-                                        <td>${flower.length}</td>
-                                        <td>${flower.amount}</td>
-                                        <td>${flower.price}</td>
-                                        <td>${flower.picture}</td>
-                                        <td><a href="<c:url value='/editFlower/${flower.id}'/>">Редактирование</a></td>
-                                        <td><a href="<c:url value='/removeFlower/${flower.id}'/>">Удаление</a></td>
+                                        <td>${pack.id}</td>
+                                        <td>${pack.name}</td>
+                                        <td>${pack.amount}</td>
+                                        <td>${pack.price}</td>
+                                        <td>${pack.picture}</td>
+                                        <td><a href="<c:url value='/editPack/${pack.id}'/>">Редактирование</a></td>
+                                        <td><a href="<c:url value='/removePack/${pack.id}'/>">Удаление</a></td>
                                     </tr>
                                 </c:forEach>
                             </table>
                         </c:if>
 
+
                         <div class="headname">
                             <h1>Форма для данных</h1>
                         </div>
+                        <c:url var="addAction" value="/packs/add"/>
 
-
-
-                        <c:url var="addAction" value="/flowers/add"/>
-
-                        <form:form action="${addAction}" commandName="flower" class="form-horizontal">
-                            <c:if test="${!empty flower.species}">
+                        <form:form action="${addAction}" commandName="pack" class="form-horizontal">
+                            <c:if test="${!empty pack.name}">
                                 <div class="form-group">
                                     <form:label path="id" class="col-sm-2 control-label">
                                         <spring:message text="ID"/>
@@ -165,35 +156,11 @@
                                 </div>
                             </c:if>
                             <div class="form-group">
-                                <form:label path="species" class="col-sm-2 control-label">
-                                    <spring:message text="Вид"/>
+                                <form:label path="name" class="col-sm-2 control-label">
+                                    <spring:message text="Название"/>
                                 </form:label>
                                 <div class="col-sm-4">
-                                    <form:input path="species" class="form-control"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <form:label path="sort" class="col-sm-2 control-label">
-                                    <spring:message text="Сорт"/>
-                                </form:label>
-                                <div class="col-sm-4">
-                                    <form:input path="sort" class="form-control"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <form:label path="color" class="col-sm-2 control-label">
-                                    <spring:message text="Цвет"/>
-                                </form:label>
-                                <div class="col-sm-4">
-                                    <form:input path="color" class="form-control"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <form:label path="length" class="col-sm-2 control-label">
-                                    <spring:message text="Высота"/>
-                                </form:label>
-                                <div class="col-sm-2">
-                                    <form:input path="length" class="form-control"/>
+                                    <form:input path="name" class="form-control"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -214,13 +181,13 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <c:if test="${!empty flower.species}">
+                                    <c:if test="${!empty pack.name}">
                                         <input type="submit" class="btn btn-success"
-                                               value="<spring:message text="Редактировать цветы"/>"/>
+                                               value="<spring:message text="Редактировать упаковку"/>"/>
                                     </c:if>
-                                    <c:if test="${empty flower.species}">
+                                    <c:if test="${empty pack.name}">
                                         <input type="submit" class="btn btn-success"
-                                               value="<spring:message text="Добавить цветы"/>"/>
+                                               value="<spring:message text="Добавить упаковку"/>"/>
                                     </c:if>
                                 </div>
                             </div>
@@ -233,8 +200,7 @@
 
     <footer>
         <div class="container">
-            <div style="padding: 10px 0pt 0pt 30px; clear: both; color: #8d1645; font-size: 15px;">Все права защищены
-                &copy; <?=date ('Y')?></div>
+            <div style="padding: 10px 0pt 0pt 30px; clear: both; color: #8d1645; font-size: 15px;">Все права защищены &copy; <?=date ('Y')?></div>
         </div>
     </footer>
 </div>

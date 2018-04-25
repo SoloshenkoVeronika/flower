@@ -30,7 +30,7 @@ public class BouquetController {
             this.bouquetService.update(bouquet);
         }
 
-        return "redirect:/bouquets";
+        return "redirect:/bouquets_admin";
     }
 
     @RequestMapping("editBouquet/{id}")
@@ -38,21 +38,21 @@ public class BouquetController {
         model.addAttribute("bouquet", this.bouquetService.getById(id));
         model.addAttribute("listBouquets", this.bouquetService.list());
 
-        return "bouquets";
+        return "bouquets_admin";
     }
 
     @RequestMapping("/removeBouquet/{id}")
     public String removeBouquet(@PathVariable("id") int id) {
         this.bouquetService.remove(id);
 
-        return "redirect:/bouquets";
+        return "redirect:/bouquets_admin";
     }
 
-    @RequestMapping(value = "bouquets", method = RequestMethod.GET)
+    @RequestMapping(value = "bouquets_admin", method = RequestMethod.GET)
     public String listBouquets(Model model) {
         model.addAttribute("bouquet", new Bouquet());
         model.addAttribute("listBouquets", this.bouquetService.list());
 
-        return "bouquets";
+        return "bouquets_admin";
     }
 }

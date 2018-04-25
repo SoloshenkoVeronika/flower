@@ -31,7 +31,7 @@ public class FlowerController {
             this.flowerService.update(flower);
         }
 
-        return "redirect:/flowers";
+        return "redirect:/flowers_admin";
     }
 
     @RequestMapping("editFlower/{id}")
@@ -39,21 +39,21 @@ public class FlowerController {
         model.addAttribute("flower", this.flowerService.getById(id));
         model.addAttribute("listFlowers", this.flowerService.list());
 
-        return "flowers";
+        return "flowers_admin";
     }
 
     @RequestMapping("/removeFlower/{id}")
     public String removeFlower(@PathVariable("id") int id){
         this.flowerService.remove(id);
 
-        return "redirect:/flowers";
+        return "redirect:/flowers_admin";
     }
 
-    @RequestMapping(value = "flowers", method = RequestMethod.GET)
+    @RequestMapping(value = "flowers_admin", method = RequestMethod.GET)
     public String listFlowers(Model model){
         model.addAttribute("flower", new Flower());
         model.addAttribute("listFlowers", this.flowerService.list());
 
-        return "flowers";
+        return "flowers_admin";
     }
 }
