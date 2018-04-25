@@ -16,7 +16,6 @@ DROP TABLE IF EXISTS bouquet;
 DROP TABLE IF EXISTS pack;
 DROP TABLE IF EXISTS decoration;
 DROP TABLE IF EXISTS flower;
-DROP TABLE IF EXISTS payment;
 DROP TABLE IF EXISTS address;
 DROP TABLE IF EXISTS recipient;
 DROP TABLE IF EXISTS sender;
@@ -116,7 +115,7 @@ CREATE TABLE IF NOT EXISTS composition (
 	id INT(3) NOT NULL AUTO_INCREMENT,
 	name VARCHAR(60) NOT NULL,
 	composition VARCHAR(256) NOT NULL,
-	pack VARCHAR(40) NOT NULL,
+	pack VARCHAR(100) NOT NULL,
 	amount INT(3) NOT NULL,
 	price DOUBLE(10,2) NOT NULL,
 	picture VARCHAR(256) NULL,
@@ -134,10 +133,12 @@ CREATE TABLE IF NOT EXISTS customer_bouquet (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS flower_customer_bouquet (
+	id INT(3) NOT NULL AUTO_INCREMENT,
 	flower_id INT NULL,
 	customer_bouquet_id INT NULL,
 	quantity INT NULL,
 
+	PRIMARY KEY (id),
 	FOREIGN KEY (flower_id) REFERENCES flower (id)
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (customer_bouquet_id) REFERENCES customer_bouquet (id)
@@ -146,10 +147,12 @@ CREATE TABLE IF NOT EXISTS flower_customer_bouquet (
 	DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS decoration_customer_bouquet (
+	id INT(3) NOT NULL AUTO_INCREMENT,
 	decoration_id INT NULL,
 	customer_bouquet_id INT NULL,
 	quantity INT NULL,
 
+	PRIMARY KEY (id),
 	FOREIGN KEY (decoration_id) REFERENCES decoration (id)
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (customer_bouquet_id) REFERENCES customer_bouquet (id)
@@ -187,10 +190,12 @@ CREATE TABLE IF NOT EXISTS `order` (
 
 
 CREATE TABLE IF NOT EXISTS flower_order (
+	id INT(3) NOT NULL AUTO_INCREMENT,
 	flower_id INT NULL,
 	order_id INT NULL,
 	quantity INT NULL,
 
+	PRIMARY KEY (id),
 	FOREIGN KEY (flower_id) REFERENCES flower (id)
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (order_id) REFERENCES `order` (id)
@@ -199,10 +204,12 @@ CREATE TABLE IF NOT EXISTS flower_order (
 	DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS bouquet_order (
+	id INT(3) NOT NULL AUTO_INCREMENT,
 	bouquet_id INT NULL,
 	order_id INT NULL,
 	quantity INT NULL,
 
+	PRIMARY KEY (id),
 	FOREIGN KEY (bouquet_id) REFERENCES bouquet (id)
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (order_id) REFERENCES `order` (id)
@@ -211,10 +218,12 @@ CREATE TABLE IF NOT EXISTS bouquet_order (
 	DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS composition_order (
+	id INT(3) NOT NULL AUTO_INCREMENT,
 	composition_id INT NULL,
 	order_id INT NULL,
 	quantity INT NULL,
 
+	PRIMARY KEY (id),
 	FOREIGN KEY (composition_id) REFERENCES composition (id)
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (order_id) REFERENCES `order` (id)
@@ -223,10 +232,12 @@ CREATE TABLE IF NOT EXISTS composition_order (
 	DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS customer_bouquet_order (
+	id INT(3) NOT NULL AUTO_INCREMENT,
 	customer_bouquet_id INT NULL,
 	order_id INT NULL,
 	quantity INT NULL,
 
+	PRIMARY KEY (id),
 	FOREIGN KEY (customer_bouquet_id) REFERENCES customer_bouquet (id)
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (order_id) REFERENCES `order` (id)
