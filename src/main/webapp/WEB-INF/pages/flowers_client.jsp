@@ -73,13 +73,13 @@
                     <a href="<c:url value="/flowers_client"/>" target="_self">Цветы</a>
                 </li>
                 <%--<li class="">--%>
-                    <%--<a href="<c:url value="/bouquets_client"/>" target="_self">Букеты</a>--%>
+                <%--<a href="<c:url value="/bouquets_client"/>" target="_self">Букеты</a>--%>
                 <%--</li>--%>
                 <%--<li class="">--%>
-                    <%--<a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>--%>
+                <%--<a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>--%>
                 <%--</li>--%>
                 <%--<li class="">--%>
-                    <%--<a href="<c:url value="/packs_client"/>" target="_self">Составить букет</a>--%>
+                <%--<a href="<c:url value="/packs_client"/>" target="_self">Составить букет</a>--%>
                 <%--</li>--%>
 
             </ul>
@@ -100,7 +100,6 @@
 </nav>
 
 
-
 <br><br><br><br><br>
 <div class="mybody">
     <div class="container">
@@ -113,28 +112,38 @@
 
 
                         <c:if test="${!empty listFlowers}">
-                            <table class="table">
-                                <thead>
-                            <tr>
-                                <th width="90"></th>
-                                <th width="420"></th>
-                                <th width="70"></th>
-                            </tr>
-                                </thead>
+
                             <c:forEach items="${listFlowers}" var="flower">
-                                <tbody>
-                                <tr>
-                                     <td>${flower.picture}</td>
-                                    <td><b>${flower.species}: ${flower.sort}</b>
-                                        <br>Цвет: ${flower.color}
-                                        <br>Высота: ${flower.length}
-                                        <br>Цена: ${flower.price}</td>
-                                    <td><input type="submit" class="btn btn-success"
-                                           value="<spring:message text="В корзину"/>"/></td>
-                                </tbody>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                            ${flower.picture}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="fontname">
+                                            <b>${flower.species} ${flower.sort}</b>
+                                        </div>
+                                        <br>
+                                        <div class="fontchar">
+                                            Цвет ${flower.color}
+                                            <br>Высота ${flower.length}
+                                            <br>Цена ${flower.price}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="fontbut">
+                                        <input type="submit" class="btn btn-success"
+                                               value="<spring:message text="В корзину"/>"/>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <br>  <br>
                             </c:forEach>
-                        </table>
+
                         </c:if>
+
                     </section>
                 </div>
             </div>
