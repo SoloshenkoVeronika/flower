@@ -9,7 +9,7 @@ public class User {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "login", nullable = false, length = 50)
     private String login;
@@ -18,17 +18,40 @@ public class User {
     private String password;
 
     @Column(name = "status", nullable = true)
-    private String status;
+    private int status;
 
 
     @OneToMany(mappedBy = "userByUserId")
     private Collection<Order> ordersById;
 
-    public int getId() {
+    public User() {}
+
+    public User(String login, String password, int status) {
+        this.login = login;
+        this.password = password;
+        this.status = status;
+    }
+
+    public User(Integer id, String login, String password, int status) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.status = status;
+    }
+
+    public User(Integer id, String login, String password, int status, Collection<Order> ordersById) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.status = status;
+        this.ordersById = ordersById;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -48,13 +71,18 @@ public class User {
         this.password = password;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
+
+    /*@Override
+    public String toString() {
+        return "User{" + "id=" + id + ", login='" + login + '\'' + ", password='" + password + '\'' + ", status=" + status + ", ordersById=" + ordersById + '}';
+    }*/
 
     @Override
     public String toString() {
@@ -68,18 +96,20 @@ public class User {
 
         User user = (User) o;
 
-        if (id != user.id) return false;
+        if (status != user.status) return false;
+        if (id != null ? !id.equals(user.id) : user.id != null) return false;
         if (login != null ? !login.equals(user.login) : user.login != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        return status != null ? status.equals(user.status) : user.status == null;
+        return ordersById != null ? ordersById.equals(user.ordersById) : user.ordersById == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + status;
+        result = 31 * result + (ordersById != null ? ordersById.hashCode() : 0);
         return result;
     }
 

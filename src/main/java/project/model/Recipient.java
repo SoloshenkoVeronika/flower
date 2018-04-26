@@ -25,6 +25,29 @@ public class Recipient {
     @OneToMany(mappedBy = "recipientByRecipientId")
     private Collection<Order> ordersById;
 
+    public Recipient() {}
+
+    public Recipient(String firstName, String secondName, String phone) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.phone = phone;
+    }
+
+    public Recipient(Integer id, String firstName, String secondName, String phone) {
+        this.id = id;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.phone = phone;
+    }
+
+    public Recipient(Integer id, String firstName, String secondName, String phone, Collection<Order> ordersById) {
+        this.id = id;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.phone = phone;
+        this.ordersById = ordersById;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -57,6 +80,16 @@ public class Recipient {
         this.phone = phone;
     }
 
+    /*@Override
+    public String toString() {
+        return "Recipient{" + "id=" + id + ", firstName='" + firstName + '\'' + ", secondName='" + secondName + '\'' + ", phone='" + phone + '\'' + ", ordersById=" + ordersById + '}';
+    }*/
+
+    @Override
+    public String toString() {
+        return "Recipient{" + "id=" + id + ", firstName='" + firstName + '\'' + ", secondName='" + secondName + '\'' + ", phone='" + phone + '\'' + '}';
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,8 +101,7 @@ public class Recipient {
         if (firstName != null ? !firstName.equals(recipient.firstName) : recipient.firstName != null) return false;
         if (secondName != null ? !secondName.equals(recipient.secondName) : recipient.secondName != null) return false;
         if (phone != null ? !phone.equals(recipient.phone) : recipient.phone != null) return false;
-
-        return true;
+        return ordersById != null ? ordersById.equals(recipient.ordersById) : recipient.ordersById == null;
     }
 
     @Override
@@ -78,6 +110,7 @@ public class Recipient {
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (secondName != null ? secondName.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        result = 31 * result + (ordersById != null ? ordersById.hashCode() : 0);
         return result;
     }
 

@@ -29,6 +29,33 @@ public class Sender {
     @OneToMany(mappedBy = "senderBySenderId")
     private Collection<Order> ordersById;
 
+    public Sender() {}
+
+    public Sender(String firstName, String secondName, String phone, String email) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    public Sender(Integer id, String firstName, String secondName, String phone, String email) {
+        this.id = id;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    public Sender(Integer id, String firstName, String secondName, String phone,
+                  String email, Collection<Order> ordersById) {
+        this.id = id;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.phone = phone;
+        this.email = email;
+        this.ordersById = ordersById;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -69,6 +96,16 @@ public class Sender {
         this.email = email;
     }
 
+    /*@Override
+    public String toString() {
+        return "Sender{" + "id=" + id + ", firstName='" + firstName + '\'' + ", secondName='" + secondName + '\'' + ", phone='" + phone + '\'' + ", email='" + email + '\'' + ", ordersById=" + ordersById + '}';
+    }*/
+
+    @Override
+    public String toString() {
+        return "Sender{" + "id=" + id + ", firstName='" + firstName + '\'' + ", secondName='" + secondName + '\'' + ", phone='" + phone + '\'' + ", email='" + email + '\'' + '}';
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,8 +118,7 @@ public class Sender {
         if (secondName != null ? !secondName.equals(sender.secondName) : sender.secondName != null) return false;
         if (phone != null ? !phone.equals(sender.phone) : sender.phone != null) return false;
         if (email != null ? !email.equals(sender.email) : sender.email != null) return false;
-
-        return true;
+        return ordersById != null ? ordersById.equals(sender.ordersById) : sender.ordersById == null;
     }
 
     @Override
@@ -92,6 +128,7 @@ public class Sender {
         result = 31 * result + (secondName != null ? secondName.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (ordersById != null ? ordersById.hashCode() : 0);
         return result;
     }
 

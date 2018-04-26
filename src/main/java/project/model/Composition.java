@@ -8,7 +8,7 @@ public class Composition {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Basic
     @Column(name = "name", nullable = false, length = 60)
@@ -38,11 +38,46 @@ public class Composition {
     @OneToMany(mappedBy = "compositionByCompositionId")
     private Collection<CompositionOrder> compositionOrdersById;
 
-    public int getId() {
+    public Composition() {}
+
+    public Composition(String name, String composition, String pack,
+                       int amount, double price, String picture) {
+        this.name = name;
+        this.composition = composition;
+        this.pack = pack;
+        this.amount = amount;
+        this.price = price;
+        this.picture = picture;
+    }
+
+    public Composition(Integer id, String name, String composition, String pack,
+                       int amount, double price, String picture) {
+        this.id = id;
+        this.name = name;
+        this.composition = composition;
+        this.pack = pack;
+        this.amount = amount;
+        this.price = price;
+        this.picture = picture;
+    }
+
+    public Composition(Integer id, String name, String composition, String pack, int amount,
+                       double price, String picture, Collection<CompositionOrder> compositionOrdersById) {
+        this.id = id;
+        this.name = name;
+        this.composition = composition;
+        this.pack = pack;
+        this.amount = amount;
+        this.price = price;
+        this.picture = picture;
+        this.compositionOrdersById = compositionOrdersById;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -100,6 +135,11 @@ public class Composition {
         this.picture = picture;
     }
 
+    /*@Override
+    public String toString() {
+        return "Composition{" + "id=" + id + ", name='" + name + '\'' + ", composition='" + composition + '\'' + ", pack='" + pack + '\'' + ", amount=" + amount + ", price=" + price + ", picture='" + picture + '\'' + ", compositionOrdersById=" + compositionOrdersById + '}';
+    }*/
+
     @Override
     public String toString() {
         return "Composition{" + "id=" + id + ", name='" + name + '\'' + ", composition='" + composition + '\'' + ", pack='" + pack + '\'' + ", amount=" + amount + ", price=" + price + ", picture='" + picture + '\'' + '}';
@@ -112,22 +152,21 @@ public class Composition {
 
         Composition that = (Composition) o;
 
-        if (id != that.id) return false;
         if (amount != that.amount) return false;
         if (Double.compare(that.price, price) != 0) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (composition != null ? !composition.equals(that.composition) : that.composition != null) return false;
         if (pack != null ? !pack.equals(that.pack) : that.pack != null) return false;
         if (picture != null ? !picture.equals(that.picture) : that.picture != null) return false;
-
-        return true;
+        return compositionOrdersById != null ? compositionOrdersById.equals(that.compositionOrdersById) : that.compositionOrdersById == null;
     }
 
     @Override
     public int hashCode() {
         int result;
         long temp;
-        result = id;
+        result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (composition != null ? composition.hashCode() : 0);
         result = 31 * result + (pack != null ? pack.hashCode() : 0);
@@ -135,6 +174,7 @@ public class Composition {
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (picture != null ? picture.hashCode() : 0);
+        result = 31 * result + (compositionOrdersById != null ? compositionOrdersById.hashCode() : 0);
         return result;
     }
 

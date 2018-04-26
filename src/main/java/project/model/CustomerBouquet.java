@@ -28,6 +28,28 @@ public class CustomerBouquet {
     @OneToMany(mappedBy = "customerBouquetByCustomerBouquetId")
     private Collection<FlowerCustomerBouquet> flowerCustomerBouquetsById;
 
+    public CustomerBouquet() {}
+
+    public CustomerBouquet(Integer packId) {
+        this.packId = packId;
+    }
+
+    public CustomerBouquet(Integer id, Integer packId) {
+        this.id = id;
+        this.packId = packId;
+    }
+
+    public CustomerBouquet(Integer id, Integer packId, Pack packByPackId,
+                           Collection<CustomerBouquetOrder> customerBouquetOrdersById,
+                           Collection<DecorationCustomerBouquet> decorationCustomerBouquetsById,
+                           Collection<FlowerCustomerBouquet> flowerCustomerBouquetsById) {
+        this.id = id;
+        this.packId = packId;
+        this.packByPackId = packByPackId;
+        this.customerBouquetOrdersById = customerBouquetOrdersById;
+        this.decorationCustomerBouquetsById = decorationCustomerBouquetsById;
+        this.flowerCustomerBouquetsById = flowerCustomerBouquetsById;
+    }
 
     public Integer getId() {
         return id;
@@ -45,6 +67,16 @@ public class CustomerBouquet {
         this.packId = packId;
     }
 
+    /*@Override
+    public String toString() {
+        return "CustomerBouquet{" + "id=" + id + ", packId=" + packId + ", packByPackId=" + packByPackId + ", customerBouquetOrdersById=" + customerBouquetOrdersById + ", decorationCustomerBouquetsById=" + decorationCustomerBouquetsById + ", flowerCustomerBouquetsById=" + flowerCustomerBouquetsById + '}';
+    }*/
+
+    @Override
+    public String toString() {
+        return "CustomerBouquet{" + "id=" + id + ", packId=" + packId + '}';
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -54,14 +86,22 @@ public class CustomerBouquet {
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (packId != null ? !packId.equals(that.packId) : that.packId != null) return false;
-
-        return true;
+        if (packByPackId != null ? !packByPackId.equals(that.packByPackId) : that.packByPackId != null) return false;
+        if (customerBouquetOrdersById != null ? !customerBouquetOrdersById.equals(that.customerBouquetOrdersById) : that.customerBouquetOrdersById != null)
+            return false;
+        if (decorationCustomerBouquetsById != null ? !decorationCustomerBouquetsById.equals(that.decorationCustomerBouquetsById) : that.decorationCustomerBouquetsById != null)
+            return false;
+        return flowerCustomerBouquetsById != null ? flowerCustomerBouquetsById.equals(that.flowerCustomerBouquetsById) : that.flowerCustomerBouquetsById == null;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (packId != null ? packId.hashCode() : 0);
+        result = 31 * result + (packByPackId != null ? packByPackId.hashCode() : 0);
+        result = 31 * result + (customerBouquetOrdersById != null ? customerBouquetOrdersById.hashCode() : 0);
+        result = 31 * result + (decorationCustomerBouquetsById != null ? decorationCustomerBouquetsById.hashCode() : 0);
+        result = 31 * result + (flowerCustomerBouquetsById != null ? flowerCustomerBouquetsById.hashCode() : 0);
         return result;
     }
 

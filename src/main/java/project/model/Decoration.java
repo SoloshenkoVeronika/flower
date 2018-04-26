@@ -8,7 +8,7 @@ public class Decoration {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Basic
     @Column(name = "name", nullable = false, length = 50)
@@ -30,11 +30,38 @@ public class Decoration {
     @OneToMany(mappedBy = "decorationByDecorationId")
     private Collection<DecorationCustomerBouquet> decorationCustomerBouquetsById;
 
-    public int getId() {
+    public Decoration() {}
+
+    public Decoration(String name, int amount, double price, String picture) {
+        this.name = name;
+        this.amount = amount;
+        this.price = price;
+        this.picture = picture;
+    }
+
+    public Decoration(Integer id, String name, int amount, double price, String picture) {
+        this.id = id;
+        this.name = name;
+        this.amount = amount;
+        this.price = price;
+        this.picture = picture;
+    }
+
+    public Decoration(Integer id, String name, int amount, double price, String picture,
+                      Collection<DecorationCustomerBouquet> decorationCustomerBouquetsById) {
+        this.id = id;
+        this.name = name;
+        this.amount = amount;
+        this.price = price;
+        this.picture = picture;
+        this.decorationCustomerBouquetsById = decorationCustomerBouquetsById;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -74,6 +101,11 @@ public class Decoration {
         this.picture = picture;
     }
 
+    /*@Override
+    public String toString() {
+        return "Decoration{" + "id=" + id + ", name='" + name + '\'' + ", amount=" + amount + ", price=" + price + ", picture='" + picture + '\'' + ", decorationCustomerBouquetsById=" + decorationCustomerBouquetsById + '}';
+    }*/
+
     @Override
     public String toString() {
         return "Decoration{" + "id=" + id + ", name='" + name + '\'' + ", amount=" + amount + ", price=" + price + ", picture='" + picture + '\'' + '}';
@@ -86,25 +118,25 @@ public class Decoration {
 
         Decoration that = (Decoration) o;
 
-        if (id != that.id) return false;
         if (amount != that.amount) return false;
         if (Double.compare(that.price, price) != 0) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (picture != null ? !picture.equals(that.picture) : that.picture != null) return false;
-
-        return true;
+        return decorationCustomerBouquetsById != null ? decorationCustomerBouquetsById.equals(that.decorationCustomerBouquetsById) : that.decorationCustomerBouquetsById == null;
     }
 
     @Override
     public int hashCode() {
         int result;
         long temp;
-        result = id;
+        result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + amount;
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (picture != null ? picture.hashCode() : 0);
+        result = 31 * result + (decorationCustomerBouquetsById != null ? decorationCustomerBouquetsById.hashCode() : 0);
         return result;
     }
 

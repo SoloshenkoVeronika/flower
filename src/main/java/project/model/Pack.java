@@ -8,7 +8,7 @@ public class Pack {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Basic
     @Column(name = "name", nullable = false, length = 60)
@@ -30,11 +30,38 @@ public class Pack {
     @OneToMany(mappedBy = "packByPackId")
     private Collection<CustomerBouquet> customerBouquetsById;
 
-    public int getId() {
+    public Pack() {}
+
+    public Pack(String name, int amount, double price, String picture) {
+        this.name = name;
+        this.amount = amount;
+        this.price = price;
+        this.picture = picture;
+    }
+
+    public Pack(Integer id, String name, int amount, double price, String picture) {
+        this.id = id;
+        this.name = name;
+        this.amount = amount;
+        this.price = price;
+        this.picture = picture;
+    }
+
+    public Pack(Integer id, String name, int amount, double price, String picture,
+                Collection<CustomerBouquet> customerBouquetsById) {
+        this.id = id;
+        this.name = name;
+        this.amount = amount;
+        this.price = price;
+        this.picture = picture;
+        this.customerBouquetsById = customerBouquetsById;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -74,6 +101,11 @@ public class Pack {
         this.picture = picture;
     }
 
+    /*@Override
+    public String toString() {
+        return "Pack{" + "id=" + id + ", name='" + name + '\'' + ", amount=" + amount + ", price=" + price + ", picture='" + picture + '\'' + ", customerBouquetsById=" + customerBouquetsById + '}';
+    }*/
+
     @Override
     public String toString() {
         return "Pack{" + "id=" + id + ", name='" + name + '\'' + ", amount=" + amount + ", price=" + price + ", picture='" + picture + '\'' + '}';
@@ -86,23 +118,25 @@ public class Pack {
 
         Pack pack = (Pack) o;
 
-        if (id != pack.id) return false;
         if (amount != pack.amount) return false;
         if (Double.compare(pack.price, price) != 0) return false;
+        if (id != null ? !id.equals(pack.id) : pack.id != null) return false;
         if (name != null ? !name.equals(pack.name) : pack.name != null) return false;
-        return picture != null ? picture.equals(pack.picture) : pack.picture == null;
+        if (picture != null ? !picture.equals(pack.picture) : pack.picture != null) return false;
+        return customerBouquetsById != null ? customerBouquetsById.equals(pack.customerBouquetsById) : pack.customerBouquetsById == null;
     }
 
     @Override
     public int hashCode() {
         int result;
         long temp;
-        result = id;
+        result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + amount;
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (picture != null ? picture.hashCode() : 0);
+        result = 31 * result + (customerBouquetsById != null ? customerBouquetsById.hashCode() : 0);
         return result;
     }
 

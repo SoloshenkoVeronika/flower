@@ -8,7 +8,7 @@ public class FlowerCustomerBouquet {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Basic
     @Column(name = "flower_id", nullable = true, insertable = false, updatable = false)
@@ -17,6 +17,10 @@ public class FlowerCustomerBouquet {
     @Basic
     @Column(name = "customer_bouquet_id", nullable = true, insertable = false, updatable = false)
     private Integer customerBouquetId;
+
+    @Basic
+    @Column(name = "quantity", nullable = true)
+    private int quantity;
 
 
     @ManyToOne
@@ -27,11 +31,36 @@ public class FlowerCustomerBouquet {
     @JoinColumn(name = "customer_bouquet_id", referencedColumnName = "id")
     private CustomerBouquet customerBouquetByCustomerBouquetId;
 
-    public int getId() {
+    public FlowerCustomerBouquet() {}
+
+    public FlowerCustomerBouquet(Integer flowerId, Integer customerBouquetId, int quantity) {
+        this.flowerId = flowerId;
+        this.customerBouquetId = customerBouquetId;
+        this.quantity = quantity;
+    }
+
+    public FlowerCustomerBouquet(Integer id, Integer flowerId, Integer customerBouquetId, int quantity) {
+        this.id = id;
+        this.flowerId = flowerId;
+        this.customerBouquetId = customerBouquetId;
+        this.quantity = quantity;
+    }
+
+    public FlowerCustomerBouquet(Integer id, Integer flowerId, Integer customerBouquetId, int quantity,
+                                 Flower flowerByFlowerId, CustomerBouquet customerBouquetByCustomerBouquetId) {
+        this.id = id;
+        this.flowerId = flowerId;
+        this.customerBouquetId = customerBouquetId;
+        this.quantity = quantity;
+        this.flowerByFlowerId = flowerByFlowerId;
+        this.customerBouquetByCustomerBouquetId = customerBouquetByCustomerBouquetId;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -51,6 +80,24 @@ public class FlowerCustomerBouquet {
         this.customerBouquetId = customerBouquetId;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    /*@Override
+    public String toString() {
+        return "FlowerCustomerBouquet{" + "id=" + id + ", flowerId=" + flowerId + ", customerBouquetId=" + customerBouquetId + ", quantity=" + quantity + ", flowerByFlowerId=" + flowerByFlowerId + ", customerBouquetByCustomerBouquetId=" + customerBouquetByCustomerBouquetId + '}';
+    }*/
+
+    @Override
+    public String toString() {
+        return "FlowerCustomerBouquet{" + "id=" + id + ", flowerId=" + flowerId + ", customerBouquetId=" + customerBouquetId + ", quantity=" + quantity + '}';
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -58,17 +105,24 @@ public class FlowerCustomerBouquet {
 
         FlowerCustomerBouquet that = (FlowerCustomerBouquet) o;
 
+        if (quantity != that.quantity) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (flowerId != null ? !flowerId.equals(that.flowerId) : that.flowerId != null) return false;
         if (customerBouquetId != null ? !customerBouquetId.equals(that.customerBouquetId) : that.customerBouquetId != null)
             return false;
-
-        return true;
+        if (flowerByFlowerId != null ? !flowerByFlowerId.equals(that.flowerByFlowerId) : that.flowerByFlowerId != null)
+            return false;
+        return customerBouquetByCustomerBouquetId != null ? customerBouquetByCustomerBouquetId.equals(that.customerBouquetByCustomerBouquetId) : that.customerBouquetByCustomerBouquetId == null;
     }
 
     @Override
     public int hashCode() {
-        int result = flowerId != null ? flowerId.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (flowerId != null ? flowerId.hashCode() : 0);
         result = 31 * result + (customerBouquetId != null ? customerBouquetId.hashCode() : 0);
+        result = 31 * result + quantity;
+        result = 31 * result + (flowerByFlowerId != null ? flowerByFlowerId.hashCode() : 0);
+        result = 31 * result + (customerBouquetByCustomerBouquetId != null ? customerBouquetByCustomerBouquetId.hashCode() : 0);
         return result;
     }
 

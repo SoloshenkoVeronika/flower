@@ -8,7 +8,7 @@ public class Bouquet {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Basic
     @Column(name = "name", nullable = false, length = 60)
@@ -46,11 +46,50 @@ public class Bouquet {
     @OneToMany(mappedBy = "bouquetByBouquetId")
     private Collection<BouquetOrder> bouquetOrdersById;
 
-    public int getId() {
+    public Bouquet() {}
+
+    public Bouquet(String name, String composition, double height, double diameter, double weight, int amount,
+                   double price, String picture) {
+        this.name = name;
+        this.composition = composition;
+        this.height = height;
+        this.diameter = diameter;
+        this.weight = weight;
+        this.amount = amount;
+        this.price = price;
+        this.picture = picture;
+    }
+
+    public Bouquet(Integer id, String name, String composition, double height, double diameter, double weight, int amount, double price, String picture) {
+        this.id = id;
+        this.name = name;
+        this.composition = composition;
+        this.height = height;
+        this.diameter = diameter;
+        this.weight = weight;
+        this.amount = amount;
+        this.price = price;
+        this.picture = picture;
+    }
+
+    public Bouquet(Integer id, String name, String composition, double height, double diameter, double weight, int amount, double price, String picture, Collection<BouquetOrder> bouquetOrdersById) {
+        this.id = id;
+        this.name = name;
+        this.composition = composition;
+        this.height = height;
+        this.diameter = diameter;
+        this.weight = weight;
+        this.amount = amount;
+        this.price = price;
+        this.picture = picture;
+        this.bouquetOrdersById = bouquetOrdersById;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -126,6 +165,11 @@ public class Bouquet {
         this.picture = picture;
     }
 
+    /*@Override
+    public String toString() {
+        return "Bouquet{" + "id=" + id + ", name='" + name + '\'' + ", composition='" + composition + '\'' + ", height=" + height + ", diameter=" + diameter + ", weight=" + weight + ", amount=" + amount + ", price=" + price + ", picture='" + picture + '\'' + ", bouquetOrdersById=" + bouquetOrdersById + '}';
+    }*/
+
     @Override
     public String toString() {
         return "Bouquet{" + "id=" + id + ", name='" + name + '\'' + ", composition='" + composition + '\'' + ", height=" + height + ", diameter=" + diameter + ", weight=" + weight + ", amount=" + amount + ", price=" + price + ", picture='" + picture + '\'' + '}';
@@ -138,22 +182,23 @@ public class Bouquet {
 
         Bouquet bouquet = (Bouquet) o;
 
-        if (id != bouquet.id) return false;
         if (Double.compare(bouquet.height, height) != 0) return false;
         if (Double.compare(bouquet.diameter, diameter) != 0) return false;
         if (Double.compare(bouquet.weight, weight) != 0) return false;
         if (amount != bouquet.amount) return false;
         if (Double.compare(bouquet.price, price) != 0) return false;
+        if (id != null ? !id.equals(bouquet.id) : bouquet.id != null) return false;
         if (name != null ? !name.equals(bouquet.name) : bouquet.name != null) return false;
         if (composition != null ? !composition.equals(bouquet.composition) : bouquet.composition != null) return false;
-        return picture != null ? picture.equals(bouquet.picture) : bouquet.picture == null;
+        if (picture != null ? !picture.equals(bouquet.picture) : bouquet.picture != null) return false;
+        return bouquetOrdersById != null ? bouquetOrdersById.equals(bouquet.bouquetOrdersById) : bouquet.bouquetOrdersById == null;
     }
 
     @Override
     public int hashCode() {
         int result;
         long temp;
-        result = id;
+        result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (composition != null ? composition.hashCode() : 0);
         temp = Double.doubleToLongBits(height);
@@ -166,6 +211,7 @@ public class Bouquet {
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (picture != null ? picture.hashCode() : 0);
+        result = 31 * result + (bouquetOrdersById != null ? bouquetOrdersById.hashCode() : 0);
         return result;
     }
 
