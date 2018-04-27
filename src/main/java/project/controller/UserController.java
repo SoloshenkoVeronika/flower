@@ -24,7 +24,7 @@ public class UserController {
 
     @RequestMapping(value = "/users/add", method = RequestMethod.POST)
     public String addUser(@ModelAttribute("user") User user){
-        if(user.getId() == 0){
+        if(user.getId() == null){
             this.userService.add(user);
         }else {
             this.userService.update(user);

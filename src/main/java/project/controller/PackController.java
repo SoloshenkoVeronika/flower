@@ -24,7 +24,7 @@ public class PackController {
 
     @RequestMapping(value = "/packs/add", method = RequestMethod.POST)
     public String addPack(@ModelAttribute("pack") Pack pack){
-        if(pack.getId() == 0){
+        if(pack.getId() == null){
             this.packService.add(pack);
         }else {
             this.packService.update(pack);

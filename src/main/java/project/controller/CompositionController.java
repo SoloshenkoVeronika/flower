@@ -24,7 +24,7 @@ public class CompositionController {
 
     @RequestMapping(value = "/compositions/add", method = RequestMethod.POST)
     public String addComposition(@ModelAttribute("composition") Composition composition) {
-        if (composition.getId() == 0) {
+        if (composition.getId() == null) {
             this.compositionService.add(composition);
         } else {
             this.compositionService.update(composition);

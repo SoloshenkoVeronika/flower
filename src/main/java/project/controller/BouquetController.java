@@ -24,7 +24,7 @@ public class BouquetController {
 
     @RequestMapping(value = "/bouquets/add", method = RequestMethod.POST)
     public String addBouquet(@ModelAttribute("bouquet") Bouquet bouquet) {
-        if (bouquet.getId() == 0) {
+        if (bouquet.getId() == null) {
             this.bouquetService.add(bouquet);
         } else {
             this.bouquetService.update(bouquet);
