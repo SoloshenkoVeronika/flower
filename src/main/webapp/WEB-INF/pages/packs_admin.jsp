@@ -100,7 +100,7 @@
     </div>
 </nav>
 
-<br><br><br><br><br>
+<br>
 <div class="mybody">
     <div class="container">
         <div class="article container">
@@ -116,8 +116,8 @@
                                 <tr>
                                     <th width="40">ID</th>
                                     <th width="120">Название</th>
-                                    <th width="80">Количество</th>
-                                    <th width="40">Цена</th>
+                                    <th width="80">Количество, шт</th>
+                                    <th width="40">Цена, руб</th>
                                     <th width="120">Изображение</th>
                                     <th width="60">Редактирование</th>
                                     <th width="60">Удаление</th>
@@ -129,8 +129,8 @@
                                         <td>${pack.amount}</td>
                                         <td>${pack.price}</td>
                                         <td>${pack.picture}</td>
-                                        <td><a href="<c:url value='/editPack/${pack.id}'/>">Редактирование</a></td>
-                                        <td><a href="<c:url value='/removePack/${pack.id}'/>">Удаление</a></td>
+                                        <td><a href="<c:url value='/editPack/${pack.id}'/>">Изменить</a></td>
+                                        <td><a href="<c:url value='/removePack/${pack.id}'/>">Удалить</a></td>
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -173,7 +173,7 @@
                             </div>
                             <div class="form-group">
                                 <form:label path="price" class="col-sm-2 control-label">
-                                    <spring:message text="Цена"/>
+                                    <spring:message text="Цена"/> (руб.)
                                 </form:label>
                                 <div class="col-sm-2">
                                     <form:input path="price" class="form-control"/>

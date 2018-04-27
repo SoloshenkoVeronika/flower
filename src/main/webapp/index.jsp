@@ -94,7 +94,7 @@
         </div>
     </div>
 </nav>
-<br><br><br><br><br>
+<br>
 <div class="mybody">
     <div class="container">
         <div class="article container">

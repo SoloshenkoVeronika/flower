@@ -103,7 +103,7 @@
     </div>
 </nav>
 
-<br><br><br><br><br>
+<br>
 <div class="mybody">
     <div class="container">
         <div class="article container">
@@ -121,9 +121,9 @@
                                     <th width="120">Вид</th>
                                     <th width="120">Сорт</th>
                                     <th width="90">Цвет</th>
-                                    <th width="40">Длина</th>
-                                    <th width="80">Количество</th>
-                                    <th width="40">Цена</th>
+                                    <th width="40">Длина, см</th>
+                                    <th width="80">Количество, шт</th>
+                                    <th width="40">Цена, руб</th>
                                     <th width="120">Изображение</th>
                                     <th width="60">Редактирование</th>
                                     <th width="60">Удаление</th>
@@ -138,8 +138,8 @@
                                         <td>${flower.amount}</td>
                                         <td>${flower.price}</td>
                                         <td>${flower.picture}</td>
-                                        <td><a href="<c:url value='/editFlower/${flower.id}'/>">Редактирование</a></td>
-                                        <td><a href="<c:url value='/removeFlower/${flower.id}'/>">Удаление</a></td>
+                                        <td><a href="<c:url value='/editFlower/${flower.id}'/>">Изменить</a></td>
+                                        <td><a href="<c:url value='/removeFlower/${flower.id}'/>">Удалить</a></td>
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -150,79 +150,79 @@
                         </div>
 
 
-
                         <c:url var="addAction" value="/flowers/add"/>
 
                         <form:form action="${addAction}" commandName="flower" class="form-horizontal">
-                            <c:if test="${!empty flower.species}">
-                                <div class="form-group">
-                                    <form:label path="id" class="col-sm-2 control-label">
-                                        <spring:message text="ID"/>
-                                    </form:label>
-                                    <div class="col-sm-2">
-                                        <form:input path="id" readonly="true" size="8" disabled="true"
-                                                    class="form-control"/>
-                                        <form:hidden path="id"/>
-                                    </div>
-                                </div>
-                            </c:if>
+                        <c:if test="${!empty flower.species}">
                             <div class="form-group">
-                                <form:label path="species" class="col-sm-2 control-label">
-                                    <spring:message text="Вид"/>
-                                </form:label>
-                                <div class="col-sm-4">
-                                    <form:input path="species" class="form-control"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <form:label path="sort" class="col-sm-2 control-label">
-                                    <spring:message text="Сорт"/>
-                                </form:label>
-                                <div class="col-sm-4">
-                                    <form:input path="sort" class="form-control"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <form:label path="color" class="col-sm-2 control-label">
-                                    <spring:message text="Цвет"/>
-                                </form:label>
-                                <div class="col-sm-4">
-                                    <form:input path="color" class="form-control"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <form:label path="length" class="col-sm-2 control-label">
-                                    <spring:message text="Высота"/>
+                                <form:label path="id" class="col-sm-2 control-label">
+                                    <spring:message text="ID"/>
                                 </form:label>
                                 <div class="col-sm-2">
-                                    <form:input path="length" class="form-control"/>
+                                    <form:input path="id" readonly="true" size="8" disabled="true"
+                                                class="form-control"/>
+                                    <form:hidden path="id"/>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <form:label path="amount" class="col-sm-2 control-label">
-                                    <spring:message text="Количество"/>
-                                </form:label>
-                                <div class="col-sm-2">
-                                    <form:input path="amount" class="form-control"/>
-                                </div>
+                        </c:if>
+                        <div class="form-group">
+                            <form:label path="species" class="col-sm-2 control-label">
+                                <spring:message text="Вид"/>
+                            </form:label>
+                            <div class="col-sm-4">
+                                <form:input path="species" class="form-control"/>
                             </div>
-                            <div class="form-group">
-                                <form:label path="price" class="col-sm-2 control-label">
-                                    <spring:message text="Цена"/>
-                                </form:label>
-                                <div class="col-sm-2">
-                                    <form:input path="price" class="form-control"/>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <form:label path="sort" class="col-sm-2 control-label">
+                                <spring:message text="Сорт"/>
+                            </form:label>
+                            <div class="col-sm-4">
+                                <form:input path="sort" class="form-control"/>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <form:label path="color" class="col-sm-2 control-label">
+                                <spring:message text="Цвет"/>
+                            </form:label>
+                            <div class="col-sm-4">
+                                <form:input path="color" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <form:label path="length" class="col-sm-2 control-label">
+                                <spring:message text="Высота"/> (см.)
+                            </form:label>
+                            <div class="col-sm-2">
+                                <form:input path="length" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <form:label path="amount" class="col-sm-2 control-label">
+                                <spring:message text="Количество"/> (шт.)
+                            </form:label>
+                            <div class="col-sm-2">
+                                <form:input path="amount" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <form:label path="price" class="col-sm-2 control-label">
+                                <spring:message text="Цена"/> (руб.)
+                            </form:label>
+                            <div class="col-sm-2">
+                                <form:input path="price" class="form-control"/>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <form:label path="picture" class="col-sm-2 control-label">
                                 <spring:message text="Изображение"/>
                             </form:label>
                             <div class="col-sm-2 control-label">
-                                <input type="file" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
-                                <a id="delet" name="g" href="javascript:doClick()"></a>
+                                <input type="file" id="fileElem" multiple accept="image/*" style="display:none"
+                                       onchange="handleFiles(this.files)">
+                                <a id="pictureName" name="g" href="javascript:doClick()"></a>
                                 <script>
-                                    var f = document.getElementById('delet');
+                                    var f = document.getElementById('pictureName');
                                     f.innerHTML = "Выбрать изображение";
                                 </script>
                                 <div id="fileList">
@@ -232,18 +232,18 @@
                             <form:hidden id="picture_url" path="picture"/>
                         </div>
 
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <c:if test="${!empty flower.species}">
-                                        <input type="submit" class="btn btn-success"
-                                               value="<spring:message text="Редактировать цветы"/>"/>
-                                    </c:if>
-                                    <c:if test="${empty flower.species}">
-                                        <input type="submit" class="btn btn-success"
-                                               value="<spring:message text="Добавить цветы"/>"/>
-                                    </c:if>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <c:if test="${!empty flower.species}">
+                                    <input type="submit" class="btn btn-success"
+                                           value="<spring:message text="Редактировать цветы"/>"/>
+                                </c:if>
+                                <c:if test="${empty flower.species}">
+                                    <input type="submit" class="btn btn-success"
+                                           value="<spring:message text="Добавить цветы"/>"/>
+                                </c:if>
                             </div>
-                        </form:form>
+                            </form:form>
                     </section>
                 </div>
             </div>
@@ -274,32 +274,26 @@
         if (!files.length) {
             d.innerHTML = "<p>No files selected!</p>";
         } else {
-
             var img = document.createElement("img");
             img.src = window.URL.createObjectURL(files[0]);
             img.height = 100;
-            img.onload = function() {
+            img.onload = function () {
                 window.URL.revokeObjectURL(this.src);
-            }
+            };
             d.appendChild(img);
-            var x=new XMLHttpRequest();
+            var x = new XMLHttpRequest();
             x.open("GET", img.src, true);
             x.responseType = 'blob';
-            x.onload=function(e){download(x.response, files[0].name, "image/gif" ); }
+            x.onload = function (e) {
+                download(x.response, files[0].name, "image/gif");
+            }
             x.send();
-
         }
-        var nameOfPicture = document.getElementById('delet');
-
-
+        var nameOfPicture = document.getElementById('pictureName');
 
         var picture = document.getElementById('picture_url');
-        picture.value = files[files.length-1].name;
+        picture.value = files[files.length - 1].name;
     }
-
-
 </script>
-
-
 </body>
 </html>

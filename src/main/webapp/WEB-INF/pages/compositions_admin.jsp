@@ -99,7 +99,7 @@
     </div>
 </nav>
 
-<br><br><br><br><br>
+<br>
 <div class="mybody">
     <div class="container">
         <div class="article container">
@@ -117,8 +117,8 @@
                                     <th width="120">Название</th>
                                     <th width="170">Состав</th>
                                     <th width="40">Упаковка</th>
-                                    <th width="80">Количество</th>
-                                    <th width="40">Цена</th>
+                                    <th width="80">Количество, шт</th>
+                                    <th width="40">Цена, руб</th>
                                     <th width="120">Изображение</th>
                                     <th width="60">Редактирование</th>
                                     <th width="60">Удаление</th>
@@ -132,9 +132,9 @@
                                         <td>${composition.amount}</td>
                                         <td>${composition.price}</td>
                                         <td>${composition.picture}</td>
-                                        <td><a href="<c:url value='/editComposition/${composition.id}'/>">Редактирование</a>
+                                        <td><a href="<c:url value='/editComposition/${composition.id}'/>">Изменить</a>
                                         </td>
-                                        <td><a href="<c:url value='/removeComposition/${composition.id}'/>">Удаление</a></td>
+                                        <td><a href="<c:url value='/removeComposition/${composition.id}'/>">Удалить</a></td>
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -193,7 +193,7 @@
                             </div>
                             <div class="form-group">
                                 <form:label path="price" class="col-sm-2 control-label">
-                                    <spring:message text="Цена"/>
+                                    <spring:message text="Цена"/> (руб.)
                                 </form:label>
                                 <div class="col-sm-2">
 
