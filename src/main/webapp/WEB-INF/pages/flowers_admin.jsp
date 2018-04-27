@@ -11,6 +11,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page session="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
@@ -19,6 +20,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/download.js"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
@@ -212,6 +214,24 @@
                                     <form:input path="price" class="form-control"/>
                                 </div>
                             </div>
+                        <div class="form-group">
+                            <form:label path="picture" class="col-sm-2 control-label">
+                                <spring:message text="Изображение"/>
+                            </form:label>
+                            <div class="col-sm-2 control-label">
+                                <input type="file" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+                                <a id="delet" name="g" href="javascript:doClick()"></a>
+                                <script>
+                                    var f = document.getElementById('delet');
+                                    f.innerHTML = "Выбрать изображение";
+                                </script>
+                                <div id="fileList">
+                                    <p></p>
+                                </div>
+                            </div>
+                            <form:hidden id="picture_url" path="picture"/>
+                        </div>
+
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <c:if test="${!empty flower.species}">
@@ -222,7 +242,6 @@
                                         <input type="submit" class="btn btn-success"
                                                value="<spring:message text="Добавить цветы"/>"/>
                                     </c:if>
-                                </div>
                             </div>
                         </form:form>
                     </section>
@@ -242,7 +261,45 @@
 <script>
     $.backstretch("resources/images/fon1.jpg");
 </script>
+<script>
+    function doClick() {
+        var el = document.getElementById("fileElem");
+        if (el) {
+            el.click();
+        }
+    }
+
+    function handleFiles(files) {
+        var d = document.getElementById("fileList");
+        if (!files.length) {
+            d.innerHTML = "<p>No files selected!</p>";
+        } else {
+
+            var img = document.createElement("img");
+            img.src = window.URL.createObjectURL(files[0]);
+            img.height = 100;
+            img.onload = function() {
+                window.URL.revokeObjectURL(this.src);
+            }
+            d.appendChild(img);
+            var x=new XMLHttpRequest();
+            x.open("GET", img.src, true);
+            x.responseType = 'blob';
+            x.onload=function(e){download(x.response, files[0].name, "image/gif" ); }
+            x.send();
+
+        }
+        var nameOfPicture = document.getElementById('delet');
+
+
+
+        var picture = document.getElementById('picture_url');
+        picture.value = files[files.length-1].name;
+    }
+
+
+</script>
+
 
 </body>
 </html>
-
