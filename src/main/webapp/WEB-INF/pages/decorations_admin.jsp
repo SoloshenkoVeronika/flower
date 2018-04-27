@@ -166,7 +166,7 @@
                             </div>
                             <div class="form-group">
                                 <form:label path="amount" class="col-sm-2 control-label">
-                                    <spring:message text="Количество"/>
+                                    <spring:message text="Количество"/> (шт.)
                                 </form:label>
 
                                 <div class="col-sm-4">

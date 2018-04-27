@@ -99,7 +99,7 @@
     </div>
 </nav>
 
-<br><br><br><br><br>
+<br><br>
 <div class="mybody">
     <div class="container">
         <div class="article container">
@@ -180,7 +180,7 @@
                             </div>
                             <div class="form-group">
                                 <form:label path="height" class="col-sm-2 control-label">
-                                    <spring:message text="Высота"/>
+                                    <spring:message text="Высота"/> (см.)
                                 </form:label>
                                 <div class="col-sm-2">
                                     <form:input path="height" class="form-control"/>
@@ -188,7 +188,7 @@
                             </div>
                             <div class="form-group">
                                 <form:label path="diameter" class="col-sm-2 control-label">
-                                    <spring:message text="Диаметр"/>
+                                    <spring:message text="Диаметр"/> (см.)
                                 </form:label>
                                 <div class="col-sm-2">
                                     <form:input path="diameter" class="form-control"/>
@@ -196,7 +196,7 @@
                             </div>
                             <div class="form-group">
                                 <form:label path="weight" class="col-sm-2 control-label">
-                                    <spring:message text="Вес"/>
+                                    <spring:message text="Вес"/>  (гр.)
                                 </form:label>
                                 <div class="col-sm-2">
                                     <form:input path="weight" class="form-control"/>
@@ -205,7 +205,7 @@
 
                             <div class="form-group">
                                 <form:label path="amount" class="col-sm-2 control-label">
-                                    <spring:message text="Количество"/>
+                                    <spring:message text="Количество"/> (шт.)
                                 </form:label>
                                 <div class="col-sm-2">
                                     <form:input path="amount" class="form-control"/>
