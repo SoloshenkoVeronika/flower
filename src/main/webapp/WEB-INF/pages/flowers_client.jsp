@@ -100,7 +100,7 @@
 </nav>
 
 
-<br><br><br><br><br>
+<br>
 <div class="mybody">
     <div class="container">
         <div class="article container">
@@ -116,8 +116,13 @@
                             <c:forEach items="${listFlowers}" var="flower">
 
                                 <div class="row">
-                                    <div class="col-md-6">
-                                            ${flower.picture}
+                                    <div class="col-md-6" id="getPicture">
+                                        <script>
+                                            var adress="/resources/images/pictures/";
+                                            var img = document.createElement('img');
+                                            img.setAttribute('src', adress+"${flower.picture}");
+                                            document.getElementById("getPicture").appendChild(img);
+                                        </script>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="fontname">
