@@ -52,12 +52,6 @@ public class PackDaoImpl  implements Dao<Pack> {
     }
 
     @Override
-    public boolean getEn(Pack pack) {
-
-        return false;
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
     public List<Pack> list() {
         Session session = this.sessionFactory.getCurrentSession();

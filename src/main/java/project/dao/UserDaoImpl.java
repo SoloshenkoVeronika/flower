@@ -8,7 +8,7 @@ import project.model.User;
 
 import java.util.List;
 
-public class UserDaoImpl implements Dao<User> {
+public class UserDaoImpl implements UserDao<User> {
     private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 
     private SessionFactory sessionFactory;
@@ -52,7 +52,20 @@ public class UserDaoImpl implements Dao<User> {
     }
 
     @Override
-    public boolean getEn(User user) {
+    @SuppressWarnings("unchecked")
+    public List<User> list() {
+        Session session = this.sessionFactory.getCurrentSession();
+        List<User> userList = session.createQuery("from User").list();
+
+        for(User user: userList){
+            logger.info("User list: " + user);
+        }
+
+        return userList;
+    }
+
+    @Override
+    public boolean isAuthorized(User user) {
 //        System.out.println("rrrrr");
         Session session =this.sessionFactory.getCurrentSession();
         if(session.createQuery("from User where login = '"+user.getLogin()+"' and password = '"+user.getPassword()+"'").iterate().hasNext()){
@@ -65,19 +78,6 @@ public class UserDaoImpl implements Dao<User> {
             logger.info("User successfully loaded. User details: " + user);
             return false;
         }
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<User> list() {
-        Session session = this.sessionFactory.getCurrentSession();
-        List<User> userList = session.createQuery("from User").list();
-
-        for(User user: userList){
-            logger.info("User list: " + user);
-        }
-
-        return userList;
     }
 }
 

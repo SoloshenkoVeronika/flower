@@ -12,6 +12,4 @@ public interface Dao<T> {
     public T getById(int id);
 
     public List<T> list();
-
-    public boolean getEn(T t);
 }

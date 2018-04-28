@@ -42,10 +42,4 @@ public class FlowerServiceImpl implements Service<Flower> {
     public List<Flower> list() {
         return this.flowerDao.list();
     }
-
-    @Override
-    @Transactional
-    public boolean getEn(Flower user) {
-        return this.flowerDao.getEn(user);
-    }
 }

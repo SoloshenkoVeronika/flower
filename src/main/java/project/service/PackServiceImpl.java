@@ -42,12 +42,6 @@ public class PackServiceImpl implements Service<Pack> {
     public List<Pack> list() {
         return this.packDao.list();
     }
-
-    @Override
-    @Transactional
-    public boolean getEn(Pack pack) {
-        return this.packDao.getEn(pack);
-    }
 }
 
 

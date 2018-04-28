@@ -52,12 +52,6 @@ public class CompositionDaoImpl implements Dao<Composition> {
     }
 
     @Override
-    public boolean getEn(Composition composition) {
-
-        return false;
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
     public List<Composition> list() {
         Session session = this.sessionFactory.getCurrentSession();

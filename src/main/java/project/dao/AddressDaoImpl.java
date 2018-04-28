@@ -52,12 +52,6 @@ public class AddressDaoImpl implements Dao<Address> {
     }
 
     @Override
-    public boolean getEn(Address address) {
-
-        return false;
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
     public List<Address> list() {
         Session session = this.sessionFactory.getCurrentSession();

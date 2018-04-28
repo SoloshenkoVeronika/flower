@@ -1,8 +1,8 @@
-package project.service;
+package project.dao;
 
 import java.util.List;
 
-public interface Service<T> {
+public interface UserDao<T> {
     public void add(T t);
 
     public void update(T t);
@@ -12,4 +12,6 @@ public interface Service<T> {
     public T getById(int id);
 
     public List<T> list();
+
+    public boolean isAuthorized(T t);
 }

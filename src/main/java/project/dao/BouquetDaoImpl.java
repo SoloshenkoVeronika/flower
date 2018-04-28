@@ -56,12 +56,6 @@ public class BouquetDaoImpl implements Dao<Bouquet> {
     }
 
     @Override
-    public boolean getEn(Bouquet bouquet) {
-
-        return false;
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
     public List<Bouquet> list() {
         Session session = this.sessionFactory.getCurrentSession();

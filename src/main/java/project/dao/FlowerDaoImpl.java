@@ -52,12 +52,6 @@ public class FlowerDaoImpl  implements Dao<Flower> {
     }
 
     @Override
-    public boolean getEn(Flower flower) {
-
-        return false;
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
     public List<Flower> list() {
         Session session = this.sessionFactory.getCurrentSession();

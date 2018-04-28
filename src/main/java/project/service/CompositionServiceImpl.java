@@ -42,11 +42,5 @@ public class CompositionServiceImpl implements Service<Composition> {
     public List<Composition> list() {
         return this.compositionDao.list();
     }
-
-    @Override
-    @Transactional
-    public boolean getEn(Composition composition) {
-        return this.compositionDao.getEn(composition);
-    }
 }
 

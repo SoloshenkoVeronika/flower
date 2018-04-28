@@ -42,10 +42,4 @@ public class DecorationServiceImpl implements Service<Decoration> {
     public List<Decoration> list() {
         return this.decorationDao.list();
     }
-
-    @Override
-    @Transactional
-    public boolean getEn(Decoration decoration) {
-        return this.decorationDao.getEn(decoration);
-    }
 }

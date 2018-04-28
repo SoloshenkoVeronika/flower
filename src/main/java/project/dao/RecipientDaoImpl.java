@@ -52,12 +52,6 @@ public class RecipientDaoImpl implements Dao<Recipient> {
     }
 
     @Override
-    public boolean getEn(Recipient recipient) {
-
-        return false;
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
     public List<Recipient> list() {
         Session session = this.sessionFactory.getCurrentSession();

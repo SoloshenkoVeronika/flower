@@ -42,11 +42,5 @@ public class BouquetServiceImpl implements Service<Bouquet> {
     public List<Bouquet> list() {
         return this.bouquetDao.list();
     }
-
-    @Override
-    @Transactional
-    public boolean getEn(Bouquet bouquet) {
-        return this.bouquetDao.getEn(bouquet);
-    }
 }
 

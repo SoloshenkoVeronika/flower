@@ -52,12 +52,6 @@ public class SenderDaoImpl implements Dao<Decoration> {
     }
 
     @Override
-    public boolean getEn(Decoration decoration) {
-
-        return false;
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
     public List<Decoration> list() {
         Session session = this.sessionFactory.getCurrentSession();

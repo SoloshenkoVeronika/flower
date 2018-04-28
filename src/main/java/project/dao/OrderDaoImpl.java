@@ -52,12 +52,6 @@ public class OrderDaoImpl implements Dao<Order> {
     }
 
     @Override
-    public boolean getEn(Order order) {
-
-        return false;
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
     public List<Order> list() {
         Session session = this.sessionFactory.getCurrentSession();

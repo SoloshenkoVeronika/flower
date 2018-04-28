@@ -1,15 +1,15 @@
 package project.service;
 
 import org.springframework.transaction.annotation.Transactional;
-import project.dao.Dao;
+import project.dao.UserDao;
 import project.model.User;
 
 import java.util.List;
 
-public class UserServiceImpl implements Service<User> {
-    private Dao<User> userDao;
+public class UserServiceImpl implements UserService<User> {
+    private UserDao<User> userDao;
 
-    public void setUserDao(Dao userDao) {
+    public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
 
@@ -45,7 +45,7 @@ public class UserServiceImpl implements Service<User> {
 
     @Override
     @Transactional
-    public boolean getEn(User user) {
-        return this.userDao.getEn(user);
+    public boolean isAuthorized(User user) {
+        return this.userDao.isAuthorized(user);
     }
 }
