@@ -1,10 +1,11 @@
 package project.model;
 
 import javax.persistence.*;
-import java.time.OffsetDateTime;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
+@Table(name = "order_", schema = "flowers", catalog = "")
 public class Order {
     @Id
     @Column(name = "id", nullable = false)
@@ -28,7 +29,7 @@ public class Order {
 
     @Basic
     @Column(name = "date", nullable = false)
-    private OffsetDateTime date;
+    private Date date;
 
     @Basic
     @Column(name = "postcard", nullable = true, length = 80)
@@ -39,8 +40,8 @@ public class Order {
     private String additionalInf;
 
     @Basic
-    @Column(name = "payment", nullable = false)
-    private int payment;
+    @Column(name = "payment", nullable = false, length = 30)
+    private String payment;
 
     @Basic
     @Column(name = "cost", nullable = false, precision = 0)
@@ -78,7 +79,7 @@ public class Order {
     public Order() {}
 
     public Order(Integer userId, Integer senderId, Integer recipientId, Integer addressId,
-                 OffsetDateTime date, String postcard, String additionalInf, int payment, double cost) {
+                 Date date, String postcard, String additionalInf, String payment, double cost) {
         this.userId = userId;
         this.senderId = senderId;
         this.recipientId = recipientId;
@@ -91,7 +92,7 @@ public class Order {
     }
 
     public Order(Integer id, Integer userId, Integer senderId, Integer recipientId, Integer addressId,
-                 OffsetDateTime date, String postcard, String additionalInf, int payment, double cost) {
+                 Date date, String postcard, String additionalInf, String payment, double cost) {
         this.id = id;
         this.userId = userId;
         this.senderId = senderId;
@@ -105,7 +106,8 @@ public class Order {
     }
 
     public Order(Integer id, Integer userId, Integer senderId, Integer recipientId, Integer addressId,
-                 OffsetDateTime date, String postcard, String additionalInf, int payment, double cost, User userByUserId, Sender senderBySenderId, Recipient recipientByRecipientId, Address addressByAddressId) {
+                 Date date, String postcard, String additionalInf, String payment, double cost, User userByUserId,
+                 Sender senderBySenderId, Recipient recipientByRecipientId, Address addressByAddressId) {
         this.id = id;
         this.userId = userId;
         this.senderId = senderId;
@@ -123,7 +125,7 @@ public class Order {
     }
 
     public Order(Integer id, Integer userId, Integer senderId, Integer recipientId, Integer addressId,
-                 OffsetDateTime date, String postcard, String additionalInf, int payment, double cost,
+                 Date date, String postcard, String additionalInf, String payment, double cost,
                  User userByUserId, Sender senderBySenderId, Recipient recipientByRecipientId,
                  Address addressByAddressId, Collection<BouquetOrder> bouquetOrdersById,
                  Collection<CompositionOrder> compositionOrdersById,
@@ -188,11 +190,11 @@ public class Order {
         this.addressId = addressId;
     }
 
-    public OffsetDateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(OffsetDateTime date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -212,11 +214,11 @@ public class Order {
         this.additionalInf = additionalInf;
     }
 
-    public int getPayment() {
+    public String getPayment() {
         return payment;
     }
 
-    public void setPayment(int payment) {
+    public void setPayment(String payment) {
         this.payment = payment;
     }
 
@@ -245,7 +247,6 @@ public class Order {
 
         Order order = (Order) o;
 
-        if (payment != order.payment) return false;
         if (Double.compare(order.cost, cost) != 0) return false;
         if (id != null ? !id.equals(order.id) : order.id != null) return false;
         if (userId != null ? !userId.equals(order.userId) : order.userId != null) return false;
@@ -256,6 +257,7 @@ public class Order {
         if (postcard != null ? !postcard.equals(order.postcard) : order.postcard != null) return false;
         if (additionalInf != null ? !additionalInf.equals(order.additionalInf) : order.additionalInf != null)
             return false;
+        if (payment != null ? !payment.equals(order.payment) : order.payment != null) return false;
         if (userByUserId != null ? !userByUserId.equals(order.userByUserId) : order.userByUserId != null) return false;
         if (senderBySenderId != null ? !senderBySenderId.equals(order.senderBySenderId) : order.senderBySenderId != null)
             return false;
@@ -284,7 +286,7 @@ public class Order {
         result = 31 * result + (date != null ? date.hashCode() : 0);
         result = 31 * result + (postcard != null ? postcard.hashCode() : 0);
         result = 31 * result + (additionalInf != null ? additionalInf.hashCode() : 0);
-        result = 31 * result + payment;
+        result = 31 * result + (payment != null ? payment.hashCode() : 0);
         temp = Double.doubleToLongBits(cost);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (userByUserId != null ? userByUserId.hashCode() : 0);

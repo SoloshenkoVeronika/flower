@@ -292,7 +292,7 @@
         var nameOfPicture = document.getElementById('pictureName');
 
         var picture = document.getElementById('picture_url');
-        picture.value = files[files.length - 1].name;
+        picture.value = files[0].name;
     }
 </script>
 </body>

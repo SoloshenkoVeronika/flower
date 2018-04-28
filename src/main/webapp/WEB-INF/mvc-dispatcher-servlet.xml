@@ -142,6 +142,15 @@
     </bean>
 
 
+    <bean id="orderDao" class="project.dao.OrderDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="orderService" class="project.service.OrderServiceImpl">
+        <property name="orderDao" ref="orderDao"/>
+    </bean>
+
+
 
     <context:component-scan base-package="project"/>
 
@@ -153,8 +162,8 @@
 
     <mvc:resources mapping="/resources/**" location="/resources/"
                    cache-period="31556926"/>
-
     <mvc:default-servlet-handler/>
+
     <mvc:annotation-driven/>
 
 </beans>
