@@ -12,6 +12,7 @@
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 <%@ page session="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>Цветы</title>
@@ -24,7 +25,15 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />"/>
+    <link rel="shortcut icon" href="<c:url value="/resources/images/roza.png"/>" type="image/png">
 
+    <style>
+        td{
+            border-width:2px;
+            border-color:#836FFF;
+            border-style:none none dashed dashed;
+        }
+    </style>
 </head>
 <body>
 
@@ -113,10 +122,80 @@
 
 
                         <c:if test="${!empty listOrders}">
-
+                            <table id = "order_table">
                             <c:forEach items="${listOrders}" var="order">
+                                <tr><td colspan="4"><div class="fontname"><center>
+                                    Заказ № ${order.id} <fmt:formatDate value="${order.date}"
+                                                                        pattern="yyyy-MM-dd HH:mm:ss"/></center>
+                                </div></td></tr>
 
-                                <div class="row">
+                                <tr>
+                                    <td height="40" colspan="3">Адрес доставки: г. ${order.addressByAddressId.city},
+                                        ${order.addressByAddressId.street}, д. ${order.addressByAddressId.house},
+                                        <c:if test="${order.addressByAddressId.block ne 0}">
+                                            под. ${order.addressByAddressId.block},
+                                        </c:if>
+                                        кв. ${order.addressByAddressId.flat}
+                                    </td>
+                                    <td width=15% height="40">Стоимость заказа</td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="3">
+                                        <c:if test="${!empty order.additionalInf}">
+                                            Дополнительная информация: ${order.additionalInf}
+                                        </c:if>
+                                    </td>
+                                        <%--<c:choose>
+                                            <c:when test="${!empty order.additionalInf}">
+                                                <td width=60% rowspan="3">Дополнительная информация: ${order.additionalInf}</td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td width=60% rowspan="3"></td>
+                                            </c:otherwise>
+                                        </c:choose>--%>
+                                    <td width=15% height="40">${order.cost}</td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="3">
+                                        <c:if test="${!empty order.postcard}">
+                                            Надпись на открытке: ${order.postcard}
+                                        </c:if>
+                                    </td>
+                                    <td width=15% height="40"> Оплата: ${order.payment}</td>
+                                </tr>
+
+                                <tr><td colspan="4"><center>
+                                    Цветы</center>
+                                </td></tr>
+
+                                <c:forEach items="${order.flowerOrdersById}" var="flowerOrder">
+                                    <tr>
+                                        <td width="20%">
+                                            Фото
+                                        </td>
+                                        <td width="52%">
+                                            ${flowerOrder.flowerByFlowerId.species}
+                                            ${flowerOrder.flowerByFlowerId.sort} <br/>
+                                            Цвет: ${flowerOrder.flowerByFlowerId.color},
+                                            Длина: ${flowerOrder.flowerByFlowerId.length}
+                                        </td>
+                                        <td width="13%">
+                                            ${flowerOrder.flowerByFlowerId.price} руб.<br/>
+                                            ${flowerOrder.quantity} шт.
+                                        </td>
+                                        <td width="15%">
+                                            Стоимость<br/>
+                                            <c:set var="price" value="${flowerOrder.flowerByFlowerId.price}"></c:set>
+                                            <c:set var="number" value="${flowerOrder.quantity}"></c:set>
+                                            <c:set var="sum" value="${price*number}"></c:set>
+                                            <c:out value="${sum}"/> руб.
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+
+                                <!--<div class="row">-->
                                     <!--<div class="col-md-6" id="getPicture">
                                         <script>
                                             var adress="/resources/images/pictures/";
@@ -125,8 +204,9 @@
                                             document.getElementById("getPicture").appendChild(img);
                                         </script>
                                     </div>-->
-                                    <div class="col-md-4">
-                                        <div class="fontname">
+                                <!--<div class="col-md-4">
+                                        <div class="fontname"><center>
+                                            Заказ № ${order.id}    ${order.date}</center>
                                         </div>
                                         <br>Цвет
                                         <br>Высота
@@ -141,9 +221,9 @@
 
 
                                 </div>
-                                <br>  <br>
+                                <br>  <br>-->
                             </c:forEach>
-
+                            </table>
                         </c:if>
 
                     </section>

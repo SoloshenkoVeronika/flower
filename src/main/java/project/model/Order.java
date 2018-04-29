@@ -64,16 +64,16 @@ public class Order {
     @JoinColumn(name = "address_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Address addressByAddressId;
 
-    @OneToMany(mappedBy = "orderByOrderId")
+    @OneToMany(mappedBy = "orderByOrderId", fetch = FetchType.EAGER)
     private Collection<BouquetOrder> bouquetOrdersById;
 
-    @OneToMany(mappedBy = "orderByOrderId")
+    @OneToMany(mappedBy = "orderByOrderId", fetch = FetchType.EAGER)
     private Collection<CompositionOrder> compositionOrdersById;
 
-    @OneToMany(mappedBy = "orderByOrderId")
+    @OneToMany(mappedBy = "orderByOrderId", fetch = FetchType.EAGER)
     private Collection<CustomerBouquetOrder> customerBouquetOrdersById;
 
-    @OneToMany(mappedBy = "orderByOrderId")
+    @OneToMany(mappedBy = "orderByOrderId", fetch = FetchType.EAGER)
     private Collection<FlowerOrder> flowerOrdersById;
 
     public Order() {}
