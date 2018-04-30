@@ -5,13 +5,15 @@
     <meta charset="UTF-8"/>
     <title>Главная страница</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/autor_style.css" />"/>
-    <script  src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />" />
+    <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/dopstyle.css" />"/>
 
 </head>
 <body>
@@ -55,8 +57,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
 
         </div>
@@ -99,45 +101,63 @@
     <div class="container">
         <div class="article container">
             <div class="row">
-                <div class="col-md-8">
-                    <h1 class="h2 page-header"
-                        style="color:#8d1645;   font-family: 'Lobster', cursive; text-align: center;">
-                        Акции</h1>
+                <div class="row otstup">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                                </ol>
 
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                        <img src="resources/images/one.jpg" alt="...">
+                                        <div class="carousel-caption">
+                                            <h3>Искусство есть непрестанная попытка соперничать с красотой цветов — и всегда безуспешно.</h3>
+                                            <p><em>Марк Шагал</em></p>
+                                        </div>
+                                    </div>
 
-                </div>
-                <div class="col-md-4">
-                    <h4 class="page-header">Cupiditate non</h4>
-                    <ul class="list-group">
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae
-                            vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae
-                            vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae
-                            vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
+                                    <div class="item">
+                                        <img src="resources/images/two.jpg" alt="...">
+                                        <div class="carousel-caption">
+                                            <h3>Сколько бы мы ни говорили о пустоте жизни, иногда достаточно лишь одного цветка, чтобы нас разубедить.
+                                            </h3>
+                                            <p><em>Анатоль Франс</em></p>
+                                        </div>
+                                    </div>
 
-                    </ul>
-                    <h4 class="page-header">Cupiditate non</h4>
-                    <ul class="list-group">
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae
-                            vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae
-                            vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae
-                            vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
+                                    <div class="item">
+                                        <img src="resources/images/six.JPG" alt="...">
+                                        <div class="carousel-caption">
+                                            <h3>Цветок, поворачивающийся к солнцу, видит его и за тучами.</h3>
+                                            <p><em>Роберт Лейтон</em></p>
+                                        </div>
+                                    </div>
 
-                    </ul>
-                    <h4 class="page-header">Cupiditate non</h4>
-                    <ul class="list-group">
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae
-                            vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae
-                            vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae
-                            vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
+                                    <div class="item">
+                                        <img src="resources/images/fother.jpg" alt="...">
+                                        <div class="carousel-caption">
+                                            <h3>Цветы — это свободная красота в природе.</h3>
+                                            <p><em>Иммануил Кант</em></p>
+                                        </div>
+                                    </div>
+                                </div>
 
-                    </ul>
-
+                                <!-- Controls -->
+                                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                </a>
+                                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
+                            </div>
+                        </div>
 
                 </div>
             </div>
@@ -146,7 +166,8 @@
 
     <footer>
         <div class="container">
-            <div style="padding: 10px 0pt 0pt 30px; clear: both; color: #8d1645; font-size: 15px;">Все права защищены &copy; <?=date ('Y')?></div>
+            <div style="padding: 10px 0pt 0pt 30px; clear: both; color: #8d1645; font-size: 15px;">Все права защищены
+                &copy; <?=date ('Y')?></div>
         </div>
     </footer>
 </div>
@@ -185,6 +206,6 @@
 <script>
     $.backstretch("resources/images/fon1.jpg");
 </script>
-
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 </body>
 </html>
