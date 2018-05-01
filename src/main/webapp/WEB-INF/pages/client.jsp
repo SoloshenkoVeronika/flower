@@ -20,7 +20,7 @@
 <body>
 <div class="container">
     <div class="header">
-        <div class="row">
+        <div class="row otstup">
             <div class="col-md-7">
                 <div class="name">
                     Цветочная лавка
@@ -67,9 +67,9 @@
                 <li class="">
                     <a href="<c:url value="/flowers_client"/>" target="_self">Цветы</a>
                 </li>
-                <%--<li class="">--%>
-                <%--<a href="<c:url value="/bouquets_client"/>" target="_self">Букеты</a>--%>
-                <%--</li>--%>
+                <li class="">
+                <a href="<c:url value="/bouquets_client"/>" target="_self">Букеты</a>
+                </li>
                 <%--<li class="">--%>
                 <%--<a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>--%>
                 <%--</li>--%>

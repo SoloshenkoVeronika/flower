@@ -128,7 +128,7 @@
 <div class="mybody">
     <div class="container">
         <div class="article container">
-            <div class="row">
+            <div class="row otstup">
                 <div class="col-md-8">
                     <h1 class="h2 page-header"
                         style="color:#8d1645; font-family: 'Lobster', cursive; margin-top: -1px;

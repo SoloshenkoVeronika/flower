@@ -39,23 +39,22 @@
     border-radius: 5px;
 }
 .namechar{
-    /*font-family: 'Prosto One', cursive;*/
-    /*font-family: 'Bad Script', cursive;*/
-    font-family: 'Oswald', sans-serif;
+
+    /*font-family: 'Oswald', sans-serif;*/
+    font-weight: 600;
     font-size: 1.2em;
     display:inline-block;
 }
 .charact{
-    font-family: 'Scada', sans-serif;
     display:inline-block;
     padding-left: 10px;
     font-size: 1.1em;
 }
-.otstup{
-    margin-top:30px;
-    margin-bottom: 30px;
-}
+
 .titlegood{
-    font-family: 'Yeseva One', cursive;
+    /*font-family: 'Yeseva One', cursive;*/
     font-size: 20px;
+}
+.fontbut{
+    margin-top: 100px;
 }

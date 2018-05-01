@@ -134,9 +134,9 @@
                                         </div>
                                         <br>
                                         <div class="fontchar">
-                                            <div class="namechar">Цвет   </div> <div class="charact">${flower.color}</div><br>
-                                            <div class="namechar">Высота   </div> <div class="charact">${flower.length} см.</div><br>
-                                            <div class="namechar">Цена     </div> <div class="charact">${flower.price}</div><br>
+                                            <div class="namechar">Цвет:   </div> <div class="charact">${flower.color}</div><br>
+                                            <div class="namechar">Высота:   </div> <div class="charact">${flower.length} см.</div><br>
+                                            <div class="namechar">Цена:     </div> <div class="charact">${flower.price}</div><br>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
