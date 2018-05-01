@@ -25,13 +25,15 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/order.css" />"/>
     <link rel="shortcut icon" href="<c:url value="/resources/images/roza.png"/>" type="image/png">
 
     <style>
         td {
-            border-width: 2px;
+            /*border-width: 2px;
             border-color: #836FFF;
-            border-style: none none dashed dashed;
+            border-style: solid;*/
+            padding: 10px;
         }
     </style>
 </head>
@@ -120,34 +122,41 @@
                         text-align: center;">Ваши заказы</h1>
                     <section class="main">
 
-
+                        <c:set var="j" value="0"/>
                         <c:if test="${!empty listOrders}">
-                            <table id="order_table">
+                            <table id="order_table" style="border-radius: 8px;">
                                 <c:forEach items="${listOrders}" var="order">
-                                    <tr>
-                                        <td colspan="4">
-                                            <div class="fontname" style="text-align: center;">
-                                                    Заказ № ${order.id} <fmt:formatDate value="${order.date}"
-                                                                                        pattern="yyyy-MM-dd HH:mm:ss"/>
+                                    <tr class="order_header">
+                                        <td colspan="4" height="30">
+                                            <div class="titlegood">
+                                                <b><div style="display:inline-block;">Заказ № ${order.id} </div>
+                                                    <div style="padding-left: 6%; display:inline-block;">
+                                                        <fmt:formatDate value="${order.date}"
+                                                                         pattern="yyyy-MM-dd HH:mm:ss"/>
+                                                    </div>
+                                                </b>
                                             </div>
                                         </td>
                                     </tr>
 
-                                    <tr>
-                                        <td height="40" colspan="3">Адрес доставки: г. ${order.addressByAddressId.city},
+                                    <tr class="order_td">
+                                        <td height="40" colspan="3">
+                                            <div class="property_text">Адрес доставки:</div>
+                                            г. ${order.addressByAddressId.city},
                                                 ${order.addressByAddressId.street}, д. ${order.addressByAddressId.house},
                                             <c:if test="${order.addressByAddressId.block ne 0}">
                                                 под. ${order.addressByAddressId.block},
                                             </c:if>
-                                            кв. ${order.addressByAddressId.flat}
+                                                кв. ${order.addressByAddressId.flat}
                                         </td>
-                                        <td width=15% height="40">Стоимость заказа</td>
+                                        <td width=15% height="40" class="product_text">Стоимость заказа</td>
                                     </tr>
 
-                                    <tr>
+                                    <tr class="order_td">
                                         <td colspan="3">
                                             <c:if test="${!empty order.additionalInf}">
-                                                Дополнительная информация: ${order.additionalInf}
+                                                <div class="property_text">Дополнительная информация:</div>
+                                                ${order.additionalInf}
                                             </c:if>
                                         </td>
                                             <%--<c:choose>
@@ -158,34 +167,44 @@
                                                     <td width=60% rowspan="3"></td>
                                                 </c:otherwise>
                                             </c:choose>--%>
-                                        <td width=15% height="40">${order.cost} руб.</td>
+                                        <td width=15% height="40" class="order_cost">${order.cost} руб.</td>
                                     </tr>
 
-                                    <tr>
+                                    <tr class="order_td">
                                         <td colspan="3">
                                             <c:if test="${!empty order.postcard}">
-                                                Надпись на открытке: ${order.postcard}
+                                                <div class="property_text">Надпись на открытке:</div>
+                                                ${order.postcard}
                                             </c:if>
                                         </td>
-                                        <td width=15% height="40"> Оплата: ${order.payment}</td>
+                                        <td width=15% height="40" class="product_text">Оплата: ${order.payment}</td>
                                     </tr>
 
                 <!-- *********************** ЦВЕТЫ ***********************-->
                                     <c:if test="${!empty order.flowerOrdersById}">
-                                        <tr>
-                                            <td colspan="4" style="text-align: center;">
+                                        <tr class="order_td">
+                                            <td colspan="4" class="product_text">
                                                     Цветы
                                             </td>
                                         </tr>
 
                                         <c:forEach items="${order.flowerOrdersById}" var="flowerOrder">
-                                            <tr>
+                                            <tr class="order_td">
                                                 <td width="20%">
-                                                    Фото
+                                                    <c:set var="nm" value="getPicture${j=j+1}"/>
+                                                    <div class="col-md-6" id="${nm}">
+                                                        <script>
+                                                            var adress="/resources/images/pictures/";
+                                                            var img = document.createElement('img');
+                                                            img.setAttribute('src', adress+"${flowerOrder.flowerByFlowerId.picture}");
+                                                            img.height = 150;
+                                                            document.getElementById("${nm}").appendChild(img);
+                                                        </script>
+                                                    </div>
                                                 </td>
-                                                <td width="52%">
+                                                <td width="52%"><div class="product_name">
                                                         ${flowerOrder.flowerByFlowerId.species}
-                                                        ${flowerOrder.flowerByFlowerId.sort} <br/>
+                                                        ${flowerOrder.flowerByFlowerId.sort}</div>
                                                     Цвет: ${flowerOrder.flowerByFlowerId.color},
                                                     Длина: ${flowerOrder.flowerByFlowerId.length}
                                                 </td>
@@ -193,13 +212,13 @@
                                                         ${flowerOrder.flowerByFlowerId.price} руб.<br/>
                                                         ${flowerOrder.quantity} шт.
                                                 </td>
-                                                <td width="15%">
+                                                <td width="15%" class="center">
                                                     Стоимость<br/>
                                                     <c:set var="price"
                                                            value="${flowerOrder.flowerByFlowerId.price}"/>
                                                     <c:set var="number" value="${flowerOrder.quantity}"/>
                                                     <c:set var="sum" value="${price*number}"/>
-                                                    <c:out value="${sum}"/> руб.
+                                                    <div class="cost"><c:out value="${sum}"/> руб.</div>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -207,19 +226,28 @@
 
                 <!-- *********************** БУКЕТЫ ***********************-->
                                     <c:if test="${!empty order.bouquetOrdersById}">
-                                        <tr>
-                                            <td colspan="4" style="text-align: center;">
+                                        <tr class="order_td">
+                                            <td colspan="4" class="product_text">
                                                     Букеты
                                             </td>
                                         </tr>
 
                                         <c:forEach items="${order.bouquetOrdersById}" var="bouquetOrder">
-                                            <tr>
+                                            <tr class="order_td">
                                                 <td width="20%">
-                                                    Фото
+                                                    <c:set var="nm" value="getPicture${j=j+1}"/>
+                                                    <div class="col-md-6" id="${nm}">
+                                                        <script>
+                                                            var adress="/resources/images/pictures/";
+                                                            var img = document.createElement('img');
+                                                            img.setAttribute('src', adress+"${bouquetOrder.bouquetByBouquetId.picture}");
+                                                            img.height = 150;
+                                                            document.getElementById("${nm}").appendChild(img);
+                                                        </script>
+                                                    </div>
                                                 </td>
-                                                <td width="52%">
-                                                        ${bouquetOrder.bouquetByBouquetId.name} <br/>
+                                                <td width="52%"><div class="product_name">
+                                                        ${bouquetOrder.bouquetByBouquetId.name} </div>
                                                     Высота: ${bouquetOrder.bouquetByBouquetId.height},
                                                     Диаметр: ${bouquetOrder.bouquetByBouquetId.diameter},
                                                     Вес: ${bouquetOrder.bouquetByBouquetId.weight} <br/>
@@ -229,13 +257,13 @@
                                                         ${bouquetOrder.bouquetByBouquetId.price} руб.<br/>
                                                         ${bouquetOrder.quantity} шт.
                                                 </td>
-                                                <td width="15%">
+                                                <td width="15%" class="center">
                                                     Стоимость<br/>
                                                     <c:set var="price"
                                                            value="${bouquetOrder.bouquetByBouquetId.price}"/>
                                                     <c:set var="number" value="${bouquetOrder.quantity}"/>
                                                     <c:set var="sum" value="${price*number}"/>
-                                                    <c:out value="${sum}"/> руб.
+                                                    <div class="cost"><c:out value="${sum}"/> руб.</div>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -243,19 +271,28 @@
 
                 <!-- *********************** КОМПОЗИЦИИ ***********************-->
                                     <c:if test="${!empty order.compositionOrdersById}">
-                                        <tr>
-                                            <td colspan="4" style="text-align: center;">
+                                        <tr class="order_td">
+                                            <td colspan="4" class="product_text">
                                                     Композиции
                                             </td>
                                         </tr>
 
                                         <c:forEach items="${order.compositionOrdersById}" var="compositionOrder">
-                                            <tr>
+                                            <tr class="order_td">
                                                 <td width="20%">
-                                                    Фото
+                                                    <c:set var="nm" value="getPicture${j=j+1}"/>
+                                                    <div class="col-md-6" id="${nm}">
+                                                        <script>
+                                                            var adress="/resources/images/pictures/";
+                                                            var img = document.createElement('img');
+                                                            img.setAttribute('src', adress+"${compositionOrder.compositionByCompositionId.picture}");
+                                                            img.height = 150;
+                                                            document.getElementById("${nm}").appendChild(img);
+                                                        </script>
+                                                    </div>
                                                 </td>
-                                                <td width="52%">
-                                                        ${compositionOrder.compositionByCompositionId.name} <br/>
+                                                <td width="52%"><div class="product_name">
+                                                        ${compositionOrder.compositionByCompositionId.name} </div>
                                                     Состав: ${compositionOrder.compositionByCompositionId.composition}
                                                     <br/>
                                                     Упаковка: ${compositionOrder.compositionByCompositionId.pack}
@@ -264,13 +301,13 @@
                                                         ${compositionOrder.compositionByCompositionId.price} руб.<br/>
                                                         ${compositionOrder.quantity} шт.
                                                 </td>
-                                                <td width="15%">
+                                                <td width="15%" class="center">
                                                     Стоимость<br/>
                                                     <c:set var="price"
                                                            value="${compositionOrder.compositionByCompositionId.price}"/>
                                                     <c:set var="number" value="${compositionOrder.quantity}"/>
                                                     <c:set var="sum" value="${price*number}"/>
-                                                    <c:out value="${sum}"/> руб.
+                                                    <div class="cost"><c:out value="${sum}"/> руб.</div>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -278,8 +315,8 @@
 
                 <!-- *********************** БУКЕТЫ ПОЛЬЗОВАТЕЛЯ ***********************-->
                                     <c:if test="${!empty order.customerBouquetOrdersById}">
-                                        <tr>
-                                            <td colspan="4" style="text-align: center;">
+                                        <tr class="bouquet">
+                                            <td colspan="4" class="product_text">
                                                     Ваши букеты
                                             </td>
                                         </tr>
@@ -287,8 +324,8 @@
                                         <c:set var="i" value="0"/>
                                         <c:forEach items="${order.customerBouquetOrdersById}"
                                                    var="customerBouquetOrder">
-                                            <tr>
-                                                <td colspan="4" style="text-align: center;">
+                                            <tr class="bouquet">
+                                                <td colspan="4" class="product_text">
                                                         Букет № <c:out value="${i=i+1}"/>
                                                 </td>
                                             </tr>
@@ -297,13 +334,22 @@
                                             <c:if test="${!empty customerBouquetOrder.customerBouquetByCustomerBouquetId.flowerCustomerBouquetsById}">
                                                 <c:forEach items="${customerBouquetOrder.customerBouquetByCustomerBouquetId.flowerCustomerBouquetsById}"
                                                            var="flowerCustomerBouquet">
-                                                    <tr>
+                                                    <tr class="bouquet">
                                                         <td width="20%">
-                                                            Фото
+                                                            <c:set var="nm" value="getPicture${j=j+1}"/>
+                                                            <div class="col-md-6" id="${nm}">
+                                                                <script>
+                                                                    var adress="/resources/images/pictures/";
+                                                                    var img = document.createElement('img');
+                                                                    img.setAttribute('src', adress+"${flowerCustomerBouquet.flowerByFlowerId.picture}");
+                                                                    img.height = 150;
+                                                                    document.getElementById("${nm}").appendChild(img);
+                                                                </script>
+                                                            </div>
                                                         </td>
-                                                        <td width="52%">
+                                                        <td width="52%"><div class="product_name">
                                                                 ${flowerCustomerBouquet.flowerByFlowerId.species}
-                                                                ${flowerCustomerBouquet.flowerByFlowerId.sort} <br/>
+                                                                ${flowerCustomerBouquet.flowerByFlowerId.sort} </div>
                                                             Цвет: ${flowerCustomerBouquet.flowerByFlowerId.color},
                                                             Длина: ${flowerCustomerBouquet.flowerByFlowerId.length}
                                                         </td>
@@ -311,13 +357,13 @@
                                                                 ${flowerCustomerBouquet.flowerByFlowerId.price} руб.<br/>
                                                                 ${flowerCustomerBouquet.quantity} шт.
                                                         </td>
-                                                        <td width="15%">
+                                                        <td width="15%" class="center">
                                                             Стоимость<br/>
                                                             <c:set var="price"
                                                                    value="${flowerCustomerBouquet.flowerByFlowerId.price}"/>
                                                             <c:set var="number" value="${flowerCustomerBouquet.quantity}"/>
                                                             <c:set var="sum" value="${price*number}"/>
-                                                            <c:out value="${sum}"/> руб.
+                                                            <div class="cost"><c:out value="${sum}"/> руб.</div>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -327,24 +373,33 @@
                                             <c:if test="${!empty customerBouquetOrder.customerBouquetByCustomerBouquetId.decorationCustomerBouquetsById}">
                                                 <c:forEach items="${customerBouquetOrder.customerBouquetByCustomerBouquetId.decorationCustomerBouquetsById}"
                                                            var="decorationCustomerBouquet">
-                                                    <tr>
+                                                    <tr class="bouquet">
                                                         <td width="20%">
-                                                            Фото
+                                                            <c:set var="nm" value="getPicture${j=j+1}"/>
+                                                            <div class="col-md-6" id="${nm}">
+                                                                <script>
+                                                                    var adress="/resources/images/pictures/";
+                                                                    var img = document.createElement('img');
+                                                                    img.setAttribute('src', adress+"${decorationCustomerBouquet.decorationByDecorationId.picture}");
+                                                                    img.height = 150;
+                                                                    document.getElementById("${nm}").appendChild(img);
+                                                                </script>
+                                                            </div>
                                                         </td>
-                                                        <td width="52%">
-                                                                ${decorationCustomerBouquet.decorationByDecorationId.name}
+                                                        <td width="52%"><div class="product_name">
+                                                                ${decorationCustomerBouquet.decorationByDecorationId.name}</div>
                                                         </td>
                                                         <td width="13%">
                                                                 ${decorationCustomerBouquet.decorationByDecorationId.price} руб.<br/>
                                                                 ${decorationCustomerBouquet.quantity} шт.
                                                         </td>
-                                                        <td width="15%">
+                                                        <td width="15%" class="center">
                                                             Стоимость<br/>
                                                             <c:set var="price"
                                                                    value="${decorationCustomerBouquet.decorationByDecorationId.price}"/>
                                                             <c:set var="number" value="${decorationCustomerBouquet.quantity}"/>
                                                             <c:set var="sum" value="${price*number}"/>
-                                                            <c:out value="${sum}"/> руб.
+                                                            <div class="cost"><c:out value="${sum}"/> руб.</div>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -352,19 +407,29 @@
 
                                             <!-- ####################### УПАКОВКА В БУКЕТЕ ПОЛЬЗОВАТЕЛЯ #######################-->
                                             <c:if test="${!empty customerBouquetOrder.customerBouquetByCustomerBouquetId.packByPackId}">
-                                                <tr>
+                                                <tr class="bouquet">
                                                     <td width="20%">
-                                                        Фото
+                                                        <c:set var="nm" value="getPicture${j=j+1}"/>
+                                                        <div class="col-md-6" id="${nm}">
+                                                            <script>
+                                                                var adress="/resources/images/pictures/";
+                                                                var img = document.createElement('img');
+                                                                img.setAttribute('src', adress+"${customerBouquetOrder.customerBouquetByCustomerBouquetId.packByPackId.picture}");
+                                                                img.height = 150;
+                                                                document.getElementById("${nm}").appendChild(img);
+                                                            </script>
+                                                        </div>
                                                     </td>
-                                                    <td width="52%">
-                                                            ${customerBouquetOrder.customerBouquetByCustomerBouquetId.packByPackId.name}
+                                                    <td width="52%"><div class="product_name">
+                                                            ${customerBouquetOrder.customerBouquetByCustomerBouquetId.packByPackId.name}</div>
                                                     </td>
                                                     <td width="13%">
                                                             ${customerBouquetOrder.customerBouquetByCustomerBouquetId.packByPackId.price} руб.
                                                     </td>
-                                                    <td width="15%">
-                                                        Стоимость<br/>
+                                                    <td width="15%" class="center">
+                                                        Стоимость<br/><div class="cost">
                                                             ${customerBouquetOrder.customerBouquetByCustomerBouquetId.packByPackId.price} руб.
+                                                    </div>
                                                     </td>
                                                 </tr>
                                             </c:if>

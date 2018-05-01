@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css?family=Yeseva+One');
+@import url('https://fonts.googleapis.com/css?family=Bad+Script|Prosto+One');
+@import url('https://fonts.googleapis.com/css?family=Scada');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
+.fontchar{
+    padding:5px 0px 5px 15px;
+    background:rgba(255,192,203,0.5);
+    border-radius: 5px;
+}
+.charact{
+    display:inline-block;
+    padding-left: 10px;
+    font-size: 1.1em;
+}
+
+.titlegood{
+    /*font-family: 'Yeseva One', cursive;*/
+    color: #8d1645;
+    font-size: 24px;
+    text-align: center;
+}
+.fontbut{
+    margin-top: 100px;
+}
+.order_td{
+    /*background-color: rgba(113, 227, 47, 0.2);*/
+}
+.property_text{
+    /*font-family: 'Oswald', sans-serif;*/
+    font-size: 18px;
+    font-weight: 600;
+    display:inline-block;
+}
+.product_text{
+    color: #8d1645;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    padding: 8px 0px;
+}
+.order_header{
+    /*background-color: rgba(138, 227, 204, 0.2);*/
+}
+.bouquet{
+    /*background-color: rgba(255, 255, 0, 0.2);*/
+}
+.product_name{
+    color: #8d1645;
+    font-weight: 600;
+}
+.order_cost{
+    color: #8d1645;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    padding: 0px;
+}
+.cost{
+    color: #8d1645;
+    font-size: 18px;
+    font-weight: 600;
+}
+.center{
+    text-align: center;
+}
