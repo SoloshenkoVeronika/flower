@@ -81,7 +81,7 @@
                 <%--<a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>--%>
                 <%--</li>--%>
                 <%--<li class="">--%>
-                <%--<a href="<c:url value="/packs_client"/>" target="_self">Составить букет</a>--%>
+                <%--<a href="<c:url value="customer_bouquets"/>" target="_self">Составить букет</a>--%>
                 <%--</li>--%>
 
             </ul>
@@ -134,11 +134,11 @@
                                         </div>
                                         <br>
                                         <div class="fontchar">
-                                            <div class="namechar">Состав:   </div> <div class="charact">${bouquet.composition}</div><br>
-                                            <div class="namechar">Высота:   </div> <div class="charact">${bouquet.height} см.</div><br>
-                                            <div class="namechar">Диаметр:  </div> <div class="charact">${bouquet.diameter} см.</div><br>
-                                            <div class="namechar">Вес:      </div> <div class="charact">${bouquet.weight} гр.</div><br>
-                                            <div class="namechar">Цена:     </div> <div class="charact">${bouquet.price}</div><br>
+                                            <div class="namechar">Состав:   </div><div class="charact">${bouquet.composition}</div><br>
+                                            <div class="namechar">Высота:   </div><div class="charact">${bouquet.height}</div><br>
+                                            <div class="namechar">Диаметр:  </div><div class="charact">${bouquet.diameter}</div><br>
+                                            <div class="namechar">Вес:      </div><div class="charact">${bouquet.weight}</div><br>
+                                            <div class="namechar">Цена:     </div><div class="charact">${bouquet.price}</div><br>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
