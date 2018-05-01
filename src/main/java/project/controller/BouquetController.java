@@ -55,4 +55,12 @@ public class BouquetController {
 
         return "bouquets_admin";
     }
+
+    @RequestMapping(value = "bouquets_client", method = RequestMethod.GET)
+    public String listBouquetsClient(Model model){
+        model.addAttribute("bouquet", new Bouquet());
+        model.addAttribute("listBouquets", this.bouquetService.list());
+
+        return "bouquets_client";
+    }
 }

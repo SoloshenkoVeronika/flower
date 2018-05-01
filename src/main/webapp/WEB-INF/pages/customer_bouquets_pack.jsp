@@ -110,6 +110,7 @@
 
 
 <br>
+
 <div class="mybody">
     <div class="container">
         <div class="article container">
@@ -117,31 +118,33 @@
                 <div class="col-md-12">
                     <h1 class="h2 page-header"
                         style="color:#8d1645; font-family: 'Lobster', cursive; margin-top: -1px;
-                        text-align: center;">Украшения</h1>
+                        text-align: center;">Упаковка</h1>
                     <section class="main">
 
 
                         <c:if test="${!empty listPacks}">
 
+                            <c:set var="j" value="0"/>
                             <c:forEach items="${listPacks}" var="pack">
 
                                 <div class="row">
-                                    <div class="col-md-6" id="getPicture">
+                                    <c:set var="nm" value="getPicture${j=j+1}"/>
+                                    <div class="col-md-3" id="${nm}">
                                         <script>
                                             var adress="/resources/images/pictures/";
                                             var img = document.createElement('img');
                                             img.setAttribute('src', adress+"${pack.picture}");
-                                            document.getElementById("getPicture").appendChild(img);
+                                            img.height = 150;
+                                            document.getElementById("${nm}").appendChild(img);
                                         </script>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-7">
                                         <div class="titlegood">
-                                            <b>${pack.name}</b>
+                                            <b>${pack.name} </b>
                                         </div>
                                         <br>
                                         <div class="fontchar">
-                                            <br>
-                                           <div class="namechar">Цена:     </div> <div class="charact">${pack.price}</div><br>
+                                            <div class="namechar">Цена:     </div> <div class="charact">${pack.price}</div><br>
                                         </div>
                                     </div>
                                     <div class="col-md-2">

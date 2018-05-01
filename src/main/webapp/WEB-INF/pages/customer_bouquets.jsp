@@ -13,7 +13,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Цветы</title>
+    <title>Составь букет сам</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/autor_style.css" />"/>
     <script src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
@@ -81,7 +81,7 @@
                     <a href="<c:url value="/customer_bouquets_flower"/>" target="_self">Цветы</a>
                 </li>
                 <li class="">
-                    <a href="<c:url value=""/>" target="_self">Украшения</a>
+                    <a href="<c:url value="/customer_bouquets_decoration"/>" target="_self">Украшения</a>
                 </li>
                 <li class="">
                 <a href="<c:url value="/customer_bouquets_pack"/>" target="_self">Упаковка</a>

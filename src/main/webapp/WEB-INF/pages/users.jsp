@@ -38,12 +38,12 @@
                     </button>
                 </form>
             </div>
-            <div class="col-md-1">
-                <div class="backet">
-                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                    Корзина
-                </div>
-            </div>
+            <%--<div class="col-md-1">--%>
+                <%--<div class="backet">--%>
+                    <%--<i class="fa fa-cart-plus" aria-hidden="true"></i>--%>
+                    <%--Корзина--%>
+                <%--</div>--%>
+            <%--</div>--%>
         </div>
     </div>
 </div>

@@ -13,7 +13,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Цветы</title>
+    <title>Букеты</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/autor_style.css" />"/>
     <script src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
@@ -82,9 +82,9 @@
                 <li class="">
                 <a href="<c:url value="/bouquets_client"/>" target="_self">Букеты</a>
                 </li>
-                <%--<li class="">--%>
-                <%--<a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>--%>
-                <%--</li>--%>
+                <li class="">
+                <a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>
+                </li>
                 <li class="">
                 <a href="<c:url value="/customer_bouquets"/>" target="_self">Составить букет</a>
                 </li>
@@ -109,6 +109,7 @@
 
 <br>
 
+
 <div class="mybody">
     <div class="container">
         <div class="article container">
@@ -116,34 +117,38 @@
                 <div class="col-md-12">
                     <h1 class="h2 page-header"
                         style="color:#8d1645; font-family: 'Lobster', cursive; margin-top: -1px;
-                        text-align: center;"> Букеты</h1>
+                        text-align: center;">Букеты</h1>
                     <section class="main">
 
 
                         <c:if test="${!empty listBouquets}">
 
+                            <c:set var="j" value="0"/>
                             <c:forEach items="${listBouquets}" var="bouquet">
 
                                 <div class="row">
-                                    <div class="col-md-3" id="getPicture">
+                                    <c:set var="nm" value="getPicture${j=j+1}"/>
+                                    <div class="col-md-3" id="${nm}">
                                         <script>
                                             var adress="/resources/images/pictures/";
                                             var img = document.createElement('img');
                                             img.setAttribute('src', adress+"${bouquet.picture}");
-                                            document.getElementById("getPicture").appendChild(img);
+                                            img.height = 150;
+                                            document.getElementById("${nm}").appendChild(img);
                                         </script>
                                     </div>
                                     <div class="col-md-7">
                                         <div class="titlegood">
-                                            <b>${bouquet.name}</b>
+                                            <b>${bouquet.name} </b>
                                         </div>
                                         <br>
                                         <div class="fontchar">
-                                            <div class="namechar">Состав:   </div><div class="charact">${bouquet.composition}</div><br>
-                                            <div class="namechar">Высота:   </div><div class="charact">${bouquet.height}</div><br>
-                                            <div class="namechar">Диаметр:  </div><div class="charact">${bouquet.diameter}</div><br>
-                                            <div class="namechar">Вес:      </div><div class="charact">${bouquet.weight}</div><br>
-                                            <div class="namechar">Цена:     </div><div class="charact">${bouquet.price}</div><br>
+                                            <div class="namechar">Состав:     </div> <div class="charact">${bouquet.composition}</div><br>
+                                            <div class="namechar">Длина:     </div> <div class="charact">${bouquet.height} см.</div><br>
+                                            <div class="namechar">Диаметр:     </div> <div class="charact">${bouquet.diameter} см.</div><br>
+                                            <div class="namechar">Вес:     </div> <div class="charact">${bouquet.weight} гр.</div><br>
+                                            <div class="namechar">Цена:     </div> <div class="charact">${bouquet.price} </div><br>
+
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -155,7 +160,7 @@
 
                                         <div class="fontbut">
                                             <input type="submit" class="btn btn-success"
-                                                   value="<spring:message text="В корзину"/>"/>
+                                                   value="<spring:message text="Добавить в букет"/>"/>
                                         </div>
                                     </div>
 
@@ -171,6 +176,7 @@
             </div>
         </div>
     </div>
+
 
     <footer>
         <div class="container">

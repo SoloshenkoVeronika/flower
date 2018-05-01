@@ -55,4 +55,12 @@ public class CompositionController {
 
         return "compositions_admin";
     }
+
+    @RequestMapping(value = "compositions_client", method = RequestMethod.GET)
+    public String listCompositionsClient(Model model) {
+        model.addAttribute("composition", new Composition());
+        model.addAttribute("listCompositions", this.compositionService.list());
+
+        return "compositions_client";
+    }
 }

@@ -56,4 +56,12 @@ public class FlowerController {
 
         return "flowers_admin";
     }
+
+    @RequestMapping(value = "flowers_client", method = RequestMethod.GET)
+    public String listFlowersClient(Model model){
+        model.addAttribute("flower", new Flower());
+        model.addAttribute("listFlowers", this.flowerService.list());
+
+        return "flowers_client";
+    }
 }

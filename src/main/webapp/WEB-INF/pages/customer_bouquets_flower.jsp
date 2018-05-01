@@ -35,7 +35,7 @@
 <div class="container">
     <div class="header">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <div class="name">
                     Цветочная лавка
                 </div>
@@ -51,6 +51,12 @@
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
                 </form>
+            </div>
+            <div class="col-md-1">
+                <div class="backet">
+                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                    Корзина
+                </div>
             </div>
         </div>
     </div>

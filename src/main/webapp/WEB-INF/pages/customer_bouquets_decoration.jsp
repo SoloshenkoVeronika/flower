@@ -13,7 +13,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Упаковка</title>
+    <title>Украшения</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/autor_style.css" />"/>
     <script src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
@@ -110,6 +110,7 @@
 
 
 <br>
+
 <div class="mybody">
     <div class="container">
         <div class="article container">
@@ -117,31 +118,33 @@
                 <div class="col-md-12">
                     <h1 class="h2 page-header"
                         style="color:#8d1645; font-family: 'Lobster', cursive; margin-top: -1px;
-                        text-align: center;">Украшения</h1>
+                        text-align: center;"> Украшения</h1>
                     <section class="main">
 
 
                         <c:if test="${!empty listDecorations}">
 
+                            <c:set var="j" value="0"/>
                             <c:forEach items="${listDecorations}" var="decoration">
 
                                 <div class="row">
-                                    <div class="col-md-6" id="getPicture">
+                                    <c:set var="nm" value="getPicture${j=j+1}"/>
+                                    <div class="col-md-3" id="${nm}">
                                         <script>
                                             var adress="/resources/images/pictures/";
                                             var img = document.createElement('img');
                                             img.setAttribute('src', adress+"${decoration.picture}");
-                                            document.getElementById("getPicture").appendChild(img);
+                                            img.height = 150;
+                                            document.getElementById("${nm}").appendChild(img);
                                         </script>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-7">
                                         <div class="titlegood">
-                                            <b>${decoration.name}</b>
+                                            <b>${decoration.name} </b>
                                         </div>
                                         <br>
                                         <div class="fontchar">
-                                            <br><br>
-                                            <div class="namechar">Цена:     </div> <div class="charact">${decoration.price}</div><br>
+                                           <div class="namechar">Цена:     </div> <div class="charact">${decoration.price}</div><br>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -169,6 +172,7 @@
             </div>
         </div>
     </div>
+
 
     <footer>
         <div class="container">

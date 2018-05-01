@@ -49,12 +49,12 @@
                     </button>
                 </form>
             </div>
-            <div class="col-md-1">
-                <div class="backet">
-                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                    Корзина
-                </div>
-            </div>
+            <%--<div class="col-md-1">--%>
+                <%--<div class="backet">--%>
+                    <%--<i class="fa fa-cart-plus" aria-hidden="true"></i>--%>
+                    <%--Корзина--%>
+                <%--</div>--%>
+            <%--</div>--%>
         </div>
     </div>
 </div>
@@ -64,59 +64,35 @@
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="sr-only"></span>
             </button>
 
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active">
-                    <a href="#">Цветы <span class="sr-only">(current)</span></a>
+                <li class="">
+                    <a href="<c:url value="/flowers_client"/>" target="_self">Цветы</a>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Букеты<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Подпункт 1.1</a></li>
-                        <li><a href="#">Подпункт 1.2</a></li>
-                        <li><a href="#">Подпункт 1.3</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Подпункт 1.4</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Подпункт 1.5</a></li>
-                    </ul>
+                <li class="">
+                    <a href="<c:url value="/bouquets_client"/>" target="_self">Букеты</a>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Композиции<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Подпункт 1.1</a></li>
-                        <li><a href="#">Подпункт 1.2</a></li>
-                        <li><a href="#">Подпункт 1.3</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Подпункт 1.4</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Подпункт 1.5</a></li>
-                    </ul>
+                <li class="">
+                    <a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Подарки<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Розы</a></li>
-                        <li><a href="#">Хризантемы</a></li>
-                        <li><a href="#">Подпункт 1.3</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Подпункт 1.4</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Подпункт 1.5</a></li>
-                    </ul>
+                <li class="">
+                    <a href="<c:url value="/customer_bouquets"/>" target="_self">Составить букет</a>
                 </li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Мой профиль<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Мой
+                        профиль<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li class="divider"></li>
                         <li><a href="<c:url value="/autorization"/>" target="_self">Вход</a></li>
@@ -128,7 +104,6 @@
         </div>
     </div>
 </nav>
-
 <br>
 <div class="mybody">
     <div class="container">
