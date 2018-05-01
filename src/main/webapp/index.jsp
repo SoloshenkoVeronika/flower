@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/dopstyle.css" />"/>
-
+    <link rel="shortcut icon" href="<c:url value="/resources/images/roza.png"/>" type="image/png">
 </head>
 <body>
 <!-- ///////////////////////////////////////////////// -->

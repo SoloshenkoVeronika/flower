@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />" />
+    <link rel="shortcut icon" href="<c:url value="/resources/images/roza.png"/>" type="image/png">
 </head>
 <body>
 <div class="container">
@@ -103,8 +104,8 @@
             <div class="row">
                 <div class="col-md-8">
                     <h1 class="h2 page-header"
-                        style="color:#8d1645;   font-family: 'Lobster', cursive; text-align: center;">
-                        Акции</h1>
+                        style="color:#8d1645; font-family: 'Lobster', cursive; margin-top: -1px;
+                        text-align: center;">Акции</h1>
 
                 </div>
                 <div class="col-md-4">

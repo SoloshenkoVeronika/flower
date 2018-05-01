@@ -19,13 +19,13 @@ public class CustomerBouquet {
     @JoinColumn(name = "pack_id", referencedColumnName = "id")
     private Pack packByPackId;
 
-    @OneToMany(mappedBy = "customerBouquetByCustomerBouquetId")
+    @OneToMany(mappedBy = "customerBouquetByCustomerBouquetId", fetch = FetchType.EAGER)
     private Collection<CustomerBouquetOrder> customerBouquetOrdersById;
 
-    @OneToMany(mappedBy = "customerBouquetByCustomerBouquetId")
+    @OneToMany(mappedBy = "customerBouquetByCustomerBouquetId", fetch = FetchType.EAGER)
     private Collection<DecorationCustomerBouquet> decorationCustomerBouquetsById;
 
-    @OneToMany(mappedBy = "customerBouquetByCustomerBouquetId")
+    @OneToMany(mappedBy = "customerBouquetByCustomerBouquetId", fetch = FetchType.EAGER)
     private Collection<FlowerCustomerBouquet> flowerCustomerBouquetsById;
 
     public CustomerBouquet() {}

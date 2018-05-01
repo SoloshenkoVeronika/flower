@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />"/>
+    <link rel="shortcut icon" href="<c:url value="/resources/images/roza.png"/>" type="image/png">
 
 </head>
 <body>
@@ -107,7 +108,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="h2 page-header"
-                        style="color:#8d1645;   font-family: 'Lobster', cursive; text-align: center;"> Цветы</h1>
+                        style="color:#8d1645; font-family: 'Lobster', cursive; margin-top: -1px;
+                        text-align: center;"> Цветы</h1>
                     <section class="main">
 
 

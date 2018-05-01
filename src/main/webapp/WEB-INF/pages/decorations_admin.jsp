@@ -13,7 +13,7 @@
 <%@ page session="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
-    <title>Украшение</title>
+    <title>Украшения</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/autor_style.css" />"/>
     <script src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />"/>
+    <link rel="shortcut icon" href="<c:url value="/resources/images/roza.png"/>" type="image/png">
 </head>
 <body>
 
@@ -106,7 +107,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="h2 page-header"
-                        style="color:#8d1645;   font-family: 'Lobster', cursive; text-align: center;">Украшение</h1>
+                        style="color:#8d1645; font-family: 'Lobster', cursive; margin-top: -1px;
+                        text-align: center;">Украшение</h1>
                     <section class="main">
 
 
