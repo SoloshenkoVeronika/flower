@@ -138,7 +138,17 @@
                                         <td>${flower.length}</td>
                                         <td>${flower.amount}</td>
                                         <td>${flower.price}</td>
-                                        <td>${flower.picture}</td>
+                                        <td><c:set var="nm" value="getPicture${j=j+1}"/>
+                                            <div class="col-md-3" id="${nm}">
+                                                <script>
+                                                    var adress="/resources/images/pictures/";
+                                                    var img = document.createElement('img');
+                                                    img.setAttribute('src', adress+"${flower.picture}");
+                                                    img.height = 150;
+                                                    document.getElementById("${nm}").appendChild(img);
+                                                </script>
+                                            </div>
+                                        </td>
                                         <td><a href="<c:url value='/editFlower/${flower.id}'/>">Изменить</a></td>
                                         <td><a href="<c:url value='/removeFlower/${flower.id}'/>">Удалить</a></td>
                                     </tr>

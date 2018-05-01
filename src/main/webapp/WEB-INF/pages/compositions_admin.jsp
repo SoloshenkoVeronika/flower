@@ -133,7 +133,16 @@
                                         <td>${composition.pack}</td>
                                         <td>${composition.amount}</td>
                                         <td>${composition.price}</td>
-                                        <td>${composition.picture}</td>
+                                        <td><c:set var="nm" value="getPicture${j=j+1}"/>
+                                            <div class="col-md-3" id="${nm}">
+                                                <script>
+                                                    var adress="/resources/images/pictures/";
+                                                    var img = document.createElement('img');
+                                                    img.setAttribute('src', adress+"${composition.picture}");
+                                                    img.height = 150;
+                                                    document.getElementById("${nm}").appendChild(img);
+                                                </script>
+                                            </div></td>
                                         <td><a href="<c:url value='/editComposition/${composition.id}'/>">Изменить</a>
                                         </td>
                                         <td><a href="<c:url value='/removeComposition/${composition.id}'/>">Удалить</a></td>

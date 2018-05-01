@@ -129,7 +129,17 @@
                                         <td>${decoration.name}</td>
                                         <td>${decoration.amount}</td>
                                         <td>${decoration.price}</td>
-                                        <td>${decoration.picture}</td>
+                                        <td><c:set var="nm" value="getPicture${j=j+1}"/>
+                                            <div class="col-md-3" id="${nm}">
+                                                <script>
+                                                    var adress="/resources/images/pictures/";
+                                                    var img = document.createElement('img');
+                                                    img.setAttribute('src', adress+"${decoration.picture}");
+                                                    img.height = 150;
+                                                    document.getElementById("${nm}").appendChild(img);
+                                                </script>
+                                            </div>
+                                        </td>
                                         <td><a href="<c:url value='/editDecoration/${decoration.id}'/>">Изменить</a></td>
                                         <td><a href="<c:url value='/removeDecoration/${decoration.id}'/>">Удалить</a></td>
                                     </tr>

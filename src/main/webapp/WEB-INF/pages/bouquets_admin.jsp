@@ -137,7 +137,17 @@
                                         <td>${bouquet.weight}</td>
                                         <td>${bouquet.amount}</td>
                                         <td>${bouquet.price}</td>
-                                        <td>${bouquet.picture}</td>
+                                        <td><c:set var="nm" value="getPicture${j=j+1}"/>
+                                            <div class="col-md-3" id="${nm}">
+                                                <script>
+                                                    var adress="/resources/images/pictures/";
+                                                    var img = document.createElement('img');
+                                                    img.setAttribute('src', adress+"${bouquet.picture}");
+                                                    img.height = 150;
+                                                    document.getElementById("${nm}").appendChild(img);
+                                                </script>
+                                            </div>
+                                        </td>
                                         <td><a href="<c:url value='/editBouquet/${bouquet.id}'/>">Изменить</a></td>
                                         <td><a href="<c:url value='/removeBouquet/${bouquet.id}'/>">Удаление</a></td>
                                     </tr>
