@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS flower_customer_bouquet;
 DROP TABLE IF EXISTS customer_bouquet_order;
 DROP TABLE IF EXISTS customer_bouquet;
 
-DROP TABLE IF EXISTS `order`;
+DROP TABLE IF EXISTS `order_`;
 DROP TABLE IF EXISTS composition;
 DROP TABLE IF EXISTS bouquet;
 DROP TABLE IF EXISTS pack;
@@ -161,7 +161,7 @@ CREATE TABLE IF NOT EXISTS decoration_customer_bouquet (
 	DEFAULT CHARACTER SET = utf8;
 
 
-CREATE TABLE IF NOT EXISTS `order` (
+CREATE TABLE IF NOT EXISTS `order_` (
 	id INT(3) NOT NULL AUTO_INCREMENT,
 	user_id INT(3) NULL,
 	sender_id INT(3) NULL,
@@ -198,7 +198,7 @@ CREATE TABLE IF NOT EXISTS flower_order (
 	PRIMARY KEY (id),
 	FOREIGN KEY (flower_id) REFERENCES flower (id)
 		ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (order_id) REFERENCES `order` (id)
+	FOREIGN KEY (order_id) REFERENCES `order_` (id)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB
 	DEFAULT CHARACTER SET = utf8;
@@ -212,7 +212,7 @@ CREATE TABLE IF NOT EXISTS bouquet_order (
 	PRIMARY KEY (id),
 	FOREIGN KEY (bouquet_id) REFERENCES bouquet (id)
 		ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (order_id) REFERENCES `order` (id)
+	FOREIGN KEY (order_id) REFERENCES `order_` (id)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB
 	DEFAULT CHARACTER SET = utf8;
@@ -226,7 +226,7 @@ CREATE TABLE IF NOT EXISTS composition_order (
 	PRIMARY KEY (id),
 	FOREIGN KEY (composition_id) REFERENCES composition (id)
 		ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (order_id) REFERENCES `order` (id)
+	FOREIGN KEY (order_id) REFERENCES `order_` (id)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB
 	DEFAULT CHARACTER SET = utf8;
@@ -240,23 +240,41 @@ CREATE TABLE IF NOT EXISTS customer_bouquet_order (
 	PRIMARY KEY (id),
 	FOREIGN KEY (customer_bouquet_id) REFERENCES customer_bouquet (id)
 		ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (order_id) REFERENCES `order` (id)
+	FOREIGN KEY (order_id) REFERENCES `order_` (id)
 		ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB
 	DEFAULT CHARACTER SET = utf8;
 
 
 INSERT INTO flower (species, sort, color, length, amount, price, picture)
-VALUES ('Роза', 'Blanche Moreau', 'Белый', 90, 50, 3.9, null);
+VALUES ('Роза', 'Freedom', 'Красный', 60, 70, 4.6, 'freedom_flower.jpg');
 
 INSERT INTO flower (species, sort, color, length, amount, price, picture)
-VALUES ('Роза', 'Freedom', 'Красный', 90, 50, 3.9, null);
+VALUES ('Роза', 'Talea', 'Нежно бежевый', 50, 70, 2.5, 'talea_flower.jpg');
 
 INSERT INTO flower (species, sort, color, length, amount, price, picture)
-VALUES ('Роза', 'Leonardo da Vinci', 'Розовый', 60, 30, 4, null);
+VALUES ('Роза', 'Penny lane', 'Жёлтый', 50, 60, 2.9, 'penny_lane_flower.jpg');
 
 INSERT INTO flower (species, sort, color, length, amount, price, picture)
-VALUES ('Роза', 'Мисс Пигги (Miss Piggy)', 'Розовый', 45, 50, 4.2, null);
+VALUES ('Роза', 'Avalanche', 'Белый', 50, 60, 2.9, 'avalanche_flower.jpg');
+
+INSERT INTO flower (species, sort, color, length, amount, price, picture)
+VALUES ('Роза', 'Aqua', 'Розовый', 50, 80, 3.6, 'aqua_flower.jpg');
+
+INSERT INTO flower (species, sort, color, length, amount, price, picture)
+VALUES ('Роза', 'Red Naomi', 'Красный', 80, 50, 4.5, 'red_naomi_flower.jpg');
+
+INSERT INTO flower (species, sort, color, length, amount, price, picture)
+VALUES ('Роза', 'Jumilia', 'Белый', 70, 60, 4.2, 'jumilia_flower.jpg');
+
+INSERT INTO flower (species, sort, color, length, amount, price, picture)
+VALUES ('Роза', 'Wow', 'Оранжевый', 70, 50, 4.4, 'wow_flower.jpg');
+
+INSERT INTO flower (species, sort, color, length, amount, price, picture)
+VALUES ('Роза', ' Sweet Avalanche', 'Нежно розовый', 50, 50, 4.4, 'sweet_avalanche_flower.jpg');
+
+INSERT INTO flower (species, sort, color, length, amount, price, picture)
+VALUES ('Роза', ' Senorita ', 'Нежно розовый', 70, 60, 4, 'senorita_flower.jpg');
 
 
 
@@ -273,7 +291,7 @@ INSERT INTO address (city, street, house, block, flat)
 VALUES ('Минск', 'ул. Якуба Колоса', 56, 0, 4);
 
 INSERT INTO flower (species, sort, color, length, amount, price, picture)
-VALUES ('Тюльпан', 'Christmas Dream', 'Розовый', 35, 60, 1.8, null);
+VALUES ('Тюльпан', 'Barcelona', 'Розовый', 25, 60, 2.1, 'tulip_barcelona.jpg');
 
 INSERT INTO decoration (name, amount, price, picture)
 VALUES ('Бабочка', 60, 2.6, null);
@@ -295,11 +313,14 @@ VALUES (1);
 INSERT INTO flower_customer_bouquet (flower_id, customer_bouquet_id, quantity)
 VALUES (1, 1, 2);
 
+INSERT INTO flower_customer_bouquet (flower_id, customer_bouquet_id, quantity)
+VALUES (3, 1, 3);
+
 INSERT INTO decoration_customer_bouquet (decoration_id, customer_bouquet_id, quantity)
 VALUES (1, 1, 1);
 
-INSERT INTO `order` (user_id, sender_id, recipient_id, address_id,
-										 date, postcard, additional_inf, payment, cost)
+INSERT INTO `order_` (user_id, sender_id, recipient_id, address_id,
+											date, postcard, additional_inf, payment, cost)
 VALUES (1, 1, 1, 1, '2018-04-20 16:42:17', 'С днём рождения от любящего мужа!', null, 'Наличные', 97);
 
 INSERT INTO flower_order (flower_id, order_id, quantity)
@@ -352,7 +373,7 @@ VALUES (, , );
 INSERT INTO decoration_customer_bouquet (decoration_id, customer_bouquet_id, quantity)
 VALUES (, , );
 
-INSERT INTO `order` (user_id, sender_id, recipient_id, address_id,
+INSERT INTO `order_` (user_id, sender_id, recipient_id, address_id,
 	date, postcard, additional_inf, payment, cost)
 VALUES (, , , , , , , , );
 
