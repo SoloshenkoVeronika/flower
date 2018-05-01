@@ -81,9 +81,9 @@
                 <%--<li class="">--%>
                 <%--<a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>--%>
                 <%--</li>--%>
-                <%--<li class="">--%>
-                <%--<a href="<c:url value="/packs_client"/>" target="_self">Составить букет</a>--%>
-                <%--</li>--%>
+                <li class="">
+                <a href="<c:url value="/customer_bouquets"/>" target="_self">Составить букет</a>
+                </li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -122,7 +122,7 @@
 
                                 <div class="row">
                                     <c:set var="nm" value="getPicture${j=j+1}"/>
-                                    <div class="col-md-6" id="${nm}">
+                                    <div class="col-md-3" id="${nm}">
                                         <script>
                                             var adress="/resources/images/pictures/";
                                             var img = document.createElement('img');
@@ -131,7 +131,7 @@
                                             document.getElementById("${nm}").appendChild(img);
                                         </script>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-7">
                                         <div class="titlegood">
                                             <b>${flower.species} ${flower.sort}</b>
                                         </div>

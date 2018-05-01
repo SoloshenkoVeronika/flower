@@ -84,7 +84,7 @@
                     <a href="<c:url value=""/>" target="_self">Украшения</a>
                 </li>
                 <li class="">
-                <a href="<c:url value=""/>" target="_self">Упаковка</a>
+                <a href="<c:url value="/customer_bouquets_pack"/>" target="_self">Упаковка</a>
                 </li>
                 <li class="">
                 <a href="<c:url value=""/>" target="_self">Завершить создание букета</a>

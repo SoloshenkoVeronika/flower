@@ -2,10 +2,9 @@
   Created by IntelliJ IDEA.
   User: Admin
   Date: 01.05.2018
-  Time: 16:30
+  Time: 17:45
   To change this template use File | Settings | File Templates.
 --%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -14,7 +13,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Цветы</title>
+    <title>Упаковка</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/autor_style.css" />"/>
     <script src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
@@ -35,7 +34,7 @@
 <div class="container">
     <div class="header">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <div class="name">
                     Цветочная лавка
                 </div>
@@ -51,6 +50,12 @@
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
                 </form>
+            </div>
+            <div class="col-md-1">
+                <div class="backet">
+                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                    Корзина
+                </div>
             </div>
         </div>
     </div>
@@ -112,35 +117,31 @@
                 <div class="col-md-12">
                     <h1 class="h2 page-header"
                         style="color:#8d1645; font-family: 'Lobster', cursive; margin-top: -1px;
-                        text-align: center;"> Цветы</h1>
+                        text-align: center;">Украшения</h1>
                     <section class="main">
 
 
-                        <c:if test="${!empty listFlowers}">
+                        <c:if test="${!empty listDecorations}">
 
-                            <c:set var="j" value="0"/>
-                            <c:forEach items="${listFlowers}" var="flower">
+                            <c:forEach items="${listDecorations}" var="decoration">
 
                                 <div class="row">
-                                    <c:set var="nm" value="getPicture${j=j+1}"/>
-                                    <div class="col-md-3" id="${nm}">
+                                    <div class="col-md-6" id="getPicture">
                                         <script>
                                             var adress="/resources/images/pictures/";
                                             var img = document.createElement('img');
-                                            img.setAttribute('src', adress+"${flower.picture}");
-                                            img.height = 150;
-                                            document.getElementById("${nm}").appendChild(img);
+                                            img.setAttribute('src', adress+"${decoration.picture}");
+                                            document.getElementById("getPicture").appendChild(img);
                                         </script>
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-4">
                                         <div class="titlegood">
-                                            <b>${flower.species} ${flower.sort}</b>
+                                            <b>${decoration.name}</b>
                                         </div>
                                         <br>
                                         <div class="fontchar">
-                                            <div class="namechar">Цвет:   </div> <div class="charact">${flower.color}</div><br>
-                                            <div class="namechar">Высота:   </div> <div class="charact">${flower.length} см.</div><br>
-                                            <div class="namechar">Цена:     </div> <div class="charact">${flower.price}</div><br>
+                                            <br><br>
+                                            <div class="namechar">Цена:     </div> <div class="charact">${decoration.price}</div><br>
                                         </div>
                                     </div>
                                     <div class="col-md-2">

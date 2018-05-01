@@ -86,7 +86,7 @@
                 <%--<a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>--%>
                 <%--</li>--%>
                 <li class="">
-                <a href="<c:url value="customer_bouquets"/>" target="_self">Составить букет</a>
+                <a href="<c:url value="/customer_bouquets"/>" target="_self">Составить букет</a>
                 </li>
 
             </ul>
@@ -125,7 +125,7 @@
                             <c:forEach items="${listBouquets}" var="bouquet">
 
                                 <div class="row">
-                                    <div class="col-md-5" id="getPicture">
+                                    <div class="col-md-3" id="getPicture">
                                         <script>
                                             var adress="/resources/images/pictures/";
                                             var img = document.createElement('img');
@@ -133,7 +133,7 @@
                                             document.getElementById("getPicture").appendChild(img);
                                         </script>
                                     </div>
-                                    <div class="col-md-5">
+                                    <div class="col-md-7">
                                         <div class="titlegood">
                                             <b>${bouquet.name}</b>
                                         </div>

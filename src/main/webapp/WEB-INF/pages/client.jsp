@@ -73,9 +73,9 @@
                 <%--<li class="">--%>
                 <%--<a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>--%>
                 <%--</li>--%>
-                <%--<li class="">--%>
-                <%--<a href="<c:url value="/packs_client"/>" target="_self">Составить букет</a>--%>
-                <%--</li>--%>
+                <li class="">
+                <a href="<c:url value="/customer_bouquets"/>" target="_self">Составить букет</a>
+                </li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
