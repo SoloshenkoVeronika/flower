@@ -19,11 +19,13 @@
     <script src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/button_counter.js"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/client.css" />"/>
     <link rel="shortcut icon" href="<c:url value="/resources/images/roza.png"/>" type="image/png">
 
 </head>
@@ -138,6 +140,12 @@
                                         </div>
                                     </div>
                                     <div class="col-md-2">
+                                        <div class="inputBlock">
+                                            <div class="minus">-</div>
+                                            <input type="text" value="0"/>
+                                            <div class="plus">+</div>
+                                        </div>
+
                                         <div class="fontbut">
                                         <input type="submit" class="btn btn-success"
                                                value="<spring:message text="В корзину"/>"/>
