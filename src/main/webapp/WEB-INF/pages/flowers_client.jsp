@@ -117,15 +117,18 @@
 
                         <c:if test="${!empty listFlowers}">
 
+                            <c:set var="j" value="0"/>
                             <c:forEach items="${listFlowers}" var="flower">
 
                                 <div class="row">
-                                    <div class="col-md-6" id="getPicture">
+                                    <c:set var="nm" value="getPicture${j=j+1}"/>
+                                    <div class="col-md-6" id="${nm}">
                                         <script>
                                             var adress="/resources/images/pictures/";
                                             var img = document.createElement('img');
                                             img.setAttribute('src', adress+"${flower.picture}");
-                                            document.getElementById("getPicture").appendChild(img);
+                                            img.height = 150;
+                                            document.getElementById("${nm}").appendChild(img);
                                         </script>
                                     </div>
                                     <div class="col-md-4">
