@@ -111,12 +111,15 @@
                                     <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                                     <li data-target="#carousel-example-generic" data-slide-to="2"></li>
                                     <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="5"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="6"></li>
                                 </ol>
 
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner">
                                     <div class="item active">
-                                        <img src="resources/images/one.jpg" alt="...">
+                                        <img src="resources/images/img1.jpg" alt="...">
                                         <div class="carousel-caption">
                                             <h3>Искусство есть непрестанная попытка соперничать с красотой цветов — и всегда безуспешно.</h3>
                                             <p><em>Марк Шагал</em></p>
@@ -124,7 +127,7 @@
                                     </div>
 
                                     <div class="item">
-                                        <img src="resources/images/two.jpg" alt="...">
+                                        <img src="resources/images/img3.jpg" alt="...">
                                         <div class="carousel-caption">
                                             <h3>Сколько бы мы ни говорили о пустоте жизни, иногда достаточно лишь одного цветка, чтобы нас разубедить.
                                             </h3>
@@ -133,7 +136,7 @@
                                     </div>
 
                                     <div class="item">
-                                        <img src="resources/images/six.JPG" alt="...">
+                                        <img src="resources/images/img7.jpg" alt="...">
                                         <div class="carousel-caption">
                                             <h3>Цветок, поворачивающийся к солнцу, видит его и за тучами.</h3>
                                             <p><em>Роберт Лейтон</em></p>
@@ -141,12 +144,38 @@
                                     </div>
 
                                     <div class="item">
-                                        <img src="resources/images/fother.jpg" alt="...">
+                                        <img src="resources/images/img8.jpg" alt="...">
                                         <div class="carousel-caption">
                                             <h3>Цветы — это свободная красота в природе.</h3>
                                             <p><em>Иммануил Кант</em></p>
                                         </div>
                                     </div>
+
+                                    <div class="item">
+                                        <img src="resources/images/img10.jpg" alt="...">
+                                        <div class="carousel-caption">
+                                            <h3>Никогда не надо слушать, что говорят цветы. Надо просто смотреть на них и дышать их ароматом.</h3>
+                                            <p><em>Антуан де Сент-Экзюпери</em></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="item">
+                                        <img src="resources/images/img11.jpg" alt="...">
+                                        <div class="carousel-caption">
+                                            <h3>У цветов не бывает будней, они всегда одеты празднично.</h3>
+                                            <p><em>Малкольм де Шазаль</em></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="item">
+                                        <img src="resources/images/img13.jpg" alt="...">
+                                        <div class="carousel-caption">
+                                            <h3>О, сколько их на полях! Но каждый цветёт по-своему –
+                                                вот высший подвиг цветка!</h3>
+                                            <p><em>Мацуо Басё</em></p>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <!-- Controls -->
