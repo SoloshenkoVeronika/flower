@@ -18,6 +18,8 @@
     <script src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/download.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/search.js"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
@@ -38,12 +40,9 @@
             </div>
 
             <div class="col-md-4">
-
                 <form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Найти">
-                    </div>
-                    <button type="submit" class="btn btn-default">
+                    <input type="text" id="text-to-find" value="" class="form-control" placeholder="Найти">
+                    <button type="submit" class="btn btn-default" onclick="javascript: FindOnPage('text-to-find'); return false;">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
                 </form>
@@ -233,6 +232,25 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <form:label path="picture" class="col-sm-2 control-label">
+                                    <spring:message text="Изображение"/>
+                                </form:label>
+                                <div class="col-sm-2 control-label">
+                                    <input type="file" id="fileElem" multiple accept="image/*" style="display:none"
+                                           onchange="handleFiles(this.files)">
+                                    <a id="pictureName" name="g" href="javascript:doClick()"></a>
+                                    <script>
+                                        var f = document.getElementById('pictureName');
+                                        f.innerHTML = "Выбрать изображение";
+                                    </script>
+                                    <div id="fileList">
+                                        <p></p>
+                                    </div>
+                                </div>
+                                <form:hidden id="picture_url" path="picture"/>
+                            </div>
+
+                            <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <c:if test="${!empty bouquet.name}">
                                         <input type="submit" class="btn btn-success"
@@ -262,6 +280,5 @@
 <script>
     $.backstretch("resources/images/fon1.jpg");
 </script>
-
 </body>
 </html>

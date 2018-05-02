@@ -270,39 +270,5 @@
 <script>
     $.backstretch("resources/images/fon1.jpg");
 </script>
-<script>
-    function doClick() {
-        var el = document.getElementById("fileElem");
-        if (el) {
-            el.click();
-        }
-    }
-
-    function handleFiles(files) {
-        var d = document.getElementById("fileList");
-        if (!files.length) {
-            d.innerHTML = "<p>No files selected!</p>";
-        } else {
-            var img = document.createElement("img");
-            img.src = window.URL.createObjectURL(files[0]);
-            img.height = 100;
-            img.onload = function () {
-                window.URL.revokeObjectURL(this.src);
-            };
-            d.appendChild(img);
-            var x = new XMLHttpRequest();
-            x.open("GET", img.src, true);
-            x.responseType = 'blob';
-            x.onload = function (e) {
-                download(x.response, files[0].name, "image/gif");
-            }
-            x.send();
-        }
-        var nameOfPicture = document.getElementById('pictureName');
-
-        var picture = document.getElementById('picture_url');
-        picture.value = files[0].name;
-    }
-</script>
 </body>
 </html>
