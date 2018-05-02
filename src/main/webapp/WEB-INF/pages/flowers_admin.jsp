@@ -21,50 +21,13 @@
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/download.js"></script>
-    <%--<script src="${pageContext.request.contextPath}/resources/js/search.js"></script>--%>
+    <script src="${pageContext.request.contextPath}/resources/js/search.js"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />"/>
     <link rel="shortcut icon" href="<c:url value="/resources/images/roza.png"/>" type="image/png">
-
-    <script type="text/javascript">
-        var lastResFind=""; // последний удачный результат
-        var copy_page=""; // копия страницы в ихсодном виде
-        function TrimStr(s) {
-            s = s.replace( /^\s+/g, '');
-            return s.replace( /\s+$/g, '');
-        }
-        function FindOnPage(inputId) {//ищет текст на странице, в параметр передается ID поля для ввода
-            var obj = window.document.getElementById(inputId);
-            var textToFind;
-
-            if (obj) {
-                textToFind = TrimStr(obj.value);//обрезаем пробелы
-            } else {
-                alert("Введенная фраза не найдена");
-                return;
-            }
-            if (textToFind == "") {
-                alert("Вы ничего не ввели");
-                return;
-            }
-
-            if(document.body.innerHTML.indexOf(textToFind)=="-1")
-                alert("Ничего не найдено, проверьте правильность ввода!");
-
-            if(copy_page.length>0)
-                document.body.innerHTML=copy_page;
-            else copy_page=document.body.innerHTML;
-
-
-            document.body.innerHTML = document.body.innerHTML.replace(eval("/name="+lastResFind+"/gi")," ");//стираем предыдущие якори для скрола
-            document.body.innerHTML = document.body.innerHTML.replace(eval("/"+textToFind+"/g"),"<b style='color:red'>"+textToFind+"</b>");; //Заменяем найденный текст ссылками с якорем;
-            lastResFind=textToFind; // сохраняем фразу для поиска, чтобы в дальнейшем по ней стереть все ссылки
-            window.location = '#'+textToFind;//перемещаем скрол к последнему найденному совпадению
-        }
-    </script>
 </head>
 <body>
 
@@ -79,19 +42,11 @@
             </div>
 
             <div class="col-md-4">
-                <%--<input type="button" onclick="javascript: FindOnPage('text-to-find'); return false;" value="Искать"/>--%>
                 <form class="navbar-form navbar-left" role="search">
-                    <input type="text" id="text-to-find" value="">
-                    <input type="button" onclick="javascript: FindOnPage('text-to-find'); return false;" value="Искать"/>
-                    <br/><i>Введите слово или фразу для поиска.</i>
-                    <hr/>
-                    <%--<div class="form-group">--%>
-                        <%--<input type="text" id="text-to-find" value="" class="form-control" placeholder="Найти">--%>
-                        <%--<!-- <br/><i>Введите слово или фразу для поиска.</i> -->--%>
-                    <%--</div>--%>
-                    <%--<button type="submit" class="btn btn-default" onclick="javascript: FindOnPage('text-to-find'); return false;">--%>
-                        <%--<i class="fa fa-search" aria-hidden="true"></i>--%>
-                    <%--</button>--%>
+                    <input type="text" id="text-to-find" value="" class="form-control" placeholder="Найти">
+                    <button type="submit" class="btn btn-default" onclick="javascript: FindOnPage('text-to-find'); return false;">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
                 </form>
             </div>
         </div>

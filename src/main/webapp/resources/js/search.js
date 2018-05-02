@@ -1,9 +1,10 @@
-var lastResFind=""; // последний удачный результат
-var copy_page=""; // копия страницы в ихсодном виде
+
 function TrimStr(s) {
     s = s.replace( /^\s+/g, '');
     return s.replace( /\s+$/g, '');
 }
+var lastResFind=""; // последний удачный результат
+var copy_page=""; // копия страницы в ихсодном виде
 function FindOnPage(inputId) {//ищет текст на странице, в параметр передается ID поля для ввода
     var obj = window.document.getElementById(inputId);
     var textToFind;
@@ -28,7 +29,7 @@ function FindOnPage(inputId) {//ищет текст на странице, в п
 
 
     document.body.innerHTML = document.body.innerHTML.replace(eval("/name="+lastResFind+"/gi")," ");//стираем предыдущие якори для скрола
-    document.body.innerHTML = document.body.innerHTML.replace(eval("/"+textToFind+"/gi"),"<a name="+textToFind+" style='background:red'>"+textToFind+"</a>"); //Заменяем найденный текст ссылками с якорем;
+    document.body.innerHTML = document.body.innerHTML.replace(eval("/"+textToFind+"/g"),"<b style='color:red'>"+textToFind+"</b>");; //Заменяем найденный текст ссылками с якорем;
     lastResFind=textToFind; // сохраняем фразу для поиска, чтобы в дальнейшем по ней стереть все ссылки
     window.location = '#'+textToFind;//перемещаем скрол к последнему найденному совпадению
 }
