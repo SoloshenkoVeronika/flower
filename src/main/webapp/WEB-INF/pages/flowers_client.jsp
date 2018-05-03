@@ -52,12 +52,14 @@
                     </button>
                 </form>
             </div>
-            <div class="col-md-1">
-                <div class="backet">
-                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                    Корзина
+            <a href="<c:url value="/shopping_cart"/>" target="_self">
+                <div class="col-md-1">
+                    <div class="backet">
+                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                        Корзина
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>
@@ -82,13 +84,13 @@
                     <a href="<c:url value="/flowers_client"/>" target="_self">Цветы</a>
                 </li>
                 <li class="">
-                <a href="<c:url value="/bouquets_client"/>" target="_self">Букеты</a>
+                    <a href="<c:url value="/bouquets_client"/>" target="_self">Букеты</a>
                 </li>
                 <li class="">
-                <a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>
+                    <a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>
                 </li>
                 <li class="">
-                <a href="<c:url value="/customer_bouquets"/>" target="_self">Составить букет</a>
+                    <a href="<c:url value="/customer_bouquets"/>" target="_self">Составить букет</a>
                 </li>
 
             </ul>
@@ -130,9 +132,9 @@
                                     <c:set var="nm" value="getPicture${j=j+1}"/>
                                     <div class="col-md-3" id="${nm}">
                                         <script>
-                                            var adress="/resources/images/pictures/";
+                                            var adress = "/resources/images/pictures/";
                                             var img = document.createElement('img');
-                                            img.setAttribute('src', adress+"${flower.picture}");
+                                            img.setAttribute('src', adress + "${flower.picture}");
                                             img.height = 150;
                                             document.getElementById("${nm}").appendChild(img);
                                         </script>
@@ -143,9 +145,15 @@
                                         </div>
                                         <br>
                                         <div class="fontchar">
-                                            <div class="namechar">Цвет:   </div> <div class="charact">${flower.color}</div><br>
-                                            <div class="namechar">Высота:   </div> <div class="charact">${flower.length} см.</div><br>
-                                            <div class="namechar">Цена:     </div> <div class="charact">${flower.price}</div><br>
+                                            <div class="namechar">Цвет:</div>
+                                            <div class="charact">${flower.color}</div>
+                                            <br>
+                                            <div class="namechar">Высота:</div>
+                                            <div class="charact">${flower.length} см.</div>
+                                            <br>
+                                            <div class="namechar">Цена:</div>
+                                            <div class="charact">${flower.price}</div>
+                                            <br>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -156,14 +164,14 @@
                                         </div>
 
                                         <div class="fontbut">
-                                        <input type="submit" class="btn btn-success"
-                                               value="<spring:message text="В корзину"/>"/>
+                                            <input type="submit" class="btn btn-success"
+                                                   value="<spring:message text="В корзину"/>"/>
                                         </div>
                                     </div>
 
 
                                 </div>
-                                <br>  <br>
+                                <br> <br>
                             </c:forEach>
 
                         </c:if>

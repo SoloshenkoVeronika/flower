@@ -14,6 +14,7 @@ import project.service.UserService;
 @Controller
 public class UserController {
     private UserService userService;
+    private User currentUser;
 
     @Autowired(required = true)
     @Qualifier(value = "userService")
@@ -21,15 +22,24 @@ public class UserController {
         this.userService = userService;
     }
 
+    @RequestMapping(value = "users/currentUser", method = RequestMethod.GET)
+    public void getCurrentUser(Model model) {
+        model.addAttribute("user", currentUser);
+    }
+
     @RequestMapping(value = "/users/add", method = RequestMethod.POST)
     public String addUser(@ModelAttribute("user") User user) {
         if (user.getId() == null) {
-            this.userService.add(user);
+            currentUser = (User) this.userService.add(user);
         } else {
             this.userService.update(user);
         }
+        if(currentUser.getStatus() == 0)
+            return "redirect:http://localhost:8080/client";
+        else if(currentUser.getStatus() == 1)
+            return "redirect:/flowers_admin";
 
-        return "redirect:/users";
+        return "redirect:http://localhost:8080/client";
     }
 
     @RequestMapping("editUser/{id}")
@@ -56,12 +66,15 @@ public class UserController {
     }
 
     @RequestMapping(value = "/autorization/add", method = RequestMethod.POST)
-    public String listUsersa(@ModelAttribute("use") User user) {
-        if (userService.isAuthorized(user)) {
-            return "redirect:http://localhost:8080/client";
-        } else {
-            return "redirect:/users";
+    public String autorization (@ModelAttribute("use") User user) {
+        currentUser = (User) userService.isAuthorized(user);
+        if (currentUser.getId() != null) {
+            if(currentUser.getStatus() == 0)
+                return "redirect:http://localhost:8080/client";
+            else if(currentUser.getStatus() == 1)
+                return "redirect:/flowers_admin";
         }
+        return "redirect:/users";
     }
 
     @RequestMapping(value = "autorization", method = RequestMethod.GET)

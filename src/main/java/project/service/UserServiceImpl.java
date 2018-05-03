@@ -15,8 +15,8 @@ public class UserServiceImpl implements UserService<User> {
 
     @Override
     @Transactional
-    public void add(User user) {
-        this.userDao.add(user);
+    public User add(User user) {
+        return this.userDao.add(user);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService<User> {
 
     @Override
     @Transactional
-    public boolean isAuthorized(User user) {
+    public User isAuthorized(User user) {
         return this.userDao.isAuthorized(user);
     }
 }

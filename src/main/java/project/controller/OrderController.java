@@ -14,6 +14,7 @@ import project.service.Service;
 @Controller
 public class OrderController {
     private Service orderService;
+    private Order currentOrder;
 
     @Autowired(required = true)
     @Qualifier(value = "orderService")
@@ -23,7 +24,7 @@ public class OrderController {
 
 
     @RequestMapping(value = "/order/add", method = RequestMethod.POST)
-    public String addFlower(@ModelAttribute("order") Order order){
+    public String addOrder(@ModelAttribute("order") Order order){
         if(order.getId() == null){
             this.orderService.add(order);
         }else {
@@ -54,6 +55,26 @@ public class OrderController {
         model.addAttribute("listOrders", this.orderService.list());
 
         return "order_client";
+    }
+
+    @RequestMapping(value = "shopping_cart", method = RequestMethod.GET)
+    public String getCurrentOrder(Model model){
+        if (currentOrder == null) {
+            model.addAttribute("isEmpty", true);
+            //model.addAttribute("order", new Order());
+            model.addAttribute("order", orderService.getById(1));//*************************  GET BY ID
+        } else {
+            model.addAttribute("order", false);
+        }
+
+        return "shopping_cart";
+    }
+
+    @RequestMapping(value = "/shopping_cart/update", method = RequestMethod.POST)
+    public String updateCurrentOrder(@ModelAttribute("order") Order order){
+        currentOrder = order;
+
+        return "redirect:/shopping_cart";
     }
 }
 

@@ -1,5 +1,6 @@
 package project.dao;
 
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -45,7 +46,13 @@ public class OrderDaoImpl implements Dao<Order> {
     @Override
     public Order getById(int id) {
         Session session =this.sessionFactory.getCurrentSession();
-        Order order = (Order) session.load(Order.class, new Integer(id));
+        Order order = null;
+        try {
+            order = (Order) session.load(Order.class, new Integer(id));
+        } catch (ObjectNotFoundException e){
+            logger.info("Order not found");
+            return order;
+        }
         logger.info("Order successfully loaded. Order details: " + order);
 
         return order;

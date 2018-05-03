@@ -12,30 +12,23 @@
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 <%@ page session="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>Ваши заказы</title>
+    <title>Корзина</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/autor_style.css" />"/>
     <script src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/button_counter.js"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/client.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/order.css" />"/>
     <link rel="shortcut icon" href="<c:url value="/resources/images/roza.png"/>" type="image/png">
 
-    <style>
-        td {
-            /*border-width: 2px;
-            border-color: #836FFF;
-            border-style: solid;*/
-            padding: 10px;
-        }
-    </style>
 </head>
 <body>
 
@@ -43,7 +36,7 @@
 <div class="container">
     <div class="header">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <div class="name">
                     Цветочная лавка
                 </div>
@@ -60,6 +53,14 @@
                     </button>
                 </form>
             </div>
+            <a href="<c:url value="/shopping_cart"/>" target="_self">
+                <div class="col-md-1">
+                    <div class="backet">
+                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                        Корзина
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 </div>
@@ -83,15 +84,15 @@
                 <li class="">
                     <a href="<c:url value="/flowers_client"/>" target="_self">Цветы</a>
                 </li>
-                <%--<li class="">--%>
-                <%--<a href="<c:url value="/bouquets_client"/>" target="_self">Букеты</a>--%>
-                <%--</li>--%>
-                <%--<li class="">--%>
-                <%--<a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>--%>
-                <%--</li>--%>
-                <%--<li class="">--%>
-                <%--<a href="<c:url value="/packs_client"/>" target="_self">Составить букет</a>--%>
-                <%--</li>--%>
+                <li class="">
+                    <a href="<c:url value="/bouquets_client"/>" target="_self">Букеты</a>
+                </li>
+                <li class="">
+                    <a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>
+                </li>
+                <li class="">
+                    <a href="<c:url value="/customer_bouquets"/>" target="_self">Составить букет</a>
+                </li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -119,81 +120,14 @@
                 <div class="col-md-12">
                     <h1 class="h2 page-header"
                         style="color:#8d1645; font-family: 'Lobster', cursive; margin-top: -1px;
-                        text-align: center;">Ваши заказы</h1>
+                        text-align: center;">Корзина покупок</h1>
                     <section class="main">
-
-                        <c:set var="j" value="0"/>
-                        <c:if test="${!empty listOrders}">
-                            <c:forEach items="${listOrders}" var="order">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="titlegood">
-                                            <b>
-                                                <div style="display:inline-block;">Заказ № ${order.id} </div>
-                                                <div style="padding-left: 6%; display:inline-block;">
-                                                    <fmt:formatDate value="${order.date}"
-                                                                    pattern="yyyy-MM-dd HH:mm:ss"/>
-                                                </div>
-                                            </b>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <div class="cell">
-                                            <div class="property">
-                                                <div class="property_text">Адрес доставки:</div>
-                                                г. ${order.addressByAddressId.city},
-                                                    ${order.addressByAddressId.street}, д. ${order.addressByAddressId.house},
-                                                <c:if test="${order.addressByAddressId.block ne 0}">
-                                                    под. ${order.addressByAddressId.block},
-                                                </c:if>
-                                                кв. ${order.addressByAddressId.flat}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="product_text">
-                                            Стоимость заказа
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <div class="cell">
-                                            <div class="property">
-                                                <c:if test="${!empty order.additionalInf}">
-                                                    <div class="property_text">Дополнительная информация:</div>
-                                                    ${order.additionalInf}
-                                                </c:if>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="col-md-2">
-                                            <div class="order_cost">${order.cost} руб.</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <div class="cell">
-                                            <div class="property">
-                                                <c:if test="${!empty order.postcard}">
-                                                    <div class="property_text">Надпись на открытке:</div>
-                                                    ${order.postcard}
-                                                </c:if>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="product_text">Оплата: ${order.payment}</div>
-                                    </div>
-                                </div>
-
+                        <c:choose>
+                            <c:when test="${isEmpty eq false}">
+                                <div class="empty">Ваша корзина пока пуста</div>
+                            </c:when>
+                            <c:otherwise>
+                                <c:set var="j" value="0"/>
                                 <!-- *********************** ЦВЕТЫ ***********************-->
                                 <c:if test="${!empty order.flowerOrdersById}">
                                     <div class="row">
@@ -233,8 +167,8 @@
                                                 </div>
                                                 <div class="col-md-1">
                                                     <div class="price">
-                                                        ${flowerOrder.flowerByFlowerId.price} руб.<br/>
-                                                        ${flowerOrder.quantity} шт.
+                                                            ${flowerOrder.flowerByFlowerId.price} руб.<br/>
+                                                            ${flowerOrder.quantity} шт.
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
@@ -290,8 +224,8 @@
                                                 </div>
                                                 <div class="col-md-1">
                                                     <div class="price">
-                                                        ${bouquetOrder.bouquetByBouquetId.price} руб.<br/>
-                                                        ${bouquetOrder.quantity} шт.
+                                                            ${bouquetOrder.bouquetByBouquetId.price} руб.<br/>
+                                                            ${bouquetOrder.quantity} шт.
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
@@ -347,8 +281,8 @@
 
                                                 <div class="col-md-1">
                                                     <div class="price">
-                                                        ${compositionOrder.compositionByCompositionId.price} руб.<br/>
-                                                        ${compositionOrder.quantity} шт.
+                                                            ${compositionOrder.compositionByCompositionId.price} руб.<br/>
+                                                            ${compositionOrder.quantity} шт.
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
@@ -418,8 +352,8 @@
                                                         </div>
                                                         <div class="col-md-1">
                                                             <div class="price">
-                                                                ${flowerCustomerBouquet.flowerByFlowerId.price} руб.<br/>
-                                                                ${flowerCustomerBouquet.quantity} шт.
+                                                                    ${flowerCustomerBouquet.flowerByFlowerId.price} руб.<br/>
+                                                                    ${flowerCustomerBouquet.quantity} шт.
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -466,9 +400,9 @@
                                                         </div>
                                                         <div class="col-md-1">
                                                             <div class="price">
-                                                                ${decorationCustomerBouquet.decorationByDecorationId.price}
+                                                                    ${decorationCustomerBouquet.decorationByDecorationId.price}
                                                                 руб.<br/>
-                                                                ${decorationCustomerBouquet.quantity} шт.
+                                                                    ${decorationCustomerBouquet.quantity} шт.
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -512,7 +446,7 @@
                                                     </div>
                                                     <div class="col-md-1">
                                                         <div class="price">
-                                                            ${customerBouquetOrder.customerBouquetByCustomerBouquetId.packByPackId.price}
+                                                                ${customerBouquetOrder.customerBouquetByCustomerBouquetId.packByPackId.price}
                                                             руб.
                                                         </div>
                                                     </div>
@@ -530,34 +464,8 @@
                                         </c:if>
                                     </c:forEach>
                                 </c:if>
-                                <!--<div class="row">-->
-                                <!--<div class="col-md-6" id="getPicture">
-                                <script>
-                                var adress="/resources/images/pictures/";
-                                var img = document.createElement('img');
-                                img.setAttribute('src', adress+<%--"${flower.picture}");--%>
-                                document.getElementById("getPicture").appendChild(img);
-                                </script>
-                                </div>-->
-                                <!--<div class="col-md-4">
-                                <div class="fontname"><center>
-                                Заказ № </center>
-                                </div>
-                                <br>Цвет
-                                <br>Высота
-                                <br>Цена
-                                </div>
-                                <div class="col-md-2">
-                                <div class="fontbut">
-                                <input type="submit" class="btn btn-success"
-                                value="<spring:message text="Заказать"/>"/>
-                                </div>
-                                </div>
-                                </div>
-                                <br> <br>-->
-                            </c:forEach>
-                        </c:if>
-
+                            </c:otherwise>
+                        </c:choose>
                     </section>
                 </div>
             </div>
@@ -578,4 +486,3 @@
 
 </body>
 </html>
-

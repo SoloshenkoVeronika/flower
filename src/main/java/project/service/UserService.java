@@ -3,7 +3,7 @@ package project.service;
 import java.util.List;
 
 public interface UserService<T> {
-    public void add(T t);
+    public T add(T t);
 
     public void update(T t);
 
@@ -13,5 +13,5 @@ public interface UserService<T> {
 
     public List<T> list();
 
-    public boolean isAuthorized(T t);
+    public T isAuthorized(T t);
 }

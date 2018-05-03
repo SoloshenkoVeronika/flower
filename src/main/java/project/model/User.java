@@ -21,7 +21,7 @@ public class User {
     private int status;
 
 
-    @OneToMany(mappedBy = "userByUserId")
+    @OneToMany(mappedBy = "userByUserId", fetch = FetchType.EAGER)
     private Collection<Order> ordersById;
 
     public User() {}

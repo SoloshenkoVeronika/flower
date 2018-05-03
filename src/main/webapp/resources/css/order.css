@@ -31,6 +31,7 @@
     font-size: 18px;
     font-weight: 600;
     display:inline-block;
+    vertical-align: middle;
 }
 .product_text{
     color: #8d1645;
@@ -45,6 +46,9 @@
 .bouquet{
     /*background-color: rgba(255, 255, 0, 0.2);*/
 }
+.product_info{
+    margin-left: -30px;
+}
 .product_name{
     color: #8d1645;
     font-weight: 600;
@@ -58,9 +62,32 @@
 }
 .cost{
     color: #8d1645;
-    font-size: 18px;
+    font-size: 19px;
     font-weight: 600;
+}
+.price{
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-right: 0px;
 }
 .center{
     text-align: center;
+}
+.empty{
+    color: #8d1645;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    padding: 60px;
+}
+.property{
+    padding-top: 24px;
+}
+.cell{
+    font-size: 17px;
+    padding: 8px 0px;
+}
+.picture{
+    padding-left: 0px;
+    padding-right: 0px;
 }

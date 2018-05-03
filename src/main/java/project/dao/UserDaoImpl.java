@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import project.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao<User> {
@@ -17,11 +18,26 @@ public class UserDaoImpl implements UserDao<User> {
         this.sessionFactory = sessionFactory;
     }
 
-    @Override
-    public void add(User user) {
+    private User getUser(User user){
         Session session = this.sessionFactory.getCurrentSession();
+        ArrayList<User> users = (ArrayList) session.createQuery("from User where login = '"+user.getLogin()+"' and password = '"+user.getPassword()+"'").list();
+        for(int i = 0; i <users.size(); i++){
+            user = users.get(i);
+        }
+        return user;
+    }
+
+    @Override
+    public User add(User user) {
+        Session session = this.sessionFactory.getCurrentSession();
+        if (user.getLogin().equals("admin")){
+            user.setStatus(1);
+        } else {
+            user.setStatus(0);
+        }
         session.persist(user);
         logger.info("User successfully saved. User details: " + user);
+        return getUser(user);
     }
 
     @Override
@@ -65,19 +81,21 @@ public class UserDaoImpl implements UserDao<User> {
     }
 
     @Override
-    public boolean isAuthorized(User user) {
+    public User isAuthorized(User user) {
 //        System.out.println("rrrrr");
-        Session session =this.sessionFactory.getCurrentSession();
-        if(session.createQuery("from User where login = '"+user.getLogin()+"' and password = '"+user.getPassword()+"'").iterate().hasNext()){
-//            System.out.println("e122221111e");
+        user = getUser(user);
+        if (user.getId() != null) {
             logger.info("User successfully loaded. User details: " + user);
-            return true;
         }
+
+        //if(session.createQuery("from User where login = '"+user.getLogin()+"' and password = '"+user.getPassword()+"'").iterate().hasNext()){
+//            System.out.println("e122221111e");
+
         else{
             System.out.println("neeet");
             logger.info("User successfully loaded. User details: " + user);
-            return false;
         }
+        return user;
     }
 }
 

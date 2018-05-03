@@ -23,7 +23,7 @@ public class DecorationController {
 
 
     @RequestMapping(value = "/decorations/add", method = RequestMethod.POST)
-    public String addFlower(@ModelAttribute("decoration") Decoration decoration){
+    public String addDecoration(@ModelAttribute("decoration") Decoration decoration){
         if(decoration.getId() == null){
             this.decorationService.add(decoration);
         }else {
