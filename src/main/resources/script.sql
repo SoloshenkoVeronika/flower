@@ -249,7 +249,10 @@ CREATE TABLE IF NOT EXISTS customer_bouquet_order (
 
 
 INSERT INTO user (login, password, status)
-VALUES ('user', 'user', 1);
+VALUES ('admin', 'admin', 1);
+
+INSERT INTO user (login, password, status)
+VALUES ('user', 'user', 0);
 
 INSERT INTO sender (first_name, second_name, phone, email)
 VALUES ('Иван', 'Иванов', '+375 29 333-22-11', 'ivan@mail.ru');

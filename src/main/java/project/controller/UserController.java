@@ -71,8 +71,9 @@ public class UserController {
         if (currentUser.getId() != null) {
             if(currentUser.getStatus() == 0)
                 return "redirect:http://localhost:8080/client";
-            else if(currentUser.getStatus() == 1)
+            else if(currentUser.getStatus() == 1) {
                 return "redirect:/flowers_admin";
+            }
         }
         return "redirect:/users";
     }
@@ -85,6 +86,7 @@ public class UserController {
 
     @RequestMapping(value = "client", method = RequestMethod.GET)
     public String lish(Model model) {
+        getCurrentUser(model);
         return "client";
     }
 }
