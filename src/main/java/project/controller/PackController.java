@@ -50,6 +50,7 @@ public class PackController {
 
     @RequestMapping(value = "packs_admin", method = RequestMethod.GET)
     public String listPacks(Model model){
+        UserController.getCurrentUser(model);
         model.addAttribute("pack", new Pack());
         model.addAttribute("listPacks", this.packService.list());
 

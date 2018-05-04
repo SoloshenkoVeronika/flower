@@ -50,6 +50,7 @@ public class DecorationController {
 
     @RequestMapping(value = "decorations_admin", method = RequestMethod.GET)
     public String listDecorations(Model model){
+        UserController.getCurrentUser(model);
         model.addAttribute("decoration", new Decoration());
         model.addAttribute("listDecorations", this.decorationService.list());
 

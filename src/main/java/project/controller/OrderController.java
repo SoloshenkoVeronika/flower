@@ -51,6 +51,7 @@ public class OrderController {
 
     @RequestMapping(value = "order_client", method = RequestMethod.GET)
     public String listOrders(Model model){
+        UserController.getCurrentUser(model);
         model.addAttribute("order", new Order());
         model.addAttribute("listOrders", this.orderService.list());
 

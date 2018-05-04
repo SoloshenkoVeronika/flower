@@ -51,6 +51,7 @@ public class FlowerController {
 
     @RequestMapping(value = "flowers_admin", method = RequestMethod.GET)
     public String listFlowers(Model model){
+        UserController.getCurrentUser(model);
         model.addAttribute("flower", new Flower());
         model.addAttribute("listFlowers", this.flowerService.list());
 

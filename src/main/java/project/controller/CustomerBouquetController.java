@@ -42,6 +42,7 @@ public class CustomerBouquetController {
 
     @RequestMapping(value = "customer_bouquets", method = RequestMethod.GET)
     public String listCustomer_bouquet(Model model){
+        UserController.getCurrentUser(model);
 //        model.addAttribute("flower", new Flower());
 //        model.addAttribute("listFlowers", this.flowerService.list());
 
@@ -50,6 +51,7 @@ public class CustomerBouquetController {
 
     @RequestMapping(value = "customer_bouquets_flower", method = RequestMethod.GET)
     public String listCustomer_bouquet_flower(Model model){
+        UserController.getCurrentUser(model);
         model.addAttribute("flower", new Flower());
         model.addAttribute("listFlowers", this.flowerService.list());
 
@@ -58,6 +60,7 @@ public class CustomerBouquetController {
 
     @RequestMapping(value = "customer_bouquets_pack", method = RequestMethod.GET)
     public String listPacks(Model model){
+        UserController.getCurrentUser(model);
         model.addAttribute("pack", new Pack());
         model.addAttribute("listPacks", this.packService.list());
 
@@ -66,6 +69,7 @@ public class CustomerBouquetController {
 
     @RequestMapping(value = "customer_bouquets_decoration", method = RequestMethod.GET)
     public String listDecorations(Model model){
+        UserController.getCurrentUser(model);
         model.addAttribute("decoration", new Decoration());
         model.addAttribute("listDecorations", this.decorationService.list());
 

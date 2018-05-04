@@ -84,6 +84,15 @@ public class UserController {
         return "autorization";
     }
 
+    @RequestMapping(value = "exit", method = RequestMethod.GET)
+    public String getNam(Model model) {
+        model.addAttribute("use", new User());
+        return "";
+    }
+
+
+
+
     @RequestMapping(value = "client", method = RequestMethod.GET)
     public String lish(Model model) {
         getCurrentUser(model);

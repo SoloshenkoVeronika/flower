@@ -21,7 +21,6 @@
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/download.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/search.js"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
@@ -42,9 +41,12 @@
             </div>
 
             <div class="col-md-4">
+
                 <form class="navbar-form navbar-left" role="search">
-                    <input type="text" id="text-to-find" value="" class="form-control" placeholder="Найти">
-                    <button type="submit" class="btn btn-default" onclick="javascript: FindOnPage('text-to-find'); return false;">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Найти">
+                    </div>
+                    <button type="submit" class="btn btn-default">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
                 </form>
@@ -87,8 +89,17 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Мой
-                        профиль<span class="caret"></span></a>
+                    <a href="<c:url value="/users/currentUser"/>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <c:choose>
+                            <c:when test="${user.login ne null}">
+                                ${user.login}
+                            </c:when>
+                            <c:otherwise>
+                                Мой профиль
+                            </c:otherwise>
+                        </c:choose>
+                        <span class="caret"></span>
+                    </a>
                     <ul class="dropdown-menu" role="menu">
                         <li class="divider"></li>
                         <li><a href="<c:url value="/autorization"/>" target="_self">Вход</a></li>
@@ -269,6 +280,40 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery.backstretch.min.js"></script>
 <script>
     $.backstretch("resources/images/fon1.jpg");
+</script>
+<script>
+    function doClick() {
+        var el = document.getElementById("fileElem");
+        if (el) {
+            el.click();
+        }
+    }
+
+    function handleFiles(files) {
+        var d = document.getElementById("fileList");
+        if (!files.length) {
+            d.innerHTML = "<p>No files selected!</p>";
+        } else {
+            var img = document.createElement("img");
+            img.src = window.URL.createObjectURL(files[0]);
+            img.height = 100;
+            img.onload = function () {
+                window.URL.revokeObjectURL(this.src);
+            };
+            d.appendChild(img);
+            var x = new XMLHttpRequest();
+            x.open("GET", img.src, true);
+            x.responseType = 'blob';
+            x.onload = function (e) {
+                download(x.response, files[0].name, "image/gif");
+            }
+            x.send();
+        }
+        var nameOfPicture = document.getElementById('pictureName');
+
+        var picture = document.getElementById('picture_url');
+        picture.value = files[0].name;
+    }
 </script>
 </body>
 </html>

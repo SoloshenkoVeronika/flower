@@ -85,8 +85,17 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Мой
-                        профиль<span class="caret"></span></a>
+                    <a href="<c:url value="/users/currentUser"/>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <c:choose>
+                            <c:when test="${user.login ne null}">
+                                ${user.login}
+                            </c:when>
+                            <c:otherwise>
+                                Мой профиль
+                            </c:otherwise>
+                        </c:choose>
+                        <span class="caret"></span>
+                    </a>
                     <ul class="dropdown-menu" role="menu">
                         <li class="divider"></li>
                         <li><a href="<c:url value="/autorization"/>" target="_self">Вход</a></li>

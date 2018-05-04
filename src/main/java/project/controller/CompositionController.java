@@ -50,6 +50,7 @@ public class CompositionController {
 
     @RequestMapping(value = "compositions_admin", method = RequestMethod.GET)
     public String listCompositions(Model model) {
+        UserController.getCurrentUser(model);
         model.addAttribute("composition", new Composition());
         model.addAttribute("listCompositions", this.compositionService.list());
 
@@ -58,6 +59,7 @@ public class CompositionController {
 
     @RequestMapping(value = "compositions_client", method = RequestMethod.GET)
     public String listCompositionsClient(Model model) {
+        UserController.getCurrentUser(model);
         model.addAttribute("composition", new Composition());
         model.addAttribute("listCompositions", this.compositionService.list());
 

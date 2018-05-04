@@ -50,6 +50,7 @@ public class BouquetController {
 
     @RequestMapping(value = "bouquets_admin", method = RequestMethod.GET)
     public String listBouquets(Model model) {
+        UserController.getCurrentUser(model);
         model.addAttribute("bouquet", new Bouquet());
         model.addAttribute("listBouquets", this.bouquetService.list());
 
@@ -58,6 +59,7 @@ public class BouquetController {
 
     @RequestMapping(value = "bouquets_client", method = RequestMethod.GET)
     public String listBouquetsClient(Model model){
+        UserController.getCurrentUser(model);
         model.addAttribute("bouquet", new Bouquet());
         model.addAttribute("listBouquets", this.bouquetService.list());
 
