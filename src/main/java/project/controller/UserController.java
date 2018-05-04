@@ -14,7 +14,7 @@ import project.service.UserService;
 @Controller
 public class UserController {
     private UserService userService;
-    private User currentUser;
+    private static User currentUser;
 
     @Autowired(required = true)
     @Qualifier(value = "userService")
@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "users/currentUser", method = RequestMethod.GET)
-    public void getCurrentUser(Model model) {
+    public static void getCurrentUser(Model model) {
         model.addAttribute("user", currentUser);
     }
 
