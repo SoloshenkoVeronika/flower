@@ -59,6 +59,7 @@ public class FlowerController {
 
     @RequestMapping(value = "flowers_client", method = RequestMethod.GET)
     public String listFlowersClient(Model model){
+        UserController.getCurrentUser(model);
         model.addAttribute("flower", new Flower());
         model.addAttribute("listFlowers", this.flowerService.list());
 
