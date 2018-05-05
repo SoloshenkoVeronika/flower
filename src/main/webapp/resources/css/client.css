@@ -39,9 +39,7 @@
     border-radius: 5px;
 }
 .namechar{
-    /*font-family: 'Prosto One', cursive;*/
-    /*font-family: 'Bad Script', cursive;*/
-    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
     font-size: 1.2em;
     display:inline-block;
 }
@@ -55,9 +53,17 @@
     margin-bottom: 30px;
 }
 .titlegood{
-    font-family: 'Yeseva One', cursive;
+    /*font-family: 'Yeseva One', cursive;*/
     font-size: 20px;
 }
 .fontbut{
     margin-top: 100px;
+}
+
+.orderhead{
+    font-family: 'Bad Script', cursive;
+    font-size: 10px;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
