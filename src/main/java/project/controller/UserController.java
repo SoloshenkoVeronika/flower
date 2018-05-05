@@ -87,7 +87,8 @@ public class UserController {
     @RequestMapping(value = "exit", method = RequestMethod.GET)
     public String getNam(Model model) {
         model.addAttribute("use", new User());
-        return "";
+        currentUser = null;
+        return "redirect:http://localhost:8080/";
     }
 
 

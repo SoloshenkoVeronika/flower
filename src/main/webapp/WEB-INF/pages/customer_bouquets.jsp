@@ -106,7 +106,14 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li class="divider"></li>
-                        <li><a href="<c:url value="/autorization"/>" target="_self">Вход</a></li>
+                        <c:choose>
+                            <c:when test="${user.login ne null}">
+                                <li><a href="<c:url value="/exit"/>" target="_self">Выход</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a href="<c:url value="/autorization"/>" target="_self">Вход</a></li>
+                            </c:otherwise>
+                        </c:choose>
                         <li class="divider"></li>
                         <li><a href="<c:url value="/users"/>" target="_self">Регистрация</a></li>
                     </ul>

@@ -25,7 +25,8 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />"/>
+    <link rel="s" href="<c:url value="/resources/css/form.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/images/pictures" />"/>
     <link rel="shortcut icon" href="<c:url value="/resources/images/roza.png"/>" type="image/png">
 </head>
 <body>
@@ -102,7 +103,14 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li class="divider"></li>
-                        <li><a href="<c:url value="/autorization"/>" target="_self">Вход</a></li>
+                        <c:choose>
+                            <c:when test="${user.login ne null}">
+                                <li><a href="<c:url value="/exit"/>" target="_self">Выход</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a href="<c:url value="/autorization"/>" target="_self">Вход</a></li>
+                            </c:otherwise>
+                        </c:choose>
                         <li class="divider"></li>
                         <li><a href="<c:url value="/users"/>" target="_self">Регистрация</a></li>
                     </ul>
@@ -281,39 +289,6 @@
 <script>
     $.backstretch("resources/images/fon1.jpg");
 </script>
-<script>
-    function doClick() {
-        var el = document.getElementById("fileElem");
-        if (el) {
-            el.click();
-        }
-    }
 
-    function handleFiles(files) {
-        var d = document.getElementById("fileList");
-        if (!files.length) {
-            d.innerHTML = "<p>No files selected!</p>";
-        } else {
-            var img = document.createElement("img");
-            img.src = window.URL.createObjectURL(files[0]);
-            img.height = 100;
-            img.onload = function () {
-                window.URL.revokeObjectURL(this.src);
-            };
-            d.appendChild(img);
-            var x = new XMLHttpRequest();
-            x.open("GET", img.src, true);
-            x.responseType = 'blob';
-            x.onload = function (e) {
-                download(x.response, files[0].name, "image/gif");
-            }
-            x.send();
-        }
-        var nameOfPicture = document.getElementById('pictureName');
-
-        var picture = document.getElementById('picture_url');
-        picture.value = files[0].name;
-    }
-</script>
 </body>
 </html>
