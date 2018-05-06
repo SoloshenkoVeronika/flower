@@ -139,10 +139,11 @@
                         text-align: center;">Корзина покупок</h1>
                     <section class="main">
                         <c:choose>
-                            <c:when test="${isEmpty eq false}">
-                                <div class="empty">Ваша корзина пока пуста</div>
+                            <c:when test="${isEmpty eq true}">
+                                <div class="empty">Ваша корзина пуста</div>
                             </c:when>
                             <c:otherwise>
+                                <c:set var="totalCost" value="0"/>
                                 <c:set var="j" value="0"/>
                                 <!-- *********************** ЦВЕТЫ ***********************-->
                                 <c:if test="${!empty order.flowerOrdersById}">
@@ -195,6 +196,7 @@
                                                         <c:set var="number" value="${flowerOrder.quantity}"/>
                                                         <c:set var="sum" value="${price*number}"/>
                                                         <div class="cost"><c:out value="${sum}"/> руб.</div>
+                                                        <c:set var="total" value="${totalCost = totalCost + sum}"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -252,6 +254,7 @@
                                                         <c:set var="number" value="${bouquetOrder.quantity}"/>
                                                         <c:set var="sum" value="${price*number}"/>
                                                         <div class="cost"><c:out value="${sum}"/> руб.</div>
+                                                        <c:set var="total" value="${totalCost = totalCost + sum}"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -309,6 +312,7 @@
                                                         <c:set var="number" value="${compositionOrder.quantity}"/>
                                                         <c:set var="sum" value="${price*number}"/>
                                                         <div class="cost"><c:out value="${sum}"/> руб.</div>
+                                                        <c:set var="total" value="${totalCost = totalCost + sum}"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -381,6 +385,7 @@
                                                                        value="${flowerCustomerBouquet.quantity}"/>
                                                                 <c:set var="sum" value="${price*number}"/>
                                                                 <div class="cost"><c:out value="${sum}"/> руб.</div>
+                                                                <c:set var="total" value="${totalCost = totalCost + sum}"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -430,6 +435,7 @@
                                                                        value="${decorationCustomerBouquet.quantity}"/>
                                                                 <c:set var="sum" value="${price*number}"/>
                                                                 <div class="cost"><c:out value="${sum}"/> руб.</div>
+                                                                <c:set var="total" value="${totalCost = totalCost + sum}"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -473,6 +479,8 @@
                                                                     ${customerBouquetOrder.customerBouquetByCustomerBouquetId.packByPackId.price}
                                                                 руб.
                                                             </div>
+                                                            <c:set var="total" value="${totalCost = totalCost +
+                                                                customerBouquetOrder.customerBouquetByCustomerBouquetId.packByPackId.price}"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -480,6 +488,16 @@
                                         </c:if>
                                     </c:forEach>
                                 </c:if>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="product_text">
+                                            Общая стоимость: <c:out value="${totalCost}"/> руб.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="/baskets">Перейти к оформлению заказа</a>
+                                </div>
                             </c:otherwise>
                         </c:choose>
                     </section>

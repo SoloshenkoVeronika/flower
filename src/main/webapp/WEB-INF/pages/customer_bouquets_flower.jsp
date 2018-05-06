@@ -52,12 +52,14 @@
                     </button>
                 </form>
             </div>
-            <div class="col-md-1">
-                <div class="backet">
-                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                    Корзина
+            <a href="<c:url value="/shopping_cart"/>" target="_self">
+                <div class="col-md-1">
+                    <div class="backet">
+                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                        Корзина
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>
@@ -166,16 +168,21 @@
                                         </div>
                                     </div>
                                     <div class="col-md-2">
-                                        <div class="inputBlock">
-                                            <div class="minus">-</div>
-                                            <input type="text" value="0"/>
-                                            <div class="plus">+</div>
-                                        </div>
+                                        <c:url var="addAction" value="/order/addFlowerToCustomerBouquet"/>
+                                        <form:form action="${addAction}" modelAttribute="flowerCustomerBouquet" class="form-horizontal">
+                                            <div class="inputBlock">
+                                                <div class="minus">-</div>
+                                                <form:input path="quantity" value="0"/>
+                                                <div class="plus">+</div>
+                                            </div>
 
-                                        <div class="fontbut">
-                                            <input type="submit" class="btn btn-success"
-                                                   value="<spring:message text="Добавить в букет"/>"/>
-                                        </div>
+                                            <div class="fontbut">
+                                                <form:hidden path="flowerId" value="${flower.id}"/>
+
+                                                <input type="submit" class="btn btn-success"
+                                                       value="<spring:message text="В корзину"/>"/>
+                                            </div>
+                                        </form:form>
                                     </div>
 
 

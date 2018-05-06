@@ -320,7 +320,7 @@ VALUES ('Тюльпан', 'Strong Gold', 'Жёлтый', 45, 60, 1.9, 'tulip_str
 
 
 INSERT INTO decoration (name, amount, price, picture)
-VALUES ('Веточка вербная (залёная), 80 см', 200, 2.4, 'vetka5.jpg');
+VALUES ('Веточка вербная (зелёная), 80 см', 200, 2.4, 'vetka5.jpg');
 
 INSERT INTO decoration (name, amount, price, picture)
 VALUES ('Веточка вербная (белая), 80 см', 200, 2.2, 'vetka1.jpg');

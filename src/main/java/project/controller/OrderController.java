@@ -4,17 +4,47 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import project.model.Order;
+import org.springframework.web.bind.annotation.*;
+import project.model.*;
 import project.service.Service;
+
+import java.util.Iterator;
 
 @Controller
 public class OrderController {
     private Service orderService;
-    private Order currentOrder;
+    private static Order currentOrder;
+    private static CustomerBouquet customerBouquet;
+    private Service flowerService;
+    private Service bouquetService;
+    private Service compositionService;
+    private Service packService;
+    private Service decorationService;
+
+    public static void setCurrentOrder(Order currentOrder) {
+        OrderController.currentOrder = currentOrder;
+    }
+
+    public static void setCustomerBouquet(CustomerBouquet customerBouquet) {
+        OrderController.customerBouquet = customerBouquet;
+    }
+
+    public static Order getCurrentOrder(){
+        return currentOrder;
+    }
+    
+    public static CustomerBouquet getCustomerBouquet(){
+        return customerBouquet;
+    }
+
+    public static boolean isCustomerBouquetEmpty(){
+        if (customerBouquet.getPackId() == null && (customerBouquet.getFlowerCustomerBouquetsById() == null ||
+                customerBouquet.getFlowerCustomerBouquetsById().size() == 0) &&
+                (customerBouquet.getDecorationCustomerBouquetsById() == null ||
+                customerBouquet.getDecorationCustomerBouquetsById().size() == 0))
+            return true;
+        return false;
+    }
 
     @Autowired(required = true)
     @Qualifier(value = "orderService")
@@ -22,7 +52,38 @@ public class OrderController {
         this.orderService = orderService;
     }
 
+    @Autowired(required = true)
+    @Qualifier(value = "flowerService")
+    public void setFlowerService(Service flowerService) {
+        this.flowerService = flowerService;
+    }
 
+    @Autowired(required = true)
+    @Qualifier(value = "bouquetService")
+    public void setBouquetService(Service bouquetService) {
+        this.bouquetService = bouquetService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "compositionService")
+    public void setCompositionService(Service compositionService) {
+        this.compositionService = compositionService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "packService")
+    public void setPackService(Service packService) {
+        this.packService = packService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "decorationService")
+    public void setDecorationService(Service decorationService) {
+        this.decorationService = decorationService;
+    }
+
+
+    // = ОФОРМИТЬ ЗАКАЗ
     @RequestMapping(value = "/order/add", method = RequestMethod.POST)
     public String addOrder(@ModelAttribute("order") Order order){
         if(order.getId() == null){
@@ -34,12 +95,34 @@ public class OrderController {
         return "redirect:/order_client";
     }
 
+
+
+    @RequestMapping(value = "/order/addCustomerBouquet", method = RequestMethod.POST)
+    public String addCustomerBouquet(@ModelAttribute("customerBouquetOrder") CustomerBouquetOrder customerBouquetOrder){
+        if (OrderController.getCurrentOrder() == null){
+            OrderController.setCurrentOrder(new Order());
+        }
+        Iterator<CustomerBouquetOrder> iterator = OrderController.getCurrentOrder().getCustomerBouquetOrdersById().iterator();
+        while (iterator.hasNext()){
+            CustomerBouquetOrder order = iterator.next();
+            if (order.getCustomerBouquetId().equals(customerBouquetOrder.getCustomerBouquetId())){
+                order.setQuantity(order.getQuantity() + customerBouquetOrder.getQuantity());
+                return "redirect:/customer_bouquets";
+            }
+        }
+        getCurrentOrder().getCustomerBouquetOrdersById().add(customerBouquetOrder);
+
+        return "redirect:/customer_bouquets";
+    }
+
+
+
     @RequestMapping("editOrder/{id}")
     public String editOrder(@PathVariable("id") int id, Model model){
         model.addAttribute("order", this.orderService.getById(id));
         model.addAttribute("listOrders", this.orderService.list());
 
-        return "order_client";
+        return "orders_client";
     }
 
     @RequestMapping("/removeOrder/{id}")
@@ -49,23 +132,23 @@ public class OrderController {
         return "redirect:/order_client";
     }
 
-    @RequestMapping(value = "order_client", method = RequestMethod.GET)
+    @RequestMapping(value = "orders_client", method = RequestMethod.GET)
     public String listOrders(Model model){
         UserController.getCurrentUser(model);
         model.addAttribute("order", new Order());
         model.addAttribute("listOrders", this.orderService.list());
 
-        return "order_client";
+        return "orders_client";
     }
 
     @RequestMapping(value = "shopping_cart", method = RequestMethod.GET)
     public String getCurrentOrder(Model model){
-        if (currentOrder == null) {
-            model.addAttribute("isEmpty", true);
-            //model.addAttribute("order", new Order());
-            model.addAttribute("order", orderService.getById(1));//*************************  GET BY ID
+        UserController.getCurrentUser(model);
+        if (currentOrder != null) {
+            model.addAttribute("isEmpty", false);
+            model.addAttribute("order", currentOrder);
         } else {
-            model.addAttribute("order", false);
+            model.addAttribute("isEmpty", true);
         }
 
         return "shopping_cart";
@@ -76,6 +159,22 @@ public class OrderController {
         currentOrder = order;
 
         return "redirect:/shopping_cart";
+    }
+
+    @RequestMapping(value = "baskets", method = RequestMethod.GET)
+    public String listBaskets(Model model){
+        UserController.getCurrentUser(model);
+        model.addAttribute("order", currentOrder);
+        //model.addAttribute("listBaskets", this.orderService.list());
+
+        return "baskets";
+    }
+
+    @RequestMapping(value = "/baskets/add", method = RequestMethod.POST)
+    public String addBasket(@ModelAttribute("order") Order order){
+        this.orderService.add(order);
+
+        return "redirect:/baskets";
     }
 }
 

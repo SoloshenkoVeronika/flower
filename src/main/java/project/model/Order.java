@@ -1,6 +1,7 @@
 package project.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -76,7 +77,12 @@ public class Order {
     @OneToMany(mappedBy = "orderByOrderId", fetch = FetchType.EAGER)
     private Collection<FlowerOrder> flowerOrdersById;
 
-    public Order() {}
+    public Order() {
+        bouquetOrdersById = new ArrayList<>();
+        compositionOrdersById = new ArrayList<>();
+        customerBouquetOrdersById = new ArrayList<>();
+        flowerOrdersById = new ArrayList<>();
+    }
 
     public Order(Integer userId, Integer senderId, Integer recipientId, Integer addressId,
                  Date date, String postcard, String additionalInf, String payment, double cost) {

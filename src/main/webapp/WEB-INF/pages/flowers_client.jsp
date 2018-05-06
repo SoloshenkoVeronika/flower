@@ -173,16 +173,21 @@
                                         </div>
                                     </div>
                                     <div class="col-md-2">
-                                        <div class="inputBlock">
-                                            <div class="minus">-</div>
-                                            <input type="text" value="0"/>
-                                            <div class="plus">+</div>
-                                        </div>
+                                        <c:url var="addAction" value="/order/addFlower"/>
+                                        <form:form action="${addAction}" modelAttribute="flowerOrder" class="form-horizontal">
+                                            <div class="inputBlock">
+                                                <div class="minus">-</div>
+                                                <form:input path="quantity" value="0"/>
+                                                <div class="plus">+</div>
+                                            </div>
 
-                                        <div class="fontbut">
-                                            <input type="submit" class="btn btn-success"
-                                                   value="<spring:message text="В корзину"/>"/>
-                                        </div>
+                                            <div class="fontbut">
+                                                <form:hidden path="flowerId" value="${flower.id}"/>
+
+                                                <input type="submit" class="btn btn-success"
+                                                       value="<spring:message text="В корзину"/>"/>
+                                            </div>
+                                        </form:form>
                                     </div>
 
 

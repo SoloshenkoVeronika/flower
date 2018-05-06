@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import project.model.Bouquet;
+import project.model.BouquetOrder;
+import project.model.Order;
 import project.service.Service;
+
+import java.util.Iterator;
 
 @Controller
 public class BouquetController {
@@ -58,11 +62,43 @@ public class BouquetController {
     }
 
     @RequestMapping(value = "bouquets_client", method = RequestMethod.GET)
-    public String listBouquetsClient(Model model){
+    public String listBouquetsClient(Model model) {
         UserController.getCurrentUser(model);
+        model.addAttribute("bouquetOrder", new BouquetOrder());
         model.addAttribute("bouquet", new Bouquet());
         model.addAttribute("listBouquets", this.bouquetService.list());
 
         return "bouquets_client";
+    }
+
+    @RequestMapping(value = "/order/addBouquet", method = RequestMethod.POST)
+    public String addBouquet(@ModelAttribute("bouquetOrder") BouquetOrder bouquetOrder) {
+        if (bouquetOrder.getQuantity() < 1) {
+            return "redirect:/bouquets_client";
+        }
+
+        if (OrderController.getCurrentOrder() == null) {
+            OrderController.setCurrentOrder(new Order());
+        }
+
+        Iterator<BouquetOrder> iterator = OrderController.getCurrentOrder().getBouquetOrdersById().iterator();
+        while (iterator.hasNext()) {
+            BouquetOrder order = iterator.next();
+            if (order.getBouquetId().equals(bouquetOrder.getBouquetId())) {
+                order.setQuantity(order.getQuantity() + bouquetOrder.getQuantity());
+
+                OrderController.getCurrentOrder().setCost(OrderController.getCurrentOrder().getCost() +
+                        order.getBouquetByBouquetId().getPrice() * bouquetOrder.getQuantity());
+
+                return "redirect:/bouquets_client";
+            }
+        }
+        bouquetOrder.setBouquetByBouquetId((Bouquet) bouquetService.getById(bouquetOrder.getBouquetId()));
+        OrderController.getCurrentOrder().getBouquetOrdersById().add(bouquetOrder);
+
+        OrderController.getCurrentOrder().setCost(OrderController.getCurrentOrder().getCost() +
+                bouquetOrder.getBouquetByBouquetId().getPrice() * bouquetOrder.getQuantity());
+
+        return "redirect:/bouquets_client";
     }
 }

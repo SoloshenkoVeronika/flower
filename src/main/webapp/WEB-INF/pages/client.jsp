@@ -38,12 +38,14 @@
                     </button>
                 </form>
             </div>
-            <div class="col-md-1">
-                <div class="backet">
-                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                    Корзина
+            <a href="<c:url value="/shopping_cart"/>" target="_self">
+                <div class="col-md-1">
+                    <div class="backet">
+                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                        Корзина
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>

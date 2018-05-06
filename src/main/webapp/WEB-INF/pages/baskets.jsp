@@ -124,7 +124,7 @@
                     <section class="main">
                         <c:url var="addAction" value="/baskets/add"/>
 
-                        <form:form action="${addAction}" commandName="basket" class="form-horizontal">
+                        <form:form action="${addAction}" commandName="order" class="form-horizontal">
                             <%--<c:if test="${!empty basket.cost}">--%>
                                 <%--<div class="form-group">--%>
                                     <%--<form:label path="id" class="col-sm-2 control-label">--%>
@@ -278,18 +278,31 @@
                             </div>
                         </form:form>
                     </section>
-
                 </div>
                 <div class="col-md-4">
                     <h4 class="page-header">Сумма заказа</h4>
                     <ul class="list-group">
-                        <p class="list-group-item list-group-item-success">43.21 p.</p>
-
+                        <p class="list-group-item list-group-item-success">${order.cost}</p>
                     </ul>
                     <h4 class="page-header">Товары в  Вашей корзине</h4>
                     <ul class="list-group">
-                        <p class="list-group-item list-group-item-success">Роза</p>
-                        <p class="list-group-item list-group-item-success">Роза</p>
+                        <c:forEach items="${order.flowerOrdersById}" var="flowerOrder">
+                            <p class="list-group-item list-group-item-success">${flowerOrder.flowerByFlowerId.species}
+                                ${flowerOrder.flowerByFlowerId.sort}, ${flowerOrder.quantity} шт</p>
+                        </c:forEach>
+                        <c:forEach items="${order.bouquetOrdersById}" var="bouquetOrder">
+                            <p class="list-group-item list-group-item-success">Букет ${bouquetOrder.bouquetByBouquetId.name},
+                                ${bouquetOrder.quantity} шт.</p>
+                        </c:forEach>
+                        <c:forEach items="${order.compositionOrdersById}" var="compositionOrder">
+                            <p class="list-group-item list-group-item-success">Композиция ${compositionOrder.compositionByCompositionId.name},
+                                    ${compositionOrder.quantity} шт.</p>
+                        </c:forEach>
+                        <c:set var="i" value="0"/>
+                        <c:forEach items="${order.customerBouquetOrdersById}"
+                                   var="customerBouquetOrder">
+                            <p class="list-group-item list-group-item-success">Букет № <c:out value="${i=i+1}"/></p>
+                        </c:forEach>
                     </ul>
 
                 </div>

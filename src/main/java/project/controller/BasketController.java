@@ -24,27 +24,9 @@ public class BasketController {
     }
 
 
-    @RequestMapping(value = "/baskets/add", method = RequestMethod.POST)
-    public String addBasket(@ModelAttribute("basket") Order order){
-
-            this.orderService.add(order);
-
-
-        return "redirect:/baskets";
-    }
-
     @RequestMapping("editBasket/{id}")
     public String editBasket(@PathVariable("id") int id, Model model){
         model.addAttribute("basket", this.orderService.getById(id));
-        model.addAttribute("listBaskets", this.orderService.list());
-
-        return "baskets";
-    }
-
-    @RequestMapping(value = "baskets", method = RequestMethod.GET)
-    public String listBaskets(Model model){
-        UserController.getCurrentUser(model);
-        model.addAttribute("basket", new Order());
         model.addAttribute("listBaskets", this.orderService.list());
 
         return "baskets";

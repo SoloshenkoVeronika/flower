@@ -51,12 +51,14 @@
                     </button>
                 </form>
             </div>
-            <div class="col-md-1">
-                <div class="backet">
-                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                    Корзина
+            <a href="<c:url value="/shopping_cart"/>" target="_self">
+                <div class="col-md-1">
+                    <div class="backet">
+                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                        Корзина
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>
@@ -164,16 +166,15 @@
                                         </div>
                                     </div>
                                     <div class="col-md-2">
-                                        <div class="inputBlock">
-                                            <div class="minus">-</div>
-                                            <input type="text" value="0"/>
-                                            <div class="plus">+</div>
-                                        </div>
+                                        <c:url var="addAction" value="/order/addPackToCustomerBouquet"/>
+                                        <form:form action="${addAction}" modelAttribute="pack" class="form-horizontal">
+                                            <div class="fontbut">
+                                                <form:hidden path="id" value="${pack.id}"/>
 
-                                        <div class="fontbut">
-                                            <input type="submit" class="btn btn-success"
-                                                   value="<spring:message text="Добавить в букет"/>"/>
-                                        </div>
+                                                <input type="submit" class="btn btn-success"
+                                                       value="<spring:message text="Добавить в букет"/>"/>
+                                            </div>
+                                        </form:form>
                                     </div>
 
 
