@@ -82,23 +82,46 @@
 
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="">
-                    <a href="<c:url value="/flowers_client"/>" target="_self">Цветы</a>
-                </li>
-                <li class="">
-                    <a href="<c:url value="/bouquets_client"/>" target="_self">Букеты</a>
-                </li>
-                <li class="">
-                    <a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>
-                </li>
-                <li class="">
-                    <a href="<c:url value="/customer_bouquets"/>" target="_self">Составить букет</a>
-                </li>
+                <c:choose>
+                    <c:when test="${isCustomerBouquetEmpty eq true}">
+                        <li class="">
+                            <a href="<c:url value="/flowers_client"/>" target="_self">Цветы</a>
+                        </li>
+                        <li class="">
+                            <a href="<c:url value="/bouquets_client"/>" target="_self">Букеты</a>
+                        </li>
+                        <li class="">
+                            <a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>
+                        </li>
+                        <li class="">
+                            <a href="<c:url value="/customer_bouquets"/>" target="_self">
+                                Составить букет
+                            </a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="">
+                            <a href="<c:url value="/customer_bouquets_flower"/>" target="_self">Цветы</a>
+                        </li>
+                        <li class="">
+                            <a href="<c:url value="/customer_bouquets_decoration"/>" target="_self">Украшения</a>
+                        </li>
+                        <li class="">
+                            <a href="<c:url value="/customer_bouquets_pack"/>" target="_self">Упаковка</a>
+                        </li>
+                        <li class="">
+                            <a href="<c:url value="/customer_bouquets/complete"/>" target="_self">
+                                Завершить создание букета
+                            </a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="<c:url value="/users/currentUser"/>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <a href="<c:url value="/users/currentUser"/>" class="dropdown-toggle" data-toggle="dropdown"
+                       role="button" aria-expanded="false">
                         <c:choose>
                             <c:when test="${user.login ne null}">
                                 ${user.login}
@@ -301,7 +324,8 @@
 
                                                 <div class="col-md-1">
                                                     <div class="price">
-                                                            ${compositionOrder.compositionByCompositionId.price} руб.<br/>
+                                                            ${compositionOrder.compositionByCompositionId.price}
+                                                        руб.<br/>
                                                             ${compositionOrder.quantity} шт.
                                                     </div>
                                                 </div>
@@ -386,7 +410,8 @@
                                                                        value="${flowerCustomerBouquet.quantity}"/>
                                                                 <c:set var="sum" value="${price*number}"/>
                                                                 <div class="cost"><c:out value="${sum}"/> руб.</div>
-                                                                <c:set var="total" value="${totalCost = totalCost + sum}"/>
+                                                                <c:set var="total"
+                                                                       value="${totalCost = totalCost + sum}"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -436,7 +461,8 @@
                                                                        value="${decorationCustomerBouquet.quantity}"/>
                                                                 <c:set var="sum" value="${price*number}"/>
                                                                 <div class="cost"><c:out value="${sum}"/> руб.</div>
-                                                                <c:set var="total" value="${totalCost = totalCost + sum}"/>
+                                                                <c:set var="total"
+                                                                       value="${totalCost = totalCost + sum}"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -492,15 +518,16 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="product_text">
-                                            Общая стоимость: <fmt:formatNumber type="number" maxFractionDigits="2" value="${totalCost}"/>руб.
-                                            <%--<c:out value="${totalCost}"/> руб.--%>
+                                            Общая стоимость: <fmt:formatNumber type="number" maxFractionDigits="2"
+                                                                               value="${totalCost}"/>руб.
+                                                <%--<c:out value="${totalCost}"/> руб.--%>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="linkp">
-                                    <a href="/baskets">Перейти к оформлению заказа</a>
-                                </div>
+                                        <a href="/baskets">Перейти к оформлению заказа</a>
+                                    </div>
                                 </div>
                             </c:otherwise>
                         </c:choose>

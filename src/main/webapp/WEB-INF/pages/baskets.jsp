@@ -76,7 +76,18 @@
                     <a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>
                 </li>
                 <li class="">
-                    <a href="<c:url value="/customer_bouquets"/>" target="_self">Составить букет</a>
+                    <c:choose>
+                        <c:when test="${isCustomerBouquetEmpty eq true}">
+                            <a href="<c:url value="/customer_bouquets"/>" target="_self">
+                                Составить букет
+                            </a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="<c:url value="/customer_bouquets/complete"/>" target="_self">
+                                Завершить создание букета
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
                 </li>
 
             </ul>
@@ -154,7 +165,7 @@
 
                             <div class="form-group">
                                 <form:label path="payment" class="col-sm-4 control-label">
-                                    <spring:message text="Введите вариант оплаты(наличные/банковская карта)"/>
+                                    <spring:message text="Введите вариант оплаты(наличные/банковская карта) *"/>
                                 </form:label>
                                 <div class="col-sm-4">
                                     <form:input path="payment" class="form-control"/>
@@ -235,7 +246,7 @@
                             Адрес доставки
                             <div class="form-group">
                                 <form:label path="addressByAddressId.city" class="col-sm-4 control-label">
-                                    <spring:message text="Город"/>
+                                    <spring:message text="Город *"/>
                                 </form:label>
                                 <div class="col-sm-4">
                                     <form:input path="addressByAddressId.city" class="form-control"/>
@@ -244,7 +255,7 @@
 
                             <div class="form-group">
                                 <form:label path="addressByAddressId.street" class="col-sm-4 control-label">
-                                    <spring:message text="Улица"/>
+                                    <spring:message text="Улица *"/>
                                 </form:label>
                                 <div class="col-sm-4">
                                     <form:input path="addressByAddressId.street" class="form-control"/>
@@ -253,7 +264,7 @@
 
                             <div class="form-group">
                                 <form:label path="addressByAddressId.house" class="col-sm-4 control-label">
-                                    <spring:message text="Дом"/>
+                                    <spring:message text="Дом *"/>
                                 </form:label>
                                 <div class="col-sm-4">
                                     <form:input path="addressByAddressId.house" class="form-control"/>
@@ -262,7 +273,7 @@
 
                             <div class="form-group">
                                 <form:label path="addressByAddressId.block" class="col-sm-4 control-label">
-                                    <spring:message text="Подъезд"/>
+                                    <spring:message text="Подъезд *"/>
                                 </form:label>
                                 <div class="col-sm-4">
                                     <form:input path="addressByAddressId.block" class="form-control"/>
@@ -271,7 +282,7 @@
 
                             <div class="form-group">
                                 <form:label path="addressByAddressId.flat" class="col-sm-4 control-label">
-                                    <spring:message text="Квартира"/>
+                                    <spring:message text="Квартира *"/>
                                 </form:label>
                                 <div class="col-sm-4">
                                     <form:input path="addressByAddressId.flat" class="form-control"/>

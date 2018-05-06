@@ -86,16 +86,28 @@
                     <a href="<c:url value="/customer_bouquets_decoration"/>" target="_self">Украшения</a>
                 </li>
                 <li class="">
-                <a href="<c:url value="/customer_bouquets_pack"/>" target="_self">Упаковка</a>
+                    <a href="<c:url value="/customer_bouquets_pack"/>" target="_self">Упаковка</a>
                 </li>
                 <li class="">
-                <a href="<c:url value=""/>" target="_self">Завершить создание букета</a>
+                    <c:choose>
+                        <c:when test="${isCustomerBouquetEmpty eq true}">
+                            <a href="<c:url value="/customer_bouquets"/>" target="_self">
+                                Составить букет
+                            </a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="<c:url value="/customer_bouquets/complete"/>" target="_self">
+                                Завершить создание букета
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
                 </li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="<c:url value="/users/currentUser"/>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <a href="<c:url value="/users/currentUser"/>" class="dropdown-toggle" data-toggle="dropdown"
+                       role="button" aria-expanded="false">
                         <c:choose>
                             <c:when test="${user.login ne null}">
                                 ${user.login}

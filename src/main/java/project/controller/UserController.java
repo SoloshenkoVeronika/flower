@@ -97,6 +97,12 @@ public class UserController {
     @RequestMapping(value = "client", method = RequestMethod.GET)
     public String lish(Model model) {
         getCurrentUser(model);
+
+        if (OrderController.getCustomerBouquet() == null)
+            model.addAttribute("isCustomerBouquetEmpty", true);
+        else
+            model.addAttribute("isCustomerBouquetEmpty", false);
+
         return "client";
     }
 }

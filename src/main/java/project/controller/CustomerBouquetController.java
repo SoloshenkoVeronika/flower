@@ -17,8 +17,11 @@ public class CustomerBouquetController {
     @RequestMapping(value = "customer_bouquets", method = RequestMethod.GET)
     public String listCustomer_bouquet(Model model){
         UserController.getCurrentUser(model);
-//        model.addAttribute("flower", new Flower());
-//        model.addAttribute("listFlowers", this.flowerService.list());
+
+        if (OrderController.getCustomerBouquet() == null)
+            model.addAttribute("isCustomerBouquetEmpty", true);
+        else
+            model.addAttribute("isCustomerBouquetEmpty", false);
 
         return "customer_bouquets";
     }

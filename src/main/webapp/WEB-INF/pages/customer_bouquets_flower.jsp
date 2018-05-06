@@ -90,7 +90,7 @@
                     <a href="<c:url value="/customer_bouquets_pack"/>" target="_self">Упаковка</a>
                 </li>
                 <li class="">
-                    <a href="<c:url value=""/>" target="_self">Завершить создание букета</a>
+                    <a href="<c:url value="customer_bouquets/complete"/>" target="_self">Завершить создание букета</a>
                 </li>
 
 

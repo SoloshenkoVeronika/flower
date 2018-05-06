@@ -11,15 +11,15 @@ public class Recipient {
     private Integer id;
 
     @Basic
-    @Column(name = "first_name", nullable = false, length = 50)
+    @Column(name = "first_name", nullable = true, length = 50)
     private String firstName;
 
     @Basic
-    @Column(name = "second_name", nullable = false, length = 50)
+    @Column(name = "second_name", nullable = true, length = 50)
     private String secondName;
 
     @Basic
-    @Column(name = "phone", nullable = false, length = 20)
+    @Column(name = "phone", nullable = true, length = 20)
     private String phone;
 
 

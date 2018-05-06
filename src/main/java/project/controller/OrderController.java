@@ -143,15 +143,30 @@ public class OrderController {
         return "orders_client";
     }
 
+
+    @RequestMapping(value = "customer_bouquets/complete", method = RequestMethod.GET)
+    public String completeCustomerBouquetCreation(Model model){
+        UserController.getCurrentUser(model);
+        customerBouquet = null;
+
+        return "redirect:/client";
+    }
+
     @RequestMapping(value = "shopping_cart", method = RequestMethod.GET)
     public String getCurrentOrder(Model model){
         UserController.getCurrentUser(model);
+
         if (currentOrder != null) {
             model.addAttribute("isEmpty", false);
             model.addAttribute("order", currentOrder);
         } else {
             model.addAttribute("isEmpty", true);
         }
+
+        if (OrderController.getCustomerBouquet() == null)
+            model.addAttribute("isCustomerBouquetEmpty", true);
+        else
+            model.addAttribute("isCustomerBouquetEmpty", false);
 
         return "shopping_cart";
     }
@@ -167,7 +182,11 @@ public class OrderController {
     public String listBaskets(Model model){
         UserController.getCurrentUser(model);
         model.addAttribute("order", currentOrder);
-        //model.addAttribute("listBaskets", this.orderService.list());
+
+        if (OrderController.getCustomerBouquet() == null)
+            model.addAttribute("isCustomerBouquetEmpty", true);
+        else
+            model.addAttribute("isCustomerBouquetEmpty", false);
 
         return "baskets";
     }
@@ -180,18 +199,41 @@ public class OrderController {
                 order.getSenderBySenderId().getEmail().equals("")){
             currentOrder.setSenderBySenderId(null);
         }
+        if(order.getSenderBySenderId().getSecondName().equals(""))
+            order.getSenderBySenderId().setSecondName(null);
+        if(order.getSenderBySenderId().getFirstName().equals(""))
+            order.getSenderBySenderId().setFirstName(null);
+        if(order.getSenderBySenderId().getPhone().equals(""))
+            order.getSenderBySenderId().setPhone(null);
+        if(order.getSenderBySenderId().getEmail().equals(""))
+            order.getSenderBySenderId().setEmail(null);
+
         if(order.getRecipientByRecipientId().getSecondName().equals("") &&
                 order.getRecipientByRecipientId().getFirstName().equals("") &&
                 order.getRecipientByRecipientId().getPhone().equals("")){
             currentOrder.setRecipientByRecipientId(null);
         }
+        if (order.getRecipientByRecipientId().getSecondName().equals(""))
+            order.getRecipientByRecipientId().setSecondName(null);
+        if (order.getRecipientByRecipientId().getFirstName().equals(""))
+            order.getRecipientByRecipientId().setFirstName(null);
+        if (order.getRecipientByRecipientId().getPhone().equals(""))
+            order.getRecipientByRecipientId().setPhone(null);
+
         currentOrder.setUserId(order.getUserId());
         if (order.getUserId() != null)
             currentOrder.setUserByUserId((User)userService.getById(order.getUserId()));
 
         currentOrder.setDate(new Date());
+
+        if (order.getPostcard().equals(""))
+            order.setPostcard(null);
         currentOrder.setPostcard(order.getPostcard());
+
+        if(order.getAdditionalInf().equals(""))
+            order.setAdditionalInf(null);
         currentOrder.setAdditionalInf(order.getAdditionalInf());
+
         currentOrder.setPayment(order.getPayment());
         //cost уже посчитан
 
@@ -230,6 +272,8 @@ public class OrderController {
         //можно использовать метод getAddress из dao, но лучше вынести эти методы в интерфейс
         //и назвать getObject как-нибудь и потом проверять
         //******** Это надо и для адреса, и для отправителя, и для получателя
+        //для отправителя и получателя нужно учитывать, что поля могут быть null, и тогда эти
+        //отправители и получатели развые
 
         this.orderService.add(currentOrder);
         Iterator<FlowerOrder> iterator = currentOrder.getFlowerOrdersById().iterator();

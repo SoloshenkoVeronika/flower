@@ -76,7 +76,18 @@
                     <a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>
                 </li>
                 <li class="">
-                    <a href="<c:url value="/customer_bouquets"/>" target="_self">Составить букет</a>
+                    <c:choose>
+                        <c:when test="${isCustomerBouquetEmpty eq true}">
+                            <a href="<c:url value="/customer_bouquets"/>" target="_self">
+                                Составить букет
+                            </a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="<c:url value="/customer_bouquets/complete"/>" target="_self">
+                                Завершить создание букета
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
                 </li>
 
             </ul>
