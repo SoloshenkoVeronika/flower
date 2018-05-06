@@ -7,7 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import project.model.*;
 import project.service.Service;
+import project.service.UserService;
 
+import java.util.Date;
 import java.util.Iterator;
 
 @Controller
@@ -20,6 +22,7 @@ public class OrderController {
     private Service compositionService;
     private Service packService;
     private Service decorationService;
+    private UserService userService;
 
     public static void setCurrentOrder(Order currentOrder) {
         OrderController.currentOrder = currentOrder;
@@ -82,6 +85,11 @@ public class OrderController {
         this.decorationService = decorationService;
     }
 
+    @Autowired(required = true)
+    @Qualifier(value = "userService")
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     // = ОФОРМИТЬ ЗАКАЗ
     @RequestMapping(value = "/order/add", method = RequestMethod.POST)
@@ -172,9 +180,25 @@ public class OrderController {
 
     @RequestMapping(value = "/baskets/add", method = RequestMethod.POST)
     public String addBasket(@ModelAttribute("order") Order order){
-        this.orderService.add(order);
+        currentOrder.setDate(new Date());
+        currentOrder.setPostcard(order.getPostcard());
+        currentOrder.setAdditionalInf(order.getAdditionalInf());
+        currentOrder.setPayment(order.getPayment());
+        //cost уже посчитан
+        currentOrder.setUserId(order.getUserId());
+        if(order.getUserId() != null)
+            currentOrder.setUserByUserId((User)userService.getById(order.getUserId()));
+
+        currentOrder.setSenderId(order.getSenderId());
+        //currentOrder.setSenderBySenderId();
+
+        currentOrder.setRecipientId(order.getRecipientId());
+        //currentOrder.setRecipientByRecipientId();
+
+        currentOrder.setAddressId(order.getAddressId());
+        //currentOrder.getAddressByAddressId()
+        this.orderService.add(currentOrder);
 
         return "redirect:/baskets";
     }
 }
-

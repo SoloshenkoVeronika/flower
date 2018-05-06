@@ -269,6 +269,7 @@
                             <div class="col-sm-4">
                                 <form:input path="payment" class="form-control"/>
                             </div>
+                            <form:hidden path="cost" value="${order.cost}"/>
                         </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
