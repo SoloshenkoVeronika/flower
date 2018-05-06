@@ -276,6 +276,7 @@ public class OrderController {
         //отправители и получатели развые
 
         this.orderService.add(currentOrder);
+
         Iterator<FlowerOrder> iterator = currentOrder.getFlowerOrdersById().iterator();
         while (iterator.hasNext()){
             FlowerOrder flowerOrder = iterator.next();
