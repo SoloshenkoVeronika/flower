@@ -12,6 +12,7 @@
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 <%@ page session="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>Корзина</title>
@@ -491,12 +492,15 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="product_text">
-                                            Общая стоимость: <c:out value="${totalCost}"/> руб.
+                                            Общая стоимость: <fmt:formatNumber type="number" maxFractionDigits="2" value="${totalCost}"/>руб.
+                                            <%--<c:out value="${totalCost}"/> руб.--%>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <a href="/baskets">Перейти к оформлению заказа</a>
+                                <div class="col-md-12">
+                                    <div class="linkp">
+                                    <a href="/senders">Перейти к оформлению заказа</a>
+                                </div>
                                 </div>
                             </c:otherwise>
                         </c:choose>

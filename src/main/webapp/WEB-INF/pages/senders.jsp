@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Admin
-  Date: 05.05.2018
-  Time: 14:46
+  Date: 06.05.2018
+  Time: 12:22
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -16,15 +16,15 @@
 <head>
     <title>Оформление заказа</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/autor_style.css" />"/>
-    <script  src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/search.js"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />" />
-    <link rel="stylesheet" href="<c:url value="/resources/css/client.css" />" />
+    <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/client.css" />"/>
     <link rel="shortcut icon" href="<c:url value="/resources/images/roza.png"/>" type="image/png">
 </head>
 <body>
@@ -41,7 +41,8 @@
             <div class="col-md-5">
                 <form class="navbar-form navbar-left" role="search">
                     <input type="text" id="text-to-find" value="" class="form-control" placeholder="Найти">
-                    <button type="submit" class="btn btn-default" onclick="javascript: FindOnPage('text-to-find'); return false;">
+                    <button type="submit" class="btn btn-default"
+                            onclick="javascript: FindOnPage('text-to-find'); return false;">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
                 </form>
@@ -81,7 +82,8 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="<c:url value="/users/currentUser"/>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <a href="<c:url value="/users/currentUser"/>" class="dropdown-toggle" data-toggle="dropdown"
+                       role="button" aria-expanded="false">
                         <c:choose>
                             <c:when test="${user.login ne null}">
                                 ${user.login}
@@ -123,42 +125,61 @@
                         style="color:#8d1645; font-family: 'Lobster', cursive; margin-top: -1px;
                         text-align: center;">Оформление заказа</h1>
                     <section class="main">
-                        <c:url var="addAction" value="/baskets/add"/>
-
-                        <form:form action="${addAction}" commandName="order" class="form-horizontal">
-
-                         <%--/==================================================================== --%>
-                            <div class="form-group">
-                                <form:label path="postcard" class="col-sm-4 control-label">
-                                    <spring:message text=" Текст записки к букету (Пожелание) 50 символов"/>
-                                </form:label>
-                                <div class="col-sm-4">
-                                    <form:textarea path="postcard" class="form-control"/>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <form:label path="additionalInf" class="col-sm-4 control-label">
-                                    <spring:message text="Дополнительная информация (пример 'Доставка анонимна')"/>
-                                </form:label>
-                                <div class="col-sm-4">
-                                    <form:textarea path="additionalInf" class="form-control"/>
-                                </div>
-                            </div>
-                        <div class="form-group">
-                            <form:label path="payment" class="col-sm-4 control-label">
-                                <spring:message text="Введите вариант оплаты(наличные/банковская карта)"/>
-                            </form:label>
-                            <div class="col-sm-4">
-                                <form:input path="payment" class="form-control"/>
-                            </div>
-                            <form:hidden path="cost" value="${order.cost}"/>
+                        <div class="orderhead">
+                            <h1>Информация об отправителе</h1>
                         </div>
+                        <c:url var="addAction" value="/senders/add"/>
+
+                        <form:form action="${addAction}" commandName="sender" class="form-horizontal">
+                            <c:if test="${!empty sender.firstName}">
+                                <div class="form-group">
+                                    <form:label path="id" class="col-sm-2 control-label">
+                                        <spring:message text="ID"/>
+                                    </form:label>
+                                    <div class="col-sm-2">
+                                        <form:input path="id" readonly="true" size="8" disabled="true"
+                                                    class="form-control"/>
+                                        <form:hidden path="id"/>
+                                    </div>
+                                </div>
+                            </c:if>
+                            <div class="form-group">
+                                <form:label path="firstName" class="col-sm-2 control-label">
+                                    <spring:message text="Фамилия получателя"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="firstName" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <form:label path="secondName" class="col-sm-2 control-label">
+                                    <spring:message text="Имя отправителя"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="secondName" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <form:label path="phone" class="col-sm-2 control-label">
+                                    <spring:message text="Телефон отправителя"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="phone" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <form:label path="email" class="col-sm-2 control-label">
+                                    <spring:message text="email отправителя"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="email" class="form-control"/>
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                        <input type="submit" class="btn btn-success"
-                                               value="<spring:message text="Оформить заказ"/>"/>
+                                    <input type="submit" class="btn btn-success"
+                                           value="<spring:message text="Следующий шаг"/>"/>
                                 </div>
                             </div>
                         </form:form>
@@ -167,21 +188,26 @@
                 <div class="col-md-4">
                     <h4 class="page-header">Сумма заказа</h4>
                     <ul class="list-group">
-                        <p class="list-group-item list-group-item-success"> <fmt:formatNumber type="number" maxFractionDigits="2" value="${order.cost}"/> p.</p>
+                        <p class="list-group-item list-group-item-success"><fmt:formatNumber type="number"
+                                                                                             maxFractionDigits="2"
+                                                                                             value="${order.cost}"/>
+                            p.</p>
 
                     </ul>
-                    <h4 class="page-header">Товары в  Вашей корзине</h4>
+                    <h4 class="page-header">Товары в Вашей корзине</h4>
                     <ul class="list-group">
                         <c:forEach items="${order.flowerOrdersById}" var="flowerOrder">
                             <p class="list-group-item list-group-item-success">${flowerOrder.flowerByFlowerId.species}
-                                ${flowerOrder.flowerByFlowerId.sort}, ${flowerOrder.quantity} шт</p>
+                                    ${flowerOrder.flowerByFlowerId.sort}, ${flowerOrder.quantity} шт</p>
                         </c:forEach>
                         <c:forEach items="${order.bouquetOrdersById}" var="bouquetOrder">
-                            <p class="list-group-item list-group-item-success">Букет ${bouquetOrder.bouquetByBouquetId.name},
-                                ${bouquetOrder.quantity} шт.</p>
+                            <p class="list-group-item list-group-item-success">
+                                Букет ${bouquetOrder.bouquetByBouquetId.name},
+                                    ${bouquetOrder.quantity} шт.</p>
                         </c:forEach>
                         <c:forEach items="${order.compositionOrdersById}" var="compositionOrder">
-                            <p class="list-group-item list-group-item-success">Композиция ${compositionOrder.compositionByCompositionId.name},
+                            <p class="list-group-item list-group-item-success">
+                                Композиция ${compositionOrder.compositionByCompositionId.name},
                                     ${compositionOrder.quantity} шт.</p>
                         </c:forEach>
                         <c:set var="i" value="0"/>
@@ -199,16 +225,17 @@
 
     <footer>
         <div class="container">
-            <div style="padding: 10px 0pt 0pt 30px; clear: both; color: #8d1645; font-size: 15px;">Все права защищены &copy; <?=date ('Y')?></div>
+            <div style="padding: 10px 0pt 0pt 30px; clear: both; color: #8d1645; font-size: 15px;">Все права защищены
+                &copy; <?=date ('Y')?></div>
         </div>
     </footer>
 </div>
 <script type="text/javascript">
-    $(function(){
-        $(".showpassword").each(function(index,input) {
+    $(function () {
+        $(".showpassword").each(function (index, input) {
             var $input = $(input);
             $("<p class='opt'/>").append(
-                $("<input type='checkbox' class='showpasswordcheckbox' id='showPassword' />").click(function() {
+                $("<input type='checkbox' class='showpasswordcheckbox' id='showPassword' />").click(function () {
                     var change = $(this).is(":checked") ? "text" : "password";
                     var rep = $("<input placeholder='Пароль' type='" + change + "' />")
                         .attr("id", $input.attr("id"))
@@ -222,8 +249,8 @@
             ).append($("<label for='showPassword'/>").text("Показать пароль")).insertAfter($input.parent());
         });
 
-        $('#showPassword').click(function(){
-            if($("#showPassword").is(":checked")) {
+        $('#showPassword').click(function () {
+            if ($("#showPassword").is(":checked")) {
                 $('.icon-lock').addClass('icon-unlock');
                 $('.icon-unlock').removeClass('icon-lock');
             } else {

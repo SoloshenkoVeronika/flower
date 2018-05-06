@@ -66,4 +66,14 @@
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+}
+
+.linkp{
+    padding-top: 20px;
+    font-family: 'Bad Script', cursive;
+    font-size: 30px;
+    text-align: center;
+    color: #8d1645;
+    text-decoration: none
 }

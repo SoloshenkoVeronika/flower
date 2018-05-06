@@ -4,11 +4,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import project.model.Decoration;
+import project.model.Sender;
 
 import java.util.List;
 
-public class SenderDaoImpl implements Dao<Decoration> {
+public class SenderDaoImpl implements Dao<Sender> {
     private static final Logger logger = LoggerFactory.getLogger(SenderDaoImpl.class);
 
     private SessionFactory sessionFactory;
@@ -18,50 +18,50 @@ public class SenderDaoImpl implements Dao<Decoration> {
     }
 
     @Override
-    public void add(Decoration decoration) {
+    public void add(Sender sender) {
         Session session = this.sessionFactory.getCurrentSession();
-        session.persist(decoration);
-        logger.info("Decoration successfully saved. Decoration details: " + decoration);
+        session.persist(sender);
+        logger.info("Sender successfully saved. Sender details: " + sender);
     }
 
     @Override
-    public void update(Decoration decoration) {
+    public void update(Sender sender) {
         Session session = this.sessionFactory.getCurrentSession();
-        session.update(decoration);
-        logger.info("Decoration successfully updated. Decoration details: " + decoration);
+        session.update(sender);
+        logger.info("Sender successfully updated. Sender details: " + sender);
     }
 
     @Override
     public void remove(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Decoration decoration = (Decoration) session.load(Decoration.class, new Integer(id));
+        Sender sender = (Sender) session.load(Sender.class, new Integer(id));
 
-        if(decoration!=null){
-            session.delete(decoration);
+        if(sender!=null){
+            session.delete(sender);
         }
-        logger.info("Decoration successfully removed. Decoration details: " + decoration);
+        logger.info("Sender successfully removed. Sender details: " + sender);
     }
 
     @Override
-    public Decoration getById(int id) {
+    public Sender getById(int id) {
         Session session =this.sessionFactory.getCurrentSession();
-        Decoration decoration = (Decoration) session.load(Decoration.class, new Integer(id));
-        logger.info("Decoration successfully loaded. Decoration details: " + decoration);
+        Sender sender = (Sender) session.load(Sender.class, new Integer(id));
+        logger.info("Sender successfully loaded. Sender details: " + sender);
 
-        return decoration;
+        return sender;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Decoration> list() {
+    public List<Sender> list() {
         Session session = this.sessionFactory.getCurrentSession();
-        List<Decoration> decorationList = session.createQuery("from Decoration").list();
+        List<Sender> senderList = session.createQuery("from Sender").list();
 
-        for(Decoration decoration: decorationList){
-            logger.info("Decoration list: " + decoration);
+        for(Sender sender: senderList){
+            logger.info("Sender list: " + sender);
         }
 
-        return decorationList;
+        return senderList;
     }
 }
 

@@ -159,6 +159,21 @@
         <property name="addressDao" ref="addressDao"/>
     </bean>
 
+    <bean id="recipientDao" class="project.dao.RecipientDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="recipientService" class="project.service.RecipientServiceImpl">
+        <property name="recipientDao" ref="recipientDao"/>
+    </bean>
+
+    <bean id="senderDao" class="project.dao.SenderDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="senderService" class="project.service.SenderServiceImpl">
+        <property name="senderDao" ref="senderDao"/>
+    </bean>
 
 
     <context:component-scan base-package="project"/>
