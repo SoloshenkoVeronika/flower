@@ -75,5 +75,20 @@
     font-size: 30px;
     text-align: center;
     color: #8d1645;
-    text-decoration: none
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.advice{
+    font-size: 18px;
+    text-indent: 1.5em; /* Отступ первой строки */
+    text-align: justify; /* Выравнивание по ширине */
+}
+
+.listtt  {
+    display:inline-block;
+    font-size: 18px;
+text-indent: 1.5em; /* Отступ первой строки */
+    font-weight: 600;
+    color:#2ecc71;
 }
