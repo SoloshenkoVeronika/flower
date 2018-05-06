@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import project.model.Order;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDaoImpl implements Dao<Order> {
@@ -16,6 +17,17 @@ public class OrderDaoImpl implements Dao<Order> {
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
+    }
+
+    private Order getOrder(Order order){
+        Session session = this.sessionFactory.getCurrentSession();
+        ArrayList<Order> orders = (ArrayList) session.createQuery("from Order where date = '"+order.getDate()+
+                "' and postcard = '"+order.getPostcard() + "' and additionalInf = '"+order.getAdditionalInf() +
+                "' and payment = '"+order.getPayment() + "' and cost = '"+order.getCost()+"'").list();
+        for(int i = 0; i <orders.size(); i++){
+            order = orders.get(i);
+        }
+        return order;
     }
 
     @Override

@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import project.model.Address;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddressDaoImpl implements Dao<Address> {
@@ -15,6 +16,17 @@ public class AddressDaoImpl implements Dao<Address> {
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
+    }
+
+    private Address getAddress(Address address){
+        Session session = this.sessionFactory.getCurrentSession();
+        ArrayList<Address> addresses = (ArrayList) session.createQuery("from Address where city = '"+address.getCity()+
+                "' and street = '"+address.getStreet() + "' and house = '"+address.getHouse() +
+                "' and block = '"+address.getBlock() + "' and flat = '"+address.getFlat()+"'").list();
+        for(int i = 0; i <addresses.size(); i++){
+            address = addresses.get(i);
+        }
+        return address;
     }
 
     @Override

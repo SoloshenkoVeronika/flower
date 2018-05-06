@@ -34,9 +34,9 @@ CREATE TABLE IF NOT EXISTS user (
 
 CREATE TABLE IF NOT EXISTS sender (
 	id INT(3) NOT NULL AUTO_INCREMENT,
-	first_name VARCHAR(50) NOT NULL,
-	second_name VARCHAR(50) NOT NULL,
-	phone VARCHAR(20) NOT NULL,
+	first_name VARCHAR(50) NULL,
+	second_name VARCHAR(50) NULL,
+	phone VARCHAR(20) NULL,
 	email VARCHAR(50) NULL,
 
 	PRIMARY KEY (id),
@@ -45,9 +45,9 @@ CREATE TABLE IF NOT EXISTS sender (
 
 CREATE TABLE IF NOT EXISTS recipient (
 	id INT(3) NOT NULL AUTO_INCREMENT,
-	first_name VARCHAR(50) NOT NULL,
-	second_name VARCHAR(50) NOT NULL,
-	phone VARCHAR(20) NOT NULL,
+	first_name VARCHAR(50) NULL,
+	second_name VARCHAR(50) NULL,
+	phone VARCHAR(20) NULL,
 
 	PRIMARY KEY (id),
 	UNIQUE KEY phone (phone)
@@ -404,10 +404,6 @@ VALUES ('Букет с лилиями и ирисами', '7 лилий, 5 ир�
 
 
 INSERT INTO composition (name, composition, pack, amount, price, picture)
-VALUES ('Сказка', '20 роз Senorita, 12 ромашек, ветки рускуса, мелкие цветы',
-				'Круглая фиолетовая коробка в горошек', 10, 48.89, ' composition_rose_chamomile.jpg');
-
-INSERT INTO composition (name, composition, pack, amount, price, picture)
 VALUES ('Нежное утро', '40 тюльпанов Christmas Dream, широкая розовая атласная лента',
 				'Круглая фиолетовая коробка', 20, 38.99, ' composition_tulip.jpg');
 
@@ -418,6 +414,10 @@ VALUES ('Сюрприз', '9 роз, 3 тюльпана, декоративны�
 INSERT INTO composition (name, composition, pack, amount, price, picture)
 VALUES ('Живая композиция', '2 герберы, 3 розы, декоративные украшения, широкая розовая атласная лента',
 				'Плетёная корзина', 20, 50.2, ' composition_gerbera_rose.jpg');
+
+INSERT INTO composition (name, composition, pack, amount, price, picture)
+VALUES ('Сказка', '20 роз Senorita, 12 ромашек, ветки рускуса, мелкие цветы',
+				'Круглая фиолетовая коробка в горошек', 10, 48.89, ' composition_rose_chamomile.jpg');
 
 
 

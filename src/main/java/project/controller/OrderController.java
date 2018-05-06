@@ -17,11 +17,11 @@ public class OrderController {
     private Service orderService;
     private static Order currentOrder;
     private static CustomerBouquet customerBouquet;
-    private Service flowerService;
-    private Service bouquetService;
-    private Service compositionService;
-    private Service packService;
-    private Service decorationService;
+
+    private Service senderService;
+    private Service recipientService;
+    private Service addressService;
+    private Service flowerOrderService;
     private UserService userService;
 
     public static void setCurrentOrder(Order currentOrder) {
@@ -56,33 +56,27 @@ public class OrderController {
     }
 
     @Autowired(required = true)
-    @Qualifier(value = "flowerService")
-    public void setFlowerService(Service flowerService) {
-        this.flowerService = flowerService;
+    @Qualifier(value = "senderService")
+    public void setSenderService(Service senderService) {
+        this.senderService = senderService;
     }
 
     @Autowired(required = true)
-    @Qualifier(value = "bouquetService")
-    public void setBouquetService(Service bouquetService) {
-        this.bouquetService = bouquetService;
+    @Qualifier(value = "recipientService")
+    public void setRecipientService(Service recipientService) {
+        this.recipientService = recipientService;
     }
 
     @Autowired(required = true)
-    @Qualifier(value = "compositionService")
-    public void setCompositionService(Service compositionService) {
-        this.compositionService = compositionService;
+    @Qualifier(value = "addressService")
+    public void setAddressService(Service addressService) {
+        this.addressService = addressService;
     }
 
     @Autowired(required = true)
-    @Qualifier(value = "packService")
-    public void setPackService(Service packService) {
-        this.packService = packService;
-    }
-
-    @Autowired(required = true)
-    @Qualifier(value = "decorationService")
-    public void setDecorationService(Service decorationService) {
-        this.decorationService = decorationService;
+    @Qualifier(value = "flowerOrderService")
+    public void setFlowerOrderService(Service flowerOrderService) {
+        this.flowerOrderService = flowerOrderService;
     }
 
     @Autowired(required = true)
@@ -91,7 +85,7 @@ public class OrderController {
         this.userService = userService;
     }
 
-    // = ОФОРМИТЬ ЗАКАЗ
+
     @RequestMapping(value = "/order/add", method = RequestMethod.POST)
     public String addOrder(@ModelAttribute("order") Order order){
         if(order.getId() == null){
@@ -180,24 +174,71 @@ public class OrderController {
 
     @RequestMapping(value = "/baskets/add", method = RequestMethod.POST)
     public String addBasket(@ModelAttribute("order") Order order){
+        if(order.getSenderBySenderId().getSecondName().equals("") &&
+                order.getSenderBySenderId().getFirstName().equals("") &&
+                order.getSenderBySenderId().getPhone().equals("") &&
+                order.getSenderBySenderId().getEmail().equals("")){
+            currentOrder.setSenderBySenderId(null);
+        }
+        if(order.getRecipientByRecipientId().getSecondName().equals("") &&
+                order.getRecipientByRecipientId().getFirstName().equals("") &&
+                order.getRecipientByRecipientId().getPhone().equals("")){
+            currentOrder.setRecipientByRecipientId(null);
+        }
+        currentOrder.setUserId(order.getUserId());
+        if (order.getUserId() != null)
+            currentOrder.setUserByUserId((User)userService.getById(order.getUserId()));
+
         currentOrder.setDate(new Date());
         currentOrder.setPostcard(order.getPostcard());
         currentOrder.setAdditionalInf(order.getAdditionalInf());
         currentOrder.setPayment(order.getPayment());
         //cost уже посчитан
-        currentOrder.setUserId(order.getUserId());
-        if(order.getUserId() != null)
-            currentOrder.setUserByUserId((User)userService.getById(order.getUserId()));
 
-        currentOrder.setSenderId(order.getSenderId());
-        //currentOrder.setSenderBySenderId();
+        Sender sender = new Sender();
+        sender.setSecondName(order.getSenderBySenderId().getSecondName());
+        sender.setFirstName(order.getSenderBySenderId().getFirstName());
+        sender.setPhone(order.getSenderBySenderId().getPhone());
+        sender.setEmail(order.getSenderBySenderId().getEmail());
 
-        currentOrder.setRecipientId(order.getRecipientId());
-        //currentOrder.setRecipientByRecipientId();
+        senderService.add(sender);
+        currentOrder.setSenderId(sender.getId());
+        currentOrder.setSenderBySenderId(sender);
 
-        currentOrder.setAddressId(order.getAddressId());
-        //currentOrder.getAddressByAddressId()
+
+        Recipient recipient = new Recipient();
+        recipient.setSecondName(order.getRecipientByRecipientId().getSecondName());
+        recipient.setFirstName(order.getRecipientByRecipientId().getFirstName());
+        recipient.setPhone(order.getRecipientByRecipientId().getPhone());
+
+        recipientService.add(recipient);
+        currentOrder.setRecipientId(recipient.getId());
+        currentOrder.setRecipientByRecipientId(recipient);
+
+
+        Address address = new Address();
+        address.setCity(order.getAddressByAddressId().getCity());
+        address.setStreet(order.getAddressByAddressId().getStreet());
+        address.setHouse(order.getAddressByAddressId().getHouse());
+        address.setBlock(order.getAddressByAddressId().getBlock());
+        address.setFlat(order.getAddressByAddressId().getFlat());
+
+        addressService.add(address);
+        currentOrder.setAddressId(address.getId());
+        currentOrder.setAddressByAddressId(address);
+        //нужна проверка, если ли в бд адрес с такими же полями, чтобы не создавать новый.
+        //можно использовать метод getAddress из dao, но лучше вынести эти методы в интерфейс
+        //и назвать getObject как-нибудь и потом проверять
+        //******** Это надо и для адреса, и для отправителя, и для получателя
+
         this.orderService.add(currentOrder);
+        Iterator<FlowerOrder> iterator = currentOrder.getFlowerOrdersById().iterator();
+        while (iterator.hasNext()){
+            FlowerOrder flowerOrder = iterator.next();
+            flowerOrder.setOrderId(currentOrder.getId());
+            flowerOrder.setOrderByOrderId(currentOrder);
+            flowerOrderService.add(flowerOrder);
+        }
 
         return "redirect:/baskets";
     }

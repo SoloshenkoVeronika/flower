@@ -499,7 +499,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="linkp">
-                                    <a href="/senders">Перейти к оформлению заказа</a>
+                                    <a href="/baskets">Перейти к оформлению заказа</a>
                                 </div>
                                 </div>
                             </c:otherwise>

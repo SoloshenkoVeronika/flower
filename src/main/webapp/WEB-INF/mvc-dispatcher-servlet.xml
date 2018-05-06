@@ -29,15 +29,6 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="annotatedClasses">
             <list>
-                <!--
-                <value>project.model.User</value>
-                <value>project.model.Flower</value>
-                <value>project.model.Bouquet</value>
-                <value>project.model.Decoration</value>
-                <value>project.model.Composition</value>
-                <value>project.model.Pack</value>
-                -->
-
                 <value>project.model.User</value>
                 <value>project.model.Sender</value>
                 <value>project.model.Recipient</value>
@@ -173,6 +164,14 @@
 
     <bean id="senderService" class="project.service.SenderServiceImpl">
         <property name="senderDao" ref="senderDao"/>
+    </bean>
+
+    <bean id="flowerOrderDao" class="project.dao.FlowerOrderOrderDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="flowerOrderService" class="project.service.FlowerOrderServiceImpl">
+        <property name="flowerOrderDao" ref="flowerOrderDao"/>
     </bean>
 
 

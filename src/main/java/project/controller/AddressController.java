@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import project.model.Address;
-import project.model.Order;
 import project.service.Service;
 
 @Controller
@@ -47,12 +46,12 @@ public class AddressController {
 
 
 
-    @RequestMapping(value = "addresss", method = RequestMethod.GET)
+    @RequestMapping(value = "address", method = RequestMethod.GET)
     public String listAddresss(Model model) {
         UserController.getCurrentUser(model);
         model.addAttribute("address", new Address());
 
-        return "addresss";
+        return "address";
     }
 }
 

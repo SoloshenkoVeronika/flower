@@ -31,7 +31,7 @@ public class RecipientController {
             this.recipientService.update(recipient);
         }
 
-        return "redirect:/addresss";
+        return "redirect:address";
     }
 
     @RequestMapping("editRecipient/{id}")
@@ -39,7 +39,7 @@ public class RecipientController {
         model.addAttribute("recipient", this.recipientService.getById(id));
         model.addAttribute("listRecipients", this.recipientService.list());
 
-        return "addresss";
+        return "address";
     }
 
     @RequestMapping(value = "recipients", method = RequestMethod.GET)

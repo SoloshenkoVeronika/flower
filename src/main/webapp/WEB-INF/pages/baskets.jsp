@@ -16,15 +16,15 @@
 <head>
     <title>Оформление заказа</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/autor_style.css" />"/>
-    <script  src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/search.js"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />" />
-    <link rel="stylesheet" href="<c:url value="/resources/css/client.css" />" />
+    <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/client.css" />"/>
     <link rel="shortcut icon" href="<c:url value="/resources/images/roza.png"/>" type="image/png">
 </head>
 <body>
@@ -41,7 +41,8 @@
             <div class="col-md-5">
                 <form class="navbar-form navbar-left" role="search">
                     <input type="text" id="text-to-find" value="" class="form-control" placeholder="Найти">
-                    <button type="submit" class="btn btn-default" onclick="javascript: FindOnPage('text-to-find'); return false;">
+                    <button type="submit" class="btn btn-default"
+                            onclick="javascript: FindOnPage('text-to-find'); return false;">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
                 </form>
@@ -81,7 +82,8 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="<c:url value="/users/currentUser"/>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <a href="<c:url value="/users/currentUser"/>" class="dropdown-toggle" data-toggle="dropdown"
+                       role="button" aria-expanded="false">
                         <c:choose>
                             <c:when test="${user.login ne null}">
                                 ${user.login}
@@ -127,7 +129,11 @@
 
                         <form:form action="${addAction}" commandName="order" class="form-horizontal">
 
-                         <%--/==================================================================== --%>
+                            <!--              ОБЩАЯ ИНФОРМАЦИЯ О ЗАКАЗЕ              -->
+                            <c:if test="${user.login ne null}">
+                                <form:hidden path="userId" value="${user.id}"/>
+                            </c:if>
+
                             <div class="form-group">
                                 <form:label path="postcard" class="col-sm-4 control-label">
                                     <spring:message text=" Текст записки к букету (Пожелание) 50 символов"/>
@@ -146,19 +152,138 @@
                                 </div>
                             </div>
 
-                        <div class="form-group">
-                            <form:label path="payment" class="col-sm-4 control-label">
-                                <spring:message text="Введите вариант оплаты(наличные/банковская карта)"/>
-                            </form:label>
-                            <div class="col-sm-4">
-                                <form:input path="payment" class="form-control"/>
+                            <div class="form-group">
+                                <form:label path="payment" class="col-sm-4 control-label">
+                                    <spring:message text="Введите вариант оплаты(наличные/банковская карта)"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="payment" class="form-control"/>
+                                </div>
+
+                                <form:hidden path="cost" value="${order.cost}"/>
                             </div>
-                            <form:hidden path="cost" value="${order.cost}"/>
-                        </div>
+
+                            <!--              ОТПРАВИТЕЛЬ              -->
+                            Отправитель
+                            <div class="form-group">
+                                <form:label path="senderBySenderId.secondName" class="col-sm-4 control-label">
+                                    <spring:message text="Фамилия"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="senderBySenderId.secondName" class="form-control"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <form:label path="senderBySenderId.firstName" class="col-sm-4 control-label">
+                                    <spring:message text="Имя"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="senderBySenderId.firstName" class="form-control"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <form:label path="senderBySenderId.phone" class="col-sm-4 control-label">
+                                    <spring:message text="Телефон"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="senderBySenderId.phone" class="form-control"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <form:label path="senderBySenderId.email" class="col-sm-4 control-label">
+                                    <spring:message text="e-mail"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="senderBySenderId.email" class="form-control"/>
+                                </div>
+                            </div>
+
+
+                            <!--              ПОЛУЧАТЕЛЬ              -->
+                            Получатель
+                            <div class="form-group">
+                                <form:label path="recipientByRecipientId.secondName" class="col-sm-4 control-label">
+                                    <spring:message text="Фамилия"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="recipientByRecipientId.secondName" class="form-control"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <form:label path="recipientByRecipientId.firstName" class="col-sm-4 control-label">
+                                    <spring:message text="Имя"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="recipientByRecipientId.firstName" class="form-control"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <form:label path="recipientByRecipientId.phone" class="col-sm-4 control-label">
+                                    <spring:message text="Телефон"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="recipientByRecipientId.phone" class="form-control"/>
+                                </div>
+                            </div>
+
+                            <!--              АДРЕС ДОСТАВКИ              -->
+                            Адрес доставки
+                            <div class="form-group">
+                                <form:label path="addressByAddressId.city" class="col-sm-4 control-label">
+                                    <spring:message text="Город"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="addressByAddressId.city" class="form-control"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <form:label path="addressByAddressId.street" class="col-sm-4 control-label">
+                                    <spring:message text="Улица"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="addressByAddressId.street" class="form-control"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <form:label path="addressByAddressId.house" class="col-sm-4 control-label">
+                                    <spring:message text="Дом"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="addressByAddressId.house" class="form-control"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <form:label path="addressByAddressId.block" class="col-sm-4 control-label">
+                                    <spring:message text="Подъезд"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="addressByAddressId.block" class="form-control"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <form:label path="addressByAddressId.flat" class="col-sm-4 control-label">
+                                    <spring:message text="Квартира"/>
+                                </form:label>
+                                <div class="col-sm-4">
+                                    <form:input path="addressByAddressId.flat" class="form-control"/>
+                                </div>
+                            </div>
+
+
+
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                        <input type="submit" class="btn btn-success"
-                                               value="<spring:message text="Оформить заказ"/>"/>
+                                    <input type="submit" class="btn btn-success"
+                                           value="<spring:message text="Оформить заказ"/>"/>
                                 </div>
                             </div>
                         </form:form>
@@ -167,21 +292,26 @@
                 <div class="col-md-4">
                     <h4 class="page-header">Сумма заказа</h4>
                     <ul class="list-group">
-                        <p class="list-group-item list-group-item-success"> <fmt:formatNumber type="number" maxFractionDigits="2" value="${order.cost}"/> p.</p>
+                        <p class="list-group-item list-group-item-success"><fmt:formatNumber type="number"
+                                                                                             maxFractionDigits="2"
+                                                                                             value="${order.cost}"/>
+                            p.</p>
 
                     </ul>
-                    <h4 class="page-header">Товары в  Вашей корзине</h4>
+                    <h4 class="page-header">Товары в Вашей корзине</h4>
                     <ul class="list-group">
                         <c:forEach items="${order.flowerOrdersById}" var="flowerOrder">
                             <p class="list-group-item list-group-item-success">${flowerOrder.flowerByFlowerId.species}
-                                ${flowerOrder.flowerByFlowerId.sort}, ${flowerOrder.quantity} шт</p>
+                                    ${flowerOrder.flowerByFlowerId.sort}, ${flowerOrder.quantity} шт</p>
                         </c:forEach>
                         <c:forEach items="${order.bouquetOrdersById}" var="bouquetOrder">
-                            <p class="list-group-item list-group-item-success">Букет ${bouquetOrder.bouquetByBouquetId.name},
-                                ${bouquetOrder.quantity} шт.</p>
+                            <p class="list-group-item list-group-item-success">
+                                Букет ${bouquetOrder.bouquetByBouquetId.name},
+                                    ${bouquetOrder.quantity} шт.</p>
                         </c:forEach>
                         <c:forEach items="${order.compositionOrdersById}" var="compositionOrder">
-                            <p class="list-group-item list-group-item-success">Композиция ${compositionOrder.compositionByCompositionId.name},
+                            <p class="list-group-item list-group-item-success">
+                                Композиция ${compositionOrder.compositionByCompositionId.name},
                                     ${compositionOrder.quantity} шт.</p>
                         </c:forEach>
                         <c:set var="i" value="0"/>
@@ -199,16 +329,17 @@
 
     <footer>
         <div class="container">
-            <div style="padding: 10px 0pt 0pt 30px; clear: both; color: #8d1645; font-size: 15px;">Все права защищены &copy; <?=date ('Y')?></div>
+            <div style="padding: 10px 0pt 0pt 30px; clear: both; color: #8d1645; font-size: 15px;">Все права защищены
+                &copy; <?=date ('Y')?></div>
         </div>
     </footer>
 </div>
 <script type="text/javascript">
-    $(function(){
-        $(".showpassword").each(function(index,input) {
+    $(function () {
+        $(".showpassword").each(function (index, input) {
             var $input = $(input);
             $("<p class='opt'/>").append(
-                $("<input type='checkbox' class='showpasswordcheckbox' id='showPassword' />").click(function() {
+                $("<input type='checkbox' class='showpasswordcheckbox' id='showPassword' />").click(function () {
                     var change = $(this).is(":checked") ? "text" : "password";
                     var rep = $("<input placeholder='Пароль' type='" + change + "' />")
                         .attr("id", $input.attr("id"))
@@ -222,8 +353,8 @@
             ).append($("<label for='showPassword'/>").text("Показать пароль")).insertAfter($input.parent());
         });
 
-        $('#showPassword').click(function(){
-            if($("#showPassword").is(":checked")) {
+        $('#showPassword').click(function () {
+            if ($("#showPassword").is(":checked")) {
                 $('.icon-lock').addClass('icon-unlock');
                 $('.icon-unlock').removeClass('icon-lock');
             } else {
