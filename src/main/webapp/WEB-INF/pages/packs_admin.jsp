@@ -186,7 +186,7 @@
                                     <spring:message text="Название"/>
                                 </form:label>
                                 <div class="col-sm-4">
-                                    <form:input path="name" class="form-control"/>
+                                    <form:input path="name" pattern="(.[a-zA-Zа-яА-Я\s0-9,ёЁ_-]*)" title="Используйте латинские или русские символы." class="form-control"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -194,7 +194,7 @@
                                     <spring:message text="Количество"/> (шт.)
                                 </form:label>
                                 <div class="col-sm-2">
-                                    <form:input path="amount" class="form-control"/>
+                                    <form:input path="amount" pattern="^[0-9]*$" title="Используйте целое число для ввода." class="form-control"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -202,7 +202,7 @@
                                     <spring:message text="Цена"/> (руб.)
                                 </form:label>
                                 <div class="col-sm-2">
-                                    <form:input path="price" class="form-control"/>
+                                    <form:input path="price" pattern="^[+-]?([0-9]*[.])?[0-9]+$" title="Используйте число для ввода." class="form-control"/>
                                 </div>
                             </div>
                             <div class="form-group">
