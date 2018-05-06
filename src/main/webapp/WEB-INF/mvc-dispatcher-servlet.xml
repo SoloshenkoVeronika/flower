@@ -56,6 +56,7 @@
                 <value>project.model.FlowerOrder</value>
                 <value>project.model.BouquetOrder</value>
                 <value>project.model.CompositionOrder</value>
+                <value>project.model.Address</value>
                 <!--
                 <value>project.model.Address</value>
                 <value>project.model.Bouquet</value>
@@ -148,6 +149,14 @@
 
     <bean id="orderService" class="project.service.OrderServiceImpl">
         <property name="orderDao" ref="orderDao"/>
+    </bean>
+
+    <bean id="addressDao" class="project.dao.AddressDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="addressService" class="project.service.AddressServiceImpl">
+        <property name="addressDao" ref="addressDao"/>
     </bean>
 
 
