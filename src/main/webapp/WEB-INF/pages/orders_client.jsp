@@ -20,42 +20,30 @@
     <script src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/search.js"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/order.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/client.css" />"/>
     <link rel="shortcut icon" href="<c:url value="/resources/images/roza.png"/>" type="image/png">
-
-    <style>
-        td {
-            /*border-width: 2px;
-            border-color: #836FFF;
-            border-style: solid;*/
-            padding: 10px;
-        }
-    </style>
 </head>
 <body>
-
 <!-- ///////////////////////////////////////////////// -->
 <div class="container">
     <div class="header">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <div class="name">
                     Цветочная лавка
                 </div>
             </div>
 
-            <div class="col-md-4">
-
+            <div class="col-md-5">
                 <form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Найти">
-                    </div>
-                    <button type="submit" class="btn btn-default">
+                    <input type="text" id="text-to-find" value="" class="form-control" placeholder="Найти">
+                    <button type="submit" class="btn btn-default"
+                            onclick="javascript: FindOnPage('text-to-find'); return false;">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
                 </form>
@@ -63,7 +51,6 @@
         </div>
     </div>
 </div>
-
 <!-- ///////////////////////////////////////////////// -->
 <nav class="navbar navbar-default ">
     <div class="container">
@@ -83,20 +70,32 @@
                 <li class="">
                     <a href="<c:url value="/flowers_client"/>" target="_self">Цветы</a>
                 </li>
-                <%--<li class="">--%>
-                <%--<a href="<c:url value="/bouquets_client"/>" target="_self">Букеты</a>--%>
-                <%--</li>--%>
-                <%--<li class="">--%>
-                <%--<a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>--%>
-                <%--</li>--%>
-                <%--<li class="">--%>
-                <%--<a href="<c:url value="/packs_client"/>" target="_self">Составить букет</a>--%>
-                <%--</li>--%>
+                <li class="">
+                    <a href="<c:url value="/bouquets_client"/>" target="_self">Букеты</a>
+                </li>
+                <li class="">
+                    <a href="<c:url value="/compositions_client"/>" target="_self">Копмозиции</a>
+                </li>
+                <li class="">
+                    <c:choose>
+                        <c:when test="${isCustomerBouquetEmpty eq true}">
+                            <a href="<c:url value="/customer_bouquets"/>" target="_self">
+                                Составить букет
+                            </a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="<c:url value="/customer_bouquets/complete"/>" target="_self">
+                                Завершить создание букета
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
+                </li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="<c:url value="/users/currentUser"/>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <a href="<c:url value="/users/currentUser"/>" class="dropdown-toggle" data-toggle="dropdown"
+                       role="button" aria-expanded="false">
                         <c:choose>
                             <c:when test="${user.login ne null}">
                                 ${user.login}
@@ -125,6 +124,7 @@
         </div>
     </div>
 </nav>
+
 
 
 <br>

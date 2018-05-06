@@ -8,13 +8,13 @@
 <head>
     <title>Цветы</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/autor_style.css" />"/>
-    <script  src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/modernizr.custom.63321.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />" />
+    <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />"/>
     <link rel="shortcut icon" href="<c:url value="/resources/images/roza.png"/>" type="image/png">
 </head>
 <body>
@@ -93,7 +93,8 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="<c:url value="/users/currentUser"/>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <a href="<c:url value="/users/currentUser"/>" class="dropdown-toggle" data-toggle="dropdown"
+                       role="button" aria-expanded="false">
                         <c:choose>
                             <c:when test="${user.login ne null}">
                                 ${user.login}
@@ -132,34 +133,13 @@
                     <h1 class="h2 page-header"
                         style="color:#8d1645; font-family: 'Lobster', cursive; margin-top: -1px;
                         text-align: center;">Акции</h1>
+                    <section class="main">
 
-                </div>
-                <div class="col-md-4">
-                    <h4 class="page-header">Cupiditate non</h4>
-                    <ul class="list-group">
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-
-                    </ul>
-                    <h4 class="page-header">Cupiditate non</h4>
-                    <ul class="list-group">
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-
-                    </ul>
-                    <h4 class="page-header">Cupiditate non</h4>
-                    <ul class="list-group">
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-                        <a href="#" class="list-group-item list-group-item-success">Ut labore et quasi architecto beatae vitae dicta sunt explicabo. Non numquam eius modi tempora incidunt, ut aliquid.</a>
-
-                    </ul>
-
-
-
-
+                        <p class="advice">
+                            Цветочная лавка - уникальный интернет-магазин цветов, в которов мы можете не только выбрать
+                            цветы, букеты или композицц,
+                            а также составить букет на свой вкус.</p>
+                    </section>
                 </div>
             </div>
         </div>
@@ -167,16 +147,17 @@
 
     <footer>
         <div class="container">
-            <div style="padding: 10px 0pt 0pt 30px; clear: both; color: #8d1645; font-size: 15px;">Все права защищены &copy; <?=date ('Y')?></div>
+            <div style="padding: 10px 0pt 0pt 30px; clear: both; color: #8d1645; font-size: 15px;">Все права защищены
+                &copy; <?=date ('Y')?></div>
         </div>
     </footer>
 </div>
 <script type="text/javascript">
-    $(function(){
-        $(".showpassword").each(function(index,input) {
+    $(function () {
+        $(".showpassword").each(function (index, input) {
             var $input = $(input);
             $("<p class='opt'/>").append(
-                $("<input type='checkbox' class='showpasswordcheckbox' id='showPassword' />").click(function() {
+                $("<input type='checkbox' class='showpasswordcheckbox' id='showPassword' />").click(function () {
                     var change = $(this).is(":checked") ? "text" : "password";
                     var rep = $("<input placeholder='Пароль' type='" + change + "' />")
                         .attr("id", $input.attr("id"))
@@ -190,8 +171,8 @@
             ).append($("<label for='showPassword'/>").text("Показать пароль")).insertAfter($input.parent());
         });
 
-        $('#showPassword').click(function(){
-            if($("#showPassword").is(":checked")) {
+        $('#showPassword').click(function () {
+            if ($("#showPassword").is(":checked")) {
                 $('.icon-lock').addClass('icon-unlock');
                 $('.icon-unlock').removeClass('icon-lock');
             } else {

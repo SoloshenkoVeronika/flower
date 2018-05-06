@@ -175,7 +175,7 @@
                             </div>
 
                             <!--              ОТПРАВИТЕЛЬ              -->
-                            Отправитель
+                            <div class="orderfield">Отправитель</div>
                             <div class="form-group">
                                 <form:label path="senderBySenderId.secondName" class="col-sm-4 control-label">
                                     <spring:message text="Фамилия"/>
@@ -214,7 +214,7 @@
 
 
                             <!--              ПОЛУЧАТЕЛЬ              -->
-                            Получатель
+                            <div class="orderfield">Получатель</div>
                             <div class="form-group">
                                 <form:label path="recipientByRecipientId.secondName" class="col-sm-4 control-label">
                                     <spring:message text="Фамилия"/>
@@ -243,7 +243,7 @@
                             </div>
 
                             <!--              АДРЕС ДОСТАВКИ              -->
-                            Адрес доставки
+                            <div class="orderfield">Адрес доставки</div>
                             <div class="form-group">
                                 <form:label path="addressByAddressId.city" class="col-sm-4 control-label">
                                     <spring:message text="Город *"/>
