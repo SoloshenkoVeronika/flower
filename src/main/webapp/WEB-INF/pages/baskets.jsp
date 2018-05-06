@@ -145,6 +145,7 @@
                                     <form:textarea path="additionalInf" class="form-control"/>
                                 </div>
                             </div>
+
                         <div class="form-group">
                             <form:label path="payment" class="col-sm-4 control-label">
                                 <spring:message text="Введите вариант оплаты(наличные/банковская карта)"/>
@@ -154,7 +155,6 @@
                             </div>
                             <form:hidden path="cost" value="${order.cost}"/>
                         </div>
-
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
                                         <input type="submit" class="btn btn-success"
