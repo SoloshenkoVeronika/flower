@@ -15,6 +15,7 @@ import java.util.Iterator;
 @Controller
 public class OrderController {
     private Service orderService;
+
     private static Order currentOrder;
     private static CustomerBouquet customerBouquet;
 
@@ -22,7 +23,46 @@ public class OrderController {
     private Service recipientService;
     private Service addressService;
     private Service flowerOrderService;
+    private Service bouquetOrderService;
+    private Service compositionOrderService;
+    private Service packService;
+    private Service customerBouquetOrderService;
+
+
+
+
+
+    public void setPackService(Service packService) {
+        this.packService = packService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "customerBouquetOrderService")
+    public void setCustomerBouquetOrderService(Service customerBouquetService) {
+        this.customerBouquetOrderService = customerBouquetService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "compositionOrderService")
+    public void setCompositionOrderService(Service compositionOrderService) {
+        this.compositionOrderService = compositionOrderService;
+    }
+
+
+
+
     private UserService userService;
+
+    public Service getBouquetOrderService() {
+        return bouquetOrderService;
+    }
+
+
+    @Autowired(required = true)
+    @Qualifier(value = "bouquetOrderService")
+    public void setBouquetOrderService(Service bouquetOrderService) {
+        this.bouquetOrderService = bouquetOrderService;
+    }
 
     public static void setCurrentOrder(Order currentOrder) {
         OrderController.currentOrder = currentOrder;
@@ -248,6 +288,9 @@ public class OrderController {
         currentOrder.setSenderBySenderId(sender);
 
 
+
+
+
         Recipient recipient = new Recipient();
         recipient.setSecondName(order.getRecipientByRecipientId().getSecondName());
         recipient.setFirstName(order.getRecipientByRecipientId().getFirstName());
@@ -276,6 +319,7 @@ public class OrderController {
         //отправители и получатели развые
 
         this.orderService.add(currentOrder);
+
         Iterator<FlowerOrder> iterator = currentOrder.getFlowerOrdersById().iterator();
         while (iterator.hasNext()){
             FlowerOrder flowerOrder = iterator.next();
@@ -283,6 +327,63 @@ public class OrderController {
             flowerOrder.setOrderByOrderId(currentOrder);
             flowerOrderService.add(flowerOrder);
         }
+
+
+        Iterator<BouquetOrder> iterator1 = currentOrder.getBouquetOrdersById().iterator();
+        while (iterator1.hasNext()){
+            BouquetOrder bouquetOrder = iterator1.next();
+            bouquetOrder.setOrderId(currentOrder.getId());
+            bouquetOrder.setOrderByOrderId(currentOrder);
+            bouquetOrderService.add(bouquetOrder);
+        }
+
+        Iterator<CompositionOrder> iterator2 = currentOrder.getCompositionOrdersById().iterator();
+        while (iterator2.hasNext()){
+            CompositionOrder compositionOrder = iterator2.next();
+            compositionOrder.setOrderId(currentOrder.getId());
+            compositionOrder.setOrderByOrderId(currentOrder);
+            compositionOrderService.add(compositionOrder);
+        }
+
+        Iterator<CustomerBouquetOrder> iterator3 = currentOrder.getCustomerBouquetOrdersById().iterator();
+        while (iterator3.hasNext()){
+            CustomerBouquetOrder customerBouquetOrder = iterator3.next();
+            CustomerBouquet customerBouquet = customerBouquetOrder.getCustomerBouquetByCustomerBouquetId();
+
+            /*Pack pack = new Pack();
+            pack.setPrice(customerBouquet.getPackByPackId().getPrice());
+            pack.setName(customerBouquet.getPackByPackId().getName());
+            pack.setAmount(customerBouquet.getPackByPackId().getAmount());
+            pack.setPicture(customerBouquet.getPackByPackId().getPicture());
+            packService.add(pack);*/
+            customerBouquet.setPackId(customerBouquet.getPackByPackId().getId());
+            customerBouquet.setPackByPackId(customerBouquet.getPackByPackId());
+            //
+            customerBouquetOrder.setOrderId(currentOrder.getId());
+            customerBouquetOrder.setOrderByOrderId(currentOrder);
+            customerBouquetOrderService.add(customerBouquetOrder);
+
+
+            Iterator<FlowerCustomerBouquet> flowerIterator = customerBouquet.getFlowerCustomerBouquetsById().iterator();
+            while (flowerIterator.hasNext()){
+                FlowerCustomerBouquet flowerCustomerBouquet = flowerIterator.next();
+                flowerCustomerBouquet.setCustomerBouquetId(customerBouquetOrder.getId());
+                flowerCustomerBouquet.setCustomerBouquetByCustomerBouquetId(customerBouquet);
+                customerBouquet.getFlowerCustomerBouquetsById().add(flowerCustomerBouquet);
+            }
+            // -//- decoration
+            Iterator<DecorationCustomerBouquet> decorationIterator = customerBouquet.getDecorationCustomerBouquetsById().iterator();
+            while (decorationIterator.hasNext()){
+                DecorationCustomerBouquet decorationCustomerBouquet = decorationIterator.next();
+                decorationCustomerBouquet.setCustomerBouquetId(customerBouquetOrder.getId());
+                decorationCustomerBouquet.setCustomerBouquetByCustomerBouquetId(customerBouquet);
+                customerBouquet.getDecorationCustomerBouquetsById().add(decorationCustomerBouquet);
+            }
+
+        }
+
+
+
 
         return "redirect:/baskets";
     }
