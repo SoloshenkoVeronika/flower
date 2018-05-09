@@ -181,7 +181,7 @@
                                     <spring:message text="Фамилия"/>
                                 </form:label>
                                 <div class="col-sm-4">
-                                    <form:input path="senderBySenderId.secondName" class="form-control"/>
+                                    <form:input path="senderBySenderId.secondName"  pattern="(.[a-zA-Zа-яА-ЯёЁ_-]*)" title="Используйте латинские или русские символы." class="form-control"/>
                                 </div>
                             </div>
 
@@ -190,7 +190,7 @@
                                     <spring:message text="Имя"/>
                                 </form:label>
                                 <div class="col-sm-4">
-                                    <form:input path="senderBySenderId.firstName" class="form-control"/>
+                                    <form:input path="senderBySenderId.firstName" pattern="(.[a-zA-Zа-яА-ЯёЁ_-]*)" title="Используйте латинские или русские символы." class="form-control"/>
                                 </div>
                             </div>
 
@@ -208,7 +208,7 @@
                                     <spring:message text="e-mail"/>
                                 </form:label>
                                 <div class="col-sm-4">
-                                    <form:input path="senderBySenderId.email" class="form-control"/>
+                                    <form:input path="senderBySenderId.email"  pattern="^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$" title="Введите e-mail правильно. Пример 'sky@mail.ru'" class="form-control"/>
                                 </div>
                             </div>
 
@@ -220,7 +220,7 @@
                                     <spring:message text="Фамилия"/>
                                 </form:label>
                                 <div class="col-sm-4">
-                                    <form:input path="recipientByRecipientId.secondName" class="form-control"/>
+                                    <form:input path="recipientByRecipientId.secondName" pattern="(.[a-zA-Zа-яА-ЯёЁ_-]*)" title="Используйте латинские или русские символы." class="form-control"/>
                                 </div>
                             </div>
 
@@ -229,7 +229,7 @@
                                     <spring:message text="Имя"/>
                                 </form:label>
                                 <div class="col-sm-4">
-                                    <form:input path="recipientByRecipientId.firstName" class="form-control"/>
+                                    <form:input path="recipientByRecipientId.firstName" pattern="(.[a-zA-Zа-яА-ЯёЁ_-]*)" title="Используйте латинские или русские символы." class="form-control"/>
                                 </div>
                             </div>
 
@@ -249,7 +249,7 @@
                                     <spring:message text="Город *"/>
                                 </form:label>
                                 <div class="col-sm-4">
-                                    <form:input path="addressByAddressId.city" class="form-control"/>
+                                    <form:input path="addressByAddressId.city" pattern="(.[a-zA-Zа-яА-ЯёЁ_-]*)" title="Используйте латинские или русские символы." class="form-control"/>
                                 </div>
                             </div>
 
@@ -258,7 +258,7 @@
                                     <spring:message text="Улица *"/>
                                 </form:label>
                                 <div class="col-sm-4">
-                                    <form:input path="addressByAddressId.street" class="form-control"/>
+                                    <form:input path="addressByAddressId.street" pattern="(.[a-zA-Zа-яА-ЯёЁ_-]*)" title="Используйте латинские или русские символы." class="form-control"/>
                                 </div>
                             </div>
 
@@ -267,7 +267,7 @@
                                     <spring:message text="Дом *"/>
                                 </form:label>
                                 <div class="col-sm-4">
-                                    <form:input path="addressByAddressId.house" class="form-control"/>
+                                    <form:input path="addressByAddressId.house" pattern="^[0-9]*$" title="Используйте целое число для ввода." class="form-control"/>
                                 </div>
                             </div>
 
@@ -276,7 +276,7 @@
                                     <spring:message text="Подъезд *"/>
                                 </form:label>
                                 <div class="col-sm-4">
-                                    <form:input path="addressByAddressId.block" class="form-control"/>
+                                    <form:input path="addressByAddressId.block" pattern="^[0-9]*$" title="Используйте целое число для ввода." class="form-control"/>
                                 </div>
                             </div>
 
@@ -285,7 +285,7 @@
                                     <spring:message text="Квартира *"/>
                                 </form:label>
                                 <div class="col-sm-4">
-                                    <form:input path="addressByAddressId.flat" class="form-control"/>
+                                    <form:input path="addressByAddressId.flat" pattern="^[0-9]*$" title="Используйте целое число для ввода." class="form-control"/>
                                 </div>
                             </div>
 
