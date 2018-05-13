@@ -9,8 +9,8 @@ import java.util.List;
 public class FlowerOrderServiceImpl implements Service<FlowerOrder> {
     private Dao<FlowerOrder> flowerOrderDao;
 
-    public void setFlowerOrderDao(Dao userDao) {
-        this.flowerOrderDao = userDao;
+    public void setFlowerOrderDao(Dao flowerDao) {
+        this.flowerOrderDao = flowerDao;
     }
 
     @Override

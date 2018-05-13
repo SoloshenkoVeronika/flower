@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/client.css" />"/>
     <link rel="shortcut icon" href="<c:url value="/resources/images/roza.png"/>" type="image/png">
 </head>
 <body>
@@ -129,16 +130,19 @@
     <div class="container">
         <div class="article container">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <h1 class="h2 page-header"
                         style="color:#8d1645; font-family: 'Lobster', cursive; margin-top: -1px;
                         text-align: center;">Акции</h1>
                     <section class="main">
 
-                        <p class="advice">
-                            Цветочная лавка - уникальный интернет-магазин цветов, в которов мы можете не только выбрать
-                            цветы, букеты или композицц,
-                            а также составить букет на свой вкус.</p>
+
+                        <div class="hed">
+                                Цветочная лавка - уникальный интернет-магазин цветов, в котором мы можете не только выбрать
+                        цветы, букеты или композиции,
+                        а также составить букет на свой вкус.
+                        </div>
+
                     </section>
                 </div>
             </div>

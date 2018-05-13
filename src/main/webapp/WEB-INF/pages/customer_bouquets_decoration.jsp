@@ -178,7 +178,7 @@
                                                 <form:hidden path="decorationId" value="${decoration.id}"/>
 
                                                 <input type="submit" class="btn btn-success"
-                                                       value="<spring:message text="В корзину"/>"/>
+                                                       value="<spring:message text="Добавить в букет"/>"/>
                                             </div>
                                         </form:form>
                                     </div>
