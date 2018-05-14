@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import project.model.CustomerBouquet;
-import project.model.CustomerBouquetOrder;
-import project.model.Order;
-import project.model.Pack;
+import project.model.*;
 import project.service.Service;
 
 import java.util.ArrayList;
@@ -20,6 +17,7 @@ import java.util.Iterator;
 @Controller
 public class PackController {
     private Service packService;
+    private static User currentUser;
 
     @Autowired(required = true)
     @Qualifier(value = "packService")
@@ -56,11 +54,16 @@ public class PackController {
 
     @RequestMapping(value = "packs_admin", method = RequestMethod.GET)
     public String listPacks(Model model){
-        UserController.getCurrentUser(model);
-        model.addAttribute("pack", new Pack());
-        model.addAttribute("listPacks", this.packService.list());
+        currentUser = UserController.getCurrentUser(model);
+        if(currentUser!=null) {
+            UserController.getCurrentUser(model);
+            model.addAttribute("pack", new Pack());
+            model.addAttribute("listPacks", this.packService.list());
 
-        return "packs_admin";
+            return "packs_admin";
+        }
+        else
+            return "";
     }
 
 

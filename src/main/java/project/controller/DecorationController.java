@@ -17,7 +17,7 @@ import java.util.Iterator;
 @Controller
 public class DecorationController {
     private Service decorationService;
-
+    private  static User currentUser;
     @Autowired(required = true)
     @Qualifier(value = "decorationService")
     public void setDecorationService(Service decorationService) {
@@ -53,11 +53,14 @@ public class DecorationController {
 
     @RequestMapping(value = "decorations_admin", method = RequestMethod.GET)
     public String listDecorations(Model model) {
-        UserController.getCurrentUser(model);
-        model.addAttribute("decoration", new Decoration());
-        model.addAttribute("listDecorations", this.decorationService.list());
-
-        return "decorations_admin";
+        currentUser = UserController.getCurrentUser(model);
+        if(currentUser!=null) {
+            UserController.getCurrentUser(model);
+            model.addAttribute("decoration", new Decoration());
+            model.addAttribute("listDecorations", this.decorationService.list());
+            return "decorations_admin";
+        }
+        else return"";
     }
 
 
