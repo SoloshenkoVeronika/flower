@@ -148,7 +148,7 @@
                                             <form:label for="password" path="status">
                                                 <spring:message text="Пароль"/>
                                             </form:label>
-                                            <input  type="password" name="password" placeholder="Подтверждения пароля" class="showpassword"/>
+                                            <input  type="password" name="password2" placeholder="Подтверждения пароля" class="showpassword"/>
                                                 <i class="icon-lock icon-large"></i>
                                             </p>
                                     </tr>
