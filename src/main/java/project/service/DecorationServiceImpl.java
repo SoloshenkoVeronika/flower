@@ -42,4 +42,9 @@ public class DecorationServiceImpl implements Service<Decoration> {
     public List<Decoration> list() {
         return this.decorationDao.list();
     }
+
+    @Override
+    public List<Decoration> listWhere(String where) {
+        return null;
+    }
 }

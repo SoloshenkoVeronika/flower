@@ -42,6 +42,11 @@ public class PackServiceImpl implements Service<Pack> {
     public List<Pack> list() {
         return this.packDao.list();
     }
+
+    @Override
+    public List<Pack> listWhere(String where) {
+        return null;
+    }
 }
 
 

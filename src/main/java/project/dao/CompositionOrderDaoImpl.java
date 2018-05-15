@@ -63,5 +63,10 @@ public class CompositionOrderDaoImpl implements Dao<CompositionOrder> {
 
         return compositionOrderList;
     }
+
+    @Override
+    public List<CompositionOrder> listWhere(String where) {
+        return null;
+    }
 }
 

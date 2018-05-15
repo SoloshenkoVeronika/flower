@@ -9,20 +9,20 @@ import java.util.List;
 public class FlowerServiceImpl implements Service<Flower> {
     private Dao<Flower> flowerDao;
 
-    public void setFlowerDao(Dao userDao) {
-        this.flowerDao = userDao;
+    public void setFlowerDao(Dao flowerDao) {
+        this.flowerDao = flowerDao;
     }
 
     @Override
     @Transactional
-    public void add(Flower user) {
-        this.flowerDao.add(user);
+    public void add(Flower flower) {
+        this.flowerDao.add(flower);
     }
 
     @Override
     @Transactional
-    public void update(Flower user) {
-        this.flowerDao.update(user);
+    public void update(Flower flower) {
+        this.flowerDao.update(flower);
     }
 
     @Override
@@ -41,5 +41,10 @@ public class FlowerServiceImpl implements Service<Flower> {
     @Transactional
     public List<Flower> list() {
         return this.flowerDao.list();
+    }
+
+    @Override
+    public List<Flower> listWhere(String where) {
+        return null;
     }
 }

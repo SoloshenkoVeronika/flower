@@ -69,5 +69,10 @@ public class BouquetDaoImpl implements Dao<Bouquet> {
 
         return bouquetList;
     }
+
+    @Override
+    public List<Bouquet> listWhere(String where) {
+        return null;
+    }
 }
 

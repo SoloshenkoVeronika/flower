@@ -42,5 +42,10 @@ public class CompositionServiceImpl implements Service<Composition> {
     public List<Composition> list() {
         return this.compositionDao.list();
     }
+
+    @Override
+    public List<Composition> listWhere(String where) {
+        return null;
+    }
 }
 

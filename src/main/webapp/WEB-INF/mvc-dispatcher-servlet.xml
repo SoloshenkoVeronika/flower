@@ -131,6 +131,15 @@
     </bean>
 
 
+    <bean id="customerBouquetDao" class="project.dao.CustomerBouquetDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="customerBouquetService" class="project.service.CustomerBouquetServiceImpl">
+        <property name="customerBouquetDao" ref="customerBouquetDao"/>
+    </bean>
+
+
     <bean id="orderDao" class="project.dao.OrderDaoImpl">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </bean>
@@ -163,7 +172,7 @@
         <property name="senderDao" ref="senderDao"/>
     </bean>
 
-    <bean id="flowerOrderDao" class="project.dao.FlowerOrderOrderDaoImpl">
+    <bean id="flowerOrderDao" class="project.dao.FlowerOrderDaoImpl">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </bean>
 
@@ -191,16 +200,24 @@
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </bean>
 
-    <bean id="customerBouquetOrderService" class="project.service.CustomerBouquetOrderService">
+    <bean id="customerBouquetOrderService" class="project.service.CustomerBouquetOrderServiceImpl">
         <property name="customerBouquetOrderDao" ref="customerBouquetOrderDao"/>
     </bean>
 
-    <bean id="customerBouquetDao" class="project.dao.CustomerBouquetDaoImpl">
+    <bean id="flowerCustomerBouquetDao" class="project.dao.FlowerCustomerBouquetDaoImpl">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </bean>
 
-    <bean id="customerBouquetService" class="project.service.CustomerBouquetServiceImpl">
-        <property name="customerBouquetDao" ref="customerBouquetDao"/>
+    <bean id="flowerCustomerBouquetService" class="project.service.FlowerCustomerBouquetServiceImpl">
+        <property name="flowerCustomerBouquetDao" ref="flowerCustomerBouquetDao"/>
+    </bean>
+
+    <bean id="decorationCustomerBouquetDao" class="project.dao.DecorationCustomerBouquetDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="decorationCustomerBouquetService" class="project.service.DecorationCustomerBouquetServiceImpl">
+        <property name="decorationCustomerBouquetDao" ref="decorationCustomerBouquetDao"/>
     </bean>
 
 

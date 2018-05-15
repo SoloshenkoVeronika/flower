@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import project.model.*;
+import project.service.OrderServiceImpl;
 import project.service.Service;
 import project.service.UserService;
 
@@ -19,50 +20,26 @@ public class OrderController {
     private static Order currentOrder;
     private static CustomerBouquet customerBouquet;
 
+    private Service flowerService;
+    private Service bouquetService;
+    private Service compositionService;
+    private Service decorationService;
+    private Service packService;
+    private Service customerBouquetService;
+
+    private Service flowerCustomerBouquetService;
+    private Service decorationCustomerBouquetService;
+
     private Service senderService;
     private Service recipientService;
     private Service addressService;
     private Service flowerOrderService;
     private Service bouquetOrderService;
     private Service compositionOrderService;
-    private Service packService;
     private Service customerBouquetOrderService;
-
-
-
-
-
-    public void setPackService(Service packService) {
-        this.packService = packService;
-    }
-
-    @Autowired(required = true)
-    @Qualifier(value = "customerBouquetOrderService")
-    public void setCustomerBouquetOrderService(Service customerBouquetService) {
-        this.customerBouquetOrderService = customerBouquetService;
-    }
-
-    @Autowired(required = true)
-    @Qualifier(value = "compositionOrderService")
-    public void setCompositionOrderService(Service compositionOrderService) {
-        this.compositionOrderService = compositionOrderService;
-    }
-
-
-
 
     private UserService userService;
 
-    public Service getBouquetOrderService() {
-        return bouquetOrderService;
-    }
-
-
-    @Autowired(required = true)
-    @Qualifier(value = "bouquetOrderService")
-    public void setBouquetOrderService(Service bouquetOrderService) {
-        this.bouquetOrderService = bouquetOrderService;
-    }
 
     public static void setCurrentOrder(Order currentOrder) {
         OrderController.currentOrder = currentOrder;
@@ -72,19 +49,16 @@ public class OrderController {
         OrderController.customerBouquet = customerBouquet;
     }
 
-    public static Order getCurrentOrder(){
+    public static Order getCurrentOrder() {
         return currentOrder;
     }
-    
-    public static CustomerBouquet getCustomerBouquet(){
+
+    public static CustomerBouquet getCustomerBouquet() {
         return customerBouquet;
     }
 
-    public static boolean isCustomerBouquetEmpty(){
-        if (customerBouquet.getPackId() == null && (customerBouquet.getFlowerCustomerBouquetsById() == null ||
-                customerBouquet.getFlowerCustomerBouquetsById().size() == 0) &&
-                (customerBouquet.getDecorationCustomerBouquetsById() == null ||
-                customerBouquet.getDecorationCustomerBouquetsById().size() == 0))
+    public static boolean isCustomerBouquetEmpty() {
+        if (customerBouquet.getPackId() == null && (customerBouquet.getFlowerCustomerBouquetsById() == null || customerBouquet.getFlowerCustomerBouquetsById().size() == 0) && (customerBouquet.getDecorationCustomerBouquetsById() == null || customerBouquet.getDecorationCustomerBouquetsById().size() == 0))
             return true;
         return false;
     }
@@ -94,6 +68,57 @@ public class OrderController {
     public void setOrderService(Service orderService) {
         this.orderService = orderService;
     }
+
+
+    @Autowired(required = true)
+    @Qualifier(value = "flowerService")
+    public void setFlowerService(Service flowerService) {
+        this.flowerService = flowerService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "bouquetService")
+    public void setBouquetService(Service bouquetService) {
+        this.bouquetService = bouquetService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "compositionService")
+    public void setCompositionService(Service compositionService) {
+        this.compositionService = compositionService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "decorationService")
+    public void setDecorationService(Service decorationService) {
+        this.decorationService = decorationService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "packService")
+    public void setPackService(Service packService) {
+        this.packService = packService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "customerBouquetService")
+    public void setCustomerBouquetService(Service customerBouquetService) {
+        this.customerBouquetService = customerBouquetService;
+    }
+
+
+    @Autowired(required = true)
+    @Qualifier(value = "flowerCustomerBouquetService")
+    public void setFlowerCustomerBouquetService(Service flowerCustomerBouquetService) {
+        this.flowerCustomerBouquetService = flowerCustomerBouquetService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "decorationCustomerBouquetService")
+    public void setDecorationCustomerBouquetService(Service decorationCustomerBouquetService) {
+        this.decorationCustomerBouquetService = decorationCustomerBouquetService;
+    }
+
 
     @Autowired(required = true)
     @Qualifier(value = "senderService")
@@ -120,6 +145,25 @@ public class OrderController {
     }
 
     @Autowired(required = true)
+    @Qualifier(value = "bouquetOrderService")
+    public void setBouquetOrderService(Service bouquetOrderService) {
+        this.bouquetOrderService = bouquetOrderService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "compositionOrderService")
+    public void setCompositionOrderService(Service compositionOrderService) {
+        this.compositionOrderService = compositionOrderService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "customerBouquetOrderService")
+    public void setCustomerBouquetOrderService(Service customerBouquetService) {
+        this.customerBouquetOrderService = customerBouquetService;
+    }
+
+
+    @Autowired(required = true)
     @Qualifier(value = "userService")
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -127,10 +171,10 @@ public class OrderController {
 
 
     @RequestMapping(value = "/order/add", method = RequestMethod.POST)
-    public String addOrder(@ModelAttribute("order") Order order){
-        if(order.getId() == null){
+    public String addOrder(@ModelAttribute("order") Order order) {
+        if (order.getId() == null) {
             this.orderService.add(order);
-        }else {
+        } else {
             this.orderService.update(order);
         }
 
@@ -138,16 +182,15 @@ public class OrderController {
     }
 
 
-
     @RequestMapping(value = "/order/addCustomerBouquet", method = RequestMethod.POST)
-    public String addCustomerBouquet(@ModelAttribute("customerBouquetOrder") CustomerBouquetOrder customerBouquetOrder){
-        if (OrderController.getCurrentOrder() == null){
+    public String addCustomerBouquet(@ModelAttribute("customerBouquetOrder") CustomerBouquetOrder customerBouquetOrder) {
+        if (OrderController.getCurrentOrder() == null) {
             OrderController.setCurrentOrder(new Order());
         }
         Iterator<CustomerBouquetOrder> iterator = OrderController.getCurrentOrder().getCustomerBouquetOrdersById().iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             CustomerBouquetOrder order = iterator.next();
-            if (order.getCustomerBouquetId().equals(customerBouquetOrder.getCustomerBouquetId())){
+            if (order.getCustomerBouquetId().equals(customerBouquetOrder.getCustomerBouquetId())) {
                 order.setQuantity(order.getQuantity() + customerBouquetOrder.getQuantity());
                 return "redirect:/customer_bouquets";
             }
@@ -158,9 +201,8 @@ public class OrderController {
     }
 
 
-
     @RequestMapping("editOrder/{id}")
-    public String editOrder(@PathVariable("id") int id, Model model){
+    public String editOrder(@PathVariable("id") int id, Model model) {
         model.addAttribute("order", this.orderService.getById(id));
         model.addAttribute("listOrders", this.orderService.list());
 
@@ -168,24 +210,25 @@ public class OrderController {
     }
 
     @RequestMapping("/removeOrder/{id}")
-    public String removeOrder(@PathVariable("id") int id){
+    public String removeOrder(@PathVariable("id") int id) {
         this.orderService.remove(id);
 
         return "redirect:/order_client";
     }
 
     @RequestMapping(value = "orders_client", method = RequestMethod.GET)
-    public String listOrders(Model model){
+    public String listOrders(Model model) {
         UserController.getCurrentUser(model);
         model.addAttribute("order", new Order());
-        model.addAttribute("listOrders", this.orderService.list());
+        model.addAttribute("listOrders", this.orderService.listWhere("user_id = '"
+                + UserController.getCurrentUser().getId() + "'"));
 
         return "orders_client";
     }
 
 
     @RequestMapping(value = "customer_bouquets/complete", method = RequestMethod.GET)
-    public String completeCustomerBouquetCreation(Model model){
+    public String completeCustomerBouquetCreation(Model model) {
         UserController.getCurrentUser(model);
         customerBouquet = null;
 
@@ -193,7 +236,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "shopping_cart", method = RequestMethod.GET)
-    public String getCurrentOrder(Model model){
+    public String getCurrentOrder(Model model) {
         UserController.getCurrentUser(model);
 
         if (currentOrder != null) {
@@ -203,75 +246,58 @@ public class OrderController {
             model.addAttribute("isEmpty", true);
         }
 
-        if (OrderController.getCustomerBouquet() == null)
-            model.addAttribute("isCustomerBouquetEmpty", true);
-        else
-            model.addAttribute("isCustomerBouquetEmpty", false);
+        if (OrderController.getCustomerBouquet() == null) model.addAttribute("isCustomerBouquetEmpty", true);
+        else model.addAttribute("isCustomerBouquetEmpty", false);
 
         return "shopping_cart";
     }
 
     @RequestMapping(value = "/shopping_cart/update", method = RequestMethod.POST)
-    public String updateCurrentOrder(@ModelAttribute("order") Order order){
+    public String updateCurrentOrder(@ModelAttribute("order") Order order) {
         currentOrder = order;
 
         return "redirect:/shopping_cart";
     }
 
     @RequestMapping(value = "baskets", method = RequestMethod.GET)
-    public String listBaskets(Model model){
+    public String listBaskets(Model model) {
         UserController.getCurrentUser(model);
         model.addAttribute("order", currentOrder);
 
-        if (OrderController.getCustomerBouquet() == null)
-            model.addAttribute("isCustomerBouquetEmpty", true);
-        else
-            model.addAttribute("isCustomerBouquetEmpty", false);
+        if (OrderController.getCustomerBouquet() == null) model.addAttribute("isCustomerBouquetEmpty", true);
+        else model.addAttribute("isCustomerBouquetEmpty", false);
 
         return "baskets";
     }
 
     @RequestMapping(value = "/baskets/add", method = RequestMethod.POST)
-    public String addBasket(@ModelAttribute("order") Order order){
-        if(order.getSenderBySenderId().getSecondName().equals("") &&
-                order.getSenderBySenderId().getFirstName().equals("") &&
-                order.getSenderBySenderId().getPhone().equals("") &&
-                order.getSenderBySenderId().getEmail().equals("")){
+    public String addBasket(@ModelAttribute("order") Order order) {
+        if (order.getSenderBySenderId().getSecondName().equals("") && order.getSenderBySenderId().getFirstName().equals("") && order.getSenderBySenderId().getPhone().equals("") && order.getSenderBySenderId().getEmail().equals("")) {
             currentOrder.setSenderBySenderId(null);
         }
-        if(order.getSenderBySenderId().getSecondName().equals(""))
-            order.getSenderBySenderId().setSecondName(null);
-        if(order.getSenderBySenderId().getFirstName().equals(""))
-            order.getSenderBySenderId().setFirstName(null);
-        if(order.getSenderBySenderId().getPhone().equals(""))
-            order.getSenderBySenderId().setPhone(null);
-        if(order.getSenderBySenderId().getEmail().equals(""))
-            order.getSenderBySenderId().setEmail(null);
+        if (order.getSenderBySenderId().getSecondName().equals("")) order.getSenderBySenderId().setSecondName(null);
+        if (order.getSenderBySenderId().getFirstName().equals("")) order.getSenderBySenderId().setFirstName(null);
+        if (order.getSenderBySenderId().getPhone().equals("")) order.getSenderBySenderId().setPhone(null);
+        if (order.getSenderBySenderId().getEmail().equals("")) order.getSenderBySenderId().setEmail(null);
 
-        if(order.getRecipientByRecipientId().getSecondName().equals("") &&
-                order.getRecipientByRecipientId().getFirstName().equals("") &&
-                order.getRecipientByRecipientId().getPhone().equals("")){
+        if (order.getRecipientByRecipientId().getSecondName().equals("") && order.getRecipientByRecipientId().getFirstName().equals("") && order.getRecipientByRecipientId().getPhone().equals("")) {
             currentOrder.setRecipientByRecipientId(null);
         }
         if (order.getRecipientByRecipientId().getSecondName().equals(""))
             order.getRecipientByRecipientId().setSecondName(null);
         if (order.getRecipientByRecipientId().getFirstName().equals(""))
             order.getRecipientByRecipientId().setFirstName(null);
-        if (order.getRecipientByRecipientId().getPhone().equals(""))
-            order.getRecipientByRecipientId().setPhone(null);
+        if (order.getRecipientByRecipientId().getPhone().equals("")) order.getRecipientByRecipientId().setPhone(null);
 
         currentOrder.setUserId(order.getUserId());
-        if (order.getUserId() != null)
-            currentOrder.setUserByUserId((User)userService.getById(order.getUserId()));
+        if (order.getUserId() != null) currentOrder.setUserByUserId((User) userService.getById(order.getUserId()));
 
         currentOrder.setDate(new Date());
 
-        if (order.getPostcard().equals(""))
-            order.setPostcard(null);
+        if (order.getPostcard().equals("")) order.setPostcard(null);
         currentOrder.setPostcard(order.getPostcard());
 
-        if(order.getAdditionalInf().equals(""))
-            order.setAdditionalInf(null);
+        if (order.getAdditionalInf().equals("")) order.setAdditionalInf(null);
         currentOrder.setAdditionalInf(order.getAdditionalInf());
 
         currentOrder.setPayment(order.getPayment());
@@ -286,9 +312,6 @@ public class OrderController {
         senderService.add(sender);
         currentOrder.setSenderId(sender.getId());
         currentOrder.setSenderBySenderId(sender);
-
-
-
 
 
         Recipient recipient = new Recipient();
@@ -321,70 +344,88 @@ public class OrderController {
         this.orderService.add(currentOrder);
 
         Iterator<FlowerOrder> iterator = currentOrder.getFlowerOrdersById().iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             FlowerOrder flowerOrder = iterator.next();
             flowerOrder.setOrderId(currentOrder.getId());
             flowerOrder.setOrderByOrderId(currentOrder);
             flowerOrderService.add(flowerOrder);
+
+            Flower flower = flowerOrder.getFlowerByFlowerId();
+            flower.setAmount(flower.getAmount() - flowerOrder.getQuantity());
+            flowerService.update(flower);
         }
 
 
         Iterator<BouquetOrder> iterator1 = currentOrder.getBouquetOrdersById().iterator();
-        while (iterator1.hasNext()){
+        while (iterator1.hasNext()) {
             BouquetOrder bouquetOrder = iterator1.next();
             bouquetOrder.setOrderId(currentOrder.getId());
             bouquetOrder.setOrderByOrderId(currentOrder);
             bouquetOrderService.add(bouquetOrder);
+
+            Bouquet bouquet = bouquetOrder.getBouquetByBouquetId();
+            bouquet.setAmount(bouquet.getAmount() - bouquetOrder.getQuantity());
+            bouquetService.update(bouquet);
         }
 
         Iterator<CompositionOrder> iterator2 = currentOrder.getCompositionOrdersById().iterator();
-        while (iterator2.hasNext()){
+        while (iterator2.hasNext()) {
             CompositionOrder compositionOrder = iterator2.next();
             compositionOrder.setOrderId(currentOrder.getId());
             compositionOrder.setOrderByOrderId(currentOrder);
             compositionOrderService.add(compositionOrder);
+
+            Composition composition = compositionOrder.getCompositionByCompositionId();
+            composition.setAmount(composition.getAmount() - compositionOrder.getQuantity());
+            compositionService.update(composition);
         }
 
         Iterator<CustomerBouquetOrder> iterator3 = currentOrder.getCustomerBouquetOrdersById().iterator();
-        while (iterator3.hasNext()){
+        while (iterator3.hasNext()) {
             CustomerBouquetOrder customerBouquetOrder = iterator3.next();
             CustomerBouquet customerBouquet = customerBouquetOrder.getCustomerBouquetByCustomerBouquetId();
 
-            /*Pack pack = new Pack();
-            pack.setPrice(customerBouquet.getPackByPackId().getPrice());
-            pack.setName(customerBouquet.getPackByPackId().getName());
-            pack.setAmount(customerBouquet.getPackByPackId().getAmount());
-            pack.setPicture(customerBouquet.getPackByPackId().getPicture());
-            packService.add(pack);*/
-            customerBouquet.setPackId(customerBouquet.getPackByPackId().getId());
-            customerBouquet.setPackByPackId(customerBouquet.getPackByPackId());
-            //
+            Pack pack = customerBouquet.getPackByPackId();
+            pack.setAmount(pack.getAmount() - 1);
+            packService.update(pack);
+
+            customerBouquetService.add(customerBouquet);
+
             customerBouquetOrder.setOrderId(currentOrder.getId());
             customerBouquetOrder.setOrderByOrderId(currentOrder);
             customerBouquetOrderService.add(customerBouquetOrder);
 
 
-            Iterator<FlowerCustomerBouquet> flowerIterator = customerBouquet.getFlowerCustomerBouquetsById().iterator();
-            while (flowerIterator.hasNext()){
-                FlowerCustomerBouquet flowerCustomerBouquet = flowerIterator.next();
-                flowerCustomerBouquet.setCustomerBouquetId(customerBouquetOrder.getId());
-                flowerCustomerBouquet.setCustomerBouquetByCustomerBouquetId(customerBouquet);
-                customerBouquet.getFlowerCustomerBouquetsById().add(flowerCustomerBouquet);
-            }
-            // -//- decoration
-            Iterator<DecorationCustomerBouquet> decorationIterator = customerBouquet.getDecorationCustomerBouquetsById().iterator();
-            while (decorationIterator.hasNext()){
-                DecorationCustomerBouquet decorationCustomerBouquet = decorationIterator.next();
-                decorationCustomerBouquet.setCustomerBouquetId(customerBouquetOrder.getId());
-                decorationCustomerBouquet.setCustomerBouquetByCustomerBouquetId(customerBouquet);
-                customerBouquet.getDecorationCustomerBouquetsById().add(decorationCustomerBouquet);
+            if (customerBouquet.getFlowerCustomerBouquetsById() != null) {
+                Iterator<FlowerCustomerBouquet> flowerIterator = customerBouquet.getFlowerCustomerBouquetsById().iterator();
+                while (flowerIterator.hasNext()) {
+                    FlowerCustomerBouquet flowerCustomerBouquet = flowerIterator.next();
+                    flowerCustomerBouquet.setCustomerBouquetId(customerBouquetOrder.getId());
+                    flowerCustomerBouquet.setCustomerBouquetByCustomerBouquetId(customerBouquet);
+                    flowerCustomerBouquetService.add(flowerCustomerBouquet);
+
+                    Flower flower = flowerCustomerBouquet.getFlowerByFlowerId();
+                    flower.setAmount(flower.getAmount() - flowerCustomerBouquet.getQuantity());
+                    flowerService.update(flower);
+                }
             }
 
+            if (customerBouquet.getDecorationCustomerBouquetsById() != null) {
+                Iterator<DecorationCustomerBouquet> decorationIterator = customerBouquet.getDecorationCustomerBouquetsById().iterator();
+                while (decorationIterator.hasNext()) {
+                    DecorationCustomerBouquet decorationCustomerBouquet = decorationIterator.next();
+                    decorationCustomerBouquet.setCustomerBouquetId(customerBouquetOrder.getId());
+                    decorationCustomerBouquet.setCustomerBouquetByCustomerBouquetId(customerBouquet);
+                    decorationCustomerBouquetService.add(decorationCustomerBouquet);
+
+                    Decoration decoration = decorationCustomerBouquet.getDecorationByDecorationId();
+                    decoration.setAmount(decoration.getAmount() - decorationCustomerBouquet.getQuantity());
+                    decorationService.update(decoration);
+                }
+            }
         }
 
-
-
-
+        currentOrder = null;
         return "redirect:/baskets";
     }
 }

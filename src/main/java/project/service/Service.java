@@ -12,4 +12,6 @@ public interface Service<T> {
     public T getById(int id);
 
     public List<T> list();
+
+    public List<T> listWhere(String where);
 }

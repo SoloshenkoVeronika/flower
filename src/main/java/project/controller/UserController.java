@@ -28,6 +28,10 @@ public class UserController {
         return currentUser;
     }
 
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
     @RequestMapping(value = "/users/add", method = RequestMethod.POST)
     public String addUser(@ModelAttribute("user") User user) {
         if (user.getId() == null) {

@@ -63,5 +63,10 @@ public class DecorationDaoImpl implements Dao<Decoration> {
 
         return decorationList;
     }
+
+    @Override
+    public List<Decoration> listWhere(String where) {
+        return null;
+    }
 }
 

@@ -63,5 +63,10 @@ public class FlowerDaoImpl  implements Dao<Flower> {
 
         return flowerList;
     }
+
+    @Override
+    public List<Flower> listWhere(String where) {
+        return null;
+    }
 }
 

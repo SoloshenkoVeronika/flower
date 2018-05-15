@@ -18,6 +18,7 @@ import java.util.Iterator;
 public class DecorationController {
     private Service decorationService;
     private  static User currentUser;
+
     @Autowired(required = true)
     @Qualifier(value = "decorationService")
     public void setDecorationService(Service decorationService) {

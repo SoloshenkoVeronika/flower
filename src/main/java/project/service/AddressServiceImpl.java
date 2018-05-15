@@ -9,20 +9,20 @@ import java.util.List;
 public class AddressServiceImpl implements Service<Address> {
     private Dao<Address> addressDao;
 
-    public void setAddressDao(Dao bouquetDao) {
-        this.addressDao = bouquetDao;
+    public void setAddressDao(Dao addressDao) {
+        this.addressDao = addressDao;
     }
 
     @Override
     @Transactional
-    public void add(Address bouquet) {
-        this.addressDao.add(bouquet);
+    public void add(Address address) {
+        this.addressDao.add(address);
     }
 
     @Override
     @Transactional
-    public void update(Address bouquet) {
-        this.addressDao.update(bouquet);
+    public void update(Address address) {
+        this.addressDao.update(address);
     }
 
     @Override
@@ -41,6 +41,11 @@ public class AddressServiceImpl implements Service<Address> {
     @Transactional
     public List<Address> list() {
         return this.addressDao.list();
+    }
+
+    @Override
+    public List<Address> listWhere(String where) {
+        return null;
     }
 }
 

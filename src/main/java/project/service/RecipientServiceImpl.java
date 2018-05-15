@@ -9,20 +9,20 @@ import java.util.List;
 public class RecipientServiceImpl implements Service<Recipient> {
     private Dao<Recipient> recipientDao;
 
-    public void setRecipientDao(Dao bouquetDao) {
-        this.recipientDao = bouquetDao;
+    public void setRecipientDao(Dao recipientDao) {
+        this.recipientDao = recipientDao;
     }
 
     @Override
     @Transactional
-    public void add(Recipient bouquet) {
-        this.recipientDao.add(bouquet);
+    public void add(Recipient recipient) {
+        this.recipientDao.add(recipient);
     }
 
     @Override
     @Transactional
-    public void update(Recipient bouquet) {
-        this.recipientDao.update(bouquet);
+    public void update(Recipient recipient) {
+        this.recipientDao.update(recipient);
     }
 
     @Override
@@ -41,6 +41,11 @@ public class RecipientServiceImpl implements Service<Recipient> {
     @Transactional
     public List<Recipient> list() {
         return this.recipientDao.list();
+    }
+
+    @Override
+    public List<Recipient> listWhere(String where) {
+        return null;
     }
 }
 

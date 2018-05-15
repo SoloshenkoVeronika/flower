@@ -75,5 +75,10 @@ public class AddressDaoImpl implements Dao<Address> {
 
         return addressList;
     }
+
+    @Override
+    public List<Address> listWhere(String where) {
+        return null;
+    }
 }
 

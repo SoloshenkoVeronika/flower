@@ -63,5 +63,10 @@ public class RecipientDaoImpl implements Dao<Recipient> {
 
         return recipientList;
     }
+
+    @Override
+    public List<Recipient> listWhere(String where) {
+        return null;
+    }
 }
 

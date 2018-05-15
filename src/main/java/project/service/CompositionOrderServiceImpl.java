@@ -15,14 +15,14 @@ public class CompositionOrderServiceImpl implements Service<CompositionOrder> {
 
     @Override
     @Transactional
-    public void add(CompositionOrder user) {
-        this.compositionOrderDao.add(user);
+    public void add(CompositionOrder compositionOrder) {
+        this.compositionOrderDao.add(compositionOrder);
     }
 
     @Override
     @Transactional
-    public void update(CompositionOrder user) {
-        this.compositionOrderDao.update(user);
+    public void update(CompositionOrder compositionOrder) {
+        this.compositionOrderDao.update(compositionOrder);
     }
 
     @Override
@@ -41,5 +41,10 @@ public class CompositionOrderServiceImpl implements Service<CompositionOrder> {
     @Transactional
     public List<CompositionOrder> list() {
         return this.compositionOrderDao.list();
+    }
+
+    @Override
+    public List<CompositionOrder> listWhere(String where) {
+        return null;
     }
 }

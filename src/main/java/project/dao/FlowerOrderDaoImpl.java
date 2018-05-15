@@ -8,8 +8,8 @@ import project.model.FlowerOrder;
 
 import java.util.List;
 
-public class FlowerOrderOrderDaoImpl implements Dao<FlowerOrder> {
-    private static final Logger logger = LoggerFactory.getLogger(FlowerOrderOrderDaoImpl.class);
+public class FlowerOrderDaoImpl implements Dao<FlowerOrder> {
+    private static final Logger logger = LoggerFactory.getLogger(FlowerOrderDaoImpl.class);
 
     private SessionFactory sessionFactory;
 
@@ -62,6 +62,11 @@ public class FlowerOrderOrderDaoImpl implements Dao<FlowerOrder> {
         }
 
         return flowerOrderList;
+    }
+
+    @Override
+    public List<FlowerOrder> listWhere(String where) {
+        return null;
     }
 }
 

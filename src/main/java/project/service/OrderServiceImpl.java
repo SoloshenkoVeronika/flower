@@ -2,6 +2,7 @@ package project.service;
 
 import org.springframework.transaction.annotation.Transactional;
 import project.dao.Dao;
+import project.dao.OrderDaoImpl;
 import project.model.Order;
 
 import java.util.List;
@@ -41,5 +42,11 @@ public class OrderServiceImpl implements Service<Order> {
     @Transactional
     public List<Order> list() {
         return this.orderDao.list();
+    }
+
+    @Override
+    @Transactional
+    public List<Order> listWhere(String where) {
+        return ((OrderDaoImpl)this.orderDao).listWhere(where);
     }
 }

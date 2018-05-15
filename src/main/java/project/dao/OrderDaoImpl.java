@@ -82,5 +82,18 @@ public class OrderDaoImpl implements Dao<Order> {
 
         return orderList;
     }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Order> listWhere(String where) {
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Order> orderList = session.createQuery("from Order where " + where).list();
+
+        for(Order order: orderList){
+            logger.info("Order list: " + order);
+        }
+
+        return orderList;
+    }
 }
 

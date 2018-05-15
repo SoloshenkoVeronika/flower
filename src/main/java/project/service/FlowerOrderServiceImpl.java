@@ -15,14 +15,14 @@ public class FlowerOrderServiceImpl implements Service<FlowerOrder> {
 
     @Override
     @Transactional
-    public void add(FlowerOrder user) {
-        this.flowerOrderDao.add(user);
+    public void add(FlowerOrder flowerOrder) {
+        this.flowerOrderDao.add(flowerOrder);
     }
 
     @Override
     @Transactional
-    public void update(FlowerOrder user) {
-        this.flowerOrderDao.update(user);
+    public void update(FlowerOrder flowerOrder) {
+        this.flowerOrderDao.update(flowerOrder);
     }
 
     @Override
@@ -41,5 +41,10 @@ public class FlowerOrderServiceImpl implements Service<FlowerOrder> {
     @Transactional
     public List<FlowerOrder> list() {
         return this.flowerOrderDao.list();
+    }
+
+    @Override
+    public List<FlowerOrder> listWhere(String where) {
+        return null;
     }
 }

@@ -28,6 +28,59 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/client.css" />"/>
     <link rel="shortcut icon" href="<c:url value="/resources/images/roza.png"/>" type="image/png">
 
+    <style>
+        .modalDialog {
+            position: fixed;
+            font-family: Arial, Helvetica, sans-serif;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 99999;
+            -webkit-transition: opacity 400ms ease-in;
+            -moz-transition: opacity 400ms ease-in;
+            transition: opacity 400ms ease-in;
+            display: none;
+            pointer-events: none;
+        }
+        .modalDialog:target {
+            display: block;
+            pointer-events: auto;
+        }
+
+        .modalDialog > div {
+            width: 400px;
+            position: relative;
+            margin: 10% auto;
+            padding: 5px 20px 13px 20px;
+            border-radius: 10px;
+            background: #fff;
+            background: -moz-linear-gradient(#fff, #999);
+            background: -webkit-linear-gradient(#fff, #999);
+            background: -o-linear-gradient(#fff, #999);
+        }
+        .close {
+            background: #606061;
+            color: #FFFFFF;
+            line-height: 25px;
+            position: absolute;
+            right: -12px;
+            text-align: center;
+            top: -10px;
+            width: 24px;
+            text-decoration: none;
+            font-weight: bold;
+            -webkit-border-radius: 12px;
+            -moz-border-radius: 12px;
+            border-radius: 12px;
+            -moz-box-shadow: 1px 1px 3px #000;
+            -webkit-box-shadow: 1px 1px 3px #000;
+            box-shadow: 1px 1px 3px #000;
+        }
+
+        .close:hover { background: #00d9ff; }
+    </style>
 </head>
 <body>
 
@@ -119,6 +172,10 @@
                         </c:choose>
                         <li class="divider"></li>
                         <li><a href="<c:url value="/users"/>" target="_self">Регистрация</a></li>
+                        <c:if test="${user.login ne null}">
+                            <li class="divider"></li>
+                            <li><a href="<c:url value="/orders_client"/>" target="_self">Мои заказы</a></li>
+                        </c:if>
                     </ul>
                 </li>
             </ul>
@@ -177,14 +234,14 @@
                                         <form:form action="${addAction}" modelAttribute="flowerOrder" class="form-horizontal">
                                             <div class="inputBlock">
                                                 <div class="minus">-</div>
-                                                <form:input path="quantity" value="0"/>
+                                                <form:input id="input${j}" path="quantity" value="0"/>
                                                 <div class="plus">+</div>
                                             </div>
 
                                             <div class="fontbut">
                                                 <form:hidden path="flowerId" value="${flower.id}"/>
 
-                                                <input type="submit" class="btn btn-success"
+                                                <input name="inp" type="submit" class="btn btn-success"
                                                        value="<spring:message text="В корзину"/>"/>
                                             </div>
                                         </form:form>
@@ -209,12 +266,34 @@
                 &copy; <?=date ('Y')?></div>
         </div>
     </footer>
+
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.backstretch.min.js"></script>
 <script>
     $.backstretch("resources/images/fon1.jpg");
 </script>
+<script>
+        /*var a = document.createElement('a');
+        a.href="#modal";
+        a.click();*/
+        $('#inp').click(function (e) {
+            e.preventDefault();
+            var a = document.createElement('a');
+            a.href="#modal";
+            a.click();
+        });
+        debugger;
 
+</script>
+
+<div id="modal" class="modalDialog">
+    <div>
+        <a href="#close" title="Закрыть" class="close">x</a>
+        <h2>Модальное окно</h2>
+        <p>Пример простого модального окна, которое может быть создано с использованием CSS3.</p>
+        <p>Его можно использовать в широком диапазоне, начиная от вывода сообщений и заканчивая формой регистрации.</p>
+    </div>
+</div>
 </body>
 </html>
 

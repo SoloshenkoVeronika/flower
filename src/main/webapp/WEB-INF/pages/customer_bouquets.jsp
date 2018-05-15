@@ -130,6 +130,10 @@
                         </c:choose>
                         <li class="divider"></li>
                         <li><a href="<c:url value="/users"/>" target="_self">Регистрация</a></li>
+                        <c:if test="${user.login ne null}">
+                            <li class="divider"></li>
+                            <li><a href="<c:url value="/orders_client"/>" target="_self">Мои заказы</a></li>
+                        </c:if>
                     </ul>
                 </li>
             </ul>

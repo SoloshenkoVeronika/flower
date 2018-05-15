@@ -63,5 +63,10 @@ public class PackDaoImpl  implements Dao<Pack> {
 
         return packList;
     }
+
+    @Override
+    public List<Pack> listWhere(String where) {
+        return null;
+    }
 }
 

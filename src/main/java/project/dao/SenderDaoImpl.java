@@ -63,5 +63,10 @@ public class SenderDaoImpl implements Dao<Sender> {
 
         return senderList;
     }
+
+    @Override
+    public List<Sender> listWhere(String where) {
+        return null;
+    }
 }
 

@@ -42,5 +42,10 @@ public class BouquetServiceImpl implements Service<Bouquet> {
     public List<Bouquet> list() {
         return this.bouquetDao.list();
     }
+
+    @Override
+    public List<Bouquet> listWhere(String where) {
+        return null;
+    }
 }
 

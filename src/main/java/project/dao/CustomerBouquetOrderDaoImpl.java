@@ -63,5 +63,10 @@ public class CustomerBouquetOrderDaoImpl implements Dao<CustomerBouquetOrder> {
 
         return customerBouquetOrderList;
     }
+
+    @Override
+    public List<CustomerBouquetOrder> listWhere(String where) {
+        return null;
+    }
 }
 

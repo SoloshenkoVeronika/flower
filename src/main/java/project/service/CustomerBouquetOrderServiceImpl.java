@@ -6,7 +6,7 @@ import project.model.CustomerBouquetOrder;
 
 import java.util.List;
 
-public class CustomerBouquetOrderService implements Service<CustomerBouquetOrder> {
+public class CustomerBouquetOrderServiceImpl implements Service<CustomerBouquetOrder> {
     private Dao<CustomerBouquetOrder> customerBouquetOrderDao;
 
     public void setCustomerBouquetOrderDao(Dao customerBouquetDao) {
@@ -15,14 +15,14 @@ public class CustomerBouquetOrderService implements Service<CustomerBouquetOrder
 
     @Override
     @Transactional
-    public void add(CustomerBouquetOrder user) {
-        this.customerBouquetOrderDao.add(user);
+    public void add(CustomerBouquetOrder customerBouquetOrder) {
+        this.customerBouquetOrderDao.add(customerBouquetOrder);
     }
 
     @Override
     @Transactional
-    public void update(CustomerBouquetOrder user) {
-        this.customerBouquetOrderDao.update(user);
+    public void update(CustomerBouquetOrder customerBouquetOrder) {
+        this.customerBouquetOrderDao.update(customerBouquetOrder);
     }
 
     @Override
@@ -41,5 +41,10 @@ public class CustomerBouquetOrderService implements Service<CustomerBouquetOrder
     @Transactional
     public List<CustomerBouquetOrder> list() {
         return this.customerBouquetOrderDao.list();
+    }
+
+    @Override
+    public List<CustomerBouquetOrder> listWhere(String where) {
+        return null;
     }
 }

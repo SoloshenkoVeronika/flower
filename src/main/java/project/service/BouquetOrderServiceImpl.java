@@ -15,14 +15,14 @@ public class BouquetOrderServiceImpl implements Service<BouquetOrder> {
 
     @Override
     @Transactional
-    public void add(BouquetOrder user) {
-        this.bouquetOrderDao.add(user);
+    public void add(BouquetOrder bouquetOrder) {
+        this.bouquetOrderDao.add(bouquetOrder);
     }
 
     @Override
     @Transactional
-    public void update(BouquetOrder user) {
-        this.bouquetOrderDao.update(user);
+    public void update(BouquetOrder bouquetOrder) {
+        this.bouquetOrderDao.update(bouquetOrder);
     }
 
     @Override
@@ -41,5 +41,10 @@ public class BouquetOrderServiceImpl implements Service<BouquetOrder> {
     @Transactional
     public List<BouquetOrder> list() {
         return this.bouquetOrderDao.list();
+    }
+
+    @Override
+    public List<BouquetOrder> listWhere(String where) {
+        return null;
     }
 }
