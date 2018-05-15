@@ -23,8 +23,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "users/currentUser", method = RequestMethod.GET)
-    public static void getCurrentUser(Model model) {
+    public static User getCurrentUser(Model model) {
         model.addAttribute("user", currentUser);
+        return currentUser;
     }
 
     @RequestMapping(value = "/users/add", method = RequestMethod.POST)

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import project.model.Bouquet;
 import project.model.BouquetOrder;
 import project.model.Order;
+import project.model.User;
 import project.service.Service;
 
 import java.util.Iterator;
@@ -18,6 +19,7 @@ import java.util.Iterator;
 @Controller
 public class BouquetController {
     private Service bouquetService;
+    private static User currentUser;
 
     @Autowired(required = true)
     @Qualifier(value = "bouquetService")
@@ -54,11 +56,16 @@ public class BouquetController {
 
     @RequestMapping(value = "bouquets_admin", method = RequestMethod.GET)
     public String listBouquets(Model model) {
-        UserController.getCurrentUser(model);
-        model.addAttribute("bouquet", new Bouquet());
-        model.addAttribute("listBouquets", this.bouquetService.list());
+        currentUser = UserController.getCurrentUser(model);
+        if(currentUser!=null) {
+            UserController.getCurrentUser(model);
+            model.addAttribute("bouquet", new Bouquet());
+            model.addAttribute("listBouquets", this.bouquetService.list());
 
-        return "bouquets_admin";
+            return "bouquets_admin";
+        }
+        else
+            return "";
     }
 
     @RequestMapping(value = "bouquets_client", method = RequestMethod.GET)

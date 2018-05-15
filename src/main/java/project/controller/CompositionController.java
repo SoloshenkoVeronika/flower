@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import project.model.Composition;
 import project.model.CompositionOrder;
 import project.model.Order;
+import project.model.User;
 import project.service.Service;
 
 import java.util.Iterator;
@@ -18,6 +19,7 @@ import java.util.Iterator;
 @Controller
 public class CompositionController {
     private Service compositionService;
+    private static User currentUser;
 
     @Autowired(required = true)
     @Qualifier(value = "compositionService")
@@ -54,11 +56,16 @@ public class CompositionController {
 
     @RequestMapping(value = "compositions_admin", method = RequestMethod.GET)
     public String listCompositions(Model model) {
-        UserController.getCurrentUser(model);
-        model.addAttribute("composition", new Composition());
-        model.addAttribute("listCompositions", this.compositionService.list());
+        currentUser = UserController.getCurrentUser(model);
+        if(currentUser!=null) {
+            UserController.getCurrentUser(model);
+            model.addAttribute("composition", new Composition());
+            model.addAttribute("listCompositions", this.compositionService.list());
 
-        return "compositions_admin";
+            return "compositions_admin";
+        }
+        else
+            return "";
     }
 
     @RequestMapping(value = "compositions_client", method = RequestMethod.GET)

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import project.model.*;
 import project.service.Service;
+import project.service.UserService;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,6 +19,7 @@ import java.util.Iterator;
 @Controller
 public class FlowerController {
     private Service flowerService;
+    private static User currentUser;
 
     @Autowired(required = true)
     @Qualifier(value = "flowerService")
@@ -54,11 +56,14 @@ public class FlowerController {
 
     @RequestMapping(value = "flowers_admin", method = RequestMethod.GET)
     public String listFlowers(Model model) {
-        UserController.getCurrentUser(model);
-        model.addAttribute("flower", new Flower());
-        model.addAttribute("listFlowers", this.flowerService.list());
-
-        return "flowers_admin";
+        currentUser = UserController.getCurrentUser(model);
+        if(currentUser!=null){
+             model.addAttribute("flower", new Flower());
+            model.addAttribute("listFlowers", this.flowerService.list());
+             return "flowers_admin";
+        }
+        else
+            return "";
     }
 
     @RequestMapping(value = "flowers_client", method = RequestMethod.GET)

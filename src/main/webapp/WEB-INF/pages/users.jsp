@@ -127,7 +127,7 @@
                                             <form:label for="login" path="login">
                                                 <spring:message text="Логин"/>
                                             </form:label>
-                                            <form:input path="login" type="text" name="login" placeholder="Логин или email" />
+                                            <form:input path="login" type="text" name="login" pattern="[a-zA-Z](.[a-zA-Z0-9_-]*)" title="Используйте латинские буквы для логина." placeholder="Логин или email" />
                                             <i class="icon-user icon-large"></i>
 
                                         </p>
