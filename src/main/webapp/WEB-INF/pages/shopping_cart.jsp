@@ -523,7 +523,7 @@
                                     <div class="col-md-12">
                                         <div class="product_text">
                                             Общая стоимость: <fmt:formatNumber type="number" maxFractionDigits="2"
-                                                                               value="${totalCost}"/>руб.
+                                                                               value="${totalCost}"/> руб.
                                                 <%--<c:out value="${totalCost}"/> руб.--%>
                                         </div>
                                     </div>

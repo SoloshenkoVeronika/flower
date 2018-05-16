@@ -47,6 +47,6 @@ public class OrderServiceImpl implements Service<Order> {
     @Override
     @Transactional
     public List<Order> listWhere(String where) {
-        return ((OrderDaoImpl)this.orderDao).listWhere(where);
+        return this.orderDao.listWhere(where);
     }
 }
