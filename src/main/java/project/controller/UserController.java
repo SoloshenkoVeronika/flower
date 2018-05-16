@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import project.model.User;
 import project.service.UserService;
 
+import java.util.ArrayList;
+
 @Controller
 public class UserController {
     private UserService userService;
@@ -64,8 +66,12 @@ public class UserController {
 
     @RequestMapping(value = "users", method = RequestMethod.GET)
     public String listUsers(Model model) {
+        ArrayList<String> loginList = new ArrayList<>();
+        for (User user : (ArrayList<User>)userService.list()){
+            loginList.add(user.getLogin());
+        }
         model.addAttribute("user", new User());
-        model.addAttribute("listUsers", this.userService.list());
+        model.addAttribute("loginList", loginList);
 
         return "users";
     }

@@ -217,22 +217,21 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery.backstretch.min.js"></script>
 
 <script>
-        $.backstretch("resources/images/fon1.jpg");
+    $.backstretch("resources/images/fon1.jpg");
 
-        function openModal(name, quantity, input) {
-            debugger;
-            var amount = document.getElementById(input).value;
-            if (+amount > +quantity) {
-                var text = document.getElementById('info');
-                text.innerHTML = "Приносим свои извенения, но на данный момент в " +
-                    "магазине имеется только " + quantity + " единиц товара '" + name + "'";
-                var a = document.createElement('a');
-                a.href = "#modal";
-                a.click();
-                return false;
-            }
-            return true;
+    function openModal(name, quantity, input) {
+        var amount = document.getElementById(input).value;
+        if (+amount > +quantity) {
+            var text = document.getElementById('info');
+            text.innerHTML = "Приносим свои извенения, но на данный момент в " +
+                "магазине имеется только " + quantity + " единиц товара '" + name + "'";
+            var a = document.createElement('a');
+            a.href = "#modal";
+            a.click();
+            return false;
         }
+        return true;
+    }
 </script>
 
 <div id="modal" class="modalDialog">

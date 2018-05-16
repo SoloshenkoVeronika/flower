@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome.min.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/menu_style.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />" />
+    <link rel="stylesheet" href="<c:url value="/resources/css/modal.css" />" />
     <link rel="shortcut icon" href="<c:url value="/resources/images/roza.png"/>" type="image/png">
 </head>
 <body>
@@ -126,7 +127,7 @@
                                             <form:label for="login" path="login">
                                                 <spring:message text="Логин"/>
                                             </form:label>
-                                            <form:input path="login" type="text" name="login" pattern="[a-zA-Z](.[a-zA-Z0-9_-]*)" title="Используйте латинские буквы для логина." placeholder="Логин или email" />
+                                            <form:input id="loginField"  path="login" type="text" name="login" pattern="[a-zA-Z](.[a-zA-Z0-9_-]*)" title="Используйте латинские буквы для логина." placeholder="Логин или email" />
                                             <i class="icon-user icon-large"></i>
 
                                         </p>
@@ -155,8 +156,8 @@
 
                                     <tr>
                                         <c:if test="${empty user.login}">
-                                            <button type="submit" name="submit" onclick="check()"
-                                                value="<spring:message text="Add User"/>">
+                                            <button onclick="return check()" type="submit" name="submit"
+                                                    value="<spring:message text="Add User"/>">
                                                 <i class="icon-arrow-right"></i>
                                                 <span>Регистрация</span>
                                             </button>
@@ -211,20 +212,52 @@
         });
     });
 
-    function check () {
+    function checkPassword () {
         var pass = document.getElementById("password").value;
         var pass2 = document.getElementById("password2").value;
-        if(pass != pass2 ){
+        if(pass !== pass2 ){
             alert('Ваши пароли не совпадают. Пожалуйста, повторите подтверждение пароля.');
+            return false;
         }
-
+        return true;
     }
 
+    function loginTest() {
+        var login = document.getElementById('loginField').value;
+        <c:forEach items="${loginList}" var="loginFromList">
+        if (login === '${loginFromList}'){
+            var text = document.getElementById('info');
+            text.innerHTML = "Введённый Вами логин уже используется. Пожалуйста, введите другой логин.";
+            var a = document.createElement('a');
+            a.href = "#modal";
+            a.click();
+            return false;
+        }
+        </c:forEach>
+        return true;
+    }
 
+    function check() {
+        if (loginTest() === true){
+            if (checkPassword() === true)
+                return true;
+        }
+        return false;
+    }
 </script>
+
 <script src="${pageContext.request.contextPath}/resources/js/jquery.backstretch.min.js"></script>
 <script>
     $.backstretch("resources/images/fon1.jpg");
 </script>
+
+<div id="modal" class="modalDialog">
+    <div>
+        <a href="#close" title="Закрыть" class="close">x</a>
+        <h2>Оповещение</h2>
+        <p></p>
+        <p id="info"></p>
+    </div>
+</div>
 </body>
 </html>

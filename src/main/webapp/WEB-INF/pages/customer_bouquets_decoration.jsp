@@ -216,7 +216,6 @@
     $.backstretch("resources/images/fon1.jpg");
 
     function openModal(name, quantity, input) {
-        debugger;
         var amount = document.getElementById(input).value;
         if (+amount > +quantity) {
             var text = document.getElementById('info');
