@@ -105,8 +105,7 @@
                         style="color:#8d1645; font-family: 'Lobster', cursive; margin-top: -1px;
                         text-align: center;">Добро пожаловать на страницу регистрации</h1>
                     <section class="main">
-                            <c:url var="addAction" value="/users/add"/>
-
+                                <c:url var="addAction" value="/users/add"/>
                             <form:form action="${addAction}" commandName="user" class="form-2">
                                 <table>
                                     <c:if test="${!empty user.login}">
@@ -138,17 +137,17 @@
                                             <form:label for="password" path="password">
                                                 <spring:message text="Пароль"/>
                                             </form:label>
-                                            <form:input path="password" type="password" name="password" placeholder="Пароль" />
+                                            <form:input path="password" type="password" id="password" name="password" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{3,12}$" title="Введите от 4 до 12 латинских символов!" placeholder="Пароль" />
                                             <i class="icon-lock icon-large"></i>
                                         </p>
                                     </tr>
 
                                     <tr>
                                             <p class="field">
-                                            <form:label for="password" path="status">
+                                            <label>
                                                 <spring:message text="Пароль"/>
-                                            </form:label>
-                                            <input  type="password" name="password2" placeholder="Подтверждения пароля" class="showpassword"/>
+                                            </label>
+                                            <input  type="password" id="password2" name="password2" placeholder="Подтверждения пароля" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{3,12}$" title="Введите от 4 до 12 латинских символов!" class="showpassword"/>
                                                 <i class="icon-lock icon-large"></i>
                                             </p>
                                     </tr>
@@ -156,8 +155,8 @@
 
                                     <tr>
                                         <c:if test="${empty user.login}">
-                                            <button type="submit" name="submit"
-                                                    value="<spring:message text="Add User"/>">
+                                            <button type="submit" name="submit" onclick="check()"
+                                                value="<spring:message text="Add User"/>">
                                                 <i class="icon-arrow-right"></i>
                                                 <span>Регистрация</span>
                                             </button>
@@ -211,6 +210,16 @@
             }
         });
     });
+
+    function check () {
+        var pass = document.getElementById("password").value;
+        var pass2 = document.getElementById("password2").value;
+        if(pass != pass2 ){
+            alert('Ваши пароли не совпадают. Пожалуйста, повторите подтверждение пароля.');
+        }
+
+    }
+
 
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.backstretch.min.js"></script>

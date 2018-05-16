@@ -172,7 +172,7 @@
                                     <spring:message text="Введите вариант оплаты(наличные/банковская карта) *"/>
                                 </form:label>
                                 <div class="col-sm-4">
-                                    <form:input path="payment" class="form-control"/>
+                                    <form:input path="payment" required="true" class="form-control"/>
                                 </div>
 
                                 <form:hidden path="cost" value="${order.cost}"/>
@@ -262,7 +262,7 @@
                                     <spring:message text="Улица *"/>
                                 </form:label>
                                 <div class="col-sm-4">
-                                    <form:input path="addressByAddressId.street" pattern="(.[a-zA-Zа-яА-ЯёЁ_-]*)" title="Используйте латинские или русские символы." required="true" class="form-control"/>
+                                    <form:input path="addressByAddressId.street" pattern="(.[a-zA-Zа-яА-Я\sё.Ё_-]*)" title="Используйте латинские или русские символы." required="true" class="form-control"/>
                                 </div>
                             </div>
 
