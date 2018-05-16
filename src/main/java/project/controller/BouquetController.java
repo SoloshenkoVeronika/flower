@@ -97,10 +97,15 @@ public class BouquetController {
                 OrderController.getCurrentOrder().setCost(OrderController.getCurrentOrder().getCost() +
                         order.getBouquetByBouquetId().getPrice() * bouquetOrder.getQuantity());
 
+                order.getBouquetByBouquetId().setAmount(order.getBouquetByBouquetId().getAmount() - bouquetOrder.getQuantity());
+                bouquetService.update(order.getBouquetByBouquetId());
                 return "redirect:/bouquets_client";
             }
         }
         bouquetOrder.setBouquetByBouquetId((Bouquet) bouquetService.getById(bouquetOrder.getBouquetId()));
+        bouquetOrder.getBouquetByBouquetId().setAmount(bouquetOrder.getBouquetByBouquetId().getAmount() - bouquetOrder.getQuantity());
+        bouquetService.update(bouquetOrder.getBouquetByBouquetId());
+
         OrderController.getCurrentOrder().getBouquetOrdersById().add(bouquetOrder);
 
         OrderController.getCurrentOrder().setCost(OrderController.getCurrentOrder().getCost() +

@@ -96,7 +96,8 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="<c:url value="/users/currentUser"/>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <a href="<c:url value="/users/currentUser"/>" class="dropdown-toggle" data-toggle="dropdown"
+                       role="button" aria-expanded="false">
                         <c:choose>
                             <c:when test="${user.login ne null}">
                                 ${user.login}
@@ -148,42 +149,45 @@
 
                             <c:set var="j" value="0"/>
                             <c:forEach items="${listPacks}" var="pack">
-
-                                <div class="row">
-                                    <c:set var="nm" value="getPicture${j=j+1}"/>
-                                    <div class="col-md-3" id="${nm}">
-                                        <script>
-                                            var adress="/resources/images/pictures/";
-                                            var img = document.createElement('img');
-                                            img.setAttribute('src', adress+"${pack.picture}");
-                                            img.height = 150;
-                                            document.getElementById("${nm}").appendChild(img);
-                                        </script>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <div class="titlegood">
-                                            <b>${pack.name} </b>
+                                <c:if test="${pack.amount > 0}">
+                                    <div class="row">
+                                        <c:set var="nm" value="getPicture${j=j+1}"/>
+                                        <div class="col-md-3" id="${nm}">
+                                            <script>
+                                                var adress = "/resources/images/pictures/";
+                                                var img = document.createElement('img');
+                                                img.setAttribute('src', adress + "${pack.picture}");
+                                                img.height = 150;
+                                                document.getElementById("${nm}").appendChild(img);
+                                            </script>
                                         </div>
-                                        <br>
-                                        <div class="fontchar">
-                                            <div class="namechar">Цена:     </div> <div class="charact">${pack.price}</div><br>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <c:url var="addAction" value="/order/addPackToCustomerBouquet"/>
-                                        <form:form action="${addAction}" modelAttribute="pack" class="form-horizontal">
-                                            <div class="fontbut">
-                                                <form:hidden path="id" value="${pack.id}"/>
-
-                                                <input type="submit" class="btn btn-success"
-                                                       value="<spring:message text="Добавить в букет"/>"/>
+                                        <div class="col-md-7">
+                                            <div class="titlegood">
+                                                <b>${pack.name} </b>
                                             </div>
-                                        </form:form>
+                                            <br>
+                                            <div class="fontchar">
+                                                <div class="namechar">Цена:</div>
+                                                <div class="charact">${pack.price}</div>
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <c:url var="addAction" value="/order/addPackToCustomerBouquet"/>
+                                            <form:form action="${addAction}" modelAttribute="pack"
+                                                       class="form-horizontal">
+                                                <div class="fontbut">
+                                                    <form:hidden path="id" value="${pack.id}"/>
+
+                                                    <input type="submit" class="btn btn-success"
+                                                           value="<spring:message text="Добавить в букет"/>"/>
+                                                </div>
+                                            </form:form>
+                                        </div>
+
                                     </div>
-
-
-                                </div>
-                                <br>  <br>
+                                    <br> <br>
+                                </c:if>
                             </c:forEach>
 
                         </c:if>

@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/table.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/client.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/modal.css" />"/>
     <link rel="shortcut icon" href="<c:url value="/resources/images/roza.png"/>" type="image/png">
 
 </head>
@@ -176,14 +177,15 @@
                                         <form:form action="${addAction}" modelAttribute="compositionOrder" class="form-horizontal">
                                             <div class="inputBlock">
                                                 <div class="minus">-</div>
-                                                <form:input path="quantity" value="0"/>
+                                                <form:input id="input${j}" path="quantity" value="0"/>
                                                 <div class="plus">+</div>
                                             </div>
 
                                             <div class="fontbut">
                                                 <form:hidden path="compositionId" value="${composition.id}"/>
 
-                                                <input type="submit" class="btn btn-success"
+                                                <input onclick="return openModal('${composition.name}', '${composition.amount}' , 'input${j}')"
+                                                       type="submit" class="btn btn-success"
                                                        value="<spring:message text="В корзину"/>"/>
                                             </div>
                                         </form:form>
@@ -210,10 +212,34 @@
     </footer>
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.backstretch.min.js"></script>
+
 <script>
     $.backstretch("resources/images/fon1.jpg");
+
+    function openModal(name, quantity, input) {
+        debugger;
+        var amount = document.getElementById(input).value;
+        if (+amount > +quantity) {
+            var text = document.getElementById('info');
+            text.innerHTML = "Приносим свои извенения, но на данный момент в " +
+                "магазине имеется только " + quantity + " единиц товара '" + name + "'";
+            var a = document.createElement('a');
+            a.href = "#modal";
+            a.click();
+            return false;
+        }
+        return true;
+    }
 </script>
 
+<div id="modal" class="modalDialog">
+    <div>
+        <a href="#close" title="Закрыть" class="close">x</a>
+        <h2>Оповещение</h2>
+        <p></p>
+        <p id="info"></p>
+    </div>
+</div>
 </body>
 </html>
 

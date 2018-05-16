@@ -96,10 +96,17 @@ public class CompositionController {
                 OrderController.getCurrentOrder().setCost(OrderController.getCurrentOrder().getCost() +
                         order.getCompositionByCompositionId().getPrice() * compositionOrder.getQuantity());
 
+                order.getCompositionByCompositionId().setAmount(order.getCompositionByCompositionId().getAmount()
+                        - compositionOrder.getQuantity());
+                compositionService.update(order.getCompositionByCompositionId());
                 return "redirect:/compositions_client";
             }
         }
         compositionOrder.setCompositionByCompositionId((Composition) compositionService.getById(compositionOrder.getCompositionId()));
+        compositionOrder.getCompositionByCompositionId().setAmount(compositionOrder.getCompositionByCompositionId().getAmount()
+                - compositionOrder.getQuantity());
+        compositionService.update(compositionOrder.getCompositionByCompositionId());
+
         OrderController.getCurrentOrder().getCompositionOrdersById().add(compositionOrder);
 
         OrderController.getCurrentOrder().setCost(OrderController.getCurrentOrder().getCost() +

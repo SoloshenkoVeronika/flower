@@ -110,6 +110,9 @@ public class DecorationController {
                     OrderController.getCurrentOrder().setCost(OrderController.getCurrentOrder().getCost() +
                             customerBouquet.getDecorationByDecorationId().getPrice() * decorationCustomerBouquet.getQuantity());
 
+                    customerBouquet.getDecorationByDecorationId().setAmount(customerBouquet.getDecorationByDecorationId().getAmount()
+                            - decorationCustomerBouquet.getQuantity());
+                    decorationService.update(customerBouquet.getDecorationByDecorationId());
                     return "redirect:/customer_bouquets_decoration";
                 }
             }
@@ -117,6 +120,9 @@ public class DecorationController {
 
         Decoration decoration = (Decoration) decorationService.getById(decorationCustomerBouquet.getDecorationId());
         decorationCustomerBouquet.setDecorationByDecorationId(decoration);
+        decorationCustomerBouquet.getDecorationByDecorationId().setAmount(decorationCustomerBouquet.getDecorationByDecorationId().getAmount()
+                - decorationCustomerBouquet.getQuantity());
+        decorationService.update(decorationCustomerBouquet.getDecorationByDecorationId());
 
         OrderController.getCurrentOrder().setCost(OrderController.getCurrentOrder().getCost() +
                 decorationCustomerBouquet.getDecorationByDecorationId().getPrice() * decorationCustomerBouquet.getQuantity());

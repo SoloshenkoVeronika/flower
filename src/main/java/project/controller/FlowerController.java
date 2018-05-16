@@ -94,10 +94,16 @@ public class FlowerController {
 
                 OrderController.getCurrentOrder().setCost(OrderController.getCurrentOrder().getCost() +
                         order.getFlowerByFlowerId().getPrice() * flowerOrder.getQuantity());
+
+                order.getFlowerByFlowerId().setAmount(order.getFlowerByFlowerId().getAmount() - flowerOrder.getQuantity());
+                flowerService.update(order.getFlowerByFlowerId());
                 return "redirect:/flowers_client";
             }
         }
         flowerOrder.setFlowerByFlowerId((Flower) flowerService.getById(flowerOrder.getFlowerId()));
+        flowerOrder.getFlowerByFlowerId().setAmount(flowerOrder.getFlowerByFlowerId().getAmount() - flowerOrder.getQuantity());
+        flowerService.update(flowerOrder.getFlowerByFlowerId());
+
         OrderController.getCurrentOrder().getFlowerOrdersById().add(flowerOrder);
 
         OrderController.getCurrentOrder().setCost(OrderController.getCurrentOrder().getCost() +
@@ -155,6 +161,8 @@ public class FlowerController {
                     OrderController.getCurrentOrder().setCost(OrderController.getCurrentOrder().getCost() +
                             customerBouquet.getFlowerByFlowerId().getPrice() * flowerCustomerBouquet.getQuantity());
 
+                    customerBouquet.getFlowerByFlowerId().setAmount(customerBouquet.getFlowerByFlowerId().getAmount() - flowerCustomerBouquet.getQuantity());
+                    flowerService.update(customerBouquet.getFlowerByFlowerId());
                     /*ArrayList<CustomerBouquetOrder> customerBouquetOrders = new ArrayList<>(OrderController.getCurrentOrder().getCustomerBouquetOrdersById());
                     CustomerBouquetOrder order = customerBouquetOrders.get(customerBouquetOrders.size()-1);
                     Iterator<FlowerCustomerBouquet> it = order.getCustomerBouquetByCustomerBouquetId().getFlowerCustomerBouquetsById().iterator();
@@ -172,6 +180,9 @@ public class FlowerController {
 
         Flower flower = (Flower) flowerService.getById(flowerCustomerBouquet.getFlowerId());
         flowerCustomerBouquet.setFlowerByFlowerId(flower);
+        flowerCustomerBouquet.getFlowerByFlowerId().setAmount(flowerCustomerBouquet.getFlowerByFlowerId().getAmount()
+                - flowerCustomerBouquet.getQuantity());
+        flowerService.update(flowerCustomerBouquet.getFlowerByFlowerId());
 
         OrderController.getCurrentOrder().setCost(OrderController.getCurrentOrder().getCost() +
                 flowerCustomerBouquet.getFlowerByFlowerId().getPrice() * flowerCustomerBouquet.getQuantity());

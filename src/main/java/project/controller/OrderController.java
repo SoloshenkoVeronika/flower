@@ -10,6 +10,7 @@ import project.service.OrderServiceImpl;
 import project.service.Service;
 import project.service.UserService;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
@@ -309,7 +310,25 @@ public class OrderController {
         sender.setPhone(order.getSenderBySenderId().getPhone());
         sender.setEmail(order.getSenderBySenderId().getEmail());
 
-        senderService.add(sender);
+        ArrayList<Sender> senders = (ArrayList) senderService.list();
+        for (Sender senderFromList : senders){
+            if (((sender.getSecondName() == null && senderFromList.getSecondName() == null) ||
+                    (sender.getSecondName() != null && sender.getSecondName().equals(senderFromList.getSecondName()))) &&
+
+                    ((sender.getFirstName() == null && senderFromList.getFirstName() == null) ||
+                            (sender.getFirstName() != null && sender.getFirstName().equals(senderFromList.getFirstName()))) &&
+
+                    ((sender.getPhone() == null && senderFromList.getPhone() == null) ||
+                            (sender.getPhone() != null && sender.getPhone().equals(senderFromList.getPhone()))) &&
+
+                    ((sender.getEmail() == null && senderFromList.getEmail() == null) ||
+                            (sender.getEmail() != null && sender.getEmail().equals(senderFromList.getEmail())))){
+                sender = senderFromList;
+                break;
+            }
+        }
+        if (sender.getId() == null)
+            senderService.add(sender);
         currentOrder.setSenderId(sender.getId());
         currentOrder.setSenderBySenderId(sender);
 
@@ -319,7 +338,22 @@ public class OrderController {
         recipient.setFirstName(order.getRecipientByRecipientId().getFirstName());
         recipient.setPhone(order.getRecipientByRecipientId().getPhone());
 
-        recipientService.add(recipient);
+        ArrayList<Recipient> recipients = (ArrayList) recipientService.list();
+        for (Recipient recipientFromList : recipients){
+            if (((recipient.getSecondName() == null && recipientFromList.getSecondName() == null) ||
+                    (recipient.getSecondName() != null && recipient.getSecondName().equals(recipientFromList.getSecondName()))) &&
+
+                    ((recipient.getFirstName() == null && recipientFromList.getFirstName() == null) ||
+                            (recipient.getFirstName() != null && recipient.getFirstName().equals(recipientFromList.getFirstName()))) &&
+
+                    ((recipient.getPhone() == null && recipientFromList.getPhone() == null) ||
+                            (recipient.getPhone() != null && recipient.getPhone().equals(recipientFromList.getPhone())))){
+                recipient = recipientFromList;
+                break;
+            }
+        }
+        if (recipient.getId() == null)
+            recipientService.add(recipient);
         currentOrder.setRecipientId(recipient.getId());
         currentOrder.setRecipientByRecipientId(recipient);
 
@@ -331,15 +365,26 @@ public class OrderController {
         address.setBlock(order.getAddressByAddressId().getBlock());
         address.setFlat(order.getAddressByAddressId().getFlat());
 
-        addressService.add(address);
+        ArrayList<Address> addresses = (ArrayList) addressService.list();
+        for (Address addressFromList : addresses){
+            if (((address.getCity() == null && addressFromList.getCity() == null) ||
+                    (address.getCity() != null && address.getCity().equals(addressFromList.getCity()))) &&
+
+                    ((address.getStreet() == null && addressFromList.getStreet() == null) ||
+                            (address.getStreet() != null && address.getStreet().equals(addressFromList.getStreet()))) &&
+
+                    address.getHouse() == addressFromList.getHouse() &&
+                    address.getBlock() == addressFromList.getBlock()&&
+                    address.getFlat() == addressFromList.getFlat()){
+                address = addressFromList;
+                break;
+            }
+        }
+        
+        if (address.getId() == null)
+            addressService.add(address);
         currentOrder.setAddressId(address.getId());
         currentOrder.setAddressByAddressId(address);
-        //нужна проверка, если ли в бд адрес с такими же полями, чтобы не создавать новый.
-        //можно использовать метод getAddress из dao, но лучше вынести эти методы в интерфейс
-        //и назвать getObject как-нибудь и потом проверять
-        //******** Это надо и для адреса, и для отправителя, и для получателя
-        //для отправителя и получателя нужно учитывать, что поля могут быть null, и тогда эти
-        //отправители и получатели развые
 
         this.orderService.add(currentOrder);
 
@@ -350,9 +395,9 @@ public class OrderController {
             flowerOrder.setOrderByOrderId(currentOrder);
             flowerOrderService.add(flowerOrder);
 
-            Flower flower = flowerOrder.getFlowerByFlowerId();
+            /*Flower flower = flowerOrder.getFlowerByFlowerId();
             flower.setAmount(flower.getAmount() - flowerOrder.getQuantity());
-            flowerService.update(flower);
+            flowerService.update(flower);*/
         }
 
 
@@ -363,9 +408,9 @@ public class OrderController {
             bouquetOrder.setOrderByOrderId(currentOrder);
             bouquetOrderService.add(bouquetOrder);
 
-            Bouquet bouquet = bouquetOrder.getBouquetByBouquetId();
+            /*Bouquet bouquet = bouquetOrder.getBouquetByBouquetId();
             bouquet.setAmount(bouquet.getAmount() - bouquetOrder.getQuantity());
-            bouquetService.update(bouquet);
+            bouquetService.update(bouquet);*/
         }
 
         Iterator<CompositionOrder> iterator2 = currentOrder.getCompositionOrdersById().iterator();
@@ -375,9 +420,9 @@ public class OrderController {
             compositionOrder.setOrderByOrderId(currentOrder);
             compositionOrderService.add(compositionOrder);
 
-            Composition composition = compositionOrder.getCompositionByCompositionId();
+            /*Composition composition = compositionOrder.getCompositionByCompositionId();
             composition.setAmount(composition.getAmount() - compositionOrder.getQuantity());
-            compositionService.update(composition);
+            compositionService.update(composition);*/
         }
 
         Iterator<CustomerBouquetOrder> iterator3 = currentOrder.getCustomerBouquetOrdersById().iterator();
@@ -385,9 +430,11 @@ public class OrderController {
             CustomerBouquetOrder customerBouquetOrder = iterator3.next();
             CustomerBouquet customerBouquet = customerBouquetOrder.getCustomerBouquetByCustomerBouquetId();
 
-            Pack pack = customerBouquet.getPackByPackId();
-            pack.setAmount(pack.getAmount() - 1);
-            packService.update(pack);
+            if (customerBouquet.getPackByPackId() != null) {
+                Pack pack = customerBouquet.getPackByPackId();
+                pack.setAmount(pack.getAmount() - 1);
+                packService.update(pack);
+            }
 
             customerBouquetService.add(customerBouquet);
 
@@ -404,9 +451,9 @@ public class OrderController {
                     flowerCustomerBouquet.setCustomerBouquetByCustomerBouquetId(customerBouquet);
                     flowerCustomerBouquetService.add(flowerCustomerBouquet);
 
-                    Flower flower = flowerCustomerBouquet.getFlowerByFlowerId();
+                    /*Flower flower = flowerCustomerBouquet.getFlowerByFlowerId();
                     flower.setAmount(flower.getAmount() - flowerCustomerBouquet.getQuantity());
-                    flowerService.update(flower);
+                    flowerService.update(flower);*/
                 }
             }
 
@@ -418,14 +465,14 @@ public class OrderController {
                     decorationCustomerBouquet.setCustomerBouquetByCustomerBouquetId(customerBouquet);
                     decorationCustomerBouquetService.add(decorationCustomerBouquet);
 
-                    Decoration decoration = decorationCustomerBouquet.getDecorationByDecorationId();
+                    /*Decoration decoration = decorationCustomerBouquet.getDecorationByDecorationId();
                     decoration.setAmount(decoration.getAmount() - decorationCustomerBouquet.getQuantity());
-                    decorationService.update(decoration);
+                    decorationService.update(decoration);*/
                 }
             }
         }
 
-        currentOrder = null;
-        return "redirect:/baskets";
+        currentOrder = new Order();
+        return "redirect:/client";
     }
 }
