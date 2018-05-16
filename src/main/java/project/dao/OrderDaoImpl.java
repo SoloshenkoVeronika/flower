@@ -90,24 +90,6 @@ public class OrderDaoImpl implements Dao<Order> {
         Session session = this.sessionFactory.getCurrentSession();
         List<Order> orderList = session.createQuery("from Order where " + where).list();
 
-        /*Iterator<Order> iterator = orderList.iterator();
-        while (iterator.hasNext()){
-            Order order = iterator.next();
-            if (order.getBouquetOrdersById().size() > 1) {
-                ArrayList<BouquetOrder> orders = new ArrayList<>(order.getBouquetOrdersById());
-                order.getBouquetOrdersById().remove(orders.get(1));
-            }
-
-            if (order.getCustomerBouquetOrdersById().size() > 1) {
-                ArrayList<CustomerBouquetOrder> customerBouquetOrders = new ArrayList<>(order.getCustomerBouquetOrdersById());
-                order.getCustomerBouquetOrdersById().remove(customerBouquetOrders.get(1));
-            }
-            CustomerBouquetOrder bouquetOrder = new ArrayList<CustomerBouquetOrder>(order.getCustomerBouquetOrdersById()).get(0);
-            CustomerBouquet bouquet = bouquetOrder.getCustomerBouquetByCustomerBouquetId();
-
-            ArrayList<DecorationCustomerBouquet> decorations = new ArrayList<>(bouquet.getDecorationCustomerBouquetsById());
-            bouquet.getDecorationCustomerBouquetsById().remove((decorations).get(1));
-        }*/
         for(Order order: orderList){
             logger.info("Order list: " + order);
         }
